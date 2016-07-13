@@ -1,0 +1,124 @@
+\begin{thebibliography}{10}
+
+\bibitem{WinNT}
+{IFTTT}.
+\newblock http://ifttt.com.
+\newblock Accessed: 10.06.2016.
+
+\bibitem{7389133}
+A.~Akbar, F.~Carrez, K.~Moessner, J.~Sancho, and J.~Rico.
+\newblock Context-aware stream processing for distributed iot applications.
+\newblock In {\em Internet of Things (WF-IoT), 2015 IEEE 2nd World Forum on},
+  pages 663--668, Dec 2015.
+
+\bibitem{7123563}
+A.~Al-Fuqaha, M.~Guizani, M.~Mohammadi, M.~Aledhari, and M.~Ayyash.
+\newblock Internet of things: A survey on enabling technologies, protocols, and
+  applications.
+\newblock {\em IEEE Communications Surveys Tutorials}, 17(4):2347--2376,
+  Fourthquarter 2015.
+
+\bibitem{7263375}
+A.~Al-Fuqaha, A.~Khreishah, M.~Guizani, A.~Rayes, and M.~Mohammadi.
+\newblock Toward better horizontal integration among iot services.
+\newblock {\em IEEE Communications Magazine}, 53(9):72--79, September 2015.
+
+\bibitem{iota:d15}
+M.~Bauer, M.~Boussard, and N.~B. others.
+\newblock {Deliverable D1.5 – Final architectural reference model for the IoT
+  v3.0}.
+\newblock Technical Report D1.5, The Internet of Things - Architecture, 2013.
+
+\bibitem{6984170}
+A.~Botta, W.~de~Donato, V.~Persico, and A.~Pescapé.
+\newblock On the integration of cloud computing and internet of things.
+\newblock In {\em Future Internet of Things and Cloud (FiCloud), 2014
+  International Conference on}, pages 23--30, Aug 2014.
+
+\bibitem{icore:vod}
+M.~Eteläperä, A.~Rahim, D.~Kelaiodonis, V.~Foteinos, et~al.
+\newblock {iCore} - virtual object definition and design principles.
+\newblock Technical Report D3.3, iCore Project, 2014.
+
+\bibitem{7396571}
+A.~Gyrard, C.~Bonnet, K.~Boudaoud, and M.~Serrano.
+\newblock Assisting iot projects and developers in designing interoperable
+  semantic web of things applications.
+\newblock In {\em 2015 IEEE International Conference on Data Science and Data
+  Intensive Systems}, pages 659--666, Dec 2015.
+
+\bibitem{7300791}
+A.~Gyrard, S.~K. Datta, C.~Bonnet, and K.~Boudaoud.
+\newblock Cross-domain internet of things application development: M3 framework
+  and evaluation.
+\newblock In {\em Future Internet of Things and Cloud (FiCloud), 2015 3rd
+  International Conference on}, pages 9--16, Aug 2015.
+
+\bibitem{7389090}
+A.~Gyrard, M.~Serrano, and G.~A. Atemezing.
+\newblock Semantic web methodologies, best practices and ontology engineering
+  applied to internet of things.
+\newblock In {\em Internet of Things (WF-IoT), 2015 IEEE 2nd World Forum on},
+  pages 412--417, Dec 2015.
+
+\bibitem{iota:d25}
+T.~Jacobs, M.~Joos, C.~Magerkurth, et~al.
+\newblock {Adaptive, faulttolerant orchestration of distributed IoT service
+  interactions}.
+\newblock Technical Report D2.5, The Internet of Things - Architecture, 2012.
+
+\bibitem{ieee:coalIotReasoningEngine}
+Y.~Jian-Xin.
+\newblock The research and development of coal iot reasoning engine based on
+  xml model.
+\newblock In {\em 2015 Seventh International Conference on Measuring Technology
+  and Mechatronics Automation}, pages 1266--1269, June 2015.
+
+\bibitem{6614920}
+Y.~Kim, S.~Lee, Y.~Jeon, I.~Chong, and S.~H. Lee.
+\newblock Orchestration in distributed web-of-objects for creation of
+  user-centered iot service capability.
+\newblock In {\em 2013 Fifth International Conference on Ubiquitous and Future
+  Networks (ICUFN)}, pages 750--755, July 2013.
+
+\bibitem{7100544}
+N.~Kushwaha, R.~Mahule, A.~P. Singh, O.~P. Vyas, and B.~Singh.
+\newblock Integration of service oriented wsn and iot for e-commerce.
+\newblock In {\em Computing for Sustainable Global Development (INDIACom), 2015
+  2nd International Conference on}, pages 1731--1736, March 2015.
+
+\bibitem{7300909}
+A.~Marsico, A.~Broglio, M.~Vecchio, and F.~M. Facca.
+\newblock Learn by examples how to link the internet of things and the cloud
+  computing paradigms: A fully working proof of concept.
+\newblock In {\em Future Internet of Things and Cloud (FiCloud), 2015 3rd
+  International Conference on}, pages 806--810, Aug 2015.
+
+\bibitem{icore:achitecture}
+S.~Menoret et~al.
+\newblock {iCore} - final architecture reference model.
+\newblock Technical Report D2.5, iCore Project, 2014.
+
+\bibitem{ierc:portfolios}
+E.~R.~C. on~the Internet~of Things.
+\newblock {IERC} projects portfolio.
+
+\bibitem{ieee:semanticIoT}
+A.~Palavalli, D.~Karri, and S.~Pasupuleti.
+\newblock Semantic internet of things.
+\newblock In {\em 2016 IEEE Tenth International Conference on Semantic
+  Computing (ICSC)}, pages 91--95, Feb 2016.
+
+\bibitem{6468323}
+M.~Thoma, S.~Meyer, K.~Sperner, S.~Meissner, and T.~Braun.
+\newblock On iot-services: Survey, classification and enterprise integration.
+\newblock In {\em Green Computing and Communications (GreenCom), 2012 IEEE
+  International Conference on}, pages 257--260, Nov 2012.
+
+\bibitem{vermesan2015building}
+O.~Vermesan and P.~Friess.
+\newblock {\em Building the Hyperconnected Society: Internet of Things Research
+  and Innovation Value Chains, Ecosystems and Markets}.
+\newblock River Publishers Series in Communications. River Publishers, 2015.
+
+\end{thebibliography}

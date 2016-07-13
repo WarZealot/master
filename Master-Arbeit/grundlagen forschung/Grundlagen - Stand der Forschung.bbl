@@ -1,0 +1,49 @@
+\begin{thebibliography}{1}
+
+\bibitem{EOIoT}
+{Eclipse Open IoT Stack}.
+\newblock \url{https://iot.eclipse.org/java/open-iot-stack-for-java.html}.
+\newblock Accessed: 13.07.2016.
+
+\bibitem{ESH}
+{Eclipse SmartHome}.
+\newblock \url{http://www.eclipse.org/smarthome/}.
+\newblock Accessed: 13.07.2016.
+
+\bibitem{IFTTT}
+{IFTTT}.
+\newblock \url{http://ifttt.com}.
+\newblock Accessed: 10.06.2016.
+
+\bibitem{Zapier}
+{Zapier}.
+\newblock \url{http://zapier.com/}.
+\newblock Accessed: 10.06.2016.
+
+\bibitem{ECA}
+W.~Beer, V.~Christian, A.~Ferscha, and L.~Mehrmann.
+\newblock {\em Modeling Context-Aware Behavior by Interpreted ECA Rules}, pages
+  1064--1073.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 2003.
+
+\bibitem{ieee:tas}
+M.~Coronado and C.~A. Iglesias.
+\newblock Task automation services: Automation for the masses.
+\newblock {\em IEEE Internet Computing}, 20(1):52--58, Jan 2016.
+
+\bibitem{iota:d25}
+T.~Jacobs, M.~Joos, C.~Magerkurth, et~al.
+\newblock {Adaptive, faulttolerant orchestration of distributed IoT service
+  interactions}.
+\newblock Technical Report D2.5, The Internet of Things - Architecture, 2012.
+
+\bibitem{icore:achitecture}
+S.~Menoret et~al.
+\newblock {iCore} - final architecture reference model.
+\newblock Technical Report D2.5, iCore Project, 2014.
+
+\bibitem{ierc:portfolios}
+E.~R.~C. on~the Internet~of Things.
+\newblock {IERC} projects portfolio.
+
+\end{thebibliography}
