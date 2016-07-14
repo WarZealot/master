@@ -1,24 +1,24 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{EOIoT}
 {Eclipse Open IoT Stack}.
-\newblock \url{https://iot.eclipse.org/java/open-iot-stack-for-java.html}.
+\newblock http://iot.eclipse.org/java/open-iot-stack-for-java.html.
 \newblock Accessed: 13.07.2016.
 
 \bibitem{ESH}
 {Eclipse SmartHome}.
-\newblock \url{http://www.eclipse.org/smarthome/}.
+\newblock {http://www.eclipse.org/smarthome/}.
 \newblock Accessed: 13.07.2016.
 
 \bibitem{IFTTT}
 {IFTTT}.
-\newblock \url{http://ifttt.com}.
-\newblock Accessed: 10.06.2016.
+\newblock {http://ifttt.com}.
+\newblock Accessed: 13.07.2016.
 
 \bibitem{Zapier}
 {Zapier}.
-\newblock \url{http://zapier.com/}.
-\newblock Accessed: 10.06.2016.
+\newblock {http://zapier.com/}.
+\newblock Accessed: 13.07.2016.
 
 \bibitem{ECA}
 W.~Beer, V.~Christian, A.~Ferscha, and L.~Mehrmann.
@@ -26,10 +26,22 @@ W.~Beer, V.~Christian, A.~Ferscha, and L.~Mehrmann.
   1064--1073.
 \newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 2003.
 
+\bibitem{cloudsec}
+R.~Bhadauria and S.~Sanyal.
+\newblock Survey on security issues in cloud computing and associated
+  mitigation techniques.
+\newblock {\em CoRR}, abs/1204.0764, 2012.
+
 \bibitem{ieee:tas}
 M.~Coronado and C.~A. Iglesias.
 \newblock Task automation services: Automation for the masses.
 \newblock {\em IEEE Internet Computing}, 20(1):52--58, Jan 2016.
+
+\bibitem{ierc:portfolios}
+{European Research Cluster on the Internet of Things}.
+\newblock {IERC} projects portfolio.
+\newblock
+  {https://www.smart-action.eu/publications/detail/114/90c9734fda7c5c2c68e631bf29a9a9d2/}.
 
 \bibitem{iota:d25}
 T.~Jacobs, M.~Joos, C.~Magerkurth, et~al.
@@ -42,8 +54,10 @@ S.~Menoret et~al.
 \newblock {iCore} - final architecture reference model.
 \newblock Technical Report D2.5, iCore Project, 2014.
 
-\bibitem{ierc:portfolios}
-E.~R.~C. on~the Internet~of Things.
-\newblock {IERC} projects portfolio.
+\bibitem{SmartHomeIoT}
+C.~Ran, B.~Li, and J.~Yu.
+\newblock Ceis 2011 research and application on the smart home based on
+  component technologies and internet of things.
+\newblock {\em Procedia Engineering}, 15:2087 -- 2092, 2011.
 
 \end{thebibliography}
