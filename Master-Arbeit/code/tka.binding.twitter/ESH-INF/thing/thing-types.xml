@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<thing:thing-descriptions bindingId="yahooweather" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<thing:thing-descriptions bindingId="twitter" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:thing="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0"
 	xsi:schemaLocation="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0 http://eclipse.org/smarthome/schemas/thing-description-1.0.0.xsd">
 
 	<!-- Twitter Binding -->
 	<thing-type id="twitter">
 		<label>Twitter Information</label>
-		<description>Provides time data from the Atomuhr.de service</description>
+		<description>Allows the user to interact with Twitter.</description>
 
 		<channels>
 			<channel id="status" typeId="status" />
