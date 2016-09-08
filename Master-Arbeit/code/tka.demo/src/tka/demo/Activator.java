@@ -1,6 +1,7 @@
 package tka.demo;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.eclipse.smarthome.automation.Rule;
 import org.eclipse.smarthome.automation.RuleRegistry;
@@ -129,7 +130,7 @@ public class Activator implements BundleActivator {
         // ThingAddedEvent addedEvent = ThingEventFactory.createAddedEvent(thing);
         // eventPublisher.post(addedEvent);
 
-        Command command = new StringType("MyStringTypeCodeCommand");
+        Command command = new StringType("MyStringTypeCodeCommand: " + new Date());
         ItemCommandEvent event = ItemEventFactory.createCommandEvent("twitter_mycheaptwitter_percode_status", command);
         eventPublisher.post(event);
     }

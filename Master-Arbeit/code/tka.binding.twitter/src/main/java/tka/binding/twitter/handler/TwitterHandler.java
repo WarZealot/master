@@ -3,11 +3,10 @@ package tka.binding.twitter.handler;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
 import org.eclipse.smarthome.config.core.status.ConfigStatusMessage;
+import org.eclipse.smarthome.core.library.types.StringType;
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.thing.binding.ConfigStatusThingHandler;
@@ -46,8 +45,6 @@ public class TwitterHandler extends ConfigStatusThingHandler {
         if (refresh == null) {
             refresh = new BigDecimal(30);
         }
-
-        startAutomaticRefresh();
     }
 
     @Override
@@ -55,20 +52,14 @@ public class TwitterHandler extends ConfigStatusThingHandler {
         refreshJob.cancel(true);
     }
 
-    private void startAutomaticRefresh() {
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                updateTwitterStatus("Refresh status: " + new Date());
-            }
-        };
-        logger.info("Starting automatic refresh");
-        refreshJob = scheduler.scheduleAtFixedRate(runnable, 0, refresh.intValue(), TimeUnit.SECONDS);
-    }
-
     @Override
     public void handleCommand(ChannelUID channelUID, Command command) {
         logger.info("handle command: {}", command);
+        if (command instanceof StringType) {
+            StringType cmd = (StringType) command;
+            updateTwitterStatus(cmd.toString());
+            return;
+        }
         logger.info("Command {} is not supported for channel: {}", command, channelUID.getId());
     }
 

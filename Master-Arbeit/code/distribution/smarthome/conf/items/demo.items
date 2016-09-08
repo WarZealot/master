@@ -11,4 +11,3 @@ Contact DemoContact
 
 Number Weather_Temperature 		"Outside Temperature [%.1f °C]"	<temperature> (Weather_Chart) { channel="yahooweather:weather:berlin:temperature" }
 Number Atom_Time      "Current time [%.1f o'clock]" <time> (Weather_Chart) { channel="atomclock:time:test:time" }
-String Twitter_Status      "Twitter status" <string> (Twitter_Chart) { channel="twitter:status:coolname:status" }
