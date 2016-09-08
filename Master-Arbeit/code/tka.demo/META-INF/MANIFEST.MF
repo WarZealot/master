@@ -7,7 +7,18 @@ Bundle-Activator: tka.demo.Activator
 Require-Bundle: org.eclipse.core.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Import-Package: org.eclipse.smarthome.config.core,
+Import-Package: org.eclipse.smarthome.automation,
+ org.eclipse.smarthome.config.core,
  org.eclipse.smarthome.core.common.registry,
+ org.eclipse.smarthome.core.events,
+ org.eclipse.smarthome.core.items,
+ org.eclipse.smarthome.core.items.events,
+ org.eclipse.smarthome.core.library.items,
+ org.eclipse.smarthome.core.library.types,
  org.eclipse.smarthome.core.thing,
- tka.binding.atomclock
+ org.eclipse.smarthome.core.thing.binding,
+ org.eclipse.smarthome.core.thing.events,
+ org.eclipse.smarthome.core.types,
+ org.eclipse.smarthome.model.rule.rules,
+ tka.binding.atomclock,
+ tka.binding.twitter

@@ -16,7 +16,7 @@ public class TwitterBindingConstants {
     public static final String BINDING_ID = "twitter";
 
     // List all Thing Type UIDs, related to the Twitter Binding
-    public final static ThingTypeUID THING_TYPE_TWITTER = new ThingTypeUID(BINDING_ID, "mycheaptwitter");
+    public final static ThingTypeUID THING_TYPE_TWITTER = new ThingTypeUID(BINDING_ID, "twitter");
 
     // List all channels
     public static final String CHANNEL_STATUS = "status";

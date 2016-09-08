@@ -18,7 +18,7 @@
 		<item-type>String</item-type>
 		<label>Status</label>
 		<description>The current status</description>
-		<category>Who chares about the category</category>
+		<category>String</category>
 		<state readOnly="false"></state>
 	</channel-type>
 
