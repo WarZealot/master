@@ -6,6 +6,8 @@ import java.util.Date;
 import org.eclipse.smarthome.automation.Rule;
 import org.eclipse.smarthome.automation.RuleRegistry;
 import org.eclipse.smarthome.automation.Visibility;
+import org.eclipse.smarthome.automation.type.ModuleType;
+import org.eclipse.smarthome.automation.type.ModuleTypeProvider;
 import org.eclipse.smarthome.config.core.Configuration;
 import org.eclipse.smarthome.core.events.EventPublisher;
 import org.eclipse.smarthome.core.items.Item;
@@ -32,6 +34,7 @@ public class Activator implements BundleActivator {
     private RuleRegistry ruleRegistry;
     private EventPublisher eventPublisher;
     private ItemRegistry itemRegistry;
+    private ModuleTypeProvider typeProvider;
 
     static BundleContext getContext() {
         return context;
@@ -39,7 +42,7 @@ public class Activator implements BundleActivator {
 
     @Override
     public void start(BundleContext bundleContext) throws Exception {
-        Thread.sleep(8000);
+        Thread.sleep(5000);
         Activator.context = bundleContext;
         System.out.println("Activator.start()");
 
@@ -55,8 +58,14 @@ public class Activator implements BundleActivator {
         ServiceReference<EventPublisher> reference3 = context.getServiceReference(EventPublisher.class);
         eventPublisher = context.getService(reference3);
 
+        // item registry
         ServiceReference<ItemRegistry> reference4 = context.getServiceReference(ItemRegistry.class);
         itemRegistry = context.getService(reference4);
+
+        // module type provider
+        // ServiceReference<ModuleTypeProvider> reference5 = context
+        // .getServiceReference(WelcomeHomeModuleTypeProvider.class);
+        // typeProvider = context.getService(reference5);
 
         doSomething();
     }
@@ -66,14 +75,37 @@ public class Activator implements BundleActivator {
         Activator.context = null;
     }
 
+    /**
+     * Does something useful.
+     */
     private void doSomething() {
-        createThings();
-        listThings();
-        createItems();
-        listItems();
-
+        // createThings();
+        // listThings();
+        // createItems();
+        // listItems();
+        //
         manipulateMyTwitter();
         // createRules();
+
+        useModuleTypeProvider();
+        doSomethingOther();
+    }
+
+    private void doSomethingOther() {
+
+    }
+
+    private void useModuleTypeProvider() {
+        if (typeProvider == null) {
+            return;
+        }
+        Collection<ModuleType> types = typeProvider.getModuleTypes(null);
+        for (ModuleType type : types) {
+            System.out.println(type);
+            System.out.println("UID: " + type.getUID());
+            System.out.println("Label: " + type.getLabel());
+            System.out.println("-------------------");
+        }
     }
 
     private void createItems() {
