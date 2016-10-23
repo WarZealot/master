@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.smarthome.automation.sample.extension.java.handler;
+package tka.automation.extension.handler;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,15 +21,16 @@ import org.eclipse.smarthome.automation.Trigger;
 import org.eclipse.smarthome.automation.handler.BaseModuleHandlerFactory;
 import org.eclipse.smarthome.automation.handler.ModuleHandler;
 import org.eclipse.smarthome.automation.handler.ModuleHandlerFactory;
-import org.eclipse.smarthome.automation.sample.extension.java.type.AirConditionerTriggerType;
-import org.eclipse.smarthome.automation.sample.extension.java.type.LightsTriggerType;
-import org.eclipse.smarthome.automation.sample.extension.java.type.StateConditionType;
-import org.eclipse.smarthome.automation.sample.extension.java.type.TemperatureConditionType;
-import org.eclipse.smarthome.automation.sample.extension.java.type.WelcomeHomeActionType;
+import org.eclipse.smarthome.core.events.EventPublisher;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import tka.automation.extension.type.AlwaysTrueConditionType;
+import tka.automation.extension.type.TkaTriggerType;
+import tka.automation.extension.type.TwitterActionType;
 
 /**
  * This class is a simple implementation of the {@link ModuleHandlerFactory}, which is registered as a service.
@@ -37,29 +38,31 @@ import org.slf4j.LoggerFactory;
  * @author Ana Dimova - Initial Contribution
  *
  */
-public class WelcomeHomeHandlerFactory extends BaseModuleHandlerFactory {
+public class FlashHandlerFactory extends BaseModuleHandlerFactory {
 
-    public static final String MODULE_HANDLER_FACTORY_NAME = "[JavaAPIDemoHandlerFactory]";
+    public static final String MODULE_HANDLER_FACTORY_NAME = "[TkaHandlerFactory]";
     private static final Collection<String> TYPES;
 
     static {
         List<String> temp = new ArrayList<String>();
-        temp.add(WelcomeHomeActionType.UID);
-        temp.add(StateConditionType.UID);
-        temp.add(TemperatureConditionType.UID);
-        temp.add(AirConditionerTriggerType.UID);
-        temp.add(LightsTriggerType.UID);
+        temp.add(TwitterActionType.UID);
+        temp.add(AlwaysTrueConditionType.UID);
+        temp.add(TkaTriggerType.UID);
         TYPES = Collections.unmodifiableCollection(temp);
     }
 
     @SuppressWarnings("rawtypes")
     private ServiceRegistration factoryRegistration;
-    private Map<String, WelcomeHomeTriggerHandler> triggerHandlers;
-    private Logger logger = LoggerFactory.getLogger(WelcomeHomeHandlerFactory.class);
+    private Map<String, TkaTriggerHandler> triggerHandlers;
+    private Logger logger = LoggerFactory.getLogger(FlashHandlerFactory.class);
+    private EventPublisher eventPublisher;
 
-    public WelcomeHomeHandlerFactory(BundleContext bc) {
-        triggerHandlers = new HashMap<String, WelcomeHomeTriggerHandler>();
+    public FlashHandlerFactory(BundleContext bc) {
+        triggerHandlers = new HashMap<String, TkaTriggerHandler>();
         activate(bc);
+
+        ServiceReference<EventPublisher> reference3 = bc.getServiceReference(EventPublisher.class);
+        eventPublisher = bc.getService(reference3);
     }
 
     @Override
@@ -76,26 +79,25 @@ public class WelcomeHomeHandlerFactory extends BaseModuleHandlerFactory {
         factoryRegistration = null;
     }
 
-    public WelcomeHomeTriggerHandler getTriggerHandler(String uid) {
+    public TkaTriggerHandler getTriggerHandler(String uid) {
         return triggerHandlers.get(uid);
     }
 
     @Override
     protected ModuleHandler internalCreate(Module module, String ruleUID) {
+        System.out.println("FlashHandlerFactory.internalCreate() " + module + " " + ruleUID);
         ModuleHandler moduleHandler = null;
-        if (WelcomeHomeActionType.UID.equals(module.getTypeUID())) {
-            moduleHandler = new WelcomeHomeActionHandler((Action) module);
-        } else if (StateConditionType.UID.equals(module.getTypeUID())) {
-            moduleHandler = new StateConditionHandler((Condition) module);
-        } else if (TemperatureConditionType.UID.equals(module.getTypeUID())) {
-            moduleHandler = new TemperatureConditionHandler((Condition) module);
-        } else if (AirConditionerTriggerType.UID.equals(module.getTypeUID())
-                || LightsTriggerType.UID.equals(module.getTypeUID())) {
-            moduleHandler = new WelcomeHomeTriggerHandler((Trigger) module);
-            triggerHandlers.put(ruleUID, (WelcomeHomeTriggerHandler) moduleHandler);
+        if (TwitterActionType.UID.equals(module.getTypeUID())) {
+            moduleHandler = new TwitterActionHandler((Action) module, eventPublisher);
+        } else if (AlwaysTrueConditionType.UID.equals(module.getTypeUID())) {
+            moduleHandler = new AlwaysTrueConditionHandler((Condition) module);
+        } else if (TkaTriggerType.UID.equals(module.getTypeUID())) {
+            moduleHandler = new TkaTriggerHandler((Trigger) module);
+            triggerHandlers.put(ruleUID, (TkaTriggerHandler) moduleHandler);
         } else {
             logger.error(MODULE_HANDLER_FACTORY_NAME + "Not supported moduleHandler: {}", module.getTypeUID());
         }
+        System.out.println("TriggerHandlers: " + triggerHandlers);
         return moduleHandler;
     }
 }

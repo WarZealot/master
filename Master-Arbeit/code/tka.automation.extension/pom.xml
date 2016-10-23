@@ -10,13 +10,13 @@
   </parent>
 
   <properties>
-    <bundle.symbolicName>org.eclipse.smarthome.automation.sample.extension.java</bundle.symbolicName>
-    <bundle.namespace>org.eclipse.smarthome.automation.sample.extension.java</bundle.namespace>
+    <bundle.symbolicName>tka.automation.extension</bundle.symbolicName>
+    <bundle.namespace>tka.automation.extension</bundle.namespace>
   </properties>
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.smarthome.automation</groupId>
-  <artifactId>org.eclipse.smarthome.automation.sample.extension.java</artifactId>
+  <artifactId>tka.automation.extension</artifactId>
 
   <name>Eclipse SmartHome Automation Sample Extension Java</name>
 

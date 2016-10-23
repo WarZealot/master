@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.smarthome.automation.sample.extension.java.type;
+package tka.automation.extension.type;
 
 import java.util.Collection;
 import java.util.Dictionary;
@@ -14,33 +14,26 @@ import java.util.Hashtable;
 import java.util.Locale;
 import java.util.Map;
 
-import org.eclipse.smarthome.automation.Rule;
-import org.eclipse.smarthome.automation.template.RuleTemplate;
 import org.eclipse.smarthome.automation.type.ModuleType;
 import org.eclipse.smarthome.automation.type.ModuleTypeProvider;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 
 /**
- * The purpose of this class is to illustrate how to provide Module Types and how to use them for creation of the
- * {@link RuleTemplate}s or directly the {@link Rule}s.
- *
- * @author Ana Dimova - Initial Contribution
+ * @author Konstantin
  *
  */
-public class WelcomeHomeModuleTypeProvider implements ModuleTypeProvider {
+public class FlashModuleTypeProvider implements ModuleTypeProvider {
 
     private Map<String, ModuleType> providedModuleTypes;
     @SuppressWarnings("rawtypes")
     private ServiceRegistration providerReg;
 
-    public WelcomeHomeModuleTypeProvider() {
+    public FlashModuleTypeProvider() {
         providedModuleTypes = new HashMap<String, ModuleType>();
-        providedModuleTypes.put(WelcomeHomeActionType.UID, WelcomeHomeActionType.initialize());
-        providedModuleTypes.put(StateConditionType.UID, StateConditionType.initialize());
-        providedModuleTypes.put(TemperatureConditionType.UID, TemperatureConditionType.initialize());
-        providedModuleTypes.put(AirConditionerTriggerType.UID, AirConditionerTriggerType.initialize());
-        providedModuleTypes.put(LightsTriggerType.UID, LightsTriggerType.initialize());
+        providedModuleTypes.put(TwitterActionType.UID, TwitterActionType.initialize());
+        providedModuleTypes.put(AlwaysTrueConditionType.UID, AlwaysTrueConditionType.initialize());
+        providedModuleTypes.put(TkaTriggerType.UID, TkaTriggerType.initialize());
     }
 
     @SuppressWarnings("unchecked")

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.smarthome.automation.sample.extension.java.handler;
+package tka.automation.extension.handler;
 
 import java.util.Map;
 
@@ -21,11 +21,11 @@ import org.eclipse.smarthome.automation.handler.TriggerHandler;
  * @author Ana Dimova - Initial Contribution
  *
  */
-public class WelcomeHomeTriggerHandler extends BaseModuleHandler<Trigger>implements TriggerHandler {
+public class TkaTriggerHandler extends BaseModuleHandler<Trigger> implements TriggerHandler {
 
     private RuleEngineCallback callback;
 
-    public WelcomeHomeTriggerHandler(Trigger module) {
+    public TkaTriggerHandler(Trigger module) {
         super(module);
     }
 
@@ -41,6 +41,7 @@ public class WelcomeHomeTriggerHandler extends BaseModuleHandler<Trigger>impleme
      *            is used to provide the output of the {@link Trigger}.
      */
     public void trigger(Map<String, ?> context) {
+        System.out.println("Triggering TkaTrigger: " + context);
         callback.triggered(module, context);
     }
 

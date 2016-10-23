@@ -5,13 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.smarthome.automation.sample.extension.java;
+package tka.automation.extension;
 
-import org.eclipse.smarthome.automation.sample.extension.java.handler.WelcomeHomeHandlerFactory;
-import org.eclipse.smarthome.automation.sample.extension.java.template.WelcomeHomeTemplateProvider;
-import org.eclipse.smarthome.automation.sample.extension.java.type.WelcomeHomeModuleTypeProvider;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+
+import tka.automation.extension.handler.FlashHandlerFactory;
+import tka.automation.extension.template.FlashTemplateProvider;
+import tka.automation.extension.type.FlashModuleTypeProvider;
 
 /**
  * This class is responsible for starting and stopping the application that gives ability to the user to switch on the
@@ -27,28 +28,30 @@ import org.osgi.framework.BundleContext;
  */
 public class Activator implements BundleActivator {
 
-    private WelcomeHomeModuleTypeProvider mtProvider;
-    private WelcomeHomeTemplateProvider tProvider;
-    private WelcomeHomeRulesProvider rulesProvider;
-    private WelcomeHomeHandlerFactory handlerFactory;
-    private WelcomeHomeCommands commands;
+    private FlashModuleTypeProvider mtProvider;
+    private FlashTemplateProvider tProvider;
+    private FlashRulesProvider rulesProvider;
+    private FlashHandlerFactory handlerFactory;
+    private FlashCommands commands;
 
     @Override
     public void start(BundleContext context) throws Exception {
-        mtProvider = new WelcomeHomeModuleTypeProvider();
+        mtProvider = new FlashModuleTypeProvider();
         mtProvider.register(context);
 
-        tProvider = new WelcomeHomeTemplateProvider();
+        tProvider = new FlashTemplateProvider();
         tProvider.register(context);
 
-        rulesProvider = new WelcomeHomeRulesProvider();
+        rulesProvider = new FlashRulesProvider();
         rulesProvider.register(context);
 
-        handlerFactory = new WelcomeHomeHandlerFactory(context);
+        handlerFactory = new FlashHandlerFactory(context);
         handlerFactory.register(context);
 
-        commands = new WelcomeHomeCommands(context, rulesProvider, handlerFactory);
+        commands = new FlashCommands(context, rulesProvider, handlerFactory);
         commands.register(context);
+
+        System.out.println("Registered FLASH Types");
     }
 
     @Override

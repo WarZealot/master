@@ -79,7 +79,7 @@ public class TwitterHandler extends ConfigStatusThingHandler {
                 .setOAuthConsumerSecret("avJ03ScGJwMCR3GmZ1FkFtbDiGk7eJcts9R61Hy3BvXgVMPie7")
                 .setOAuthAccessToken("3524637135-tnqDTgMAFNPcUd11JgacIxz5rqeQFUW8PobKNyi")
                 .setOAuthAccessTokenSecret("TDpDdNX5cB83wilP213DGQ8UNsgMvdK9R8oJEFqfu6MRF");
-        cb.setHttpProxyHost("proxy.materna.de").setHttpProxyPort(8080);
+        // cb.setHttpProxyHost("proxy.materna.de").setHttpProxyPort(8080);
         TwitterFactory tf = new TwitterFactory(cb.build());
         Twitter twitter = tf.getInstance();
         Status status;

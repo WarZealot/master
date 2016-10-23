@@ -1,11 +1,23 @@
 package tka.demo;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import org.eclipse.smarthome.automation.Action;
+import org.eclipse.smarthome.automation.Condition;
 import org.eclipse.smarthome.automation.Rule;
+import org.eclipse.smarthome.automation.RuleProvider;
 import org.eclipse.smarthome.automation.RuleRegistry;
+import org.eclipse.smarthome.automation.Trigger;
 import org.eclipse.smarthome.automation.Visibility;
+import org.eclipse.smarthome.automation.template.Template;
+import org.eclipse.smarthome.automation.template.TemplateProvider;
 import org.eclipse.smarthome.automation.type.ModuleType;
 import org.eclipse.smarthome.automation.type.ModuleTypeProvider;
 import org.eclipse.smarthome.config.core.Configuration;
@@ -22,28 +34,30 @@ import org.eclipse.smarthome.core.thing.ThingUID;
 import org.eclipse.smarthome.core.types.Command;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 
-import tka.binding.atomclock.AtomclockBindingConstants;
+import tka.automation.extension.type.AlwaysTrueConditionType;
+import tka.automation.extension.type.TkaTriggerType;
+import tka.automation.extension.type.TwitterActionType;
 import tka.binding.twitter.TwitterBindingConstants;
 
 public class Activator implements BundleActivator {
 
-    private static BundleContext context;
+    private BundleContext context;
     private ThingRegistry thingRegistry;
     private RuleRegistry ruleRegistry;
     private EventPublisher eventPublisher;
     private ItemRegistry itemRegistry;
     private ModuleTypeProvider typeProvider;
-
-    static BundleContext getContext() {
-        return context;
-    }
+    private TemplateProvider templateProvider;
+    private RuleProvider ruleProvider;
 
     @Override
     public void start(BundleContext bundleContext) throws Exception {
+        System.out.println("Delaying start...");
         Thread.sleep(5000);
-        Activator.context = bundleContext;
+        context = bundleContext;
         System.out.println("Activator.start()");
 
         // thing registry
@@ -51,8 +65,8 @@ public class Activator implements BundleActivator {
         thingRegistry = context.getService(reference1);
 
         // rule registry
-        // ServiceReference<RuleRegistry> reference2 = context.getServiceReference(RuleRegistry.class);
-        // ruleRegistry = context.getService(reference2);
+        ServiceReference<RuleRegistry> reference2 = context.getServiceReference(RuleRegistry.class);
+        ruleRegistry = context.getService(reference2);
 
         // event publisher
         ServiceReference<EventPublisher> reference3 = context.getServiceReference(EventPublisher.class);
@@ -63,16 +77,30 @@ public class Activator implements BundleActivator {
         itemRegistry = context.getService(reference4);
 
         // module type provider
-        // ServiceReference<ModuleTypeProvider> reference5 = context
-        // .getServiceReference(WelcomeHomeModuleTypeProvider.class);
-        // typeProvider = context.getService(reference5);
+        ServiceReference<ModuleTypeProvider> reference5 = context.getServiceReference(ModuleTypeProvider.class);
+        typeProvider = context.getService(reference5);
+
+        ServiceReference<TemplateProvider> reference6 = context.getServiceReference(TemplateProvider.class);
+        templateProvider = context.getService(reference6);
+
+        ServiceReference<RuleProvider> reference7 = context.getServiceReference(RuleProvider.class);
+        ruleProvider = context.getService(reference7);
+
+        // printAllServices();
 
         doSomething();
     }
 
+    private void printAllServices() throws InvalidSyntaxException {
+        ServiceReference<?>[] references = context.getAllServiceReferences(null, null);
+        for (ServiceReference<?> reference : references) {
+            System.out.println("Reference: " + reference);
+        }
+    }
+
     @Override
     public void stop(BundleContext bundleContext) throws Exception {
-        Activator.context = null;
+        context = null;
     }
 
     /**
@@ -84,11 +112,36 @@ public class Activator implements BundleActivator {
         // createItems();
         // listItems();
         //
-        manipulateMyTwitter();
+        // manipulateMyTwitter();
         // createRules();
 
-        useModuleTypeProvider();
-        doSomethingOther();
+        // useModuleTypeProvider();
+        // doSomethingOther();
+        useFlashTemplates();
+        useRuleProvider();
+    }
+
+    private void useRuleProvider() {
+        Collection<Rule> all = ruleProvider.getAll();
+        System.out.println("Rules:");
+        for (Rule rule : all) {
+            System.out.println(rule.getUID());
+            System.out.println(rule.getName());
+            System.out.println(rule.getTemplateUID());
+        }
+    }
+
+    private void useFlashTemplates() {
+        if (templateProvider == null) {
+            System.err.println("templateProvider is NULL! This is BAD!");
+            return;
+        }
+        System.out.println("templateProvider: " + templateProvider);
+        Collection<Template> templates = templateProvider.getTemplates(null);
+        System.out.println("Templates");
+        for (Template template : templates) {
+            System.out.println(template);
+        }
     }
 
     private void doSomethingOther() {
@@ -145,11 +198,11 @@ public class Activator implements BundleActivator {
     private void createThings() {
         Configuration configuration = new Configuration();
         Thing exists = thingRegistry.get(new ThingUID("atomclock", "atomclock", "myclock"));
-        if (exists == null) {
-            Thing thing = thingRegistry.createThingOfType(AtomclockBindingConstants.THING_TYPE_ATOMCLOCK,
-                    new ThingUID("atomclock", "atomclock", "myclock"), null, "someLabel", configuration);
-            thingRegistry.add(thing);
-        }
+        // if (exists == null) {
+        // Thing thing = thingRegistry.createThingOfType(AtomclockBindingConstants.THING_TYPE_ATOMCLOCK,
+        // new ThingUID("atomclock", "atomclock", "myclock"), null, "someLabel", configuration);
+        // thingRegistry.add(thing);
+        // }
         exists = thingRegistry.get(new ThingUID("twitter", "mycheaptwitter", "percode"));
         if (exists == null) {
             Thing thing2 = thingRegistry.createThingOfType(TwitterBindingConstants.THING_TYPE_TWITTER,
@@ -179,5 +232,46 @@ public class Activator implements BundleActivator {
         rule.setConditions(null);
         rule.setVisibility(Visibility.VISIBLE);
         ruleRegistry.add(rule);
+    }
+
+    /**
+     * This method creates a rule from scratch by using trigger, condition, action, configDescriptions and
+     * configuration, tags.
+     *
+     * @return the created rule
+     */
+    private Rule createTwitterRule() {
+        // initialize the trigger
+        String triggerId = "TkaTrigger";
+        List<Trigger> triggers = new ArrayList<Trigger>();
+        triggers.add(new Trigger(triggerId, TkaTriggerType.UID, null));
+
+        // initialize the condition - here the tricky part is the referring into the condition input - trigger output.
+        // The syntax is a similar to the JUEL syntax.
+        Map<String, Object> config = new HashMap<String, Object>();
+        List<Condition> conditions = new ArrayList<Condition>();
+        Map<String, String> inputs = new HashMap<String, String>();
+        conditions.add(new Condition("AlwaysTrueCondition", AlwaysTrueConditionType.UID, config, inputs));
+
+        // initialize the action - here the tricky part is the referring into the action configuration parameter - the
+        // template configuration parameter. The syntax is a similar to the JUEL syntax.
+        config = new HashMap<String, Object>();
+        List<Action> actions = new ArrayList<Action>();
+        actions.add(new Action("TwitterAction", TwitterActionType.UID, config, null));
+
+        // create the rule
+        Rule twitterRule = new Rule("TwitterRule");
+        twitterRule.setTriggers(triggers);
+        twitterRule.setConditions(conditions);
+        twitterRule.setActions(actions);
+
+        // initialize the tags
+        Set<String> tags = new HashSet<String>();
+        tags.add("twitter");
+
+        // set the tags
+        twitterRule.setTags(tags);
+
+        return twitterRule;
     }
 }

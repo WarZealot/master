@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.smarthome.automation.sample.extension.java.template;
+package tka.automation.extension.template;
 
 import java.util.Collection;
 import java.util.Dictionary;
@@ -29,15 +29,15 @@ import org.osgi.framework.ServiceRegistration;
  * @author Ana Dimova - Initial Contribution
  *
  */
-public class WelcomeHomeTemplateProvider implements TemplateProvider {
+public class FlashTemplateProvider implements TemplateProvider {
 
     private Map<String, RuleTemplate> providedRuleTemplates;
     @SuppressWarnings("rawtypes")
     private ServiceRegistration providerReg;
 
-    public WelcomeHomeTemplateProvider() {
+    public FlashTemplateProvider() {
         providedRuleTemplates = new HashMap<String, RuleTemplate>();
-        providedRuleTemplates.put(AirConditionerRuleTemplate.UID, AirConditionerRuleTemplate.initialize());
+        providedRuleTemplates.put(TwitterRuleTemplate.UID, TwitterRuleTemplate.initialize());
     }
 
     @SuppressWarnings("unchecked")
@@ -53,7 +53,7 @@ public class WelcomeHomeTemplateProvider implements TemplateProvider {
     }
 
     /**
-     * To provide the {@link Template}s should register the WelcomeHomeTemplateProvider as {@link TemplateProvider}
+     * To provide the {@link Template}s should register the FlashTemplateProvider as {@link TemplateProvider}
      * service.
      *
      * @param bc
@@ -66,7 +66,7 @@ public class WelcomeHomeTemplateProvider implements TemplateProvider {
     }
 
     /**
-     * This method unregisters the WelcomeHomeTemplateProvider as {@link TemplateProvider}
+     * This method unregisters the FlashTemplateProvider as {@link TemplateProvider}
      * service.
      */
     public void unregister() {

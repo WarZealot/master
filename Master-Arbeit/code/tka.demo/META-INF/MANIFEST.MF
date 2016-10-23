@@ -8,6 +8,7 @@ Require-Bundle: org.eclipse.core.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.smarthome.automation,
+ org.eclipse.smarthome.automation.template,
  org.eclipse.smarthome.automation.type,
  org.eclipse.smarthome.config.core,
  org.eclipse.smarthome.core.common.registry,
@@ -18,8 +19,6 @@ Import-Package: org.eclipse.smarthome.automation,
  org.eclipse.smarthome.core.library.types,
  org.eclipse.smarthome.core.thing,
  org.eclipse.smarthome.core.thing.binding,
- org.eclipse.smarthome.core.thing.events,
  org.eclipse.smarthome.core.types,
- org.eclipse.smarthome.model.rule.rules,
- tka.binding.atomclock,
+ tka.automation.extension.type,
  tka.binding.twitter

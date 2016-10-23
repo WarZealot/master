@@ -13,14 +13,17 @@ Import-Package: com.google.common.collect,
  org.apache.commons.lang,
  org.eclipse.smarthome.config.core,
  org.eclipse.smarthome.config.core.status,
+ org.eclipse.smarthome.core.events,
  org.eclipse.smarthome.core.library.types,
  org.eclipse.smarthome.core.thing,
  org.eclipse.smarthome.core.thing.binding,
  org.eclipse.smarthome.core.types,
+ org.osgi.framework;version="1.8.0",
  org.slf4j,
  tka.binding.twitter,
  tka.binding.twitter.handler
 Service-Component: OSGI-INF/*.xml
 Export-Package: tka.binding.twitter,
  tka.binding.twitter.handler
+Bundle-Activator: tka.binding.twitter.Activator
 
