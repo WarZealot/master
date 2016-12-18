@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://eclipse.org/smarthome/schemas/binding/v1.0.0 http://eclipse.org/smarthome/schemas/binding-1.0.0.xsd">
 
     <name>Twitter Binding</name>
-    <description>The twitter binding allows the user to interact with twitter.</description>
+    <description>The twitter binding allows the user to interact with Twitter.</description>
     <author>Konstantin Tkachuk</author>
 
 </binding:binding>

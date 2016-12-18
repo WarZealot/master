@@ -25,7 +25,7 @@ public class TwitterBindingConstants {
 
     public final static String OAUTH_CONSUMER_KEY = "9F8YmBxVk6o7XZfGNLgQieREN";
     public final static String OAUTH_CONSUMER_SECRET = "avJ03ScGJwMCR3GmZ1FkFtbDiGk7eJcts9R61Hy3BvXgVMPie7";
-    public final static String OAUTH_ACCESS_TOKEN = "3524637135-tnqDTgMAFNPcUd11JgacIxz5rqeQFUW8PobKNyi";
-    public final static String OAUTH_ACCESS_TOKEN_SECRET = "TDpDdNX5cB83wilP213DGQ8UNsgMvdK9R8oJEFqfu6MRF";
 
+    public final static String TOPIC_STATUS_CHANGED = "flash/twitter/status";
+    public final static String SOURCE = "flash/twitter";
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" activate="activate" name="tka.binding.twitter.internal.TwitterConnectionServiceImpl">
+   <implementation class="tka.binding.twitter.internal.TwitterConnectionServiceImpl"/>
+   <service>
+      <provide interface="tka.binding.twitter.TwitterConnectionService"/>
+   </service>
+   <reference bind="setThingRegistry" cardinality="1..1" interface="org.eclipse.smarthome.core.thing.ThingRegistry" name="ThingRegistry" policy="static" unbind="unsetThingRegistry"/>
+   <reference bind="setEventPublisher" cardinality="1..1" interface="org.eclipse.smarthome.core.events.EventPublisher" name="EventPublisher" policy="static" unbind="unsetEventPublisher"/>
+</scr:component>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="tka.flashui2">
+   <implementation class="tka.flashui.FlashUIApp"/>
+   <reference bind="setHttpService" cardinality="1..1" interface="org.osgi.service.http.HttpService" name="HttpService" policy="static" unbind="unsetHttpService"/>
+   <reference bind="setRuleRegistry" cardinality="1..1" interface="org.eclipse.smarthome.automation.RuleRegistry" name="RuleRegistry" policy="static" unbind="unsetRuleRegistry"/>
+   <reference bind="setThingRegistry" cardinality="1..1" interface="org.eclipse.smarthome.core.thing.ThingRegistry" name="ThingRegistry" policy="static" unbind="unsetThingRegistry"/>
+   <reference bind="setTwitterConnectionService" cardinality="1..1" interface="tka.binding.twitter.TwitterConnectionService" name="TwitterConnectionService" policy="static" unbind="unsetTwitterConnectionService"/>
+</scr:component>

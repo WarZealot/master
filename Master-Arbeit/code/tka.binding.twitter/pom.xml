@@ -11,10 +11,20 @@
 	</parent>
 
 	<groupId>org.eclipse.smarthome.binding</groupId>
-	<artifactId>org.eclipse.smarthome.binding.twitter</artifactId>
+	<artifactId>tka.binding.twitter</artifactId>
 	<version>0.9.0-SNAPSHOT</version>
 
 	<name>Tkachuk Twitter Binding</name>
 	<packaging>eclipse-plugin</packaging>
+
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.apache.servicemix.bundles/org.apache.servicemix.bundles.twitter4j -->
+		<dependency>
+			<groupId>org.apache.servicemix.bundles</groupId>
+			<artifactId>org.apache.servicemix.bundles.twitter4j</artifactId>
+			<version>4.0.5_1</version>
+		</dependency>
+
+	</dependencies>
 
 </project>

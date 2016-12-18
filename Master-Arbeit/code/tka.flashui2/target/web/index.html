@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Eclipse Smarthome - Flash</title>
+<script src="js/jquery-3.1.1.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/main.css" />
+<script src="js/rules.js"></script>
+<script src="js/things.js"></script>
+<script src="js/twitter.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div id="header" class="page-header">
+			<h1>FLASH UI</h1>
+		</div>
+		<div class="row">
+			<div class="page-header">
+				<h2>Rules</h2>
+			</div>
+			<div id="rules-view">
+				<h3>Flash Rules</h3>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>UID</th>
+							<th>Name</th>
+							<th>Description</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+			<div id="rules-import">
+				<div class="form-group">
+					<label for="rule-json">Import Rules:</label>
+					<textarea class="form-control" rows="20" id="rule-json"></textarea>
+				</div>
+				<button id="importBtn" class="btn btn-primary">Import Rules</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="page-header">
+                <h2>Things</h2>
+            </div>
+			<div id="things-view">
+				<h3>Flash Things</h3>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>UID</th>
+							<th>Label</th>
+							<th>Channels</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+			<div id="connections">
+				<h3>Connections</h3>
+				<ul id="bindings-list" class="list-group">
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -49,7 +49,9 @@ public class TwitterHandler extends ConfigStatusThingHandler {
 
     @Override
     public void dispose() {
-        refreshJob.cancel(true);
+        if (refreshJob != null) {
+            refreshJob.cancel(true);
+        }
     }
 
     @Override

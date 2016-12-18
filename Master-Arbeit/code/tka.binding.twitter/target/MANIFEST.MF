@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: tka.binding.twitter;singleton:=true
+Export-Package: tka.binding.twitter,tka.binding.twitter.handler
+Bundle-Name: Tkachuk Twitter Binding
+Bundle-Version: 0.9.0.201612171605
+Bundle-ClassPath: .
+Bundle-ManifestVersion: 2
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-Activator: tka.binding.twitter.Activator
+Bundle-Vendor: Materna/Tkachuk
+Import-Package: com.google.common.collect,com.google.gson,org.apache.c
+ ommons.io,org.apache.commons.lang,org.eclipse.smarthome.config.core,o
+ rg.eclipse.smarthome.config.core.status,org.eclipse.smarthome.core.co
+ mmon.registry,org.eclipse.smarthome.core.events,org.eclipse.smarthome
+ .core.library.types,org.eclipse.smarthome.core.thing,org.eclipse.smar
+ thome.core.thing.binding,org.eclipse.smarthome.core.thing.dto,org.ecl
+ ipse.smarthome.core.thing.events,org.eclipse.smarthome.core.types,org
+ .osgi.framework,org.osgi.service.component,org.slf4j,tka.binding.twit
+ ter,tka.binding.twitter.handler,twitter4j,twitter4j.api,twitter4j.aut
+ h,twitter4j.conf
+Service-Component: OSGI-INF/*.xml
+

@@ -8,6 +8,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import org.eclipse.smarthome.automation.Action;
 import org.eclipse.smarthome.automation.Condition;
@@ -21,6 +24,8 @@ import org.eclipse.smarthome.automation.template.TemplateProvider;
 import org.eclipse.smarthome.automation.type.ModuleType;
 import org.eclipse.smarthome.automation.type.ModuleTypeProvider;
 import org.eclipse.smarthome.config.core.Configuration;
+import org.eclipse.smarthome.core.events.Event;
+import org.eclipse.smarthome.core.events.EventFactory;
 import org.eclipse.smarthome.core.events.EventPublisher;
 import org.eclipse.smarthome.core.items.Item;
 import org.eclipse.smarthome.core.items.ItemRegistry;
@@ -37,11 +42,6 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 
-import tka.automation.extension.type.AlwaysTrueConditionType;
-import tka.automation.extension.type.TkaTriggerType;
-import tka.automation.extension.type.TwitterActionType;
-import tka.binding.twitter.TwitterBindingConstants;
-
 public class Activator implements BundleActivator {
 
     private BundleContext context;
@@ -52,11 +52,12 @@ public class Activator implements BundleActivator {
     private ModuleTypeProvider typeProvider;
     private TemplateProvider templateProvider;
     private RuleProvider ruleProvider;
+    private MyDemoEventFactory myEventFactory;
 
     @Override
     public void start(BundleContext bundleContext) throws Exception {
         System.out.println("Delaying start...");
-        Thread.sleep(5000);
+        // Thread.sleep(5000);
         context = bundleContext;
         System.out.println("Activator.start()");
 
@@ -86,7 +87,10 @@ public class Activator implements BundleActivator {
         ServiceReference<RuleProvider> reference7 = context.getServiceReference(RuleProvider.class);
         ruleProvider = context.getService(reference7);
 
-        // printAllServices();
+        HashSet<String> set = new HashSet<String>();
+        set.add(MyEvent.TYPE);
+        myEventFactory = new MyDemoEventFactory(set);
+        context.registerService(EventFactory.class.getName(), myEventFactory, null);
 
         doSomething();
     }
@@ -117,8 +121,30 @@ public class Activator implements BundleActivator {
 
         // useModuleTypeProvider();
         // doSomethingOther();
-        useFlashTemplates();
-        useRuleProvider();
+        // useFlashTemplates();
+        // useRuleProvider();
+        createDemoEvents();
+
+    }
+
+    private void createDemoEvents() {
+
+        Runnable eventGenerator = new Runnable() {
+            @Override
+            public void run() {
+                Event event;
+                try {
+                    event = myEventFactory.createEventByType(MyEvent.TYPE, "flash/web/mytopic", "mypayload",
+                            "flash/web");
+                    eventPublisher.post(event);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        };
+        ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+        scheduler.scheduleAtFixedRate(eventGenerator, 0, 5, TimeUnit.MINUTES);
     }
 
     private void useRuleProvider() {
@@ -205,9 +231,9 @@ public class Activator implements BundleActivator {
         // }
         exists = thingRegistry.get(new ThingUID("twitter", "mycheaptwitter", "percode"));
         if (exists == null) {
-            Thing thing2 = thingRegistry.createThingOfType(TwitterBindingConstants.THING_TYPE_TWITTER,
-                    new ThingUID("twitter", "mycheaptwitter", "percode"), null, "twitterLabel", configuration);
-            thingRegistry.add(thing2);
+            // Thing thing2 = thingRegistry.createThingOfType(TwitterBindingConstants.THING_TYPE_TWITTER,
+            // new ThingUID("twitter", "mycheaptwitter", "percode"), null, "twitterLabel", configuration);
+            // thingRegistry.add(thing2);
         }
     }
 
@@ -244,20 +270,20 @@ public class Activator implements BundleActivator {
         // initialize the trigger
         String triggerId = "TkaTrigger";
         List<Trigger> triggers = new ArrayList<Trigger>();
-        triggers.add(new Trigger(triggerId, TkaTriggerType.UID, null));
+        // triggers.add(new Trigger(triggerId, TkaTriggerType.UID, null));
 
         // initialize the condition - here the tricky part is the referring into the condition input - trigger output.
         // The syntax is a similar to the JUEL syntax.
         Map<String, Object> config = new HashMap<String, Object>();
         List<Condition> conditions = new ArrayList<Condition>();
         Map<String, String> inputs = new HashMap<String, String>();
-        conditions.add(new Condition("AlwaysTrueCondition", AlwaysTrueConditionType.UID, config, inputs));
+        // conditions.add(new Condition("AlwaysTrueCondition", AlwaysTrueConditionType.UID, config, inputs));
 
         // initialize the action - here the tricky part is the referring into the action configuration parameter - the
         // template configuration parameter. The syntax is a similar to the JUEL syntax.
         config = new HashMap<String, Object>();
         List<Action> actions = new ArrayList<Action>();
-        actions.add(new Action("TwitterAction", TwitterActionType.UID, config, null));
+        // actions.add(new Action("TwitterAction", TwitterActionType.UID, config, null));
 
         // create the rule
         Rule twitterRule = new Rule("TwitterRule");
