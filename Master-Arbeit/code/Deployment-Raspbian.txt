@@ -1,0 +1,5 @@
+How to deploy to the raspberry pi:
+1. Use sample packaging project - build default bundles + ESH bundles
+2. Use maven to build jars of own bundles
+3. Copy own jars to other smarthome jars and edit .xargs file to start them
+4. If necessary, edit .xargs files to load additional system bundles

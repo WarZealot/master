@@ -1,0 +1,44 @@
+[
+  {
+    "triggers": [
+      {
+        "id": "KtkTwitterTriggerId",
+        "configuration": {
+          "eventSource": "flash/twitter",
+          "eventTopic": "flash/twitter/status",
+          "eventTypes": "ALL"
+        },
+        "type": "GenericEventTrigger"
+      }
+    ],
+    "conditions": [
+      {
+        "inputs": {
+          "event": "KtkTwitterTriggerId.event"
+        },
+        "id": "KtkTwitterConditionID",
+        "configuration": {
+          "topic": "flash/twitter/status"
+        },
+        "type": "EventCondition"
+      }
+    ],
+    "actions": [
+      {
+        "id": "ItemPostCommandActionID",
+        "type": "ItemPostCommandAction",
+        "configuration": {
+          "itemName": "twitter_twitterThingTypeId_twitterconnection_status",
+          "command": "myCommand"
+        }
+      }
+    ],
+    "configuration": {},
+    "configDescriptions": [],
+    "uid": "RealTwitterRule",
+    "name": "ReactToStatusChangedRule",
+    "tags": [],
+    "visibility": "VISIBLE",
+    "description": "This rule executes an action whenever the status of the user is updated."
+  }
+]
