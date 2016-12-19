@@ -36,8 +36,6 @@ import twitter4j.conf.ConfigurationBuilder;
  */
 public class TwitterConnectionServiceImpl implements TwitterConnectionService, EventSubscriber {
 
-    private static final String KEY_OAUTH_TOKEN_SECRET = "oauthTokenSecret";
-    private static final String KEY_OAUTH_TOKEN = "oauthToken";
     private static final ThingUID TWITTER_CONNECTION = new ThingUID("twitter", "twitterThingTypeId",
             "twitterconnection");
     private static final Set<String> SUBSCRIBED_EVENT_TYPES = new HashSet<>();
@@ -119,8 +117,8 @@ public class TwitterConnectionServiceImpl implements TwitterConnectionService, E
         Thing twitterConnection = thingRegistry.get(TWITTER_CONNECTION);
         if (twitterConnection != null) {
             Configuration properties = twitterConnection.getConfiguration();
-            String token = (String) properties.get(KEY_OAUTH_TOKEN);
-            String tokenSecret = (String) properties.get(KEY_OAUTH_TOKEN_SECRET);
+            String token = (String) properties.get(TwitterBindingConstants.KEY_OAUTH_TOKEN);
+            String tokenSecret = (String) properties.get(TwitterBindingConstants.KEY_OAUTH_TOKEN_SECRET);
 
             accessToken = new AccessToken(token, tokenSecret);
             configuration = buildTwitterConfiguration();
@@ -135,6 +133,8 @@ public class TwitterConnectionServiceImpl implements TwitterConnectionService, E
         twitterConfigurationBuilder.setDebugEnabled(true)
                 .setOAuthConsumerKey(TwitterBindingConstants.OAUTH_CONSUMER_KEY)
                 .setOAuthConsumerSecret(TwitterBindingConstants.OAUTH_CONSUMER_SECRET);
+        twitterConfigurationBuilder.setHttpProxyHost("proxy.materna.de").setHttpProxyPort(8080);
+
         if (accessToken != null) {
             twitterConfigurationBuilder.setOAuthAccessToken(accessToken.getToken())
                     .setOAuthAccessTokenSecret(accessToken.getTokenSecret());
@@ -165,8 +165,8 @@ public class TwitterConnectionServiceImpl implements TwitterConnectionService, E
 
     private void createTwitterThing() {
         Configuration configuration = new Configuration();
-        configuration.put(KEY_OAUTH_TOKEN, accessToken.getToken());
-        configuration.put(KEY_OAUTH_TOKEN_SECRET, accessToken.getTokenSecret());
+        configuration.put(TwitterBindingConstants.KEY_OAUTH_TOKEN, accessToken.getToken());
+        configuration.put(TwitterBindingConstants.KEY_OAUTH_TOKEN_SECRET, accessToken.getTokenSecret());
 
         Thing thing = thingRegistry.createThingOfType(TwitterBindingConstants.THING_TYPE_TWITTER, TWITTER_CONNECTION,
                 null, "twitterLabel", configuration);

@@ -8,7 +8,6 @@ package tka.binding.twitter;
  *
  */
 public interface TwitterConnectionService {
-
     /**
      * @return the URL which is used by the user to grant access to his application
      */

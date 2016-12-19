@@ -1,9 +1,7 @@
 package tka.binding.twitter.handler;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.concurrent.ScheduledFuture;
 
 import org.eclipse.smarthome.config.core.status.ConfigStatusMessage;
 import org.eclipse.smarthome.core.library.types.StringType;
@@ -14,6 +12,7 @@ import org.eclipse.smarthome.core.types.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import tka.binding.twitter.TwitterBindingConstants;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
@@ -27,12 +26,6 @@ public class TwitterHandler extends ConfigStatusThingHandler {
 
     private final Logger logger = LoggerFactory.getLogger(TwitterHandler.class);
 
-    private String timeData = null;
-
-    ScheduledFuture<?> refreshJob;
-
-    private BigDecimal refresh;
-
     public TwitterHandler(Thing thing) {
         super(thing);
     }
@@ -42,16 +35,10 @@ public class TwitterHandler extends ConfigStatusThingHandler {
         logger.debug("Initializing Twitter handler.");
         super.initialize();
 
-        if (refresh == null) {
-            refresh = new BigDecimal(30);
-        }
     }
 
     @Override
     public void dispose() {
-        if (refreshJob != null) {
-            refreshJob.cancel(true);
-        }
     }
 
     @Override
@@ -77,17 +64,19 @@ public class TwitterHandler extends ConfigStatusThingHandler {
      */
     private void updateTwitterStatus(String newStatus) {
         ConfigurationBuilder cb = new ConfigurationBuilder();
-        cb.setDebugEnabled(true).setOAuthConsumerKey("9F8YmBxVk6o7XZfGNLgQieREN")
-                .setOAuthConsumerSecret("avJ03ScGJwMCR3GmZ1FkFtbDiGk7eJcts9R61Hy3BvXgVMPie7")
-                .setOAuthAccessToken("3524637135-tnqDTgMAFNPcUd11JgacIxz5rqeQFUW8PobKNyi")
-                .setOAuthAccessTokenSecret("TDpDdNX5cB83wilP213DGQ8UNsgMvdK9R8oJEFqfu6MRF");
-        // cb.setHttpProxyHost("proxy.materna.de").setHttpProxyPort(8080);
+        cb.setDebugEnabled(true).setOAuthConsumerKey(TwitterBindingConstants.OAUTH_CONSUMER_KEY)
+                .setOAuthConsumerSecret(TwitterBindingConstants.OAUTH_CONSUMER_SECRET);
+        String token = (String) getThing().getConfiguration().get(TwitterBindingConstants.KEY_OAUTH_TOKEN);
+        String tokenSecret = (String) getThing().getConfiguration().get(TwitterBindingConstants.KEY_OAUTH_TOKEN_SECRET);
+        cb.setOAuthAccessToken(token).setOAuthAccessTokenSecret(tokenSecret);
+        cb.setHttpProxyHost("proxy.materna.de").setHttpProxyPort(8080);
+
         TwitterFactory tf = new TwitterFactory(cb.build());
         Twitter twitter = tf.getInstance();
         Status status;
         try {
             status = twitter.updateStatus(newStatus);
-            System.out.println("Successfully updated the status to [" + status.getText() + "].");
+            logger.info("Successfully updated the status to [" + status.getText() + "].");
         } catch (Exception e) {
             e.printStackTrace();
         }
