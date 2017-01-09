@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="twitter" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:thing="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0"
+	xsi:schemaLocation="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0 http://eclipse.org/smarthome/schemas/thing-description-1.0.0.xsd">
+
+	<!-- Twitter Binding -->
+	<thing-type id="weather">
+		<label>Weather Information</label>
+		<description>Allows the user to interact with online weather API..</description>
+
+		<channels>
+			<channel id="temperature" typeId="temperature" />
+			<channel id="humidity" typeId="humidity" />
+			<channel id="rain" typeId="rain" />
+		</channels>
+
+	</thing-type>
+
+	<channel-type id="temperature">
+		<item-type>Number</item-type>
+		<label>Temperature</label>
+		<description>The current temperature</description>
+		<category>Temperature</category>
+		<state readOnly="true"></state>
+	</channel-type>
+	
+	<channel-type id="humidity">
+        <item-type>Number</item-type>
+        <label>Temperature</label>
+        <description>The current humidity.</description>
+        <category>Humidity</category>
+        <state readOnly="true"></state>
+    </channel-type>
+    
+    <channel-type id="rain">
+        <item-type>Switch</item-type>
+        <label>Rain</label>
+        <description>Shows whether it is currently raining.</description>
+        <category>Rain</category>
+        <state readOnly="true"></state>
+    </channel-type>
+	
+</thing:thing-descriptions>

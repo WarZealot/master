@@ -1,32 +1,24 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Tkachuk Twitter Binding
-Bundle-SymbolicName: tka.binding.twitter;singleton:=true
+Bundle-Name: Tkachuk Weather Binding
+Bundle-SymbolicName: tka.binding.weather;singleton:=true
 Bundle-Vendor: Materna/Tkachuk
 Bundle-Version: 0.9.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ClassPath: .
 Import-Package: com.google.common.collect,
+ com.google.gson,
+ org.apache.commons.io,
  org.eclipse.smarthome.config.core,
  org.eclipse.smarthome.config.core.status,
- org.eclipse.smarthome.core.common.registry,
- org.eclipse.smarthome.core.events,
  org.eclipse.smarthome.core.library.types,
  org.eclipse.smarthome.core.thing,
  org.eclipse.smarthome.core.thing.binding,
- org.eclipse.smarthome.core.thing.dto,
- org.eclipse.smarthome.core.thing.events,
  org.eclipse.smarthome.core.types,
- org.osgi.framework,
- org.osgi.service.component,
  org.slf4j,
- tka.binding.twitter,
- tka.binding.twitter.handler,
- twitter4j,
- twitter4j.api;version="4.0.5",
- twitter4j.auth,
- twitter4j.conf
+ tka.binding.weather,
+ tka.binding.weather.handler
 Service-Component: OSGI-INF/*.xml
-Export-Package: tka.binding.twitter,
- tka.binding.twitter.handler
+Export-Package: tka.binding.weather,
+ tka.binding.weather.handler
 
