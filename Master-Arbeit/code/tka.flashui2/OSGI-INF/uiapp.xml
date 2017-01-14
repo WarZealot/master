@@ -5,4 +5,5 @@
    <reference bind="setRuleRegistry" cardinality="1..1" interface="org.eclipse.smarthome.automation.RuleRegistry" name="RuleRegistry" policy="static" unbind="unsetRuleRegistry"/>
    <reference bind="setThingRegistry" cardinality="1..1" interface="org.eclipse.smarthome.core.thing.ThingRegistry" name="ThingRegistry" policy="static" unbind="unsetThingRegistry"/>
    <reference bind="setTwitterConnectionService" cardinality="1..1" interface="tka.binding.twitter.TwitterConnectionService" name="TwitterConnectionService" policy="static" unbind="unsetTwitterConnectionService"/>
+   <reference bind="setDropboxConnectionService" cardinality="1..1" interface="tka.binding.dropbox.DropboxConnectionService" name="DropboxConnectionService" policy="static" unbind="unsetDropboxConnectionService"/>
 </scr:component>

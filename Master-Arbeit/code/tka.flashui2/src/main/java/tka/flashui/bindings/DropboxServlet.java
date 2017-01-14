@@ -7,26 +7,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import tka.binding.twitter.TwitterConnectionService;
+import tka.binding.dropbox.DropboxConnectionService;
 
 /**
  * @author Konstantin
  *
  */
-public class TwitterServlet extends HttpServlet {
+public class DropboxServlet extends HttpServlet {
     /**
      *
      */
     private static final long serialVersionUID = 957446669297705448L;
-    private TwitterConnectionService connectionService;
+    private DropboxConnectionService connectionService;
 
-    public TwitterServlet(TwitterConnectionService service) {
+    public DropboxServlet(DropboxConnectionService service) {
         this.connectionService = service;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("TwitterServlet.doGet()");
+        System.out.println("DropboxServlet.doGet()");
         resp.setContentType("text/plain");
 
         String status = req.getParameter("status");
