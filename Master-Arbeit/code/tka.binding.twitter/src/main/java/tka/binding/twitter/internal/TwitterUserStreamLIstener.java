@@ -30,16 +30,41 @@ public class TwitterUserStreamLIstener implements UserStreamListener {
 
     @Override
     public void onStatus(Status status) {
-        publishEvent(status);
+        publishStatusEvent(status);
         System.out.println("onStatus @" + status.getUser().getScreenName() + " - " + status.getText());
         ExtendedMediaEntity[] entities = status.getExtendedMediaEntities();
         System.out.println("Number of medias: " + entities.length);
         for (ExtendedMediaEntity entity : entities) {
-            System.out.println(entity);
+            publishMediaEvent(entity.getMediaURL());
         }
     }
 
-    private void publishEvent(final Status status) {
+    private void publishMediaEvent(final String url) {
+        Event event = new Event() {
+            @Override
+            public String getType() {
+                return TwitterEvent.TYPE;
+            }
+
+            @Override
+            public String getTopic() {
+                return TwitterBindingConstants.TOPIC_MEDIA;
+            }
+
+            @Override
+            public String getSource() {
+                return TwitterBindingConstants.SOURCE;
+            }
+
+            @Override
+            public String getPayload() {
+                return url;
+            }
+        };
+        eventPublisher.post(event);
+    }
+
+    private void publishStatusEvent(final Status status) {
         Event event = new Event() {
             @Override
             public String getType() {

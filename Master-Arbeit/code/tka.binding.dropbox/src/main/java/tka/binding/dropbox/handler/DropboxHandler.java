@@ -1,11 +1,16 @@
 package tka.binding.dropbox.handler;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.ScheduledFuture;
 
+import org.apache.commons.io.FilenameUtils;
 import org.eclipse.smarthome.config.core.status.ConfigStatusMessage;
+import org.eclipse.smarthome.core.library.types.StringType;
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.thing.binding.ConfigStatusThingHandler;
@@ -16,6 +21,8 @@ import org.slf4j.LoggerFactory;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.FileMetadata;
+import com.dropbox.core.v2.files.UploadErrorException;
 
 import tka.binding.dropbox.DropboxBindingConstants;
 
@@ -33,6 +40,8 @@ public class DropboxHandler extends ConfigStatusThingHandler {
 
     private BigDecimal refresh;
 
+    private DbxClientV2 client;
+
     public DropboxHandler(Thing thing) {
         super(thing);
     }
@@ -41,6 +50,10 @@ public class DropboxHandler extends ConfigStatusThingHandler {
     public void initialize() {
         logger.debug("Initializing Dropbox handler.");
         super.initialize();
+
+        DbxRequestConfig dbxRequestConfig = new DbxRequestConfig("FlashApp");
+        client = new DbxClientV2(dbxRequestConfig,
+                (String) getThing().getConfiguration().get(DropboxBindingConstants.KEY_OAUTH_TOKEN));
 
         if (refresh == null) {
             refresh = new BigDecimal(30);
@@ -59,7 +72,26 @@ public class DropboxHandler extends ConfigStatusThingHandler {
         logger.info("handle command: {}", command);
         printCurrentAccount();
 
-        // logger.info("Command {} is not supported for channel: {}", command, channelUID.getId());
+        if (command instanceof StringType) {
+            String[] split = command.toString().split(";");
+            if (split.length < 2) {
+                logger.error("Missing command configuration parameters.");
+                return;
+            }
+            String directory = split[0];
+            String urlString = split[1];
+            try {
+                URL url = new URL(urlString);
+                String filename = FilenameUtils.getName(url.getPath());
+                InputStream stream = url.openStream();
+                uploadFile(stream, directory + filename);
+            } catch (IOException | DbxException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+
+        logger.info("Command {} is not supported for channel: {}", command, channelUID.getId());
     }
 
     @Override
@@ -81,5 +113,10 @@ public class DropboxHandler extends ConfigStatusThingHandler {
         } catch (DbxException e) {
             e.printStackTrace();
         }
+    }
+
+    private void uploadFile(InputStream in, String path) throws UploadErrorException, DbxException, IOException {
+        FileMetadata metadata = client.files().uploadBuilder(path).uploadAndFinish(in);
+        logger.info("Uploaded file to dropbox:  " + path);
     }
 }

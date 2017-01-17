@@ -8,6 +8,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ClassPath: .
 Import-Package: com.dropbox.core;version="2.1.2",
  com.dropbox.core.v2;version="2.1.2",
+ com.dropbox.core.v2.files;version="2.1.2",
  com.dropbox.core.v2.users;version="2.1.2",
  com.google.common.collect,
  com.google.gson,

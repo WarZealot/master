@@ -1,0 +1,26 @@
+{  
+   "actions":[  
+    {  
+     "uid":"DropboxAction",
+     "label":"Dropbox Label",
+     "description":"Allows to interact with the dropbox",
+     "configDescriptions":[  
+      {  
+         "name":"itemName",
+         "type":"TEXT",
+         "label":"Item Name",
+         "context":"item",
+         "description":"the name of the item to post the command for",
+         "required":true
+      },
+      {  
+         "name":"command",
+         "type":"TEXT",
+         "label":"Command",
+         "description":"the command to be posted",
+         "required":true
+      }
+     ]
+    }
+   ]
+}
