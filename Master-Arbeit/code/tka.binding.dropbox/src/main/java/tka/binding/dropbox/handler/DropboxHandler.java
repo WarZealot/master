@@ -23,8 +23,10 @@ import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.FileMetadata;
 import com.dropbox.core.v2.files.UploadErrorException;
+import com.google.gson.Gson;
 
 import tka.binding.dropbox.DropboxBindingConstants;
+import tka.binding.dropbox.DropboxUploadEntity;
 
 /**
  * @author ktkachuk
@@ -41,6 +43,8 @@ public class DropboxHandler extends ConfigStatusThingHandler {
     private BigDecimal refresh;
 
     private DbxClientV2 client;
+
+    private static final Gson GSON = new Gson();
 
     public DropboxHandler(Thing thing) {
         super(thing);
@@ -73,20 +77,15 @@ public class DropboxHandler extends ConfigStatusThingHandler {
         printCurrentAccount();
 
         if (command instanceof StringType) {
-            String[] split = command.toString().split(";");
-            if (split.length < 2) {
-                logger.error("Missing command configuration parameters.");
-                return;
-            }
-            String directory = split[0];
-            String urlString = split[1];
+            DropboxUploadEntity uploadEntity = GSON.fromJson(command.toString(), DropboxUploadEntity.class);
+
             try {
-                URL url = new URL(urlString);
+                URL url = new URL(uploadEntity.getMediaUrl());
                 String filename = FilenameUtils.getName(url.getPath());
                 InputStream stream = url.openStream();
-                uploadFile(stream, directory + filename);
+                uploadFile(stream, uploadEntity.getDirectory() + filename);
             } catch (IOException | DbxException e) {
-                e.printStackTrace();
+                logger.info("Command {} has invalid configuration/context parameters.", command);
             }
             return;
         }

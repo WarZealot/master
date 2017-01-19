@@ -34,6 +34,7 @@ public class FlashModuleTypeProvider implements ModuleTypeProvider {
         providedModuleTypes.put(TwitterActionType.UID, TwitterActionType.initialize());
         providedModuleTypes.put(AlwaysTrueConditionType.UID, AlwaysTrueConditionType.initialize());
         providedModuleTypes.put(TkaTriggerType.UID, TkaTriggerType.initialize());
+        providedModuleTypes.put(DropboxActionType.UID, new DropboxActionType());
     }
 
     @SuppressWarnings("unchecked")

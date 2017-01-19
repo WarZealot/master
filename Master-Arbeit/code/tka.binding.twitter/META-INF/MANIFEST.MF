@@ -31,6 +31,7 @@ Import-Package: com.google.common.collect,
  twitter4j.conf
 Service-Component: OSGI-INF/*.xml
 Export-Package: tka.binding.twitter,
- tka.binding.twitter.handler
+ tka.binding.twitter.handler,
+ tka.binding.twitter.internal
 Bundle-Activator: tka.binding.twitter.Activator
 

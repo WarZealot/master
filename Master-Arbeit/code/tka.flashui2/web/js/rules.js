@@ -35,8 +35,8 @@ function repopulateTable(data) {
     $.each(data, function(index, rule) {
         var $row = $("<tr/>");
         $row.append("<td>" + rule.uid + "</td>");
-        $row.append("<td>" + rule.name + "</td>");
         $row.append("<td>" + rule.description + "</td>");
+        $row.append("<td>" + rule.enabled + "</td>");
 
         var $showBtn = $("<button class='btn btn-default' data-uid='" + rule.uid + "' > Show </button>");
         $showBtn.click(function(event) {
@@ -49,6 +49,28 @@ function repopulateTable(data) {
                 success : function(data) {
                     var $text = $("#rule-json");
                     $text.val(JSON.stringify(data, null, 4));
+                },
+                error : function(msg) {
+                    console.log("error during ajax request")
+                    console.log(msg);
+                },
+            });
+        });
+        
+        var $toggleBtn = $("<button class='btn btn-warning' data-uid='" + rule.uid + "' > Toggle </button>");
+        $toggleBtn.click(function(event) {
+            $btn = $(event.target);
+            var uid = $btn.data("uid");
+            var param = "toggle=" + uid;
+            $.ajax({
+                dataType : "json",
+                url : "http://localhost:8080/flashrulesdeleter?" + param,
+                success : function(data) {
+                    if (data == "SUCCESS") {
+                        location.reload(true);
+                    } else {
+                        alert("Could not toggle rule... Sorry!");
+                    }
                 },
                 error : function(msg) {
                     console.log("error during ajax request")
@@ -81,6 +103,7 @@ function repopulateTable(data) {
 
         var $cell = $("<td/>");
         $cell.append($showBtn);
+        $cell.append($toggleBtn);
         $cell.append($deleteBtn);
         $row.append($cell);
         $row.appendTo($tbody);

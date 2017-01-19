@@ -1,0 +1,49 @@
+[
+    {
+        "triggers": [
+            {
+                "id": "KtkTwitter2DropboxTriggerId",
+                "configuration": {
+                    "eventSource": "flash/twitter",
+                    "eventTopic": "flash/twitter/media",
+                    "eventTypes": "ALL"
+                },
+                "type": "GenericEventTrigger"
+            }
+        ],
+        "conditions": [
+            {
+                "inputs": {
+                    "event": "KtkTwitter2DropboxTriggerId.event"
+                },
+                "id": "KtkTwitter2DropboxConditionID",
+                "configuration": {
+                    "topic": "flash/twitter/media"
+                },
+                "type": "EventCondition"
+            }
+        ],
+        "actions": [
+            {
+                "inputs": {
+                    "event": "KtkTwitter2DropboxTriggerId.event"
+                },
+                "id": "DropboxActionWohooID",
+                "configuration": {
+                    "itemName": "dropbox_dropboxThingTypeId_dropboxconnection_folder",
+                    "directory": "/testfolder/"
+                },
+                "type": "DropboxAction"
+            }
+        ],
+        "configuration": {},
+        "configDescriptions": [],
+        "uid": "Twitter2Dropbox",
+        "name": "Twitter2DropboxRule",
+        "tags": [
+            "flash"
+        ],
+        "visibility": "VISIBLE",
+        "description": "This rule saves any media in tweet to the dropbox."
+    }
+]

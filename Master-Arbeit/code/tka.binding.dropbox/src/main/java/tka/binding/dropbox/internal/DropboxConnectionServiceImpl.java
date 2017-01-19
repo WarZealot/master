@@ -5,6 +5,10 @@ package tka.binding.dropbox.internal;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 import org.eclipse.smarthome.config.core.Configuration;
 import org.eclipse.smarthome.core.events.Event;
@@ -52,6 +56,9 @@ public class DropboxConnectionServiceImpl implements DropboxConnectionService, E
     private DbxClientV2 client;
     private DbxWebAuth webAuth;
 
+    ScheduledFuture<?> changeListenerJob;
+    private ScheduledFuture<?> scheduledFuture;
+
     /**
      * @see tka.binding.dropbox.DropboxConnectionService#requestAuthorization()
      */
@@ -86,7 +93,7 @@ public class DropboxConnectionServiceImpl implements DropboxConnectionService, E
             authFinish = webAuth.finishFromCode(pin);
             accessToken = authFinish.getAccessToken();
             createDropboxThing();
-            client = buildDropboxClient();
+            buildDropboxClient();
             webAuth = null;
             return true;
         } catch (Exception e) {
@@ -111,14 +118,15 @@ public class DropboxConnectionServiceImpl implements DropboxConnectionService, E
             Configuration properties = dropboxConnection.getConfiguration();
             accessToken = (String) properties.get(DropboxBindingConstants.KEY_OAUTH_TOKEN);
 
-            client = buildDropboxClient();
+            buildDropboxClient();
             return;
         }
     }
 
-    private DbxClientV2 buildDropboxClient() {
+    private void buildDropboxClient() {
         DbxRequestConfig dbxRequestConfig = new DbxRequestConfig("FlashApp");
-        return new DbxClientV2(dbxRequestConfig, accessToken);
+        client = new DbxClientV2(dbxRequestConfig, accessToken);
+        registerChangeListener();
     }
 
     private void regsiterServices() {
@@ -141,7 +149,16 @@ public class DropboxConnectionServiceImpl implements DropboxConnectionService, E
         Thing thing = thingRegistry.createThingOfType(DropboxBindingConstants.THING_TYPE_DROPBOX, DROPBOX_CONNECTION,
                 null, "dropboxLabel", configuration);
         thingRegistry.add(thing);
+    }
 
+    private void registerChangeListener() {
+        DropboxChangesTracker tracker = new DropboxChangesTracker(client, eventPublisher);
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        scheduledFuture = executor.scheduleWithFixedDelay(tracker, 0, 5, TimeUnit.SECONDS);
+    }
+
+    private void unregisterChangeListener() {
+        scheduledFuture.cancel(true);
     }
 
     public void setThingRegistry(ThingRegistry thingRegistry) {
@@ -177,6 +194,7 @@ public class DropboxConnectionServiceImpl implements DropboxConnectionService, E
             accessToken = null;
             client = null;
             webAuth = null;
+            unregisterChangeListener();
         }
 
     }

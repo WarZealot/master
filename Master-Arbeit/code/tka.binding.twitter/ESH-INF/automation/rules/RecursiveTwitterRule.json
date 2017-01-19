@@ -1,0 +1,44 @@
+[
+  {
+    "triggers": [
+      {
+        "id": "KtkTwitterTriggerId",
+        "configuration": {
+          "eventSource": "flash/twitter",
+          "eventTopic": "flash/twitter/status",
+          "eventTypes": "ALL"
+        },
+        "type": "GenericEventTrigger"
+      }
+    ],
+    "conditions": [
+      {
+        "inputs": {
+          "event": "KtkTwitterTriggerId.event"
+        },
+        "id": "KtkTwitterConditionID",
+        "configuration": {
+          "topic": "flash/twitter/status"
+        },
+        "type": "EventCondition"
+      }
+    ],
+    "actions": [
+      {
+        "id": "ItemPostCommandActionID",
+        "type": "ItemPostCommandAction",
+        "configuration": {
+          "itemName": "twitter_twitterThingTypeId_twitterconnection_status",
+          "command": "Status changed by FLASH"
+        }
+      }
+    ],
+    "configuration": {},
+    "configDescriptions": [],
+    "uid": "RecursiveTwitter",
+    "name": "RecursiveTwitterRule",
+    "tags": ["flash"],
+    "visibility": "VISIBLE",
+    "description": "This rule changes the status of the user whenever status changed."
+  }
+]

@@ -33,6 +33,14 @@ public class RulesDeleterServlet extends HttpServlet {
         System.out.println("RulesDeleterServlet called!");
         resp.setContentType("application/json");
 
+        if (req.getParameter("toggle") != null) {
+            String uid = req.getParameter("toggle");
+            Boolean enabled = ruleRegistry.isEnabled(uid);
+            ruleRegistry.setEnabled(uid, !enabled);
+            resp.getWriter().print(new Gson().toJson("SUCCESS"));
+            return;
+        }
+
         boolean deleted = handleDelete(req);
         String result = deleted ? "SUCCESS" : "ERROR";
 

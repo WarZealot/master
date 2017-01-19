@@ -14,4 +14,14 @@ public class TwitterEvent extends AbstractEvent {
     public String getType() {
         return TYPE;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("[source=" + getSource());
+        builder.append(", topic=" + getTopic());
+        builder.append(", payload=" + getPayload());
+        builder.append("]");
+        return builder.toString();
+    }
 }
