@@ -4,6 +4,6 @@ layout: documentation
 
 {% include base.html %}
 
-# Twitter Binding
+# Weather Binding
 
 Who needs a readme?

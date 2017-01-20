@@ -86,6 +86,7 @@ public class DropboxActionHandler extends BaseModuleHandler<Action> implements A
 
     private String buildJson(String directory, String payload) {
         DropboxUploadEntity entity = new DropboxUploadEntity(directory, payload);
+
         return GSON.toJson(entity);
     }
 

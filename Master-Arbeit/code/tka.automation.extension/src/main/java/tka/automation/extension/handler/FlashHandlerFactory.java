@@ -93,7 +93,7 @@ public class FlashHandlerFactory extends BaseModuleHandlerFactory {
         System.out.println("FlashHandlerFactory.internalCreate() " + module + " " + ruleUID);
         ModuleHandler moduleHandler = null;
         if (TwitterActionType.UID.equals(module.getTypeUID())) {
-            moduleHandler = new TwitterActionHandler((Action) module, eventPublisher);
+            moduleHandler = new TwitterActionHandler((Action) module, eventPublisher, itemRegistry);
         } else if (DropboxActionType.UID.equals(module.getTypeUID())) {
             moduleHandler = new DropboxActionHandler((Action) module, eventPublisher, itemRegistry);
         } else if (AlwaysTrueConditionType.UID.equals(module.getTypeUID())) {

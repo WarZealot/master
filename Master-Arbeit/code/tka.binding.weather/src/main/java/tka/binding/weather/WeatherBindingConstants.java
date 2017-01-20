@@ -15,7 +15,7 @@ public class WeatherBindingConstants {
 
     public static final String BINDING_ID = "weather";
 
-    // List all Thing Type UIDs, related to the Twitter Binding
+    // List all Thing Type UIDs, related to the Weather Binding
     public final static ThingTypeUID THING_TYPE_WEATHER = new ThingTypeUID(BINDING_ID, "weather");
 
     // List all channels
@@ -29,6 +29,8 @@ public class WeatherBindingConstants {
     public static final String WETTER_API_URL = "http://api.openweathermap.org/data/2.5/weather?appid="
             + WETTER_API_KEY;
     public static final String URL_PARAM_LOCATION = "&q=";
+    public static final String CONFIG_LOCATION = "location";
+    public static final String CONFIG_REFRESH = "refresh";
 
     public final static String TOPIC_STATUS_CHANGED = "flash/weather/temperature";
     public final static String SOURCE = "flash/weather";

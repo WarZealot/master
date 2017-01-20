@@ -12,6 +12,7 @@ Import-Package: com.google.gson,
  org.apache.commons.io,
  org.eclipse.smarthome.automation,
  org.eclipse.smarthome.automation.parser,
+ org.eclipse.smarthome.config.core,
  org.eclipse.smarthome.core.common.registry,
  org.eclipse.smarthome.core.thing,
  org.osgi.framework,
@@ -19,6 +20,7 @@ Import-Package: com.google.gson,
  org.osgi.service.http,
  org.slf4j,
  tka.binding.dropbox,
- tka.binding.twitter
+ tka.binding.twitter,
+ tka.binding.weather
 Service-Component: OSGI-INF/*.xml
 

@@ -24,6 +24,7 @@ import tka.binding.dropbox.DropboxConnectionService;
 import tka.binding.twitter.TwitterConnectionService;
 import tka.flashui.bindings.DropboxServlet;
 import tka.flashui.bindings.TwitterServlet;
+import tka.flashui.bindings.WeatherServlet;
 import tka.flashui.rule.RulesDeleterServlet;
 import tka.flashui.rule.RulesImporterServlet;
 import tka.flashui.rule.RulesProviderServlet;
@@ -73,6 +74,7 @@ public class FlashUIApp {
             // binding servlets
             httpService.registerServlet("/twitter", new TwitterServlet(twitterConnectionService), null, null);
             httpService.registerServlet("/dropbox", new DropboxServlet(dropboxConnectionService), null, null);
+            httpService.registerServlet("/weather", new WeatherServlet(thingRegistry), null, null);
 
             logger.info("Started Flash UI at " + WEBAPP_ALIAS);
         } catch (Exception e) {

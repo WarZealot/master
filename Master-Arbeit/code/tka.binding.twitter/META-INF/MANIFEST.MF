@@ -33,5 +33,4 @@ Service-Component: OSGI-INF/*.xml
 Export-Package: tka.binding.twitter,
  tka.binding.twitter.handler,
  tka.binding.twitter.internal
-Bundle-Activator: tka.binding.twitter.Activator
 

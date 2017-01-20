@@ -56,11 +56,11 @@ public class WeatherHandler extends ConfigStatusThingHandler {
 
     @Override
     public void initialize() {
-        logger.debug("Initializing Twitter handler.");
+        logger.debug("Initializing Weather handler.");
         super.initialize();
         Configuration config = getThing().getConfiguration();
 
-        location = (String) config.get("location");
+        location = (String) config.get(WeatherBindingConstants.CONFIG_LOCATION);
 
         try {
             refresh = (BigDecimal) config.get("refresh");
@@ -68,9 +68,9 @@ public class WeatherHandler extends ConfigStatusThingHandler {
             logger.debug("Cannot set refresh parameter.", e);
         }
 
-        if (refresh == null) {
+        if (refresh == null || refresh.intValue() <= 0) {
             // let's go for the default
-            refresh = new BigDecimal(60);
+            refresh = new BigDecimal(3600);
         }
 
         startAutomaticRefresh();

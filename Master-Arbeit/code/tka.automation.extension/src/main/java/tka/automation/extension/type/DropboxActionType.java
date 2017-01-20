@@ -36,8 +36,8 @@ public class DropboxActionType extends ActionType {
                 .withRequired(true).withReadOnly(true).withMultiple(false).withLabel("Device")
                 .withDescription("Device description").build();
         final ConfigDescriptionParameter directory = ConfigDescriptionParameterBuilder
-                .create(CONFIG_ITEM_NAME, Type.TEXT).withRequired(true).withReadOnly(true).withMultiple(false)
-                .withLabel("Device").withDescription("Device description").build();
+                .create(CONFIG_DIRECTORY, Type.TEXT).withRequired(true).withReadOnly(true).withMultiple(false)
+                .withLabel("Directory").withDescription("Directory with trailing /").build();
 
         List<ConfigDescriptionParameter> list = new ArrayList<>();
         list.add(device);
