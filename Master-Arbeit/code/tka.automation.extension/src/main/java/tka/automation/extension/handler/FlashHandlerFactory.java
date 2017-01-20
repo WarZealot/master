@@ -22,6 +22,7 @@ import org.eclipse.smarthome.automation.handler.BaseModuleHandlerFactory;
 import org.eclipse.smarthome.automation.handler.ModuleHandler;
 import org.eclipse.smarthome.automation.handler.ModuleHandlerFactory;
 import org.eclipse.smarthome.core.events.EventPublisher;
+import org.eclipse.smarthome.core.items.ItemRegistry;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
@@ -29,13 +30,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import tka.automation.extension.type.AlwaysTrueConditionType;
+import tka.automation.extension.type.DropboxActionType;
 import tka.automation.extension.type.TkaTriggerType;
 import tka.automation.extension.type.TwitterActionType;
 
 /**
  * This class is a simple implementation of the {@link ModuleHandlerFactory}, which is registered as a service.
- *
- * @author Ana Dimova - Initial Contribution
  *
  */
 public class FlashHandlerFactory extends BaseModuleHandlerFactory {
@@ -46,6 +46,7 @@ public class FlashHandlerFactory extends BaseModuleHandlerFactory {
     static {
         List<String> temp = new ArrayList<String>();
         temp.add(TwitterActionType.UID);
+        temp.add(DropboxActionType.UID);
         temp.add(AlwaysTrueConditionType.UID);
         temp.add(TkaTriggerType.UID);
         TYPES = Collections.unmodifiableCollection(temp);
@@ -56,6 +57,7 @@ public class FlashHandlerFactory extends BaseModuleHandlerFactory {
     private Map<String, TkaTriggerHandler> triggerHandlers;
     private Logger logger = LoggerFactory.getLogger(FlashHandlerFactory.class);
     private EventPublisher eventPublisher;
+    private ItemRegistry itemRegistry;
 
     public FlashHandlerFactory(BundleContext bc) {
         triggerHandlers = new HashMap<String, TkaTriggerHandler>();
@@ -63,6 +65,9 @@ public class FlashHandlerFactory extends BaseModuleHandlerFactory {
 
         ServiceReference<EventPublisher> reference3 = bc.getServiceReference(EventPublisher.class);
         eventPublisher = bc.getService(reference3);
+
+        ServiceReference<ItemRegistry> reference4 = bc.getServiceReference(ItemRegistry.class);
+        itemRegistry = bc.getService(reference4);
     }
 
     @Override
@@ -89,6 +94,8 @@ public class FlashHandlerFactory extends BaseModuleHandlerFactory {
         ModuleHandler moduleHandler = null;
         if (TwitterActionType.UID.equals(module.getTypeUID())) {
             moduleHandler = new TwitterActionHandler((Action) module, eventPublisher);
+        } else if (DropboxActionType.UID.equals(module.getTypeUID())) {
+            moduleHandler = new DropboxActionHandler((Action) module, eventPublisher, itemRegistry);
         } else if (AlwaysTrueConditionType.UID.equals(module.getTypeUID())) {
             moduleHandler = new AlwaysTrueConditionHandler((Condition) module);
         } else if (TkaTriggerType.UID.equals(module.getTypeUID())) {

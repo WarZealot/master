@@ -20,7 +20,9 @@ import org.osgi.service.http.HttpService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import tka.binding.dropbox.DropboxConnectionService;
 import tka.binding.twitter.TwitterConnectionService;
+import tka.flashui.bindings.DropboxServlet;
 import tka.flashui.bindings.TwitterServlet;
 import tka.flashui.rule.RulesDeleterServlet;
 import tka.flashui.rule.RulesImporterServlet;
@@ -43,9 +45,11 @@ public class FlashUIApp {
     private ServiceReference<Parser> parserReference;
     private ThingRegistry thingRegistry;
     private TwitterConnectionService twitterConnectionService;
+    private DropboxConnectionService dropboxConnectionService;
 
     @SuppressWarnings("rawtypes")
     protected void activate(ComponentContext componentContext) {
+        System.out.println("FlashUIApp.activate()");
         context = componentContext.getBundleContext();
         try {
             Collection<ServiceReference<Parser>> references = context.getServiceReferences(Parser.class,
@@ -68,6 +72,7 @@ public class FlashUIApp {
 
             // binding servlets
             httpService.registerServlet("/twitter", new TwitterServlet(twitterConnectionService), null, null);
+            httpService.registerServlet("/dropbox", new DropboxServlet(dropboxConnectionService), null, null);
 
             logger.info("Started Flash UI at " + WEBAPP_ALIAS);
         } catch (Exception e) {
@@ -110,5 +115,13 @@ public class FlashUIApp {
 
     public void unsetTwitterConnectionService(TwitterConnectionService twitterConnectionService) {
         this.twitterConnectionService = null;
+    }
+
+    public void setDropboxConnectionService(DropboxConnectionService dropboxConnectionService) {
+        this.dropboxConnectionService = dropboxConnectionService;
+    }
+
+    public void unsetDropboxConnectionService(DropboxConnectionService dropboxConnectionService) {
+        this.dropboxConnectionService = null;
     }
 }

@@ -18,6 +18,7 @@ Import-Package: com.google.gson,
  org.osgi.service.component,
  org.osgi.service.http,
  org.slf4j,
+ tka.binding.dropbox,
  tka.binding.twitter
 Service-Component: OSGI-INF/*.xml
 

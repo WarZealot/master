@@ -1,0 +1,48 @@
+[
+    {
+        "triggers": [
+            {
+                "id": "Dropbox2TwitterTriggerId",
+                "configuration": {
+                    "eventSource": "flash/dropbox",
+                    "eventTopic": "flash/dropbox/added",
+                    "eventTypes": "ALL"
+                },
+                "type": "GenericEventTrigger"
+            }
+        ],
+        "conditions": [
+            {
+                "inputs": {
+                    "event": "Dropbox2TwitterTriggerId.event"
+                },
+                "id": "Dropbox2TwitterConditionID",
+                "configuration": {
+                    "topic": "flash/dropbox/added",
+                    "payload": ".*/testfolder.*"
+                },
+                "type": "EventCondition"
+            }
+        ],
+        "actions": [
+            {
+                "inputs": {},
+                "id": "ItemPostCommandActionID",
+                "configuration": {
+                    "itemName": "twitter_twitterThingTypeId_twitterconnection_status",
+                    "command": "Something was added to the test folder"
+                },
+                "type": "ItemPostCommandAction"
+            }
+        ],
+        "configuration": {},
+        "configDescriptions": [],
+        "uid": "Dropbox2Twitter",
+        "name": "Dropbox2TwitterRule",
+        "tags": [
+            "flash"
+        ],
+        "visibility": "VISIBLE",
+        "description": "This rule posts a tweet whenever something is added to the /testfolder."
+    }
+]

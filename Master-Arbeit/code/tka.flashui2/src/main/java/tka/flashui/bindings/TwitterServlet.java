@@ -26,7 +26,7 @@ public class TwitterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("ThingsProviderServlet.doGet()");
+        System.out.println("TwitterServlet.doGet()");
         resp.setContentType("text/plain");
 
         String status = req.getParameter("status");

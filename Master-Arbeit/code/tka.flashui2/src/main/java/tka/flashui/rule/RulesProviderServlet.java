@@ -13,6 +13,9 @@ import org.eclipse.smarthome.automation.Rule;
 import org.eclipse.smarthome.automation.RuleRegistry;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 /**
  * @author Konstantin
@@ -44,7 +47,22 @@ public class RulesProviderServlet extends HttpServlet {
         }
 
         Collection<Rule> flashRules = ruleRegistry.getByTag("flash");
-        String result = gson.toJson(flashRules);
+
+        String result = buildJson(flashRules);
+
+        // String result = gson.toJson(flashRules);
         resp.getWriter().print(result);
+    }
+
+    private String buildJson(Collection<Rule> flashRules) {
+        JsonArray root = gson.toJsonTree(flashRules).getAsJsonArray();
+        for (JsonElement rule : root) {
+            JsonObject ruleObj = rule.getAsJsonObject();
+            String uid = ruleObj.get("uid").getAsString();
+            Boolean enabled = ruleRegistry.isEnabled(uid);
+            ruleObj.addProperty("enabled", enabled);
+        }
+
+        return gson.toJson(root);
     }
 }

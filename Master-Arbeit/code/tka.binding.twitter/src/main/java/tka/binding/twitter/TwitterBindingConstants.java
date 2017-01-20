@@ -29,6 +29,9 @@ public class TwitterBindingConstants {
     public static final String KEY_OAUTH_TOKEN_SECRET = "oauthTokenSecret";
     public static final String KEY_OAUTH_TOKEN = "oauthToken";
 
-    public final static String TOPIC_STATUS_CHANGED = "flash/twitter/status";
+    private final static String TOPIC = "flash/twitter/";
+    public final static String TOPIC_STATUS_CHANGED = TOPIC + "status";
+    public final static String TOPIC_MEDIA = TOPIC + "media";
+    public final static String TOPIC_MESSAGE = TOPIC + "message";
     public final static String SOURCE = "flash/twitter";
 }

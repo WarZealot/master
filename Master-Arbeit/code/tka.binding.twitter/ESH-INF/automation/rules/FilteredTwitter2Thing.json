@@ -2,7 +2,7 @@
   {
     "triggers": [
       {
-        "id": "KtkTwitterTriggerId",
+        "id": "KtkFilteredTwitter2ThingTriggerId",
         "configuration": {
           "eventSource": "flash/twitter",
           "eventTopic": "flash/twitter/status",
@@ -14,11 +14,12 @@
     "conditions": [
       {
         "inputs": {
-          "event": "KtkTwitterTriggerId.event"
+          "event": "KtkFilteredTwitter2ThingTriggerId.event"
         },
-        "id": "KtkTwitterConditionID",
+        "id": "KtkFilteredTwitter2ThingConditionID",
         "configuration": {
-          "topic": "flash/twitter/status"
+          "topic": "flash/twitter/status",
+          "payload": "DemoDimmer-ON"
         },
         "type": "EventCondition"
       }
@@ -28,17 +29,17 @@
         "id": "ItemPostCommandActionID",
         "type": "ItemPostCommandAction",
         "configuration": {
-          "itemName": "twitter_twitterThingTypeId_twitterconnection_status",
-          "command": "myCommand"
+          "itemName": "DemoDimmer",
+          "command": "ON"
         }
       }
     ],
     "configuration": {},
     "configDescriptions": [],
-    "uid": "RealTwitterRule",
-    "name": "ReactToStatusChangedRule",
-    "tags": [],
+    "uid": "FilteredTwitter2Thing",
+    "name": "FilteredTwitter2ThingRule",
+    "tags": ["flash"],
     "visibility": "VISIBLE",
-    "description": "This rule executes an action whenever the status of the user is updated."
+    "description": "This rule sets the DemoDimmer to OFF only when a tweet contains a specific text."
   }
 ]

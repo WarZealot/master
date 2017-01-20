@@ -69,7 +69,7 @@ public class TwitterHandler extends ConfigStatusThingHandler {
         String token = (String) getThing().getConfiguration().get(TwitterBindingConstants.KEY_OAUTH_TOKEN);
         String tokenSecret = (String) getThing().getConfiguration().get(TwitterBindingConstants.KEY_OAUTH_TOKEN_SECRET);
         cb.setOAuthAccessToken(token).setOAuthAccessTokenSecret(tokenSecret);
-        cb.setHttpProxyHost("proxy.materna.de").setHttpProxyPort(8080);
+        // cb.setHttpProxyHost("proxy.materna.de").setHttpProxyPort(8080);
 
         TwitterFactory tf = new TwitterFactory(cb.build());
         Twitter twitter = tf.getInstance();

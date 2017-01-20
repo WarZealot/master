@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="dropbox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:thing="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0"
+	xsi:schemaLocation="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0 http://eclipse.org/smarthome/schemas/thing-description-1.0.0.xsd">
+
+	<!-- Dropbox Binding -->
+	<thing-type id="dropbox">
+		<label>Dropbox Information</label>
+		<description>Allows the user to interact with Dropbox.</description>
+
+		<channels>
+			<channel id="folder" typeId="folder" />
+		</channels>
+
+	</thing-type>
+
+	<channel-type id="folder">
+		<item-type>String</item-type>
+		<label>Folder</label>
+		<description>The monitored folder.</description>
+		<category>String</category>
+		<state readOnly="false"></state>
+	</channel-type>
+	
+</thing:thing-descriptions>
