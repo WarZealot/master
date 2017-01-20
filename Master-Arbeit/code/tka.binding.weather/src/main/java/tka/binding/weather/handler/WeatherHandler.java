@@ -17,6 +17,8 @@ import org.apache.commons.io.IOUtils;
 import org.eclipse.smarthome.config.core.Configuration;
 import org.eclipse.smarthome.config.core.status.ConfigStatusMessage;
 import org.eclipse.smarthome.core.library.types.DecimalType;
+import org.eclipse.smarthome.core.library.types.OnOffType;
+import org.eclipse.smarthome.core.library.types.StringType;
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.thing.ThingStatus;
@@ -105,6 +107,12 @@ public class WeatherHandler extends ConfigStatusThingHandler {
     @Override
     public void handleCommand(ChannelUID channelUID, Command command) {
         logger.info("handle command: {}", command);
+
+        if (command instanceof StringType) {
+            StringType type = (StringType) command;
+            logger.info(type.toString());
+
+        }
         logger.info("Command {} is not supported for channel: {}", command, channelUID.getId());
     }
 
@@ -164,10 +172,8 @@ public class WeatherHandler extends ConfigStatusThingHandler {
     private State getRain() {
         if (weatherJSON != null) {
             JsonObject rootObj = PARSER.parse(weatherJSON).getAsJsonObject();
-            BigDecimal temp = rootObj.getAsJsonObject("main").get("temp").getAsBigDecimal();
-            if (temp != null) {
-                return new DecimalType(temp);
-            }
+            Boolean raining = rootObj.getAsJsonObject("weather").get("main").getAsString().contains("rain");
+            return raining ? OnOffType.ON : OnOffType.OFF;
         }
         return UnDefType.UNDEF;
     }
