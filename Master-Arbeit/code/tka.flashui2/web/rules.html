@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Eclipse Smarthome - Flash</title>
+<script src="js/jquery-3.1.1.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/main.css" />
+<script src="js/bootstrap.min.js"></script>
+<script src="js/rules.js"></script>
+<script src="js/things.js"></script>
+<script src="js/bindings/twitter.js"></script>
+<script src="js/bindings/dropbox.js"></script>
+<script src="js/bindings/weather.js"></script>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div id="header" class="page-header">
+			<h1>FLASH UI - Rules Tutorial</h1>
+		</div>
+		<div class="row">
+			<div class="page-header">
+				<h2>Rule structure</h2>
+				<div>You always import a list of rules at the same time:</div>
+				<pre class="prettyprint">
+[
+    {
+       ...single rule content...
+    }
+]</pre>
+				<div>A single rule is comprised of metadata, which uniquely identifies it...</div>
+				<pre class="prettyprint">
+{
+    "uid": "Twitter2Dropbox",
+    "name": "Twitter2DropboxRule",
+    "description": "This rule saves any media in tweet to the dropbox.",
+     "tags": [
+        "flash"
+    ],
+    "visibility": "VISIBLE",
+    "configuration": {},
+    "configDescriptions": [],
+    ...
+}
+</pre>
+				<div>Uid, name, description, tags can be chosen arbitrarily.</div>
+				<br>
+				<div>...as well as of lists of triggers, ...</div>
+				<pre class="prettyprint">
+{
+    ...
+    "triggers": [
+	     {
+	         "id": "KtkTwitter2DropboxTriggerId",
+	         "type": "GenericEventTrigger",
+	         "configuration": {
+	             "eventSource": "flash/twitter",
+	             "eventTopic": "flash/twitter/media",
+	             "eventTypes": "ALL"
+	         }	         
+	     }
+    ],
+    ...
+}            
+</pre>
+				<div>The trigger specifies when this rule will be executed. Uid can be chosen arbitrarily, it only serves to distinguish multiple triggers within the same rule. The type and configuration of the trigger specify its functionality.</div>
+				<br>
+				<div>...conditions, ...</div>
+				<pre class="prettyprint">
+{
+    ...
+    "conditions": [
+        {
+            "id": "KtkTwitter2DropboxConditionID",
+            "type": "EventCondition",
+            "configuration": {
+                "topic": "flash/twitter/.*"
+            },
+            "inputs": {
+                "event": "KtkTwitter2DropboxTriggerId.event"
+            }           
+        }
+    ],
+    ...
+}            
+</pre>
+				<div>The conditions act as a filter for the triggers. Whenever a trigger fires the conditions are evaluated and only if all conditions are satisfied will the actions actually be executed. Id can be chosen freely. Type, configuration and inputs specify the functionality.</div>
+				<br>
+				<div>...and actions.</div>
+				<pre class="prettyprint">
+{
+    ...
+    "actions": [
+        {
+            "id": "DropboxActionWohooID",
+            "type": "DropboxAction",
+            "configuration": {
+                "directory": "/testfolder/",
+                "itemName": "dropbox_dropboxThingTypeId_dropboxconnection_folder"
+            },
+            "inputs": {
+                "event": "KtkTwitter2DropboxTriggerId.event"
+            }
+        }
+    ]
+}            
+</pre>
+				<div>The actions represent what will be done when the rule is executed. Id can be chosen freely. Type, configuration and inputs specify the functionality.</div>
+				<br>
+			</div>
+		</div>
+		<div class="row">
+			<div id="sample-rule">
+				<h3>A complete sample rule:</h3>
+				<pre class="prettyprint">
+[
+    {
+        "triggers": [
+            {
+                "id": "KtkTwitter2DropboxTriggerId",
+                "configuration": {
+                    "eventSource": "flash/twitter",
+                    "eventTopic": "flash/twitter/media",
+                    "eventTypes": "ALL"
+                },
+                "type": "GenericEventTrigger"
+            }
+        ],
+        "conditions": [
+            {
+                "inputs": {
+                    "event": "KtkTwitter2DropboxTriggerId.event"
+                },
+                "id": "KtkTwitter2DropboxConditionID",
+                "configuration": {
+                    "topic": "flash/twitter/.*"
+                },
+                "type": "EventCondition"
+            }
+        ],
+        "actions": [
+            {
+                "inputs": {
+                    "event": "KtkTwitter2DropboxTriggerId.event"
+                },
+                "id": "DropboxActionWohooID",
+                "configuration": {
+                    "directory": "/testfolder/",
+                    "itemName": "dropbox_dropboxThingTypeId_dropboxconnection_folder"
+                },
+                "type": "DropboxAction"
+            }
+        ],
+        "configuration": {},
+        "configDescriptions": [],
+        "uid": "Twitter2Dropbox",
+        "name": "Twitter2DropboxRule",
+        "tags": [
+            "flash"
+        ],
+        "visibility": "VISIBLE",
+        "description": "This rule saves any media in tweet to the dropbox."
+    }
+]   
+</pre>
+		        <div>Whenever you or anybody you follow posts a tweet with a media (an image, etc.), said media is saved to your dropbox into the specified folder.</div>
+		        <div>This rule is <strong>triggered</strong> whenever any event with the topic "flash/twitter/media" is fired. It also saves the triggering event in the execution context, which is available to the conditions and actions that follow. The event which should be matched against is specified by the inputs.</div>
+		        <div>The condition is <strong>evaluated</strong>, in this case whether the topic matches the specified regular expression. </div>
+		        <div>The actions are <strong>executed</strong>. The configuration specifies to which folder the media is saved. The name is taken from the event, specifically from the event payload.</div>
+		        
+		        <br>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

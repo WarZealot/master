@@ -6,6 +6,7 @@ package dropbox;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import com.dropbox.core.DbxAppInfo;
 import com.dropbox.core.DbxAuthFinish;
@@ -13,6 +14,8 @@ import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.DbxWebAuth;
 import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.ListFolderResult;
+import com.dropbox.core.v2.files.Metadata;
 
 /**
  * @author Konstantin
@@ -56,6 +59,14 @@ public class DropboxTest {
         System.out.println("Dropbox Account Name: " + dbxClient.users().getCurrentAccount().getName());
 
         return dbxClient;
+    }
+
+    public static void collectCreateTimes(DbxClientV2 client) throws Exception {
+        ListFolderResult listFolder = client.files().listFolder("testfolder");
+        List<Metadata> entries = listFolder.getEntries();
+        for (Metadata metadata : entries) {
+            System.out.println(metadata.getName());
+        }
     }
 
 }

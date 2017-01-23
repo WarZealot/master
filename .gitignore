@@ -1,3 +1,5 @@
 *.class
 Master-Arbeit/code/tka.binding.dropbox/target/
 Master-Arbeit/code/tka.binding.weather/target/
+Master-Arbeit/code/tka.binding.gmail/target/
+Master-Arbeit/code/tka.binding.core/target/

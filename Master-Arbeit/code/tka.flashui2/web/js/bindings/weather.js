@@ -19,10 +19,14 @@ function createWeatherView(status) {
 }
 
 function createWeatherLocationInput(url) {
-    var $block = $("<div class='col-md-4 input-group weather-pin-group'><input class='form-control' placeholder='Location' type='text' id='weather-location'>   </div>");
+    var $block = $("<div class='col-md-4 input-group weather-pin-group'><input class='form-control'" +
+    		" placeholder='Location' type='text' id='weather-location'>   </div>");
+    var $block2 = $("<div class='col-md-4 input-group weather-pin-group'><input class='form-control' placeholder='Refresh'" +
+    		" type='text' id='weather-refresh'>   </div>");
     var $connectBtn = $(" <span class='input-group-btn'> <button class='btn btn-default' type='button'>Add</button>  </span>");
     $connectBtn.click(function(event) {
         var param = "location=" + $("#weather-location").val();
+        param += "&refresh=" +  $("#weather-refresh").val();
         $.ajax({
             dataType : "text",
             url : "http://localhost:8080/weather?" + param,
@@ -34,6 +38,7 @@ function createWeatherLocationInput(url) {
     });
     $connectBtn.appendTo($block);
     var $li = $("li.weather");
+    $li.append($block2);
     $li.append($block);
 }
 
