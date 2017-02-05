@@ -1,0 +1,71 @@
+\select@language {english}
+\select@language {english}
+\select@language {german}
+\contentsline {chapter}{\numberline {1}Einleitung}{1}
+\contentsline {section}{\numberline {1.1}Motivation und Hintergrund}{1}
+\contentsline {section}{\numberline {1.2}Ziele der Arbeit}{1}
+\contentsline {section}{\numberline {1.3}Aufbau der Arbeit}{1}
+\contentsline {chapter}{\numberline {2}Stand der Forschung}{3}
+\contentsline {section}{\numberline {2.1}Internet of Things}{3}
+\contentsline {subsection}{\numberline {2.1.1}Smart Home}{3}
+\contentsline {subsubsection}{Vorteile}{4}
+\contentsline {subsubsection}{Nachteile}{4}
+\contentsline {subsection}{\numberline {2.1.2}Task Automation Services}{4}
+\contentsline {subsubsection}{IFTTT}{5}
+\contentsline {section}{\numberline {2.2}Ziele}{6}
+\contentsline {section}{\numberline {2.3}Anforderungen}{6}
+\contentsline {subsubsection}{Anzubindende Services}{7}
+\contentsline {chapter}{\numberline {3}Eclipse Smarthome}{9}
+\contentsline {section}{\numberline {3.1}\IeC {\"U}berblick}{9}
+\contentsline {subsection}{\numberline {3.1.1}Bindings}{10}
+\contentsline {subsection}{\numberline {3.1.2}Automatisierung}{10}
+\contentsline {subsection}{\numberline {3.1.3}Deklarative Typen}{10}
+\contentsline {subsection}{\numberline {3.1.4}Persistenz}{10}
+\contentsline {section}{\numberline {3.2}Modell}{10}
+\contentsline {subsection}{\numberline {3.2.1}Channels}{10}
+\contentsline {subsection}{\numberline {3.2.2}Things und Bridges}{10}
+\contentsline {subsection}{\numberline {3.2.3}Links}{10}
+\contentsline {subsection}{\numberline {3.2.4}Items}{10}
+\contentsline {subsection}{\numberline {3.2.5}Discovery und Inbox}{10}
+\contentsline {section}{\numberline {3.3}Rule Engine}{10}
+\contentsline {subsection}{\numberline {3.3.1}Triggers}{10}
+\contentsline {subsection}{\numberline {3.3.2}Conditions}{10}
+\contentsline {subsection}{\numberline {3.3.3}Actions}{10}
+\contentsline {subsection}{\numberline {3.3.4}Events}{10}
+\contentsline {section}{\numberline {3.4}Controller}{10}
+\contentsline {subsection}{\numberline {3.4.1}Thing Handler}{10}
+\contentsline {subsection}{\numberline {3.4.2}Trigger/Action Handler}{10}
+\contentsline {section}{\numberline {3.5}Fazit}{10}
+\contentsline {chapter}{\numberline {4}Entwurf}{11}
+\contentsline {section}{\numberline {4.1}\IeC {\"U}berblick}{11}
+\contentsline {section}{\numberline {4.2}Bindings}{11}
+\contentsline {chapter}{\numberline {5}Implementierung}{13}
+\contentsline {section}{\numberline {5.1}\IeC {\"U}berblick}{13}
+\contentsline {section}{\numberline {5.2}Bundles}{13}
+\contentsline {subsection}{\numberline {5.2.1}tka.binding.twitter}{13}
+\contentsline {subsubsection}{Triggers und Events}{13}
+\contentsline {subsubsection}{Actions}{13}
+\contentsline {subsection}{\numberline {5.2.2}tka.binding.dropbox}{13}
+\contentsline {subsubsection}{Triggers und Events}{13}
+\contentsline {subsubsection}{Actions}{13}
+\contentsline {subsection}{\numberline {5.2.3}tka.binding.weather}{13}
+\contentsline {subsubsection}{Triggers und Events}{13}
+\contentsline {subsubsection}{Actions}{13}
+\contentsline {subsection}{\numberline {5.2.4}tka.binding.gmail}{13}
+\contentsline {subsubsection}{Triggers und Events}{13}
+\contentsline {subsubsection}{Actions}{13}
+\contentsline {subsection}{\numberline {5.2.5}tka.flashui}{13}
+\contentsline {section}{\numberline {5.3}Fazit}{14}
+\contentsline {chapter}{\numberline {6}Evaluation}{15}
+\contentsline {section}{\numberline {6.1}Erf\IeC {\"u}llte Ziele}{15}
+\contentsline {section}{\numberline {6.2}Vergleich mit Smart Home}{15}
+\contentsline {section}{\numberline {6.3}Vergleich mit IFTTT}{15}
+\contentsline {section}{\numberline {6.4}Quellcode}{18}
+\contentsline {section}{\numberline {6.5}Fazit}{18}
+\contentsline {chapter}{\numberline {7}Zusammenfassung}{19}
+\contentsline {section}{\numberline {7.1}Zusammenfassung}{19}
+\contentsline {section}{\numberline {7.2}Ausblick}{19}
+\contentsline {chapter}{\numberline {A}Weitere Informationen}{21}
+\contentsline {chapter}{Abbildungsverzeichnis}{23}
+\contentsline {chapter}{Literaturverzeichnis}{25}
+\contentsline {chapter}{Erkl\IeC {\"a}rung}{25}

@@ -26,7 +26,6 @@ import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 
-import tka.automation.extension.type.DropboxActionType;
 import tka.automation.extension.type.TwitterActionType;
 
 /**
@@ -52,8 +51,8 @@ public class TwitterActionHandler extends BaseModuleHandler<Action> implements A
 
     @Override
     public Map<String, Object> execute(Map<String, ?> context) {
-        String itemName = (String) module.getConfiguration().get(DropboxActionType.CONFIG_ITEM_NAME);
-        String message = (String) module.getConfiguration().get(DropboxActionType.CONFIG_DIRECTORY);
+        String itemName = (String) module.getConfiguration().get(TwitterActionType.CONFIG_ITEM_NAME);
+        String message = (String) module.getConfiguration().get(TwitterActionType.CONFIG_MESSAGE);
         if (message == null) {
             message = "";
         }

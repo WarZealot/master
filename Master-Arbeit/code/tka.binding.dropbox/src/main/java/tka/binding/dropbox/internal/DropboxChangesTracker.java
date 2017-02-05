@@ -10,6 +10,7 @@ import org.eclipse.smarthome.core.events.EventPublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.DeletedMetadata;
 import com.dropbox.core.v2.files.ListFolderResult;
@@ -17,7 +18,6 @@ import com.dropbox.core.v2.files.Metadata;
 import com.google.gson.Gson;
 
 import tka.binding.dropbox.DropboxBindingConstants;
-import tka.binding.twitter.internal.TwitterEvent;
 
 /**
  * @author Konstantin
@@ -37,6 +37,19 @@ public class DropboxChangesTracker implements Runnable {
         this.eventPublisher = eventPublisher;
         cursor = null;
         children = new TreeMap<String, Metadata>();
+
+        // check current state
+        try {
+            ListFolderResult result = client.files().listFolderBuilder("").withRecursive(true).start();
+            cursor = result.getCursor();
+            for (Metadata md : result.getEntries()) {
+                children.put(md.getPathLower(), md);
+            }
+        } catch (DbxException e) {
+            logger.error(
+                    "Could not check current state of dropbox. All existing files will be interpreted as newly added!",
+                    e);
+        }
     }
 
     @Override
@@ -73,7 +86,7 @@ public class DropboxChangesTracker implements Runnable {
         Event event = new Event() {
             @Override
             public String getType() {
-                return TwitterEvent.TYPE;
+                return "TwitterEvent";
             }
 
             @Override

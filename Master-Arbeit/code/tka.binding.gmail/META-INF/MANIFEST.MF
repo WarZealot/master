@@ -8,6 +8,8 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ClassPath: .
 Import-Package: com.google.common.collect,
  com.google.gson,
+ javax.mail,
+ javax.mail.internet,
  org.apache.commons.io,
  org.apache.commons.lang,
  org.eclipse.smarthome.config.core,
@@ -23,7 +25,7 @@ Import-Package: com.google.common.collect,
  org.osgi.framework,
  org.osgi.service.component,
  org.slf4j,
- tka.binding.core
+ tka.automation.extension.type
 Service-Component: OSGI-INF/*.xml
 Export-Package: tka.binding.gmail,
  tka.binding.gmail.handler,

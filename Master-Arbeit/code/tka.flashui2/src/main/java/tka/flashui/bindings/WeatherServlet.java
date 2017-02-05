@@ -10,11 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.eclipse.smarthome.config.core.Configuration;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.thing.ThingRegistry;
+import org.eclipse.smarthome.core.thing.ThingTypeUID;
 import org.eclipse.smarthome.core.thing.ThingUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import tka.binding.weather.WeatherBindingConstants;
 
 /**
  * @author Konstantin
@@ -50,15 +49,19 @@ public class WeatherServlet extends HttpServlet {
         resp.getWriter().print("SUCCESS");
     }
 
+    public static final String CONFIG_LOCATION = "location";
+    public static final String CONFIG_REFRESH = "refresh";
+    public final static ThingTypeUID THING_TYPE_WEATHER = new ThingTypeUID("weather", "weather");
+
     private void createThingForLocation(String location, int refreshInSeconds) {
         Configuration configuration = new Configuration();
-        configuration.put(WeatherBindingConstants.CONFIG_LOCATION, location);
-        configuration.put(WeatherBindingConstants.CONFIG_REFRESH, refreshInSeconds);
+        configuration.put(CONFIG_LOCATION, location);
+        configuration.put(CONFIG_REFRESH, refreshInSeconds);
 
         ThingUID thingUID = new ThingUID("weather", "weatherThingTypeId", location);
 
-        Thing thing = thingRegistry.createThingOfType(WeatherBindingConstants.THING_TYPE_WEATHER, thingUID, null,
-                location.toUpperCase(), configuration);
+        Thing thing = thingRegistry.createThingOfType(THING_TYPE_WEATHER, thingUID, null, location.toUpperCase(),
+                configuration);
         thingRegistry.add(thing);
     }
 

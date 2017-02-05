@@ -1,0 +1,41 @@
+\begin{thebibliography}{1}
+
+\bibitem{IFTTT}
+{\em {IFTTT}}.
+\newblock {http://ifttt.com}.
+\newblock Accessed: 13.07.2016.
+
+\bibitem{Zapier}
+{\em {Zapier}}.
+\newblock {http://zapier.com/}.
+\newblock Accessed: 13.07.2016.
+
+\bibitem{ieee:tas}
+{\sc Coronado, M.} \btxandlong{}\ {\sc C.~A. Iglesias}: {\em Task Automation
+  Services: Automation for the Masses}.
+\newblock IEEE Internet Computing, 20(1):52--58, Jan 2016.
+
+\bibitem{ierc:portfolios}
+{\sc {European Research Cluster on the Internet of Things}}: {\em {IERC}
+  Projects Portfolio}.
+\newblock
+  {https://www.smart-action.eu/publications/detail/114/90c9734fda7c5c2c68e631bf29a9a9d2/}.
+
+\bibitem{iota:d25}
+{\sc Jacobs, Tobias}, {\sc Markus Joos}, {\sc Carsten Magerkurth}
+  \btxetalshort{.}: {\em {Adaptive, faulttolerant orchestration of distributed
+  IoT service interactions}}.
+\newblock \Btxtechreplong{}\ D2.5, The Internet of Things - Architecture, 2012.
+
+\bibitem{icore:achitecture}
+{\sc Menoret, Stephane} \btxetalshort{.}: {\em {iCore} - Final architecture
+  reference model}.
+\newblock \Btxtechreplong{}\ D2.5, iCore Project, 2014.
+
+\bibitem{SmartHomeIoT}
+{\sc Ran, Chen}, {\sc Baoan Li} \btxandlong{}\ {\sc Jianjun Yu}: {\em CEIS 2011
+  Research and Application on the Smart Home Based on Component Technologies
+  and Internet of Things}.
+\newblock Procedia Engineering, 15:2087 -- 2092, 2011.
+
+\end{thebibliography}

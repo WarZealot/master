@@ -11,7 +11,6 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
 import tka.automation.extension.handler.FlashHandlerFactory;
-import tka.automation.extension.template.FlashTemplateProvider;
 import tka.automation.extension.type.FlashModuleTypeProvider;
 
 /**
@@ -29,27 +28,15 @@ import tka.automation.extension.type.FlashModuleTypeProvider;
 public class Activator implements BundleActivator {
 
     private FlashModuleTypeProvider mtProvider;
-    private FlashTemplateProvider tProvider;
-    private FlashRulesProvider rulesProvider;
     private FlashHandlerFactory handlerFactory;
-    private FlashCommands commands;
 
     @Override
     public void start(BundleContext context) throws Exception {
         mtProvider = new FlashModuleTypeProvider();
         mtProvider.register(context);
 
-        tProvider = new FlashTemplateProvider();
-        tProvider.register(context);
-
-        rulesProvider = new FlashRulesProvider();
-        rulesProvider.register(context);
-
         handlerFactory = new FlashHandlerFactory(context);
         handlerFactory.register(context);
-
-        commands = new FlashCommands(context, rulesProvider, handlerFactory);
-        commands.register(context);
 
         System.out.println("Registered FLASH Types");
     }
@@ -58,15 +45,6 @@ public class Activator implements BundleActivator {
     public void stop(BundleContext context) throws Exception {
         mtProvider.unregister();
         mtProvider = null;
-
-        tProvider.unregister();
-        tProvider = null;
-
-        commands.unregister();
-        commands = null;
-
-        rulesProvider.unregister();
-        rulesProvider = null;
 
         handlerFactory.unregister();
         handlerFactory = null;

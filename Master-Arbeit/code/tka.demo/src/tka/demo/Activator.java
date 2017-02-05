@@ -25,7 +25,6 @@ import org.eclipse.smarthome.automation.type.ModuleType;
 import org.eclipse.smarthome.automation.type.ModuleTypeProvider;
 import org.eclipse.smarthome.config.core.Configuration;
 import org.eclipse.smarthome.core.events.Event;
-import org.eclipse.smarthome.core.events.EventFactory;
 import org.eclipse.smarthome.core.events.EventPublisher;
 import org.eclipse.smarthome.core.items.Item;
 import org.eclipse.smarthome.core.items.ItemRegistry;
@@ -70,27 +69,27 @@ public class Activator implements BundleActivator {
         ruleRegistry = context.getService(reference2);
 
         // event publisher
-        ServiceReference<EventPublisher> reference3 = context.getServiceReference(EventPublisher.class);
-        eventPublisher = context.getService(reference3);
+        // ServiceReference<EventPublisher> reference3 = context.getServiceReference(EventPublisher.class);
+        // eventPublisher = context.getService(reference3);
 
         // item registry
         ServiceReference<ItemRegistry> reference4 = context.getServiceReference(ItemRegistry.class);
         itemRegistry = context.getService(reference4);
 
         // module type provider
-        ServiceReference<ModuleTypeProvider> reference5 = context.getServiceReference(ModuleTypeProvider.class);
-        typeProvider = context.getService(reference5);
+        // ServiceReference<ModuleTypeProvider> reference5 = context.getServiceReference(ModuleTypeProvider.class);
+        // typeProvider = context.getService(reference5);
 
-        ServiceReference<TemplateProvider> reference6 = context.getServiceReference(TemplateProvider.class);
-        templateProvider = context.getService(reference6);
+        // ServiceReference<TemplateProvider> reference6 = context.getServiceReference(TemplateProvider.class);
+        // templateProvider = context.getService(reference6);
 
-        ServiceReference<RuleProvider> reference7 = context.getServiceReference(RuleProvider.class);
-        ruleProvider = context.getService(reference7);
+        // ServiceReference<RuleProvider> reference7 = context.getServiceReference(RuleProvider.class);
+        // ruleProvider = context.getService(reference7);
 
-        HashSet<String> set = new HashSet<String>();
-        set.add(MyEvent.TYPE);
-        myEventFactory = new MyDemoEventFactory(set);
-        context.registerService(EventFactory.class.getName(), myEventFactory, null);
+        // HashSet<String> set = new HashSet<String>();
+        // set.add(MyEvent.TYPE);
+        // myEventFactory = new MyDemoEventFactory(set);
+        // context.registerService(EventFactory.class.getName(), myEventFactory, null);
 
         doSomething();
     }
@@ -112,7 +111,7 @@ public class Activator implements BundleActivator {
      */
     private void doSomething() {
         // createThings();
-        // listThings();
+        listThings();
         // createItems();
         // listItems();
         //
@@ -123,7 +122,7 @@ public class Activator implements BundleActivator {
         // doSomethingOther();
         // useFlashTemplates();
         // useRuleProvider();
-        createDemoEvents();
+        // createDemoEvents();
 
     }
 

@@ -9,7 +9,7 @@
 		<description>Allows the user to interact with Gmail.</description>
 
 		<channels>
-			<channel id="status" typeId="status" />
+			<channel id="email" typeId="email" />
 		</channels>
 
 	</thing-type>

@@ -1,0 +1,50 @@
+[
+    {
+        "triggers": [
+            {
+               "id": "TriggerId",
+                "configuration": {
+                    "eventSource": "flash/dropbox",
+                    "eventTopic": "flash/dropbox/added",
+                    "eventTypes": "ALL"
+                },
+                "type": "GenericEventTrigger"
+            }
+        ],
+        "conditions": [
+            {
+                "inputs": {
+                    "event": "TriggerId.event"
+                },
+                "id": "ConditionID",
+                "configuration": {
+                    "topic": "flash/dropbox/added",
+                    "payload": ".*/flash/flash_source_45.*"
+                },
+                "type": "EventCondition"
+            }
+        ],
+        "actions": [
+            {
+                "inputs": {
+                    "event": "TriggerId.event"
+                },
+                "id": "DropboxActionWohooID",
+                "configuration": {
+                    "itemName": "dropbox_dropboxThingTypeId_dropboxconnection_folder",
+                    "directory": "/flash/flash_target_45/"
+                },
+                "type": "DropboxAction"
+            }
+        ],
+        "configuration": {},
+        "configDescriptions": [],
+        "uid": "D2D_45",
+        "name": "D2D_45",
+        "tags": [
+            "flash"
+        ],
+        "visibility": "VISIBLE",
+        "description": "This rule copies files from '/flash/flash_source_45' to '/flash/flash_target_45'."
+    }
+]

@@ -1,0 +1,109 @@
+% kapitel2.tex
+\chapter{Qivicon}
+\section{Struktur}
+\subsection{Kommunikation}
+Der Aufbau des Systems lässt sich gut anhand von Abbildung ~\ref{QiviconStruktur} erkennen. Jeder Nutzer ist innerhalb seiner Wohnung direkt mit seiner Qivicon-Box verbunden. Er kann alle seine Geräte direkt per WLAN steuern, eine Internetverbindung ist nicht notwendig. 
+
+Jede Qivicon-Box ist mit dem Telekom-Backend-Server (TBS) verbunden. Der TBS stellt den Zugriff auf bestimmte Boxen dem Serviceportal-Backend-Server (SBS) zur Verfügung. Um auf eine konkrete Box zugreifen zu können, wird der entsprechende Username und das Passwort benötigt.
+
+Der Nutzer kann sich per Internet auf dem SBS einloggen und Zugriff auf seine persönliche Box bekommen. Das erlaubt es ihm, sein gesamtes Zuhause praktisch von überall auf der Welt direkt zu kontrollieren.
+
+\begin{figure}
+	\centering
+  	\includegraphics[width=\textwidth]{bilder/QiviconStruktur}
+	\caption{Aufbau der Kommunikation zwischen Box, Server und Client}
+	\label{QiviconStruktur}
+\end{figure}
+
+Der Serviceportal-Backend-Server bietet eine Reihe von Services an. Zentraler Aspekt darunter ist der Zugriff auf die Qivicon-Box, aber auch Services Drittanbieter (z.B. Pizza, Taxi, usw.) sind enthalten. 
+
+\subsection{Qivicon Box}
+Die Qivicon-Box ist ein Gerät, dass in einer Wohnung installiert wird und die Kontrolle über elektronische Geräte im Haushalt bietet. Es benötigt lediglich einen Anschluss an das Internet und eine Kopplung zum entsprechenden Gerät. Die Kommunikation zwischen Gerät und Box findet über Funk statt.
+
+Qivicon arbeitet mit Java. Es hat eine serviceorientierte Architektur, basierend auf dem OSGi Framework. 
+"Die OSGi Alliance (früher Open Services Gateway initiative) spezifiziert eine hardwareunabhängige dynamische Softwareplattform, die es erleichtert, Anwendungen und ihre Dienste per Komponentenmodell („Bundle“/„Service“) zu modularisieren und zu verwalten („Service Registry“)." (Zitat Wikipedia?)
+Dies erlaubt es verschiedene Bundles nahezu unabhängig von einander zu entwickeln und später einzelne Bundles gegen aktuellere Versionen problemlos auszutauschen. Aus einer Reihe solcher untereinander kommunizierender Bundles besteht auch die Anwendung "Serviceportal", an der die Anasoft Technology AG gerade arbeitet.
+
+\subsection{Serviceportal}
+"Serviceportal" ist eine Anwendung, die eine Reihe von Services anbietet. Dazu gehören Gerätesteuerung, Szenarioverwaltung, Hausüberwachung und Services Drittanbieter. In erster Linie ist sie jedoch an ältere Menschen (60+) gerichtet. Das spiegelt sich vor allem auf der GUI wieder.
+
+Die GUI ist eine Webanwendung, die hauptsächlich durch Javascript erzeugt wird. Das führt dazu, dass sie sich auch auf mobilen Geräten problemlos ausführen lässt.
+
+\section{Szenarien}
+\subsection{Einleitung}
+Die Automatisierung der Haushaltsgeräte soll vor allem durch Szenarien realisiert werden. Unter einem Szenario versteht man die Zuordnung von bestimmten Zuständen bestimmter Geräte and bestimmte Zeiträume. Szenarien sollen sich entweder in festgelegten Zeiträumen regelmäßig wiederholen oder jedoch manuell ausführbar sein.
+\begin{description}
+	\item[Beispiele]~\par
+	\begin{enumerate}
+		\item Alle Lichter im Wohnzimmer sollen um 18-20 Uhr an sein.
+		\item Die Jalousien sollen regelmäßig um 18 Uhr runter gehen.
+		\item Alle Lichter im Haus sollen ausgeschaltet werden.
+	\end{enumerate}
+\end{description}
+
+\subsection{Gegeben}
+Qivicon bietet eine Reihe von Tools an, um derartige Szenarien zu definieren. Es existieren  Conditions, Commands, Scenes und Rules.
+
+\subsubsection{Conditions}
+Conditions sind Bedingungen, nach deren Erfüllung Events geworfen werden. Aktuell gibt es verschiedene zeit basierte Konditionen, wie z.B. die "Absolute Timer Condition" und die "Periodic Timer Condition". Der Absolute Timer wirft einmal ein Event, wenn der vorher eingestellte Moment eintrifft. Ein Periodic Timer wirft solche Events immer wieder in einem bestimmten Abstand.
+Es gibt noch eine Reihe weiterer zeit basierte Konditionen. Außerdem lassen sich auch Custom Conditions definieren, wo der Entwickler beliebige Bedingungen einprogrammieren kann.
+
+\subsubsection{Commands}
+Ein Command ist eine Aktion, z.B. das Setzen eines Parameters eines Gerätes auf einen bestimmten Zustand oder das Aufrufen einer durch das Interface des Gerätes definierter Methode.
+Auch hier lassen sich durch den Entwickler beliebige Custom Commands definieren.
+
+\subsubsection{Scenes}
+Eine Scene ist eine besondere Art von Command. Sie ist eine Ansammlung von beliebig vielen anderen Commands, das heißt, bei dem Ausführen einer Scene werden alle in ihr enthaltenen Befehle ausgeführt. Eine solche Zusammenfassung vereinfacht deutlich die Definition von Rules.
+
+\subsubsection{Rules}
+Ein Rule verbindet eine Condition und ein Command. Es ist eine Regel, die besagt, dass sobald eine bestimmte Condition ein Event wirft, ein bestimmtes Command ausgeführt wird. Hier helfen die Scenes mehrere Commands an eine Condition zu binden, ohne einzelne Rules für jedes Command definieren zu müssen.
+
+
+\subsection{Ansatz}
+\subsubsection{Konzept}
+Insgesamt lässt sich aus den oben beschriebenen Elementen bereits eine primitive Gerätesteuerung realisieren. Es wird eine Scene definiert, die mit Hilfe eines Rule an eine Condition gebunden wird. Damit lassen sich beliebige Geräte zu einer bestimmten Zeit auf einen bestimmten Zustand schalten.\\
+Leider führt eine derartige Realisierung sofort zu einer ganzen Reihe von Problemen.
+
+\subsubsection{Probleme}
+Bei einer direkten Implementierung mit Hilfe der bereits vorhandenen Tools stößt man sofort auf eine ganze Reihe von Problemen. 
+\begin{description}
+	\item[Was passiert, wenn]~\par
+	\begin{itemize}
+		\item zwei sich widersprechende Commands an ein Event gebunden werden?\\
+\textbf{Beispiel:} Ein Command schaltet das Gerät ein, das andere schaltet es aus. Welchen Zustand wird das Gerät nach Ausführung des Rule haben?
+		
+		\item ein Szenario über einen bestimmten Zeitraum aktiv sein soll?\\
+		\textbf{Beispiel:} Ein Gerät soll über einen bestimmten Zeitraum an sein. Zurzeit gibt es keine Möglichkeit Zustände für Zeiträume zu definieren.
+		
+		\item zwei solche Szenarien sich widersprechen?\\
+		\textbf{Beispiel:} Zwei Szenarien definieren für ein Gerät verschiedene Zustände im selben Zeitraum. Welchen Zusand wird das Gerät nach dem Schalten haben?
+		
+		\item ein Nutzer ein Gerät manuell schaltet? Wie reagiert ein aktives Szenario?\\
+		\textbf{Beispiel:} Ein Szenario definiert, das ein Gerät noch eine Stunde an sein soll. Nun schaltet der Nutzer das Gerät manuell aus. Wie soll das Szenario reagieren?
+		
+		\item man einen Minimalwert für ein Gerät definieren möchte? Lässt sich das Gerät 	dann manuell nicht ausschalten?\\
+		\textbf{Beispiel:} Man möchte ein Nachtlicht-Szenario definieren, sodass das Licht nicht unter 10\% Stärke leuchten darf, damit ältere Menschen sehen, wohin sie gehen. Beim manuellen Schalten kann der Nutzer das Licht komplett einschalten, aber nicht komplett ausschalten. Das führt jedoch auch dazu, dass bei einer Definition eines Szenarios mit Minimalwert 100\% das Licht auch manuell nicht ausschaltbar ist.
+		
+		\item ein Szenario zu Ende ist? \\
+		\textbf{Beispiel:} Das Szenario ist zu Ende. Soll der vorherige Zustand wiederhergestellt werden? Soll nichts getan werden? 
+	\end{itemize}
+\end{description}
+Zurzeit ist das Verhalten des Systems nicht deterministisch, das heißt es lässt sich nicht im Voraus vorhersagen, welche Condition ihr Event zuerst wirft, wenn sie es beide zur gleichen Zeit tun sollen. Analog, wenn zwei sich widersprechende Commands an eine Condition gebunden werden.
+
+
+\subsection{Anforderungen}
+Bevor man die Arbeit fortsetzen kann, müssen gewisse Entscheidungen auf der Anforderungsebene getroffen werden. Nach detaillierter Analyse der vorhandenen Tools und der Probleme, die ein direkter Einsatz mit sich zieht, wurden bei Anasoft Technology AG folgende Entscheidungen getroffen:
+\begin{enumerate}
+	\item Szenen werden Prioritäten erhalten. \\
+	Bei einem Konflikt zwischen zwei Szenarien wird das Szenario mit der höheren Priorität ausgeführt.
+	\item Es gibt keinen Endzustand.\\
+	Es wird vor dem Ausführen eines Szenarios nicht gespeichert, welche Zustände die Geräte gerade haben. Entsprechend werden auch keine Zustände am Ende des Szenarios definiert. Innerhalb des Szenarios wird auch kein Endzustand definiert.
+	\item Am Ende eines Szenarios werden die anderen aktiven Szenarien nochmal ausgeführt, mit Priorität von hoch bis niedrig.\\
+	Falls es keine aktiven Szenarien gibt, so wird nichts gemacht. Es sollte für alle Geräte Szenarien für 24 Stunden täglich geben, damit 3. ideal funktioniert.
+	\item Manuelle Steuerung übersteuert aktive Szenarien.\\
+	Falls ein Mensch ein Gerät manuell schaltet, so nimmt das Gerät den entsprechenden Zustand an. Eine Ausnahme sind nur Minimal-Zustände.
+	\item Nach manueller Steuerung verhindert ein Timer für eine bestimmte Zeit \textit{t} Umschaltungen durch andere Szenen. Dies ist gemacht, damit z.B. ein Mensch nicht auf Toilette geht und im Prozess plötzlich das Licht ausgeht, weil eine Szene es so definiert.
+	\item Es gibt Geräte, für die Minimalzustände definiert werden können.\\
+	Wie bei dem Nachtlicht-Problem erläutert, kann man für Gerät einen Minimalwert definieren, sodass z.B. ein Gerät nicht ausgeschaltet werden kann.
+\end{enumerate}
+Ziel der Arbeit ist es diese Anforderungen in einem OSGi-Bundle umzusetzen, also eine Lösung zu implementieren. Zunächst muss das Problem jedoch noch formalisiert werden.	

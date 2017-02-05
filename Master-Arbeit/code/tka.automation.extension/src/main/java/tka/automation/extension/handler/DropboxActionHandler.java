@@ -25,9 +25,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonParser;
 
 import tka.automation.extension.type.DropboxActionType;
-import tka.binding.dropbox.DropboxUploadEntity;
+import tka.automation.extension.type.DropboxUploadEntity;
 
 /**
  * This class serves to handle the Action types provided by this application. It is used to help the RuleEngine
@@ -65,7 +66,13 @@ public class DropboxActionHandler extends BaseModuleHandler<Action> implements A
 
         if (itemName != null && directory != null && eventPublisher != null && itemRegistry != null) {
             try {
-                String json = buildJson(directory, payload);
+                String json;
+                if (payload.contains("pathLower") && payload.contains("serverModified")) {
+                    json = GSON
+                            .toJson(new DropboxUploadEntity(directory, GSON.toJson(new JsonParser().parse(payload))));
+                } else {
+                    json = buildJson(directory, payload);
+                }
 
                 Item item = itemRegistry.getItem(itemName);
                 Command commandObj = TypeParser.parseCommand(item.getAcceptedCommandTypes(), json);

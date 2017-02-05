@@ -1,15 +1,16 @@
 Manifest-Version: 1.0
 Bundle-SymbolicName: tka.flashui2;singleton:=true
 Bundle-Name: Tkachuk Flash UI
-Bundle-Version: 0.9.0.201612171348
+Bundle-Version: 0.9.0.201701291634
 Bundle-ClassPath: .
 Bundle-ManifestVersion: 2
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-Vendor: Materna/Tkachuk
 Import-Package: com.google.gson,javax.servlet,javax.servlet.http,org.a
  pache.commons.io,org.eclipse.smarthome.automation,org.eclipse.smartho
- me.automation.parser,org.eclipse.smarthome.core.common.registry,org.e
- clipse.smarthome.core.thing,org.osgi.framework,org.osgi.service.compo
- nent,org.osgi.service.http,org.slf4j,tka.binding.twitter
+ me.automation.parser,org.eclipse.smarthome.config.core,org.eclipse.sm
+ arthome.core.common.registry,org.eclipse.smarthome.core.thing,org.osg
+ i.framework,org.osgi.service.component,org.osgi.service.http,org.slf4
+ j,tka.binding.dropbox,tka.binding.twitter
 Service-Component: OSGI-INF/*.xml
 

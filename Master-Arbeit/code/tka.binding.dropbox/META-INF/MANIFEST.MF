@@ -6,10 +6,10 @@ Bundle-Vendor: Materna/Tkachuk
 Bundle-Version: 0.9.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ClassPath: .
-Import-Package: com.dropbox.core;version="2.1.2",
- com.dropbox.core.v2;version="2.1.2",
- com.dropbox.core.v2.files;version="2.1.2",
- com.dropbox.core.v2.users;version="2.1.2",
+Import-Package: com.dropbox.core,
+ com.dropbox.core.v2,
+ com.dropbox.core.v2.files,
+ com.dropbox.core.v2.users,
  com.google.common.collect,
  com.google.gson,
  org.apache.commons.io,
@@ -26,9 +26,7 @@ Import-Package: com.dropbox.core;version="2.1.2",
  org.eclipse.smarthome.core.types,
  org.osgi.framework,
  org.osgi.service.component,
- org.slf4j,
- tka.binding.twitter,
- tka.binding.twitter.internal
+ org.slf4j
 Service-Component: OSGI-INF/*.xml
 Export-Package: tka.binding.dropbox,
  tka.binding.dropbox.handler

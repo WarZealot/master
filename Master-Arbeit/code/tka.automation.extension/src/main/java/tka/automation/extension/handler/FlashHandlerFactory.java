@@ -31,6 +31,7 @@ import org.slf4j.LoggerFactory;
 
 import tka.automation.extension.type.AlwaysTrueConditionType;
 import tka.automation.extension.type.DropboxActionType;
+import tka.automation.extension.type.EmailActionType;
 import tka.automation.extension.type.TkaTriggerType;
 import tka.automation.extension.type.TwitterActionType;
 
@@ -47,6 +48,7 @@ public class FlashHandlerFactory extends BaseModuleHandlerFactory {
         List<String> temp = new ArrayList<String>();
         temp.add(TwitterActionType.UID);
         temp.add(DropboxActionType.UID);
+        temp.add(EmailActionType.UID);
         temp.add(AlwaysTrueConditionType.UID);
         temp.add(TkaTriggerType.UID);
         TYPES = Collections.unmodifiableCollection(temp);
@@ -96,6 +98,8 @@ public class FlashHandlerFactory extends BaseModuleHandlerFactory {
             moduleHandler = new TwitterActionHandler((Action) module, eventPublisher, itemRegistry);
         } else if (DropboxActionType.UID.equals(module.getTypeUID())) {
             moduleHandler = new DropboxActionHandler((Action) module, eventPublisher, itemRegistry);
+        } else if (EmailActionType.UID.equals(module.getTypeUID())) {
+            moduleHandler = new EmailActionHandler((Action) module, eventPublisher, itemRegistry);
         } else if (AlwaysTrueConditionType.UID.equals(module.getTypeUID())) {
             moduleHandler = new AlwaysTrueConditionHandler((Condition) module);
         } else if (TkaTriggerType.UID.equals(module.getTypeUID())) {

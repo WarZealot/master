@@ -21,9 +21,12 @@ import org.slf4j.LoggerFactory;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.DownloadErrorException;
 import com.dropbox.core.v2.files.FileMetadata;
 import com.dropbox.core.v2.files.UploadErrorException;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import tka.binding.dropbox.DropboxBindingConstants;
 import tka.binding.dropbox.DropboxUploadEntity;
@@ -33,6 +36,8 @@ import tka.binding.dropbox.DropboxUploadEntity;
  *
  */
 public class DropboxHandler extends ConfigStatusThingHandler {
+
+    private static final JsonParser JSON_PARSER = new JsonParser();
 
     private final Logger logger = LoggerFactory.getLogger(DropboxHandler.class);
 
@@ -80,7 +85,15 @@ public class DropboxHandler extends ConfigStatusThingHandler {
             DropboxUploadEntity uploadEntity = GSON.fromJson(command.toString(), DropboxUploadEntity.class);
 
             try {
-                URL url = new URL(uploadEntity.getMediaUrl());
+                String mediaUrl = uploadEntity.getMediaUrl();
+                if (mediaUrl.contains("pathLower") && mediaUrl.contains("serverModified")) {
+                    InputStream fileInputStream = getFileInputStream(mediaUrl);
+                    String filename = JSON_PARSER.parse(mediaUrl).getAsJsonObject().get("name").getAsString();
+                    uploadFile(fileInputStream, uploadEntity.getDirectory() + filename);
+                    return;
+                }
+
+                URL url = new URL(mediaUrl);
                 String filename = FilenameUtils.getName(url.getPath());
                 InputStream stream = url.openStream();
                 uploadFile(stream, uploadEntity.getDirectory() + filename);
@@ -91,6 +104,12 @@ public class DropboxHandler extends ConfigStatusThingHandler {
         }
 
         logger.info("Command {} is not supported for channel: {}", command, channelUID.getId());
+    }
+
+    private InputStream getFileInputStream(String dropboxJson) throws DownloadErrorException, DbxException {
+        JsonObject root = JSON_PARSER.parse(dropboxJson).getAsJsonObject();
+        String path = root.get("pathLower").getAsString();
+        return client.files().download(path).getInputStream();
     }
 
     @Override

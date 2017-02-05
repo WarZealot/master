@@ -59,8 +59,14 @@ public class RulesProviderServlet extends HttpServlet {
         for (JsonElement rule : root) {
             JsonObject ruleObj = rule.getAsJsonObject();
             String uid = ruleObj.get("uid").getAsString();
+
+            // add enabled info
             Boolean enabled = ruleRegistry.isEnabled(uid);
             ruleObj.addProperty("enabled", enabled);
+
+            // add status info
+            String status = ruleRegistry.getStatus(uid).getStatus().toString();
+            ruleObj.addProperty("status", status);
         }
 
         return gson.toJson(root);

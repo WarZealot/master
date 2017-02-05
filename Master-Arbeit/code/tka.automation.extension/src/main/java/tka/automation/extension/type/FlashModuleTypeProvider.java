@@ -16,6 +16,7 @@ import java.util.Map;
 
 import org.eclipse.smarthome.automation.type.ModuleType;
 import org.eclipse.smarthome.automation.type.ModuleTypeProvider;
+import org.eclipse.smarthome.core.common.registry.ProviderChangeListener;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 
@@ -35,6 +36,7 @@ public class FlashModuleTypeProvider implements ModuleTypeProvider {
         providedModuleTypes.put(AlwaysTrueConditionType.UID, AlwaysTrueConditionType.initialize());
         providedModuleTypes.put(TkaTriggerType.UID, TkaTriggerType.initialize());
         providedModuleTypes.put(DropboxActionType.UID, new DropboxActionType());
+        providedModuleTypes.put(EmailActionType.UID, new EmailActionType());
     }
 
     @SuppressWarnings("unchecked")
@@ -58,7 +60,7 @@ public class FlashModuleTypeProvider implements ModuleTypeProvider {
      */
     public void register(BundleContext bc) {
         Dictionary<String, Object> properties = new Hashtable<String, Object>();
-        properties.put(REG_PROPERTY_MODULE_TYPES, providedModuleTypes.keySet());
+        // properties.put(REG_PROPERTY_MODULE_TYPES, providedModuleTypes.keySet());
         providerReg = bc.registerService(ModuleTypeProvider.class.getName(), this, properties);
     }
 
@@ -70,5 +72,19 @@ public class FlashModuleTypeProvider implements ModuleTypeProvider {
         providerReg.unregister();
         providerReg = null;
         providedModuleTypes = null;
+    }
+
+    public void addProviderChangeListener(ProviderChangeListener<ModuleType> listener) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public Collection<ModuleType> getAll() {
+        return providedModuleTypes.values();
+    }
+
+    public void removeProviderChangeListener(ProviderChangeListener<ModuleType> listener) {
+        // TODO Auto-generated method stub
+
     }
 }

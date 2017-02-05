@@ -1,0 +1,47 @@
+[
+    {
+        "triggers": [
+            {
+                "id": "KtkTwitter2DropboxTriggerId",
+                "configuration": {
+                    "eventSource": "flash/twitter",
+                    "eventTopic": "flash/twitter/status",
+                    "eventTypes": "ALL"
+                },
+                "type": "GenericEventTrigger"
+            }
+        ],
+        "conditions": [
+            {
+                "inputs": {
+                    "event": "KtkTwitter2DropboxTriggerId.event"
+                },
+                "id": "KtkTwitter2DropboxConditionID",
+                "configuration": {
+                    "topic": "flash/twitter/status"
+                },
+                "type": "EventCondition"
+            }
+        ],
+        "actions": [
+            {
+                "inputs": {},
+                "id": "ItemPostCommandActionID",
+                "configuration": {
+                    "itemName": "hue_LCT001_0017881cbbd0_4_color",
+                    "command": "OFF"
+                },
+                "type": "ItemPostCommandAction"
+            }
+        ],
+        "configuration": {},
+        "configDescriptions": [],
+        "uid": "Twitter2Hue",
+        "name": "Twitter2HueRule",
+        "tags": [
+            "flash"
+        ],
+        "visibility": "VISIBLE",
+        "description": "This rule turns your light off when a wild tweet appears."
+    }
+]

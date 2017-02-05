@@ -6,6 +6,9 @@ package dropbox;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import com.dropbox.core.DbxAppInfo;
@@ -16,6 +19,8 @@ import com.dropbox.core.DbxWebAuth;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.ListFolderResult;
 import com.dropbox.core.v2.files.Metadata;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 /**
  * @author Konstantin
@@ -34,11 +39,36 @@ public class DropboxTest {
         DbxClientV2 dbxClient = new DbxClientV2(dbxRequestConfig, OAUTH_TOKEN);
         System.out.println("Dropbox Account Name: " + dbxClient.users().getCurrentAccount().getName());
 
+        listFiles(dbxClient);
+
         // try {
         // authDropbox(OAUTH_CONSUMER_KEY, OAUTH_CONSUMER_SECRET);
         // } catch (IOException | DbxException e) {
         // e.printStackTrace();
         // }
+    }
+
+    private static void listFiles(DbxClientV2 client) {
+        try {
+            ListFolderResult folderResult = client.files().listFolder("/ifttt/ifttt_target_15");
+            // System.out.println(folderResult.toStringMultiline());
+            List<Metadata> entries = folderResult.getEntries();
+            JsonParser parser = new JsonParser();
+            for (Metadata entry : entries) {
+                System.out.println(entry.getName());
+                String json = entry.toString();
+                JsonObject root = parser.parse(json).getAsJsonObject();
+                String date = root.get("server_modified").getAsString();
+                System.out.println(date);
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'");
+                Date result = format.parse(date);
+                System.out.println(result);
+
+            }
+        } catch (DbxException | ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static DbxClientV2 authDropbox(String dropBoxAppKey, String dropBoxAppSecret)

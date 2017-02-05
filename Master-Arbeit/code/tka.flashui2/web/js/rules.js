@@ -36,6 +36,7 @@ function repopulateTable(data) {
         var $row = $("<tr/>");
         $row.append("<td>" + rule.uid + "</td>");
         $row.append("<td>" + rule.description + "</td>");
+        $row.append("<td>" + rule.status + "</td>");
         $row.append("<td>" + rule.enabled + "</td>");
 
         var $showBtn = $("<button class='btn btn-default' data-uid='" + rule.uid + "' > Show </button>");
