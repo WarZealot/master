@@ -6,7 +6,7 @@ In diesem Kapitel wird die entstandene Implementierung gegen die Anforderungen v
 Alle formalen Anforderungen, wie sie in Sektion \ref{sec:anforderungen} festgehalten sind, wurden erfüllt. Der Demonstrator läuft on-premise auf dem Raspberry Pi und verwaltet sämtliche Daten lokal. Es ist möglich komplexe Szenarien zu definieren, wobei intelligente Geräte mit Webdiensten frei zusammengefügt werden können. Dies ist möglich, da die integrierten Webservices ebenfalls als \textit{Things} im System abgebildet sind. Schließlich ist eine Benutzeroberfläche vorhanden, die es dem Nutzer erlaubt zur Laufzeit neue Szenarien zu erstellen, zu editieren und zu löschen.
 
 \section{Vergleich mit Smart Home}
-Bei dem entwickelten Demonstrator handelt es sich um eine typische Smart Home Lösung, die auf \textit{Eclipse SmartHome} basiert und um weitere Funktionalitäten angereichert wurde. Dadurch besitzt er alle üblichen Funktionalitäten, die ein Smart Home enthält - er ist in der Lage ausgewählte intelligente Geräte direkt anzusteuern und in Szenarien zu automatisieren. 
+Bei dem entwickelten Demonstrator handelt es sich um eine klassische Smart Home Lösung, die auf \textit{Eclipse SmartHome} basiert und um weitere Funktionalitäten angereichert wurde. Dadurch besitzt er alle üblichen Funktionalitäten, die ein Smart Home enthält - er ist in der Lage ausgewählte intelligente Geräte direkt anzusteuern und in Szenarien zu automatisieren. 
 
 \section{Vergleich mit IFTTT}
 Es ist zu beachten, dass es sich bei IFTTT um einen Cloud-Service handelt. Dadurch hat es keine Möglichkeit intelligente Geräte im Haus zu steuern, sofern diese nicht über eine vom Hersteller bereitgestellte Webschnittstelle verfügen.
@@ -16,45 +16,63 @@ In IFTTT ist es nur möglich simple Szenarien auf eine einfache Art und Weise zu
 Der entstandene Demonstrator wurde einem umfassenden Test unterzogen, im Laufe dessen Durchsatz und Reaktionszeiten gemessen und mit IFTTT verglichen wurden. 
 
 \subsection{Kopieren von Dateien in der Dropbox}
-Um Durchsatz zu messen, wurde ein Szenario definiert, dass sämtliche Dateien, die in einen bestimmten Ordner in Dropbox hinzugefügt wurden, in einen anderen Ordner in der Dropbox zu kopieren. Zu Beachten ist, dass IFTTT sich auf die Abarbeitung von bis zu 15 Dateien pro Abfrage begrenzt und Dateien, die größer, als 30MB sind, nicht beachtet. Zusätzlich wird vom Service gewarnt, dass die Ausführung aller Szenarien sich um bis zu 1 Stunde verzögern kann.
+Um Durchsatz zu messen, wurde ein Szenario definiert, dass sämtliche Dateien, die in einen bestimmten Ordner in Dropbox hinzugefügt wurden, in einen anderen Ordner in der Dropbox zu kopieren. Zu Beachten ist, dass IFTTT sich auf die Abarbeitung von bis zu 15 Dateien pro Abfrage begrenzt und Dateien, die größer, als 30 MB sind, nicht beachtet. Zusätzlich wird vom Service gewarnt, dass die Ausführung aller Szenarien sich um bis zu 1 Stunde verzögern kann.
+
+Der Demonstrator lief auf einem Raspberry Pi 3 Model B, der an einen Router mit VDSL (50 MBit) Verbindung angeschlossen war.
+
 Es wurde geprüft, wie gut die beiden Anwendungen mit einer großer Anzahl kleiner Dateien, sowie mit geringer Anzahl von großen Dateien umgehen können. 
 
 \subsubsection{Zahlreiche kleine Dateien}
-Es wurden Mengen von 258KB großen Dateien gleichzeitig in einen Dropbox Ordner hochgeladen. Es wurden jeweils Vielfache von 15 verwendet, da dies die maximale Anzahl von Dateien ist, die IFTTT in einer Abfrage bearbeitet.
+Es wurden Mengen von 258 KB großen Dateien gleichzeitig in einen Dropbox Ordner hochgeladen. Es wurden jeweils Vielfache von 15 verwendet, da dies die maximale Anzahl von Dateien ist, die IFTTT in einer Abfrage bearbeitet.
 
 Es entstanden die Grafiken \ref{fig:eval1} und \ref{fig:eval2}.
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{bilder/TASOverview}
-	\caption{Here will be another image}
+	\includegraphics[width=\textwidth]{bilder/vs_mittelwert}
+	\caption{Vergleich des Mittelwerts zwischen IFTTT und FLASH für unterschiedliche Dateimengen}
 	\label{fig:eval1}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{bilder/TASOverview}
-	\caption{Here will be another image}
+	\includegraphics[width=\textwidth]{bilder/vs_laengste}
+	\caption{Vergleich der längsten Dauer (equivalent zu Gesamtdauer, da ca. 1-2 Sekunden vernachlässigt werden können) zwischen IFTTT und FLASH für unterschiedliche Dateimengen}
 	\label{fig:eval2}
 \end{figure}
 
 Für die Erstellung von Grafik \ref{fig:eval1} wurde für jede hochgeladene Datei einzeln gemessen, wie viele Sekunden es dauert, bis eine Kopie im Zielordner vorhanden ist. Es wurde anschließend ein Mittelwert gebildet und die Messung mehrmals wiederholt. Schließlich wurde ein gemeinsamer Mittelwert über die gesammelten Werte gebildet und in der Grafik für die verschiedenen Mengen von Dateien dargestellt.
 
-In der Grafik \ref{fig:eval2} wurde analog gehandelt, mit dem Unterschied, dass hier dargestellt ist, was die längste Dauer zwischen hochladen einer Datei und der Bereitstellung der Kopie ist.
+In der Grafik \ref{fig:eval2} wurde analog gehandelt, mit dem Unterschied, dass hier dargestellt ist, was die längste Dauer zwischen hochladen einer Datei und der Bereitstellung der Kopie ist. Da alle Dateien nahezu gleichzeitig hochgeladen werden, kann man diesen Wert auch als Gesamtdauer, bis alle Dateien verschoben wurden, betrachten.
 
 \subsubsection{Große Dateien}
-IFTTT ist in der Lage mit Dateien umzugehen, die bis zu 30MB groß sind. Eine Wiederholung der oben genannten Messung mit 25MB großen Dateien hat ergeben, dass sich die Ergebnisse  analog verhalten. 
+IFTTT ist in der Lage mit Dateien umzugehen, die bis zu 30 MB groß sind. Eine Wiederholung der oben genannten Messung mit 25 MB großen Dateien hat ergeben, dass sich die Ergebnisse  analog verhalten. 
 
-Der Demonstrator ist in der Lage mit Dateien \glqq beliebiger\grqq Größe umzugehen. Im Test gab es auch bei Verschiebung von 300MB großen Dateien keinerlei Probleme.
+Der Demonstrator ist in der Lage mit größeren Dateien umzugehen. Im Test gab es auch bei Verschiebung von 300 MB großen Dateien keinerlei Probleme.
 
 \subsection{Steuern von Lampen bei Tweets}
-Es wurde sowohl auf IFTTT als auch auf dem Demonstrator ein Szenario erstellt, dass bei jedem Tweet eine Philips Hue Lampe ausschaltet. Anschließend wurde gemessen, wie lange es dauert, bis die Lampe tatsächlich ausgeschaltet wird, nachdem der Tweet veröffentlicht wurde. 
+Es wurde sowohl auf IFTTT als auch auf dem Demonstrator ein Szenario erstellt, dass bei jedem Tweet eine Philips Hue Lampe ausschaltet. Anschließend wurde gemessen, wie lange es dauert, bis die Lampe tatsächlich ausgeschaltet wird, nachdem der Tweet veröffentlicht wurde. Dabei steuert ITTTT die Lampe über die von Hue bereitgestellte Webschnittstelle an, während der Demonstrator das Gerät über WLAN bedient.
 
 Es hat sich ergeben, dass die Reaktionszeit des Demonstrators stets unter einer Sekunde lag, während die Schaltung durch IFTTT eine sehr variable Dauer aufwies. Die schnellste Reaktionszeit lag bei ungefähr 10 Sekunden.
 
 
 \subsection{Auswertung}
-Aus den Messungen hat sich gezeigt, dass der Demonstrator IFTTT in jeder Hinsicht deutlich voraus ist. Dadurch, dass er sich im Hause des Nutzers befindet, ist er in der Lage Geräte direkt anzusteuern...
+\subsubsection{Vorteile}
+Aus den Messungen hat sich gezeigt, dass der Demonstrator IFTTT in vieler Hinsicht deutlich voraus ist. Dadurch, dass er sich im Hause des Nutzers befindet, ist er in der Lage mit Geräten direkt zu kommunizieren, was Grund für merklich bessere Reaktionszeiten in Szenarien, die intelligente Geräte im Haus betreffen, ist.\\
+
+Auch in Szenarien, die nur Web-basiert sind und viel Download/Upload-Volumen mit sich ziehen, hat sich der Raspberry Pi als überlegen erwiesen. Dies lässt sich dadurch erklären, dass es sich bei dem Demonstrator im Gegensatz zu IFTTT um ein dediziertes Gerät handelt, dass nur einen konkreten User bedient. Dies führt auch dazu, dass er keine arbiträren Eingrenzungen besitzt, wie z.B. die Begrenzung der Dateigröße.\\
+
+Schließlich ist der Raspberry Pi aus einer Datenschutzperspektive dem Cloud-Service zu bevorzugen, da sämtliche Zugriffsdaten nur lokal auf dem Gerät gesichert werden.
+
+\subsubsection{Nachteile}
+Negative Aspekte des Demonstrators sind Konsequenz der Tatsache, dass es sich dabei um eine on-premise Lösung handelt. Sämtliche Szenarien, die Webdienste automatisieren, funktionieren nur solange eine Internetverbindung  vorhanden ist. Sollte sie ausfallen, bleiben nur die charakteristischen Smart Home Funktionalitäten erhalten. In diesem Aspekt ist IFTTT dem Demonstrator voraus, da die Ausfallsicherheit in einem Rechenzentrum gegenüber der eines herkömmlichen Heimanschlusses unvergleichbar ist.\\
+
+Die Tatsache, dass sämtliche Zugriffsdaten auf Accounts des Users ausschließlich lokal auf dem Gerät vorhanden sind, zieht mit sich, dass im Falle eines Ausfalls (z.B. Hardware-Fehler) sämtliche Daten verloren gehen können. Dies könnte dazu führen, dass sämtliche Geräte, Dienste und Szenarien nach einer Reparatur komplett neu aufgesetzt werden müssten.
+
+
 
 \section{Quellcode}
+Generisch, etc. - Schreiben, nachdem Implementierungskapitel fertig ist.
+
 
 \section{Fazit}
+Die Implementierung erfüllt alle explizit definierten Anforderungen an die Funktionsweise und weist deutliche Verbesserungen in wesentlichen Aspekten gegenüber der Konkurrenz auf. Sie lässt sich leicht um neue Elemente und Funktionalitäten erweitern.
