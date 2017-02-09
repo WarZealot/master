@@ -5,10 +5,13 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces \IeC {\"U}berblick \IeC {\"u}ber existierende Task Automation Services \cite {ieee:tas}\relax }}{5}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces OSGi Komponentenmodell: Kommunikation zwischen Bundles \cite {osgi:whatisit}\relax }}{9}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Architektur von \textit {Things} und \textit {Items} in ESH \cite {ESH:home}\relax }}{11}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Here will be another image\relax }}{16}
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Here will be another image\relax }}{17}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Vergleich des Demonstrators mit existierenden Task Automation Services\relax }}{18}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Vergleich des Mittelwerts zwischen IFTTT und FLASH f\IeC {\"u}r unterschiedliche Dateimengen\relax }}{19}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Vergleich der l\IeC {\"a}ngsten Dauer (equivalent zu Gesamtdauer, da ca. 1-2 Sekunden vernachl\IeC {\"a}ssigt werden k\IeC {\"o}nnen) zwischen IFTTT und FLASH f\IeC {\"u}r unterschiedliche Dateimengen\relax }}{20}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -1,7 +1,7 @@
 % Ansatz.tex
 \chapter{Eclipse Smarthome}
 \label{chap:esh}
-In diesem Kapitel wird \textit{Eclipse SmartHome} (ESH) vorgestellt. Es werden zunächst die grundlegenden Konzepte des Frameworks erläutert. Anschließend wird auf für die Arbeit relevante konkrete Aspekte näher eingegangen.
+In diesem Kapitel wird \textit{Eclipse SmartHome} (ESH) \cite{ESH:home} vorgestellt. Es werden zunächst die grundlegenden Konzepte des Frameworks erläutert. Anschließend wird auf für die Arbeit relevante konkrete Aspekte näher eingegangen.
 
 \section{Überblick}
 Hier wird ein kurzer Überblick über Smarthome gegeben
@@ -15,12 +15,12 @@ Eclipse SmartHome positioniert sich als ein Framework, dass als Grundlage für d
 
 
 \subsubsection{Architektur}
-Eclipse SmartHome hat eine serviceorientierte Architektur, basierend auf dem Java OSGi Framework. OSGi spezifiziert eine dynamische Softwareplattform, die hardwareunabhängig ist und es ermöglicht, Anwendungen zu modularisieren und zu verwalten. Der Funktionsweise der Kommunikation ist in Abbildung \ref{osgi:png} veranschaulicht.
+Eclipse SmartHome hat eine serviceorientierte Architektur, basierend auf dem Java OSGi Framework. OSGi spezifiziert eine dynamische Softwareplattform, die hardwareunabhängig ist und es ermöglicht, Anwendungen zu modularisieren und zu verwalten. Der Funktionsweise der Kommunikation ist in Abbildung \ref{fig:osgi} veranschaulicht.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics{bilder/osgi}
-	\caption{OSGi Komponentenmodell: Kommunikation zwischen Bundles}
+	\caption{OSGi Komponentenmodell: Kommunikation zwischen Bundles \cite{osgi:whatisit}}
 	\label{fig:osgi}
 \end{figure}
 
@@ -32,9 +32,8 @@ Ein derartiger modularer Aufbau erlaubt es verschiedene Bundles nahezu unabhäng
 \subsubsection{Features}
 Trotz der Positionierung als Grundlage für konkrete Smart Home Lösungen anderer Anbieter, verfügt das Framework über den kompletten Service Stack, der in einem SmartHome zum Einsatz kommt. Es existiert ein Modellgerüst für die virtuelle Abbildung von realen Geräten. Für einige ausgewählte Geräte ist die Steuerung implementiert. Automatische Discovery von Geräten wird begrenzt unterstützt. Eine Rule Engine ist bereits integriert. Schließlich gibt es eine rudimentäre Benutzeroberfläche, die es erlaubt zur Laufzeit Geräte zum System hinzuzufügen und sie zu steuern. ESH hat eine ganze Reihe weiterer Features, wie z.B. Sprachunterstützung, die jedoch im Rahmen dieser Arbeit nicht von Interesse sind. 
 
-Zentrales Prinzip des gesamten Frameworks ist es möglichst generische Schnittstellen zu definieren und exemplarische Implementierungen anzubieten, die die beabsichtigte Funktionsweise veranschaulichen. 
+Zentrales Prinzip des gesamten Frameworks ist es möglichst generische Schnittstellen zu definieren und exemplarische Implementierungen anzubieten, die die beabsichtigte Funktionsweise veranschaulichen. \\
 
-\\
 Im Folgenden werden die verschiedenen Aspekte von ESH, die für die Arbeit relevant sind, erläutert.
 
 \section{Modell}
@@ -43,7 +42,7 @@ Die virtuelle Abbildung der realen Geräte im System veranschaulicht Abbildung \
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{bilder/esh_model}
-	\caption{Architektur von \textit{Things} und \textit{Items} in ESH}
+	\caption{Architektur von \textit{Things} und \textit{Items} in ESH \cite{ESH:home}}
 	\label{fig:esh_model}
 \end{figure}
 
@@ -53,13 +52,13 @@ Things repräsentieren Entitäten, die zum System hinzugefügt werden können. I
 Things, die als Brücke zu anderen intelligenten Geräten dienen, werden als Bridges bezeichnet (z.B. \textit{Hue} Bridge);
 
 \subsubsection{Channels}
-Ein Channel stellt eine bestimmte Funktionalität eines Things dar. Things können eine beliebige Anzahl von Channels anbieten. Beispielsweise kann eine Hue Lampe einen einzigen \glqq Licht\grqq -Channel anbieten, während eine Wetterstation die Channels \glqq Temperatur\grqq , \glqq Druck\grqq{} und \glqq Feuchtigkeit\grqq unterstützt.
+Ein Channel stellt eine bestimmte Funktionalität eines Things dar. Things können eine beliebige Anzahl von Channels anbieten. Beispielsweise kann eine Hue Lampe einen einzigen \glqq Licht\grqq -Channel anbieten, während eine Wetterstation die Channels \glqq Temperatur\grqq , \glqq Druck\grqq{} und \glqq Feuchtigkeit\grqq{} unterstützt.
 
 \subsubsection{Items}
 Items repräsentieren konkrete, detaillierte Funktionalitäten eines Things. Beispielsweise kann ein Thing den Channel \glqq Licht\grqq{} unterstützen, wobei es 2 verschiedene Items besitzt, die beide jeweils eine physische Glühbirne verkörpern. Items haben einen Zustand, der im System gespeichert wird und können Commands empfangen.
 
 \subsubsection{Links}
-Links verbinden Items mit Things. Jeder Link assoziiert genau einen Channel des Things mit genau einem Item. Erst wenn ein Channel mit mindestens einem Item verbunden ist, gilt er als \glqq aktiviert\grqq{}. Channels und Items können über eine beliebige Anzahl von Links miteinander verbunden werden.
+Links verbinden Items mit Things. Jeder Link assoziiert genau einen Channel des Things mit genau einem Item. Erst wenn ein Channel mit mindestens einem Item verbunden ist, gilt er als \glqq aktiviert\grqq{}. Channels und Items können über eine beliebige Anzahl von Links untereinander verbunden werden.
 
 
 \subsection{Bindings}
@@ -73,10 +72,10 @@ In der Regel handelt es sich dabei um verschiedene intelligente Geräte, doch es
 Eclipse SmartHome unterstützt die Möglichkeit, konkrete Typen durch die Sm
 
 \subsection{Persistenz}
-In Eclipse SmartHome ist eine MapDB\cite{•} bereits integriert. Dabei handelt es sich um eine leichtgewichtige, eingebettete Datenbank, in der zur Laufzeit alle Things, Items und Rules persistiert werden. 
+In Eclipse SmartHome ist eine MapDB bereits integriert. Dabei handelt es sich um eine leichtgewichtige, eingebettete Datenbank, in der zur Laufzeit alle Things, Items und Rules persistiert werden. 
 
 %Move to entwurf?
-Da im Rahmen dieser Arbeit es nur geringe Mengen an Daten bearbeitet werden müssen, ist es nicht notwendig, auf eine mächtigere Datenbank umzusteigen. Dadurch, dass die Webservices selbst als Things modelliert werden und alle notwendigen Konfigurationsdaten mit sich tragen, kann dieser Aspekt von ESH in seiner aktuellen Form wiederverwendet werden.
+%Da im Rahmen dieser Arbeit es nur geringe Mengen an Daten bearbeitet werden müssen, ist es nicht notwendig, auf eine mächtigere Datenbank umzusteigen. Dadurch, dass die Webservices selbst als Things modelliert werden und alle notwendigen Konfigurationsdaten mit sich tragen, kann dieser Aspekt von ESH in seiner aktuellen Form wiederverwendet werden.
 
 
 

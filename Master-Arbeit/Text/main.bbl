@@ -1,14 +1,59 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{dropbox}
+{\em {Dropbox}}.
+\newblock Available online at \url{https://www.dropbox.com/}; visited on
+  February 6th, 2017.
+
+\bibitem{ESH:home}
+{\em {Eclipse SmartHome Homepage}}.
+\newblock Available online at \url{https://www.eclipse.org/smarthome/}; visited
+  on February 6th, 2017.
+
+\bibitem{wetterapi}
+{\em {OpenWeatherMap}}.
+\newblock Available online at \url{https://openweathermap.org/api}; visited on
+  February 6th, 2017.
+
+\bibitem{RWE}
+{\em {RWE SmartHome}}.
+\newblock Available online at \url{http://www.rwe-smarthome.de/}; visited on
+  February 6th, 2017.
+
+\bibitem{twitter}
+{\em {Twitter}}.
+\newblock Available online at \url{https://twitter.com/}; visited on February
+  6th, 2017.
 
 \bibitem{IFTTT}
 {\em {IFTTT}}.
-\newblock {http://ifttt.com}.
-\newblock Accessed: 13.07.2016.
+\newblock Website, 2017.
+\newblock Available online at \url{http://ifttt.com}; visited on February 6th,
+  2017.
+
+\bibitem{osgi:whatisit}
+{\em {The OSGi Architecture}}.
+\newblock Website, 2017.
+\newblock Available online at
+  \url{https://www.osgi.org/developer/architecture/}; visited on February 6th,
+  2017.
 
 \bibitem{Zapier}
 {\em {Zapier}}.
-\newblock {http://zapier.com/}.
-\newblock Accessed: 13.07.2016.
+\newblock Website, 2017.
+\newblock Available online at \url{http://zapier.com/}; visited on February
+  6th, 2017.
+
+\bibitem{ECA}
+{\sc Beer, Wolfgang}, {\sc Volker Christian}, {\sc Alois Ferscha}
+  \btxandlong{}\ {\sc Lars Mehrmann}: {\em Modeling Context-Aware Behavior by
+  Interpreted ECA Rules}, \btxpageslong{}\ 1064--1073.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 2003.
+
+\bibitem{cloudsec}
+{\sc Bhadauria, Rohit} \btxandlong{}\ {\sc Sugata Sanyal}: {\em Survey on
+  Security Issues in Cloud Computing and Associated Mitigation Techniques}.
+\newblock CoRR, abs/1204.0764, 2012.
 
 \bibitem{ieee:tas}
 {\sc Coronado, M.} \btxandlong{}\ {\sc C.~A. Iglesias}: {\em Task Automation
