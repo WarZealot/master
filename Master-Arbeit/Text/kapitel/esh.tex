@@ -4,14 +4,7 @@
 In diesem Kapitel wird \textit{Eclipse SmartHome} (ESH) \cite{ESH:home} vorgestellt. Es werden zunächst die grundlegenden Konzepte des Frameworks erläutert. Anschließend wird auf für die Arbeit relevante konkrete Aspekte näher eingegangen.
 
 \section{Überblick}
-Hier wird ein kurzer Überblick über Smarthome gegeben
-- Was ist ESH?
-- Zugrunde liegende Technologien
-- Zentrale Features von ESH
-- Wo kommt es zum Einsatz
--
-
-Eclipse SmartHome positioniert sich als ein Framework, dass als Grundlage für die Entwicklung von konkreten SmartHome Endlösungen dienen soll. Tatsächlich kommt es in vielen bekannten Produkten zum Einsatz, wie z.B. openHAB und Qivicon. 
+Eclipse SmartHome positioniert sich als ein Framework, dass als Grundlage für die Entwicklung von konkreten SmartHome Endlösungen dienen soll. Tatsächlich kommt es in vielen bekannten Produkten zum Einsatz, wie z.B. openHAB und Qivicon.
 
 
 \subsubsection{Architektur}
@@ -61,38 +54,66 @@ Items repräsentieren konkrete, detaillierte Funktionalitäten eines Things. Bei
 Links verbinden Items mit Things. Jeder Link assoziiert genau einen Channel des Things mit genau einem Item. Erst wenn ein Channel mit mindestens einem Item verbunden ist, gilt er als \glqq aktiviert\grqq{}. Channels und Items können über eine beliebige Anzahl von Links untereinander verbunden werden.
 
 
-\subsection{Bindings}
-Ein Binding ist eine Erweiterung (in der Regel ein eigenständiges Bundle) des Eclipse SmartHome Frameworks, dass für die Integration einer externen Funktionalität in Form von Things verantwortlich ist. 
-In der Regel handelt es sich dabei um verschiedene intelligente Geräte, doch es können auch beispielsweise Webservices angebunden werden.
+\subsection{Persistenz}
+In Eclipse SmartHome ist eine MapDB bereits integriert. Dabei handelt es sich um eine leichtgewichtige, eingebettete Datenbank, in der zur Laufzeit alle Things, Items und Rules persistiert werden. Da im Rahmen dieser Arbeit alle angebundenen Webservices im System als Things repräsentiert werden, ist es nicht notwendig an dieser Stelle Änderungen vorzunehmen. Mehr dazu in Kapitel \ref{chap:entwurf}.
 
-\subsection{Automatisierung}
+\section{Automatisierung}
+In ESH herrschen eine Reihe von Design Prinzipien, die sich durch das gesamte Framework verfolgen lassen. Vor allem macht sich die Aufteilung in Modell und Controller bemerkbar: Für sämtliche Entitäten werden zunächst Typen deklariert, für welche über ModuleTypeProvider zugehörige Handler im System registriert werden. Dadurch wird die klassische Trennung von Datenmodell und Logik realisiert.
+
+\subsection{Rule Engine}
+\label{sec:ruleengine}
+Teil des Eclipse SmartHome Frameworks ist eine Regelmaschine. Sie hat eine generische Struktur und arbeitet mit ECA-Regeln, die durch eine Zusammenarbeit von Auslösern (Trigger), Bedingungen (Conditions) und Befehlen (Actions) die Automatisierung von Things ermöglicht. Trigger, Conditions und Actions werden in ESH auch \textit{Module} genannt.
+
+
+\subsubsection{Trigger}
+Durch Trigger wird die Ausführung einer Regel angestoßen. Die Logik dahinter ist absolut frei implementierbar - der bekannte Aufbau, dass ein hineinkommendes Event den Trigger auslöst, ist nur eine Möglichkeit unter vielen. Dies wird ermöglicht, indem das Auslösen von Triggern von der Regelmaschine los gekoppelt und in einem dedizierten Trigger-Handler behandelt wird. \\
+
+Der Handler erhält nach der Instanziierung einen Callback zur Rule Engine vom System. Über diesen Callback teilt er der Regelmaschine mit, wann immer die Ausführung einer Regel angestoßen werden soll. Wann dies geschieht, muss vom Handler selbst entschieden werden, die Rule Engine hat hierauf keinerlei Einfluss. Beispielsweise, falls der Trigger bei einem Event feuern sollte, müsste der Handler sich als \textit{EventSubscriber} im System registrieren und auf das Event entsprechend reagieren.\\
+
+Trigger-Handler werden für Instanzen von Triggern über \textit{ModuleTypeProvider} bereitgestellt. Solche Provider sind dafür verantwortlich für bestimmte Modul-IDs zugehörige Handler zur Verfügung zu stellen. Jedes Mal, wenn eine Instanz eines Moduls im System erzeugt wird, wird unter den registrierten Providern nach einem passenden gesucht, der für die ID des Moduls einen Handler generieren kann. Falls kein entsprechender Handler instanziiert werden kann, bleibt das Modul tot im System liegen und sämtliche damit gekoppelte Funktionalitäten fallen aus. Beispielsweise würde eine Rule, die einen Trigger enthält, für den kein korrespondierender Handler erzeugt werden kann, im System als \glqq nicht initialisiert\grqq{} herumliegen.
+
+\subsubsection{Kontext}
+Während der Ausführung einer Rule ist ein Kontext gegeben, der stets weitergereicht wird, was es ermöglicht komplexe Logik einzubauen. Alle Komponenten der Regel erhalten ihn bei der Ausführung übergeben und können ihn mit Informationen füllen. Beispielsweise kann das auslösende Event im Kontext gespeichert werden, sodass die darauffolgende Condition aufgrund dessen eine Entscheidung treffen kann, ob die Actions tatsächlich ausgeführt werden sollen.
+
+\subsubsection{Conditions}
+Conditions sind analog zu Triggern aufgebaut. Sie agieren als Filter, indem sie festlegen, ob eine Regel, die durch einen Trigger angestoßen wurde, die zugehörigen Actions in Wirklichkeit ausführt. Bedingungen haben ebenfalls Handler, die den Kontext erhalten und entsprechend ihrer Logik eine Entscheidung treffen. Die Handler werden über zugehörige Provider instanziiert.
+
+\subsubsection{Actions}
+Actions spezifizieren, was genau getan werden soll, wenn eine Rule ausgeführt wird. Dabei kann es sowohl um die klassische Steuerung von intelligenten Geräten gehen, als auch um beliebige andere Automatisierung. Zu beachten ist, dass der Handler selbst dafür verantwortlich ist, das entsprechende Item ausfindig zu machen, an das er ein Command senden möchte. Die Rule Engine bietet an dieser Stelle keinerlei Unterstützung - sie übernimmt nur das Weiterreichen des Kontextes zwischen Modulen.
 
 
 \subsection{Deklarative Typen}
-Eclipse SmartHome unterstützt die Möglichkeit, konkrete Typen durch die Sm
+Eclipse SmartHome unterstützt die Möglichkeit viele Entitäten deklarativ im JSON-Format in externen Dateien zu definieren. Es kann sich dabei sowohl um die Typen von Triggern, Conditions und Actions handeln, als auch beispielsweise um konkrete Regeln, die beim Systemstart ausgelesen und importiert werden. Sämtliche JSON-Dateien, die auf diese Weise Entitäten deklarieren, müssen sich in ihrem Bundle im Ordner \textit{ESH-INF} befinden, wobei weitere Unterordner (z.B. \textit{automation}, \textit{moduletypes}) feinere Unterteilung ermöglichen. \\
 
-\subsection{Persistenz}
-In Eclipse SmartHome ist eine MapDB bereits integriert. Dabei handelt es sich um eine leichtgewichtige, eingebettete Datenbank, in der zur Laufzeit alle Things, Items und Rules persistiert werden. 
+Dabei werden die Namen und Typen der Modell-Attribute festgelegt. Jede Entität muss eine eindeutige ID besitzen, denn für diese ID werden sogenannte \textit{ModuleTypeProvider} im System registriert, die dafür verantwortlich sind für eine konkrete Instanz einer Entität einen entsprechenden Handler bereit zu stellen.\\
 
-%Move to entwurf?
-%Da im Rahmen dieser Arbeit es nur geringe Mengen an Daten bearbeitet werden müssen, ist es nicht notwendig, auf eine mächtigere Datenbank umzusteigen. Dadurch, dass die Webservices selbst als Things modelliert werden und alle notwendigen Konfigurationsdaten mit sich tragen, kann dieser Aspekt von ESH in seiner aktuellen Form wiederverwendet werden.
+Alternativ ist es auch möglich Typen von Modulen klassisch per Java-Code zu definieren.
 
-
-
-\section{Rule Engine}
-\subsection{Triggers}
-\subsection{Conditions}
-\subsection{Actions}
 \subsection{Events}
+ESH arbeitet über den klassischen OSGi Event Bus. Dennoch ist es auch möglich eigene Event Typen zu definieren. Hierfür muss zunächst der Typ des Events (POJO mit Attributen) festgelegt werden. Daraufhin muss für dieses Event ein EventProvider im System registriert werden, der dafür verantwortlich ist, ein generisches OSGi Event in ein entsprechendes Event vom spezifizierten Typ umzuwandeln. Die Zuordnung findet klassischerweise über eindeutige IDs statt.
 
-\section{Controller}
-\subsection{Thing Handler}
+
+\section{Bindings}
+Ein Binding ist eine Erweiterung (in der Regel ein eigenständiges Bundle) des Eclipse SmartHome Frameworks, dass für die Integration einer externen Funktionalität in Form von Things verantwortlich ist. 
+In der Regel handelt es sich dabei um verschiedene intelligente Geräte, doch es können auch beispielsweise Webservices angebunden werden.\\
+
 Ein Binding besteht aus einer Reihe von Komponenten. Die grundlegenden Elemente sind im Folgenden aufgeführt:
 
 \begin{enumerate}
-\item Eine
+\item Eine Datei \textit{binding.xml} im Unterordner \textit{ESH-INF/binding}, die die ID des Bindings eindeutig festlegt.
+\item Eine Datei \textit{thing-types.xml} im Unterordner \textit{ESH-INF/thing}, in der die durch dieses Binding unterstützten Things und Channels spezifiziert werden.
+\item Eine \textit{HandlerFactory}, die für die in der \textit{thing-types.xml}-Datei spezifizierten Things zugehörige Handler instanziiert.
+\item Eine Reihe von Thing-Handlern, über die die Things tatsächlich gesteuert werden können.
 \end{enumerate}
 
-\subsection{Trigger/Action Handler}
 
-\section{Fazit}
+\subsubsection{Thing Handler}
+Thing Handler sind dafür verantwortlich, die Logik für die Steuerung von Geräten zu implementieren. Sie sind zuständig für die automatische Aktualisierung von Zuständen im System (z.B. regelmäßige Aktualisierung der Temperatur, die von einem Thermostat geliefert werden). Außerdem erhalten sie Commands vom System (z.B. als Teil einer Action einer Rule).
+
+
+
+
+
+
+
+
