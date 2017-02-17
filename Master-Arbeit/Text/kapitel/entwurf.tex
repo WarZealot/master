@@ -2,9 +2,75 @@
 \label{chap:entwurf}
 In diesem Kapitel wird vorgestellt, wie die neuen Funktionalitäten in ESH integriert werden sollen.
 
-Elemente, die im vorherigen Kapitel vorgestellt wurden, wiederverwenden, zeigen, an welcher Stelle was wie eingebaut wurde.
+
+\section{Webservices}
+Man kann im Allgemeinen zwischen \textit{öffentlichen} und \textit{privaten} Webservices differenzieren. Der wesentliche Unterschied ist, dass öffentliche Dienste keine Nutzerverwaltung einschließen - sämtliche Schnittstellen und bereitgestellten Informationen sind frei verfügbar. Ein online Wetterdienst ist ein Beispiel für einen öffentlichen Webservice. 
+
+Unter privaten Webservices handelt es sich in diesem Kontext um Dienste, deren Funktionalität von eingeloggten User abhängt. Ein Beispiel hierfür ist \textit{Dropbox}. Der Zugriff auf die in der Dropbox gelagerten Dateien ist erst möglich, nachdem sich der User im System authentisiert hat. 
+
+Es gibt eine Vielzahl von verschiedenen Sicherheitsprotokollen, die an dieser Stelle zum Einsatz kommen. Vor allem hat sich derzeit das OAuth-Protokoll etabliert, welches auch in den Webservices \textit{Twitter} und \textit{Dropbox} genutzt wird.\\
+
+\subsubsection{OAuth Standard}
+OAuth ist ein offener Standard für Autorisierung, der es ermöglicht Nutzern Applikationen von Drittanbietern den Zugriff auf Webdienste in ihrem Namen zu gestatten, ohne dabei das eigene Passwort freizugeben. Dies geschieht in der Regel in mehreren Schritten.
+
+\begin{enumerate}
+\item Die Applikation registriert sich bei dem Webservice und erhält einen Consumer-Key und Consumer-Secret.
+\item Ein Nutzer möchte der Applikation gestatten auf seinen Account zuzugreifen.
+\item Die Applikation teilt dem Nutzer eine URL mit, über die er dies erlauben kann. Diese URL wird vom Webservice basierend auf dem Consumer-Key bereitgestellt. 
+\item Der Nutzer autorisiert sich unter der URL beim Webservice klassischerweise mit seinem Namen und Passwort. Daraufhin erhält er die Möglichkeit, der Applikation die geforderten Zugriffsrechte einzugestehen.
+\item Nachdem der Nutzer die Erlaubnis erteilt hat, erhält er eine PIN, die er manuell in der Applikation eingeben muss. 
+\item Nachdem er dies getan hat erhält die Applikation ein generiertes OAuth-Token, mit dem sie Zugriff auf den Account des Users hat. Der Autorisierungsprozess ist damit abgeschlossen.
+\end{enumerate}
+
+
+Im Rahmen dieser Arbeit wird es nötig sein, sowohl mit öffentlichen, als auch mit privaten Webservices Kontakt aufzunehmen. Es wird also notwendig sein, sich gegenüber den Diensten zu authentisieren um die erforderlichen Rechte zu erhalten, die es ermöglichen den Workflow des Nutzers zu automatisieren. Die Autorisierung wird über die Benutzeroberfläche stattfinden.
 
 
 
-%Move to entwurf?
-%Da im Rahmen dieser Arbeit es nur geringe Mengen an Daten bearbeitet werden müssen, ist es nicht notwendig, auf eine mächtigere Datenbank umzusteigen. Dadurch, dass die Webservices selbst als Things modelliert werden und alle notwendigen Konfigurationsdaten mit sich tragen, kann dieser Aspekt von ESH in seiner aktuellen Form wiederverwendet werden.
+\section{Integration in Eclipse SmartHome}
+Im Rahmen der Arbeit sollen die bereits existierenden Funktionalitäten von ESH sofern möglich wiederverwendet werden. Hierzu sollen die einzelnen Webservices in Form von Bindings in das System integriert werden. 
+Dabei sollen jeder gesamte Webservice als ein Thing repräsentiert werden. Die konkreten Funktionalitäten werden über ein oder mehrere Channels dargestellt.
+
+Die benötigten Konfigurationsdaten (z.B. OAuth-Token) werden in den Things selbst abgelegt. Ein solcher Aufbau garantiert, dass jedes Thing über sämtliche Informationen verfügt, die benötigt werden, um es zu steuern. 
+
+\subsection{Verbindung zum Webdienst}
+Nachdem ein Thing mit den benötigten Zugriffsdaten angelegt wurde, muss es vom System verwaltet werden können. Hierzu gehört vor allem die virtuelle Abbildung des realen Zustandes zu aktualisieren, sowie die tatsächliche Steuerung zu ermöglichen. 
+
+\subsubsection{Polling und Webhooks}
+Die Aktualisierung des Zustandes kann auf zwei Arten geschehen: Polling und WebHooks. Beim Polling ist die Applikation selbst dafür verantwortlich die aktuellen Werte abzurufen. Beispielsweise könnte die Applikation in einem festgelegten Intervall prüfen, welche Dateien in der Dropbox vorhanden sind. Änderungen würden in entsprechenden Events publiziert werden.\\
+
+Falls der Webservice es unterstützt, können statt Polling auch WebHooks angewendet werden. Hierbei handelt es sich um HTTP Callbacks - die Applikation registriert also eine Adresse beim Dienst und relevante Informationen (Zustandsänderungen, etc.) werden von Dienst an diese Adresse kommuniziert. Dieser Aufbau hat den Vorteil, dass die Netzwerklast deutlich reduziert und gleichzeitig die Reaktionszeit merklich erhöht wird. Leider unterstützen derzeit nur wenige Webservices WebHooks.
+
+\subsubsection{Verbindung}
+Es soll für jedes (Webservice-)Thing, welches im System registriert wird, eine Verbindung aufgebaut werden, die auf eine der oben beschriebenen Arten die Zustände aktuell hält. Diese Verbindung soll automatisch geöffnet werden, wenn ein Gerät dem System hinzugefügt wird und wieder geschlossen werden, wenn es entfernt wird. Sie ist dafür verantwortlich bei Zustandsänderungen entsprechende Events im System zu publizieren. Die Details sollen hierbei im Payload im JSON Format bereitgestellt werden.\\
+
+JSON wurde an dieser Stelle ausgewählt, da es die Möglichkeit bietet, komplexe Datenstrukturen über das Payload Attribut zu vermitteln. Dies erlaubt es zu vermeiden, dass jedes Binding eigene Events definieren und registrieren muss. Außerdem müssen auch die verschiedenen Handler nicht für jeden neuen Event-Typ angepasst werden - es reicht, wenn sie im Payload nach den für sie relevanten Attributen suchen. Eine Tabelle mit den publizierten Events, sowie den Eingaben und Ausgaben von Regel-Modulen ist in Abbildung \ref{img:io} aufgeführt.
+
+
+
+\subsubsection{Eigene Events und Module von Regeln}
+ESH bietet die Möglichkeit eigene Event-Typen zu definieren. Dies ist stets eine Option, die jedem Binding offen ist. Im Rahmen der Arbeit reicht es jedoch, einen allgemeinen neuen Event-Typ zu definieren und daraufhin die konkreten \textit{topics} und \textit{payloads} zu variieren. Beispielsweise würde bei Hochladen einer neuen Datei in die Dropbox ein Event mit dem Topic \glqq flash/dropbox/added\grqq{} und einem Payload, dass die Metadaten (Name, Pfad, etc.) der Datei im JSON Format enthält, im System publiziert.\\
+
+Analog soll mit Triggern, Conditions und Actions von Regeln umgegangen werden. Es sollen zunächst \textit{GenericEventTrigger} und \textit{EventCondition} zum Einsatz kommen. 
+
+Der \textit{GenericEventTrigger} ist ein von ESH bereits implementierter Auslöser, der die Ausführung einer Regel auslöst, wenn ein Event eintrifft. Das erwartete Event kann vom Nutzer konfiguriert werden. Der Trigger stellt das auslösende außerdem im Kontext (siehe Sektion \ref{subsubsec:kontext})bereit.
+
+Die \textit{EventCondition} ermöglicht es das erhaltene Event
+
+
+
+
+
+\subsection{Persistenz}
+Wie in Sektion \ref{subsec:persistenz} erläutert, ist eine MapDB in ESH bereits integriert. 
+
+
+Da im Rahmen dieser Arbeit es nur geringe Mengen an Daten bearbeitet werden müssen, ist es nicht notwendig, auf eine mächtigere Datenbank umzusteigen. Dadurch, dass die Webservices selbst als Things modelliert werden und alle notwendigen Konfigurationsdaten mit sich tragen, kann dieser Aspekt von ESH in seiner aktuellen Form wiederverwendet werden.
+
+
+Da im Rahmen dieser Arbeit alle angebundenen Webservices im System als Things repräsentiert werden, ist es nicht notwendig an dieser Stelle Änderungen vorzunehmen. Mehr dazu in Kapitel \ref{chap:entwurf}.
+
+
+\section{Deployment auf Raspberry pi}
+Eclipse SmartHome besteht aus einer Reihe von OSGi Bundles und die im Rahmen der Arbeit erstellten zusätzlichen Funktionalitäten nehmen ebenfalls diese Form an. Es lässt sich annehmen, dass sofern ein OSGi Container auf dem Pi laufen wird, auch das gesamte Framework gestartet werden kann.
+

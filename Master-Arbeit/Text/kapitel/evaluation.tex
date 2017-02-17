@@ -71,6 +71,8 @@ Aus den Messungen hat sich gezeigt, dass der Demonstrator IFTTT in vieler Hinsic
 
 Auch in Szenarien, die nur Web-basiert sind und viel Download/Upload-Volumen mit sich ziehen, hat sich der Raspberry Pi als überlegen erwiesen. Dies lässt sich dadurch erklären, dass es sich bei dem Demonstrator im Gegensatz zu IFTTT um ein dediziertes Gerät handelt, dass nur einen konkreten User bedient. Dies führt auch dazu, dass er keine arbiträren Eingrenzungen besitzt, wie z.B. die Begrenzung der Dateigröße.\\
 
+%\paragraph{Anmerkung:} Es ist zu beachten, dass diese Messung mit einem 50 MBit/s Internetanschluss erstellt wurde. Langsamere/schnellere Verbindungen könnten die Messungen entsprechend beeinflussen.\\
+
 Schließlich ist der Raspberry Pi aus einer Datenschutzperspektive dem Cloud-Service zu bevorzugen, da sämtliche Zugriffsdaten nur lokal auf dem Gerät gesichert werden.
 
 \subsubsection{Nachteile}
@@ -90,7 +92,7 @@ Dies, sowie OSGi im Allgemeinen, ermöglicht es ebenfalls, weitere Funktionalit�
 \subsubsection{Eclipse SmartHome}
 Negativ aufgefallen ist die mangelnde Dokumentation von ESH, die den Einstieg in das Framework deutlich erschwert. Verstehen der einzelnen Funktionalitäten bedarf der Betrachtung des Quellcodes, wobei relevante Stellen unter den mehr als hundert Bundles erst noch identifiziert werden müssen. 
 
-Eclipse SmartHome befindet sich derzeit noch auf Version 0.9.0 und wird aktiv weiterentwickelt. Dies hat unvermeidbar dazu geführt, dass an einigen Stellen der Code nicht fehlerfrei ist. Im Laufe der Implementierung mussten an mehreren Stellen Bugs zunächst ausfindig gemacht und danach behoben werden.
+Eclipse SmartHome befindet sich derzeit noch auf Version 0.9.x und wird aktiv weiterentwickelt. Dies hat unvermeidbar dazu geführt, dass an einigen Stellen der Code nicht fehlerfrei ist. Im Laufe der Implementierung mussten an mehreren Stellen Bugs zunächst ausfindig gemacht und danach behoben werden.
 
 \subsubsection{Quellcode}
 Vor allem der Mangel eines visuellen Regeleditors begrenzt derzeit die Nutzungsmöglichkeiten des Demonstrators. Zwar ist es möglich, Szenarien zur Laufzeit zu editieren, so bedarf dies dennoch Kenntnissen von JSON, sowie den existierenden Event-Typen, sowie der Eingaben und Ausgaben von Triggern, Bedingungen und Aktionen.
