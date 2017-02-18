@@ -3,11 +3,13 @@
  */
 package tka.binding.twitter;
 
+import tka.binding.core.ConnectionService;
+
 /**
  * @author Konstantin
  *
  */
-public interface TwitterConnectionService {
+public interface TwitterConnectionService extends ConnectionService {
     /**
      * @return the URL which is used by the user to grant access to his application
      */

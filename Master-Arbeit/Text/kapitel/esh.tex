@@ -86,6 +86,7 @@ Actions spezifizieren, was genau getan werden soll, wenn eine Rule ausgeführt w
 
 
 \subsection{Deklarative Typen}
+\label{subsec:decltypes}
 Eclipse SmartHome unterstützt die Möglichkeit viele Entitäten deklarativ im JSON-Format in externen Dateien zu definieren. Es kann sich dabei sowohl um die Typen von Triggern, Conditions und Actions handeln, als auch beispielsweise um konkrete Regeln, die beim Systemstart ausgelesen und importiert werden. Sämtliche JSON-Dateien, die auf diese Weise Entitäten deklarieren, müssen innerhalb eines Bundles im Ordner \textit{ESH-INF} gelagert werden, wobei weitere Unterordner (z.B. \textit{automation}, \textit{moduletypes}) feinere Unterteilung ermöglichen. \\
 
 Dabei werden die Namen und Typen der Modell-Attribute festgelegt. Jede Entität muss eine eindeutige ID besitzen, denn für diese ID werden sogenannte \textit{ModuleTypeProvider} im System registriert, die dafür verantwortlich sind für eine konkrete Instanz einer Entität einen entsprechenden Handler bereit zu stellen.\\

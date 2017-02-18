@@ -1,6 +1,12 @@
 \chapter{Entwurf}
 \label{chap:entwurf}
-In diesem Kapitel wird vorgestellt, wie die neuen Funktionalitäten in ESH integriert werden sollen.
+Bevor mit der Implementierung angefangen werden kann, müssen erst Entscheidungen
+getroffen werden, wie die einzelnen Anforderungen umgesetzt werden sollen. Es folgt eine
+schrittweise Analyse der einzelnen Anforderungen.
+
+\section{Überblick}
+Im Rahmen der Arbeit müssen die Anforderungen umgesetzt werden, die in Sektion \ref{sec:anforderungen} zusammengefasst wurden. Durch die Nutzung von Eclipse SmartHome ist die Anforderung, dass das System in der Lage ist Geräte innerhalb des Hauses ohne Internetverbindung zu steuern, bereits gegeben. Es ist jedoch darauf zu achten, dass durch die Integration der neuen Funktionalitäten die existierenden nicht beeinträchtigt werden.
+Auf welche Weise die übrigen Anforderungen umgesetzt werden sollen, wird in den nachfolgenden Sektionen diskutiert.
 
 
 \section{Webservices}
@@ -8,9 +14,10 @@ Man kann im Allgemeinen zwischen \textit{öffentlichen} und \textit{privaten} We
 
 Unter privaten Webservices handelt es sich in diesem Kontext um Dienste, deren Funktionalität von eingeloggten User abhängt. Ein Beispiel hierfür ist \textit{Dropbox}. Der Zugriff auf die in der Dropbox gelagerten Dateien ist erst möglich, nachdem sich der User im System authentisiert hat. 
 
-Es gibt eine Vielzahl von verschiedenen Sicherheitsprotokollen, die an dieser Stelle zum Einsatz kommen. Vor allem hat sich derzeit das OAuth-Protokoll etabliert, welches auch in den Webservices \textit{Twitter} und \textit{Dropbox} genutzt wird.\\
+Es gibt eine Vielzahl von verschiedenen Sicherheitsprotokollen, die an dieser Stelle zum Einsatz kommen. Vor allem hat sich derzeit der OAuth Standard etabliert, welcher auch in den Webservices \textit{Twitter} und \textit{Dropbox} genutzt wird.\\
 
 \subsubsection{OAuth Standard}
+\label{subsubsec:oauth}
 OAuth ist ein offener Standard für Autorisierung, der es ermöglicht Nutzern Applikationen von Drittanbietern den Zugriff auf Webdienste in ihrem Namen zu gestatten, ohne dabei das eigene Passwort freizugeben. Dies geschieht in der Regel in mehreren Schritten.
 
 \begin{enumerate}
@@ -28,10 +35,11 @@ Im Rahmen dieser Arbeit wird es nötig sein, sowohl mit öffentlichen, als auch 
 
 
 \section{Integration in Eclipse SmartHome}
-Im Rahmen der Arbeit sollen die bereits existierenden Funktionalitäten von ESH sofern möglich wiederverwendet werden. Hierzu sollen die einzelnen Webservices in Form von Bindings in das System integriert werden. 
-Dabei sollen jeder gesamte Webservice als ein Thing repräsentiert werden. Die konkreten Funktionalitäten werden über ein oder mehrere Channels dargestellt.
+\label{sec:integrationESH}
+Im Rahmen der Arbeit sollen die bereits existierenden Funktionalitäten von ESH sofern möglich wiederverwendet werden. Hierzu sollen die einzelnen Webservices durch Bindings in das System integriert werden. 
+Dabei soll jede Instanz eines Webdienstes als ein Thing repräsentiert werden. Das bedeutet, dass beispielsweise im Falle eines Wetterdienstes für jeden Ort ein eigene Instanz des Thing-Typen erstellt wird, die diesen Ort darstellt. Alternativ könnte es sich bei den Instanzen um verschiedene Twitter-Accounts handeln.
 
-Die benötigten Konfigurationsdaten (z.B. OAuth-Token) werden in den Things selbst abgelegt. Ein solcher Aufbau garantiert, dass jedes Thing über sämtliche Informationen verfügt, die benötigt werden, um es zu steuern. 
+Die benötigten Zugriffsdaten (z.B. OAuth-Token) werden in den Konfigurationen der Things abgelegt. Ein solcher Aufbau garantiert, dass jedes Thing über sämtliche Informationen verfügt, die benötigt werden, um es zu steuern. Die konkreten Funktionalitäten werden über ein oder mehrere Channels dargestellt.
 
 \subsection{Verbindung zum Webdienst}
 Nachdem ein Thing mit den benötigten Zugriffsdaten angelegt wurde, muss es vom System verwaltet werden können. Hierzu gehört vor allem die virtuelle Abbildung des realen Zustandes zu aktualisieren, sowie die tatsächliche Steuerung zu ermöglichen. 
@@ -53,24 +61,40 @@ ESH bietet die Möglichkeit eigene Event-Typen zu definieren. Dies ist stets ein
 
 Analog soll mit Triggern, Conditions und Actions von Regeln umgegangen werden. Es sollen zunächst \textit{GenericEventTrigger} und \textit{EventCondition} zum Einsatz kommen. 
 
-Der \textit{GenericEventTrigger} ist ein von ESH bereits implementierter Auslöser, der die Ausführung einer Regel auslöst, wenn ein Event eintrifft. Das erwartete Event kann vom Nutzer konfiguriert werden. Der Trigger stellt das auslösende außerdem im Kontext (siehe Sektion \ref{subsubsec:kontext})bereit.
+Der \textit{GenericEventTrigger} ist ein von ESH bereits implementierter Auslöser, der die Ausführung einer Regel anstoßt, wenn ein Event eintrifft. Das erwartete Event kann vom Nutzer konfiguriert werden. Der Trigger stellt das auslösende Event außerdem im Kontext (siehe Sektion \ref{subsubsec:kontext}) bereit.
 
-Die \textit{EventCondition} ermöglicht es das erhaltene Event
+Die \textit{EventCondition} ermöglicht es das erhaltene Event nach seinen Attributen zu filtern. In der Konfiguration der Bedingung werden reguläre Ausdrücke für die vier Attribute des Events hinterlegt. Wenn die Bedingung evaluiert wird, wird geprüft, ob die tatsächlichen Werte des Events mit dem Regex übereinstimmen. 
 
+Zusammen decken diese beiden Module einen großen Teil der möglichen Szenarien ab. Bindings, die Funktionalitäten anbieten oder einer Logik bedürfen, die von diesen Werkzeugen nicht abgedeckt werden kann, haben stets die Option eigene Module im System zu registrieren.
 
 
 
 
 \subsection{Persistenz}
-Wie in Sektion \ref{subsec:persistenz} erläutert, ist eine MapDB in ESH bereits integriert. 
+Wie in Sektion \ref{subsec:persistenz} erläutert, ist eine MapDB in ESH bereits integriert. Da im Rahmen dieser Arbeit es nur geringe Mengen an Daten persistiert werden müssen, ist es nicht notwendig, auf eine mächtigere Datenbank umzusteigen. 
+
+Dadurch, dass die Webservices selbst als Things modelliert werden und alle notwendigen Konfigurationsdaten mit sich tragen, kann dieser Aspekt von ESH in seiner aktuellen Form wiederverwendet werden. Bei einem Neustart des Systems werden sämtliche relevante Things aus der Datenbank ausgelesen und basierend auf den in ihrer Konfiguration gespeicherten Zugriffsdaten (z.B. OAuth Token) entsprechende Verbindungen aufgebaut, die für die Aktualität der Zustände sorgen.
+
+\subsection{Benutzeroberfläche}
+Die Benutzeroberfläche soll den Nutzer in die Lage versetzen Regeln zur Laufzeit zu bearbeiten. Das bedeutet, es soll ihm möglich sein neue Regeln anzulegen, sowie existierende Regeln zu betrachten, zu editieren und zu löschen. Da Eclipse SmartHome die Möglichkeit bietet Regeln im JSON-Format zu deklarieren (siehe Sektion \ref{subsec:decltypes}), bietet sich an dieser Stelle an, es in der Benutzeroberfläche analog umzusetzen.\\
+
+Des weiteren soll dem User die Möglichkeit gegeben sein, die Zugriffsrechte auf die unterstützten Webservices (z.B. auf seinen Twitter Account) der Anwendung zu übermitteln, bzw. auf diese Weise neue Instanzen des entsprechenden Thing-Typen zum System hinzuzufügen.
 
 
-Da im Rahmen dieser Arbeit es nur geringe Mengen an Daten bearbeitet werden müssen, ist es nicht notwendig, auf eine mächtigere Datenbank umzusteigen. Dadurch, dass die Webservices selbst als Things modelliert werden und alle notwendigen Konfigurationsdaten mit sich tragen, kann dieser Aspekt von ESH in seiner aktuellen Form wiederverwendet werden.
 
 
-Da im Rahmen dieser Arbeit alle angebundenen Webservices im System als Things repräsentiert werden, ist es nicht notwendig an dieser Stelle Änderungen vorzunehmen. Mehr dazu in Kapitel \ref{chap:entwurf}.
+\section{Deployment auf Raspberry Pi}
+\label{sec:deploy}
+Eclipse SmartHome besteht aus einer Reihe von OSGi Bundles und die im Rahmen der Arbeit erstellten zusätzlichen Funktionalitäten nehmen ebenfalls diese Form an. Es lässt sich annehmen, dass sofern ein OSGi Container auf dem Pi laufen wird, auch das gesamte Framework gestartet werden kann.\\
+
+Konkret betrachtet wird auf dem Raspberry Pi ein Betriebssystem benötigt, das Java unterstützt. Daraufhin muss ein OSGi Container wie beispielsweise Concierge oder Apache Felix GoGo gestartet werden. Danach muss er entsprechend konfiguriert werden, sodass die Jar-Dateien der relevanten ESH Bundles auf die benötigten allgemeinen System-Jars von Java Zugriff haben. Schließlich müssen alle Abhängigkeiten der im Container installierten Bundles erfüllt sein, damit sie gestartet werden können. Beispielsweise bedarf eine Web-UI eines entsprechenden HTTP Servers.
 
 
-\section{Deployment auf Raspberry pi}
-Eclipse SmartHome besteht aus einer Reihe von OSGi Bundles und die im Rahmen der Arbeit erstellten zusätzlichen Funktionalitäten nehmen ebenfalls diese Form an. Es lässt sich annehmen, dass sofern ein OSGi Container auf dem Pi laufen wird, auch das gesamte Framework gestartet werden kann.
+\section{Fazit}
+Jeder Webdienst wird in einem eigenen Binding in das System integriert. Dabei werden Thing-Typen registriert, deren Instanzen konkrete Ausprägungen des Webservices repräsentieren. Für jede Thing-Instanz wird eine Verbindung aufgebaut, die für die Aktualität der Zustandsdaten und das Publizieren entsprechender Events verantwortlich ist. Jedes Binding entscheidet selbst, ob ihm die existierenden Module ausreichen oder es neue Entitäten im System registriert. 
+
+
+
+
+
 

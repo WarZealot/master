@@ -23,58 +23,73 @@
 \contentsline {subsubsection}{Channels}{11}
 \contentsline {subsubsection}{Items}{11}
 \contentsline {subsubsection}{Links}{11}
-\contentsline {subsection}{\numberline {3.2.1}Bindings}{12}
-\contentsline {subsection}{\numberline {3.2.2}Automatisierung}{12}
-\contentsline {subsection}{\numberline {3.2.3}Deklarative Typen}{12}
-\contentsline {subsection}{\numberline {3.2.4}Persistenz}{12}
-\contentsline {section}{\numberline {3.3}Rule Engine}{12}
-\contentsline {subsection}{\numberline {3.3.1}Triggers}{12}
-\contentsline {subsection}{\numberline {3.3.2}Conditions}{12}
-\contentsline {subsection}{\numberline {3.3.3}Actions}{12}
-\contentsline {subsection}{\numberline {3.3.4}Events}{12}
-\contentsline {section}{\numberline {3.4}Controller}{12}
-\contentsline {subsection}{\numberline {3.4.1}Thing Handler}{12}
-\contentsline {subsection}{\numberline {3.4.2}Trigger/Action Handler}{12}
-\contentsline {section}{\numberline {3.5}Fazit}{12}
-\contentsline {chapter}{\numberline {4}Entwurf}{13}
-\contentsline {chapter}{\numberline {5}Implementierung}{15}
-\contentsline {section}{\numberline {5.1}\IeC {\"U}berblick}{15}
-\contentsline {section}{\numberline {5.2}Bundles}{15}
-\contentsline {subsection}{\numberline {5.2.1}tka.binding.twitter}{15}
-\contentsline {subsubsection}{Triggers und Events}{15}
-\contentsline {subsubsection}{Actions}{15}
-\contentsline {subsection}{\numberline {5.2.2}tka.binding.dropbox}{15}
-\contentsline {subsubsection}{Triggers und Events}{15}
-\contentsline {subsubsection}{Actions}{15}
-\contentsline {subsection}{\numberline {5.2.3}tka.binding.weather}{15}
-\contentsline {subsubsection}{Triggers und Events}{15}
-\contentsline {subsubsection}{Actions}{15}
-\contentsline {subsection}{\numberline {5.2.4}tka.binding.gmail}{15}
-\contentsline {subsubsection}{Triggers und Events}{15}
-\contentsline {subsubsection}{Actions}{15}
-\contentsline {subsection}{\numberline {5.2.5}tka.flashui}{15}
-\contentsline {section}{\numberline {5.3}Fazit}{16}
-\contentsline {chapter}{\numberline {6}Evaluation}{17}
-\contentsline {section}{\numberline {6.1}Erf\IeC {\"u}llte Ziele}{17}
-\contentsline {section}{\numberline {6.2}Vergleich mit Smart Home}{17}
-\contentsline {section}{\numberline {6.3}Vergleich mit webbasierten Task Automation Services}{17}
-\contentsline {subsection}{\numberline {6.3.1}Kopieren von Dateien in der Dropbox}{18}
-\contentsline {subsubsection}{Zahlreiche kleine Dateien}{19}
-\contentsline {subsubsection}{Gro\IeC {\ss }e Dateien}{20}
-\contentsline {subsection}{\numberline {6.3.2}Steuern von Lampen bei Tweets}{20}
-\contentsline {subsection}{\numberline {6.3.3}Auswertung}{21}
-\contentsline {subsubsection}{Vorteile}{21}
-\contentsline {subsubsection}{Nachteile}{21}
-\contentsline {section}{\numberline {6.4}Eclipse SmartHome und Quellcode}{21}
-\contentsline {subsection}{\numberline {6.4.1}Positive Aspekte}{21}
-\contentsline {subsection}{\numberline {6.4.2}Negative Aspekte}{22}
-\contentsline {subsubsection}{Eclipse SmartHome}{22}
-\contentsline {subsubsection}{Quellcode}{22}
-\contentsline {section}{\numberline {6.5}Fazit}{22}
-\contentsline {chapter}{\numberline {7}Zusammenfassung}{23}
-\contentsline {section}{\numberline {7.1}Zusammenfassung}{23}
-\contentsline {section}{\numberline {7.2}Ausblick}{23}
-\contentsline {chapter}{\numberline {A}Weitere Informationen}{25}
-\contentsline {chapter}{Abbildungsverzeichnis}{27}
-\contentsline {chapter}{Literaturverzeichnis}{30}
-\contentsline {chapter}{Erkl\IeC {\"a}rung}{30}
+\contentsline {subsection}{\numberline {3.2.1}Persistenz}{12}
+\contentsline {section}{\numberline {3.3}Automatisierung}{12}
+\contentsline {subsection}{\numberline {3.3.1}Rule Engine}{12}
+\contentsline {subsubsection}{Trigger}{12}
+\contentsline {subsubsection}{Kontext}{13}
+\contentsline {subsubsection}{Conditions}{13}
+\contentsline {subsubsection}{Actions}{13}
+\contentsline {subsection}{\numberline {3.3.2}Deklarative Typen}{13}
+\contentsline {subsection}{\numberline {3.3.3}Events}{14}
+\contentsline {section}{\numberline {3.4}Bindings}{14}
+\contentsline {subsubsection}{Thing Handler}{15}
+\contentsline {chapter}{\numberline {4}Entwurf}{17}
+\contentsline {section}{\numberline {4.1}\IeC {\"U}berblick}{17}
+\contentsline {section}{\numberline {4.2}Webservices}{17}
+\contentsline {subsubsection}{OAuth Standard}{18}
+\contentsline {section}{\numberline {4.3}Integration in Eclipse SmartHome}{18}
+\contentsline {subsection}{\numberline {4.3.1}Verbindung zum Webdienst}{19}
+\contentsline {subsubsection}{Polling und Webhooks}{19}
+\contentsline {subsubsection}{Verbindung}{19}
+\contentsline {subsubsection}{Eigene Events und Module von Regeln}{20}
+\contentsline {subsection}{\numberline {4.3.2}Persistenz}{20}
+\contentsline {subsection}{\numberline {4.3.3}Benutzeroberfl\IeC {\"a}che}{21}
+\contentsline {section}{\numberline {4.4}Deployment auf Raspberry pi}{21}
+\contentsline {section}{\numberline {4.5}Fazit}{21}
+\contentsline {chapter}{\numberline {5}Implementierung}{23}
+\contentsline {section}{\numberline {5.1}\IeC {\"U}berblick}{23}
+\contentsline {section}{\numberline {5.2}Schnittstellen-Bundles}{23}
+\contentsline {subsection}{\numberline {5.2.1}tka.binding.core}{23}
+\contentsline {subsubsection}{ConnectionService}{24}
+\contentsline {subsubsection}{AbstractConnectionService}{24}
+\contentsline {subsection}{\numberline {5.2.2}tka.automation.extension}{25}
+\contentsline {section}{\numberline {5.3}Bindings}{25}
+\contentsline {subsection}{\numberline {5.3.1}tka.binding.twitter}{25}
+\contentsline {subsubsection}{Triggers und Events}{25}
+\contentsline {subsubsection}{Actions}{25}
+\contentsline {subsection}{\numberline {5.3.2}tka.binding.dropbox}{25}
+\contentsline {subsubsection}{Triggers und Events}{25}
+\contentsline {subsubsection}{Actions}{25}
+\contentsline {subsection}{\numberline {5.3.3}tka.binding.weather}{25}
+\contentsline {subsubsection}{Triggers und Events}{25}
+\contentsline {subsubsection}{Actions}{25}
+\contentsline {subsection}{\numberline {5.3.4}tka.binding.gmail}{25}
+\contentsline {subsubsection}{Triggers und Events}{25}
+\contentsline {subsubsection}{Actions}{25}
+\contentsline {subsection}{\numberline {5.3.5}tka.flashui}{25}
+\contentsline {section}{\numberline {5.4}Fazit}{25}
+\contentsline {chapter}{\numberline {6}Evaluation}{27}
+\contentsline {section}{\numberline {6.1}Erf\IeC {\"u}llte Ziele}{27}
+\contentsline {section}{\numberline {6.2}Vergleich mit Smart Home}{27}
+\contentsline {section}{\numberline {6.3}Vergleich mit webbasierten Task Automation Services}{27}
+\contentsline {subsection}{\numberline {6.3.1}Kopieren von Dateien in der Dropbox}{28}
+\contentsline {subsubsection}{Zahlreiche kleine Dateien}{29}
+\contentsline {subsubsection}{Gro\IeC {\ss }e Dateien}{30}
+\contentsline {subsection}{\numberline {6.3.2}Steuern von Lampen bei Tweets}{30}
+\contentsline {subsection}{\numberline {6.3.3}Auswertung}{31}
+\contentsline {subsubsection}{Vorteile}{31}
+\contentsline {subsubsection}{Nachteile}{31}
+\contentsline {section}{\numberline {6.4}Eclipse SmartHome und Quellcode}{31}
+\contentsline {subsection}{\numberline {6.4.1}Positive Aspekte}{31}
+\contentsline {subsection}{\numberline {6.4.2}Negative Aspekte}{32}
+\contentsline {subsubsection}{Eclipse SmartHome}{32}
+\contentsline {subsubsection}{Quellcode}{32}
+\contentsline {section}{\numberline {6.5}Fazit}{32}
+\contentsline {chapter}{\numberline {7}Zusammenfassung}{33}
+\contentsline {section}{\numberline {7.1}Zusammenfassung}{33}
+\contentsline {section}{\numberline {7.2}Ausblick}{33}
+\contentsline {chapter}{\numberline {A}Weitere Informationen}{35}
+\contentsline {chapter}{Abbildungsverzeichnis}{37}
+\contentsline {chapter}{Literaturverzeichnis}{40}
+\contentsline {chapter}{Erkl\IeC {\"a}rung}{40}

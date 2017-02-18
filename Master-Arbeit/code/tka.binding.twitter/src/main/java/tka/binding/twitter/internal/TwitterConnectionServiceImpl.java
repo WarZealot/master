@@ -20,6 +20,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.ComponentContext;
 
+import tka.binding.core.AbstractConnectionService;
 import tka.binding.twitter.TwitterBindingConstants;
 import tka.binding.twitter.TwitterConnectionService;
 import twitter4j.Twitter;
@@ -34,7 +35,8 @@ import twitter4j.conf.ConfigurationBuilder;
  * @author Konstantin
  *
  */
-public class TwitterConnectionServiceImpl implements TwitterConnectionService, EventSubscriber {
+public class TwitterConnectionServiceImpl extends AbstractConnectionService
+        implements TwitterConnectionService, EventSubscriber {
 
     private static final ThingUID TWITTER_CONNECTION = new ThingUID("twitter", "twitterThingTypeId",
             "twitterconnection");
@@ -108,6 +110,7 @@ public class TwitterConnectionServiceImpl implements TwitterConnectionService, E
         twitterStream.user();
     }
 
+    @Override
     public void activate(ComponentContext context) {
         this.context = context;
         this.bundleContext = context.getBundleContext();
@@ -151,6 +154,7 @@ public class TwitterConnectionServiceImpl implements TwitterConnectionService, E
         thisSubscriberService = bundleContext.registerService(EventSubscriber.class.getName(), this, null);
     }
 
+    @Override
     public void deactivate(ComponentContext context) {
         if (eventFactoryService != null) {
             eventFactoryService.unregister();
@@ -174,18 +178,22 @@ public class TwitterConnectionServiceImpl implements TwitterConnectionService, E
 
     }
 
+    @Override
     public void setThingRegistry(ThingRegistry thingRegistry) {
         this.thingRegistry = thingRegistry;
     }
 
+    @Override
     public void unsetThingRegistry(ThingRegistry thingRegistry) {
         this.thingRegistry = null;
     }
 
+    @Override
     public void setEventPublisher(EventPublisher eventPublisher) {
         this.eventPublisher = eventPublisher;
     }
 
+    @Override
     public void unsetEventPublisher(EventPublisher eventPublisher) {
         this.eventPublisher = null;
     }
@@ -211,6 +219,5 @@ public class TwitterConnectionServiceImpl implements TwitterConnectionService, E
             twitterStream = null;
             twitter = null;
         }
-
     }
 }
