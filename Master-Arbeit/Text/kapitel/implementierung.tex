@@ -161,7 +161,7 @@ Beim Stylen der Oberfläche kam Bootstrap\cite{bootstrap} zum Einsatz.
 \label{impl:deployment}
 Das Deployment fand auf einem Raspberry Pi 3 Model B statt. Auf dem Gerät lief das Betriebssystem \textit{Raspbian} mit installiertem Java 8.
 
-Als Grundlage für die Distribution wurde das \textit{Eclipse SmartHome Packaging Sample} verwendet. Es erlaubt es mithilfe von Maven eine leichtgewichtigen OSGi Container mitsamt einigen der zusätzlich benötigten Services zu bauen. Diese Distribution wurde entsprechend angepasst: 
+Als Grundlage für die Distribution wurde das \textit{Eclipse SmartHome Packaging Sample} verwendet. Es erlaubt es mithilfe von Maven\cite{maven} eine leichtgewichtigen OSGi Container mitsamt einigen der zusätzlich benötigten Services zu bauen. Diese Distribution wurde entsprechend angepasst: 
 \begin{enumerate}
 \item Weitere notwendige Service-Bundles wurden hinzugefügt. Vor allem bei dem Einbinden von den externen Bibliotheken (Dropbox SDK und Twitter4J) mussten an dieser Stelle zusätzliche Konfigurationen vorgenommen werden.
 \item Die eigenen Bundles wurden mithilfe von Maven zu OSGi-Jar-Dateien umgewandelt und zum Deployment hinzugefügt.

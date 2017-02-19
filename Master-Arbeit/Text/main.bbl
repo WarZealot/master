@@ -153,6 +153,14 @@
   reference model}.
 \newblock \Btxtechreplong{}\ D2.5, iCore Project, 2014.
 
+\bibitem{maven}
+{\sc O'Brien, Tim}, {\sc Manfred Moser} \btxetalshort{.}: {\em Maven: The
+  Complete Reference}.
+\newblock Sonatype.
+\newblock Available online at
+  \url{https://books.sonatype.com/mvnref-book/reference/public-book.html};
+  visited on February 19th, 2017.
+
 \bibitem{SmartHomeIoT}
 {\sc Ran, Chen}, {\sc Baoan Li} \btxandlong{}\ {\sc Jianjun Yu}: {\em CEIS 2011
   Research and Application on the Smart Home Based on Component Technologies

@@ -58,4 +58,5 @@ Warning--to sort, need author or key in bnd
 Warning--to sort, need author or key in gmail
 Warning--to sort, need author or key in bootstrap
 Warning--can't use both author and editor fields in ECA
-(There were 32 warnings)
+Warning--empty year in maven
+(There were 33 warnings)
