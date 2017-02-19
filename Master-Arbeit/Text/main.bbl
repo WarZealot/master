@@ -1,5 +1,15 @@
 \begin{thebibliography}{10}
 
+\bibitem{bnd}
+{\em {bnd}}.
+\newblock Available online at \url{http://bnd.bndtools.org/}; visited on
+  February 19th, 2017.
+
+\bibitem{bootstrap}
+{\em {Bootstrap}}.
+\newblock Available online at \url{http://getbootstrap.com/}; visited on
+  February 19th, 2017.
+
 \bibitem{dropbox}
 {\em {Dropbox}}.
 \newblock Available online at \url{https://www.dropbox.com/}; visited on
@@ -10,10 +20,41 @@
 \newblock Available online at \url{https://www.eclipse.org/smarthome/}; visited
   on February 6th, 2017.
 
+\bibitem{gmail}
+{\em {Google Mail}}.
+\newblock Available online at \url{https://mail.google.com/}; visited on
+  February 19th, 2017.
+
+\bibitem{mapDB}
+{\em {MapDB}}.
+\newblock Available online at \url{http://www.mapdb.org/}; visited on February
+  19th, 2017.
+
+\bibitem{openHAB}
+{\em {openHAB}}.
+\newblock Available online at \url{http://www.openhab.org/}; visited on
+  February 19th, 2017.
+
 \bibitem{wetterapi}
 {\em {OpenWeatherMap}}.
 \newblock Available online at \url{https://openweathermap.org/api}; visited on
   February 6th, 2017.
+
+\bibitem{hue}
+{\em {Philips Hue}}.
+\newblock Available online at \url{www.meethue.com/}; visited on February 19th,
+  2017.
+
+\bibitem{qivicon}
+{\em {Qivicon}}.
+\newblock Available online at \url{https://www.qivicon.com/}; visited on
+  February 19th, 2017.
+
+\bibitem{rasp}
+{\em {Raspberry Pi}}.
+\newblock Available online at
+  \url{https://www.raspberrypi.org/products/raspberry-pi-3-model-b/}; visited
+  on February 19th, 2017.
 
 \bibitem{RWE}
 {\em {RWE SmartHome}}.
@@ -24,6 +65,11 @@
 {\em {Twitter}}.
 \newblock Available online at \url{https://twitter.com/}; visited on February
   6th, 2017.
+
+\bibitem{twitter4j}
+{\em {Twitter4J}}.
+\newblock Available online at \url{http://twitter4j.org/}; visited on February
+  19th, 2017.
 
 \bibitem{IFTTT}
 {\em {IFTTT}}.
@@ -44,6 +90,11 @@
 \newblock Available online at \url{http://zapier.com/}; visited on February
   6th, 2017.
 
+\bibitem{osgibook}
+{\sc Bakker, Paul} \btxandlong{}\ {\sc Bert Ertman}: {\em Building Modular
+  Cloud Apps with OSGi}.
+\newblock "O'Reilly Media, Inc.", Sebastopol, 2013.
+
 \bibitem{ECA}
 {\sc Beer, Wolfgang}, {\sc Volker Christian}, {\sc Alois Ferscha}
   \btxandlong{}\ {\sc Lars Mehrmann}: {\em Modeling Context-Aware Behavior by
@@ -55,6 +106,17 @@
   Security Issues in Cloud Computing and Associated Mitigation Techniques}.
 \newblock CoRR, abs/1204.0764, 2012.
 
+\bibitem{FiCloud:CloudIot}
+{\sc Botta, A.}, {\sc W.~de~Donato}, {\sc V.~Persico} \btxandlong{}\ {\sc
+  A.~Pescapé}: {\em On the Integration of Cloud Computing and Internet of
+  Things}.
+\newblock \Btxinlong{}\ {\em Future Internet of Things and Cloud (FiCloud),
+  2014 International Conference on}, \btxpageslong{}\ 23--30, Aug 2014.
+
+\bibitem{oauth}
+{\sc Boyd, Ryan}: {\em Getting Started with OAuth 2.0}.
+\newblock "O'Reilly Media, Inc.", 2012.
+
 \bibitem{ieee:tas}
 {\sc Coronado, M.} \btxandlong{}\ {\sc C.~A. Iglesias}: {\em Task Automation
   Services: Automation for the Masses}.
@@ -65,6 +127,20 @@
   Projects Portfolio}.
 \newblock
   {https://www.smart-action.eu/publications/detail/114/90c9734fda7c5c2c68e631bf29a9a9d2/}.
+
+\bibitem{FiCloud:M3Iot}
+{\sc Gyrard, A.}, {\sc S.~K. Datta}, {\sc C.~Bonnet} \btxandlong{}\ {\sc
+  K.~Boudaoud}: {\em Cross-Domain Internet of Things Application Development:
+  M3 Framework and Evaluation}.
+\newblock \Btxinlong{}\ {\em Future Internet of Things and Cloud (FiCloud),
+  2015 3rd International Conference on}, \btxpageslong{}\ 9--16, Aug 2015.
+
+\bibitem{SemWebIoT}
+{\sc Gyrard, A.}, {\sc M.~Serrano} \btxandlong{}\ {\sc G.~A. Atemezing}: {\em
+  Semantic web methodologies, best practices and ontology engineering applied
+  to Internet of Things}.
+\newblock \Btxinlong{}\ {\em Internet of Things (WF-IoT), 2015 IEEE 2nd World
+  Forum on}, \btxpageslong{}\ 412--417, Dec 2015.
 
 \bibitem{iota:d25}
 {\sc Jacobs, Tobias}, {\sc Markus Joos}, {\sc Carsten Magerkurth}
@@ -82,5 +158,16 @@
   Research and Application on the Smart Home Based on Component Technologies
   and Internet of Things}.
 \newblock Procedia Engineering, 15:2087 -- 2092, 2011.
+
+\bibitem{gson}
+{\sc Singh, Inderjeet}, {\sc Joel Leitch} \btxandlong{}\ {\sc Jesse Wilson}:
+  {\em {Gson User Guide}}, 2008.
+\newblock Available online at
+  \url{https://sites.google.com/site/gson/gson-user-guide}; visited on October
+  25th, 2013.
+
+\bibitem{json}
+{\sc Sriparasa, Sai~Srinivas}: {\em JavaScript and JSON Essentials}.
+\newblock "Packt Publishing", 2013.
 
 \end{thebibliography}

@@ -13,22 +13,49 @@ The style file: gerplain.bst
 A level-1 auxiliary file: kapitel/erklaerung.aux
 Database file #1: literatur/diplom.bib
 Warning--string name "website" is undefined
---line 237 of file literatur/diplom.bib
+--line 231 of file literatur/diplom.bib
 Warning--string name "website" is undefined
---line 245 of file literatur/diplom.bib
+--line 239 of file literatur/diplom.bib
 Warning--string name "website" is undefined
---line 253 of file literatur/diplom.bib
+--line 247 of file literatur/diplom.bib
 Warning--string name "website" is undefined
---line 261 of file literatur/diplom.bib
+--line 255 of file literatur/diplom.bib
 Warning--string name "website" is undefined
---line 269 of file literatur/diplom.bib
+--line 263 of file literatur/diplom.bib
+Warning--string name "website" is undefined
+--line 272 of file literatur/diplom.bib
+Warning--string name "website" is undefined
+--line 280 of file literatur/diplom.bib
+Warning--string name "website" is undefined
+--line 288 of file literatur/diplom.bib
+Warning--string name "website" is undefined
+--line 297 of file literatur/diplom.bib
+Warning--string name "website" is undefined
+--line 305 of file literatur/diplom.bib
+Warning--string name "website" is undefined
+--line 313 of file literatur/diplom.bib
+Warning--string name "website" is undefined
+--line 321 of file literatur/diplom.bib
+Warning--string name "website" is undefined
+--line 329 of file literatur/diplom.bib
+Warning--string name "website" is undefined
+--line 339 of file literatur/diplom.bib
 Warning--to sort, need author or key in RWE
 Warning--to sort, need author or key in IFTTT
 Warning--to sort, need author or key in Zapier
+Warning--to sort, need author or key in hue
+Warning--to sort, need author or key in rasp
 Warning--to sort, need author or key in twitter
 Warning--to sort, need author or key in dropbox
 Warning--to sort, need author or key in wetterapi
 Warning--to sort, need author or key in ESH:home
+Warning--to sort, need author or key in openHAB
+Warning--to sort, need author or key in qivicon
 Warning--to sort, need author or key in osgi:whatisit
+Warning--to sort, need author or key in mapDB
+Warning--to sort, need author or key in twitter4j
+Warning--to sort, need author or key in bnd
+Warning--to sort, need author or key in gmail
+Warning--to sort, need author or key in bootstrap
 Warning--can't use both author and editor fields in ECA
-(There were 14 warnings)
+(There were 32 warnings)

@@ -18,7 +18,7 @@ Es gibt eine Vielzahl von verschiedenen Sicherheitsprotokollen, die an dieser St
 
 \subsubsection{OAuth Standard}
 \label{subsubsec:oauth}
-OAuth ist ein offener Standard für Autorisierung, der es ermöglicht Nutzern Applikationen von Drittanbietern den Zugriff auf Webdienste in ihrem Namen zu gestatten, ohne dabei das eigene Passwort freizugeben. Dies geschieht in der Regel in mehreren Schritten.
+OAuth\cite{oauth} ist ein offener Standard für Autorisierung, der es ermöglicht Nutzern Applikationen von Drittanbietern den Zugriff auf Webdienste in ihrem Namen zu gestatten, ohne dabei das eigene Passwort freizugeben. Dies geschieht in der Regel in mehreren Schritten.
 
 \begin{enumerate}
 \item Die Applikation registriert sich bei dem Webservice und erhält einen Consumer-Key und Consumer-Secret.
@@ -52,7 +52,7 @@ Falls der Webservice es unterstützt, können statt Polling auch WebHooks angewe
 \subsubsection{Verbindung}
 Es soll für jedes (Webservice-)Thing, welches im System registriert wird, eine Verbindung aufgebaut werden, die auf eine der oben beschriebenen Arten die Zustände aktuell hält. Diese Verbindung soll automatisch geöffnet werden, wenn ein Gerät dem System hinzugefügt wird und wieder geschlossen werden, wenn es entfernt wird. Sie ist dafür verantwortlich bei Zustandsänderungen entsprechende Events im System zu publizieren. Die Details sollen hierbei im Payload im JSON Format bereitgestellt werden.\\
 
-JSON wurde an dieser Stelle ausgewählt, da es die Möglichkeit bietet, komplexe Datenstrukturen über das Payload Attribut zu vermitteln. Dies erlaubt es zu vermeiden, dass jedes Binding eigene Events definieren und registrieren muss. Außerdem müssen auch die verschiedenen Handler nicht für jeden neuen Event-Typ angepasst werden - es reicht, wenn sie im Payload nach den für sie relevanten Attributen suchen. Eine Tabelle mit den publizierten Events, sowie den Eingaben und Ausgaben von Regel-Modulen ist in Abbildung \ref{img:io} aufgeführt.
+JSON wurde an dieser Stelle ausgewählt, da es die Möglichkeit bietet, komplexe Datenstrukturen über das Payload Attribut zu vermitteln. Dies erlaubt es zu vermeiden, dass jedes Binding eigene Events definieren und registrieren muss. Außerdem müssen auch die verschiedenen Handler nicht für jeden neuen Event-Typ angepasst werden - es reicht, wenn sie im Payload nach den für sie relevanten Attributen suchen. Eine Tabelle mit den publizierten Events, sowie den Eingaben und Ausgaben von Regel-Modulen ist in Abbildung \ref{table:io} aufgeführt.
 
 
 
@@ -71,7 +71,7 @@ Zusammen decken diese beiden Module einen großen Teil der möglichen Szenarien 
 
 
 \subsection{Persistenz}
-Wie in Sektion \ref{subsec:persistenz} erläutert, ist eine MapDB in ESH bereits integriert. Da im Rahmen dieser Arbeit es nur geringe Mengen an Daten persistiert werden müssen, ist es nicht notwendig, auf eine mächtigere Datenbank umzusteigen. 
+Wie in Sektion \ref{subsec:persistenz} erläutert, ist eine MapDB in ESH bereits integriert. Da im Rahmen dieser Arbeit nur geringe Mengen an Daten persistiert werden müssen, ist es nicht notwendig, auf eine mächtigere Datenbank umzusteigen. 
 
 Dadurch, dass die Webservices selbst als Things modelliert werden und alle notwendigen Konfigurationsdaten mit sich tragen, kann dieser Aspekt von ESH in seiner aktuellen Form wiederverwendet werden. Bei einem Neustart des Systems werden sämtliche relevante Things aus der Datenbank ausgelesen und basierend auf den in ihrer Konfiguration gespeicherten Zugriffsdaten (z.B. OAuth Token) entsprechende Verbindungen aufgebaut, die für die Aktualität der Zustände sorgen.
 

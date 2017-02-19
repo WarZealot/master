@@ -4,11 +4,11 @@
 In diesem Kapitel wird \textit{Eclipse SmartHome} (ESH) \cite{ESH:home} vorgestellt. Es werden zunächst die grundlegenden Konzepte des Frameworks erläutert. Anschließend wird auf für die Arbeit relevante konkrete Aspekte näher eingegangen.
 
 \section{Überblick}
-Eclipse SmartHome positioniert sich als ein Framework, dass als Grundlage für die Entwicklung von konkreten SmartHome Endlösungen dienen soll. Tatsächlich kommt es in vielen bekannten Produkten zum Einsatz, wie z.B. openHAB und Qivicon.
+Eclipse SmartHome positioniert sich als ein Framework, dass als Grundlage für die Entwicklung von konkreten SmartHome Endlösungen dienen soll. Tatsächlich kommt es in vielen bekannten Produkten zum Einsatz, wie z.B. openHAB\cite{openHAB} und Qivicon\cite{qivicon}.
 
 
 \subsubsection{Architektur}
-Eclipse SmartHome hat eine serviceorientierte Architektur, basierend auf dem Java OSGi Framework. OSGi spezifiziert eine dynamische Softwareplattform, die hardwareunabhängig ist und es ermöglicht, Anwendungen zu modularisieren und zu verwalten. Der Funktionsweise der Kommunikation ist in Abbildung \ref{fig:osgi} veranschaulicht.
+Eclipse SmartHome hat eine serviceorientierte Architektur, basierend auf dem Java OSGi Framework\cite{osgibook}. OSGi spezifiziert eine dynamische Softwareplattform, die hardwareunabhängig ist und es ermöglicht, Anwendungen zu modularisieren und zu verwalten. Der Funktionsweise der Kommunikation ist in Abbildung \ref{fig:osgi} veranschaulicht.
 
 \begin{figure}[h]
 	\centering
@@ -23,7 +23,7 @@ Ein derartiger modularer Aufbau erlaubt es verschiedene Bundles nahezu unabhäng
 
 
 \subsubsection{Features}
-Trotz der Positionierung als Grundlage für konkrete Smart Home Lösungen anderer Anbieter, verfügt das Framework über den kompletten Service Stack, der in einem SmartHome zum Einsatz kommt. Es existiert ein Modellgerüst für die virtuelle Abbildung von realen Geräten. Für einige ausgewählte Geräte ist die Steuerung implementiert. Automatische Discovery von Geräten wird begrenzt unterstützt. Eine Rule Engine ist bereits integriert. Schließlich gibt es eine rudimentäre Benutzeroberfläche, die es erlaubt zur Laufzeit Geräte zum System hinzuzufügen und sie zu steuern. ESH hat eine ganze Reihe weiterer Features, wie z.B. Sprachunterstützung, die jedoch im Rahmen dieser Arbeit nicht von Interesse sind. 
+Trotz der Positionierung als Grundlage für konkrete Smart Home Lösungen anderer Anbieter, verfügt das Framework über den kompletten Service Stack, der in einem SmartHome zum Einsatz kommt. Es existiert ein allgemeines Modellgerüst für die virtuelle Abbildung von realen Geräten. Für einige ausgewählte Geräte ist die Steuerung implementiert. Automatische Discovery von Geräten wird begrenzt unterstützt. Eine Rule Engine ist bereits integriert. Schließlich gibt es eine rudimentäre Benutzeroberfläche, die es erlaubt zur Laufzeit Geräte zum System hinzuzufügen und sie zu steuern. ESH hat eine ganze Reihe weiterer Features, wie z.B. Sprachunterstützung, die jedoch im Rahmen dieser Arbeit nicht von Interesse sind. 
 
 Zentrales Prinzip des gesamten Frameworks ist es möglichst generische Schnittstellen zu definieren und exemplarische Implementierungen anzubieten, die die beabsichtigte Funktionsweise veranschaulichen. \\
 
@@ -56,11 +56,11 @@ Links verbinden Items mit Things. Jeder Link assoziiert genau einen Channel des 
 
 \subsection{Persistenz}
 \label{subsec:persistenz}
-In Eclipse SmartHome ist eine MapDB bereits integriert. Dabei handelt es sich um eine leichtgewichtige, eingebettete Datenbank, in der zur Laufzeit alle Things, Items und Rules persistiert werden. 
+In Eclipse SmartHome ist eine MapDB\cite{mapDB} bereits integriert. Dabei handelt es sich um eine leichtgewichtige, eingebettete Datenbank, in der zur Laufzeit alle Things, Items und Rules persistiert werden. 
 
 
 \section{Automatisierung}
-In ESH herrschen eine Reihe von Design Prinzipien, die sich durch das gesamte Framework verfolgen lassen. Vor allem macht sich die Aufteilung in Modell und Controller bemerkbar: Für sämtliche Entitäten werden zunächst Typen deklariert, für welche über ModuleTypeProvider zugehörige Handler im System registriert werden. Dadurch wird die klassische Trennung von Datenmodell und Logik realisiert.
+In ESH herrschen eine Reihe von Design Prinzipien, die sich durch das gesamte Framework verfolgen lassen. Vor allem macht sich die Aufteilung in Modell und Controller bemerkbar: Für sämtliche Entitäten werden zunächst Typen deklariert, für welche über \textit{ModuleTypeProvider} zugehörige Handler im System registriert werden. Dadurch wird die klassische Trennung von Datenmodell und Logik realisiert.
 
 \subsection{Rule Engine}
 \label{sec:ruleengine}
@@ -85,9 +85,15 @@ Conditions sind analog zu Triggern aufgebaut. Sie agieren als Filter, indem sie 
 Actions spezifizieren, was genau getan werden soll, wenn eine Rule ausgeführt wird. Dabei kann es sowohl um die klassische Steuerung von intelligenten Geräten gehen, als auch um beliebige andere Automatisierung. Zu beachten ist, dass der Handler selbst dafür verantwortlich ist, das entsprechende Item ausfindig zu machen, an das er ein Command senden möchte. Hierfür registriert ESH im System Services wie \textit{ThingRegistry} und \textit{ItemRegistry}. Die Rule Engine bietet an dieser Stelle keinerlei Unterstützung - sie übernimmt ausschließlich das Weiterreichen des Kontextes zwischen Modulen.
 
 
+\subsubsection{Commands}
+Die Commands sind das verbindende Glied zwischen den Aktionen und den ThingHandlern. Sie werden von Aktionen erstellt und durch das System an den entsprechenden ThingHandler übermittelt. Hierfür muss die Aktion beim Erstellen spezifizieren, an welches Item das Command gesendet werden soll. 
+
+Es gibt eine ganze Reihe unterschiedlicher Commands in ESH. Unter anderen gibt es OFF/ON-Commands, String-Commands und Number-Commands. Falls gewünscht, lassen sich weitere Command-Typen im System registrieren.
+
+
 \subsection{Deklarative Typen}
 \label{subsec:decltypes}
-Eclipse SmartHome unterstützt die Möglichkeit viele Entitäten deklarativ im JSON-Format in externen Dateien zu definieren. Es kann sich dabei sowohl um die Typen von Triggern, Conditions und Actions handeln, als auch beispielsweise um konkrete Regeln, die beim Systemstart ausgelesen und importiert werden. Sämtliche JSON-Dateien, die auf diese Weise Entitäten deklarieren, müssen innerhalb eines Bundles im Ordner \textit{ESH-INF} gelagert werden, wobei weitere Unterordner (z.B. \textit{automation}, \textit{moduletypes}) feinere Unterteilung ermöglichen. \\
+Eclipse SmartHome unterstützt die Möglichkeit viele Entitäten deklarativ im JSON-Format\cite{json} in externen Dateien zu definieren. Es kann sich dabei sowohl um die Typen von Triggern, Conditions und Actions handeln, als auch beispielsweise um konkrete Regeln, die beim Systemstart ausgelesen und importiert werden. Sämtliche JSON-Dateien, die auf diese Weise Entitäten deklarieren, müssen innerhalb eines Bundles im Ordner \textit{ESH-INF} gelagert werden, wobei weitere Unterordner (z.B. \textit{automation}, \textit{moduletypes}) feinere Unterteilung ermöglichen. \\
 
 Dabei werden die Namen und Typen der Modell-Attribute festgelegt. Jede Entität muss eine eindeutige ID besitzen, denn für diese ID werden sogenannte \textit{ModuleTypeProvider} im System registriert, die dafür verantwortlich sind für eine konkrete Instanz einer Entität einen entsprechenden Handler bereit zu stellen.\\
 
@@ -98,6 +104,7 @@ ESH arbeitet über den klassischen OSGi Event Bus. Dennoch ist es auch möglich 
 
 
 \section{Bindings}
+\label{esh:bindings}
 Ein Binding ist eine Erweiterung (in der Regel ein eigenständiges Bundle) des Eclipse SmartHome Frameworks, dass für die Integration einer externen Funktionalität in Form von Things verantwortlich ist. 
 In der Regel handelt es sich dabei um verschiedene intelligente Geräte, doch es können auch beispielsweise Webservices angebunden werden.\\
 

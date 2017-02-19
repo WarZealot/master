@@ -2,14 +2,24 @@
 \label{chap:ausblick}
 
 \section{Zusammenfassung}
-Hier eine Zusammenfassung
+Im Rahmen dieser Arbeit wurde die Kompatibilität von Smart Home mit webbasierten Task Automation Services überprüft. Es stellte sich heraus, dass diese beiden Ansätze viele Gemeinsamkeiten haben und durch ihre Integration miteinander sich viele Vorteile gewinnen lassen könnten.\\
+
+Zu erwarten war, dass durch die Erweiterung einer Smart Home Anwendung um die Funktionalitäten von TAS die inhärenten Sicherheitsrisiken eines webbasierten Task Automation Services vermeiden lassen. Außerdem ließ sich erhoffen, dass ein dediziertes Gerät Verbesserungen in Punkten Reaktionszeit und Durchsatz aufweisen würde.\\
+
+Diese Annahmen wurden in der Praxis getestet. Hierzu wurde das Open Source Framework Eclipse SmartHome als Grundlage verwendet und auf dessen Basis ein vollständiger Prototyp entworfen und implementiert. Im Prototypen wurden die Webservices Twitter, Dropbox, ein Wetter- und ein Emaildienst integriert. Der Code wurde möglichst generisch gehalten, sodass Erweiterungen ohne großen Aufwand eingebaut werden können.\\
+
+Im Laufe der Evaluationsphase haben sich die zugrundeliegenden Annahmen vollständig bestätigt. Es hat sich gezeigt, dass der Prototyp einer herkömmlichen Smart Home Lösung überlegen ist, da er vergleichbare Reaktionszeiten aufweist und gleichzeitig um zusätzliche Funktionalitäten verfügt. Gleichzeitig ist er auch den webbasierten Task Automation Services voraus in Punkten Reaktionszeit, Durchsatz und Sicherheit voraus.
+
+
 
 
 
 
 \section{Ausblick}
-Hier ein Ausblick
+Es hat sich gezeigt, dass die notwendige Hardware durch eine typische Smart Home Basis bereits gegeben ist. Auch was den Software Aspekt betrifft, sind viele notwendige Elemente bereits vorhanden. Es ist daher etwas verwunderlich, dass bis dato weder die proprietären noch die open source Smart Home Lösungen die Automatisierung von Webdiensten anbieten. 
 
-Es hat sich gezeigt, dass die notwendige Hardware durch eine typische Smart Home Base bereits gegeben ist. Auch was den Software Aspekt betrifft, sind viele notwendige Elemente bereits vorhanden. Es ist daher etwas verwunderlich, dass bis dato weder die proprietären noch die open source Smart Home Lösungen die Automatisierung von Webdiensten ermöglichen. 
+Diese Tatsache lässt sich zum Teil durch die sehr starke Fragmentierung des Marktes erklären. Typische kommerzielle Smart Home Lösungen unterstützen nur einen kleinen Bruchteil aller existierenden intelligenten Geräte und priorisieren diesen Aspekt, wenn es um die Weiterentwicklung geht. Dennoch lässt sich vermuten, dass in Zukunft, nachdem sich die IoT Landschaft stärker standardisiert hat, die Integration von Webservices in Smart Home etablieren wird.\\
 
-Diese Tatsache lässt sich zum Teil durch die sehr starke Fragmentierung des Marktes erklären. Typische kommerzielle Smart Home Lösungen unterstützen nur einen kleinen Bruchteil aller existierenden intelligenten Geräte und priorisieren diesen Aspekt, wenn es um die Weiterentwicklung geht. Dennoch lässt sich vermuten, dass in Zukunft, nachdem sich die IoT Landschaft stärker standardisiert hat, die Integration von Webservices in Smart Home etablieren wird.
+In diesem Zusammenhang kann Ziel zukünftiger Arbeiten werden, weiter in die Richtung der Integration von SmartHome mit Task Automation Services zu forschen. Beispielsweise wäre ein einfacher, aber gleichzeitig mächtiger visueller Regeleditor für den Erfolg eines solchen Unternehmens von großer Wichtigkeit. \\
+
+Ein anderer möglicher Ausbaupunkt für einen solchen Workflow Automation Service wäre die automatische Generierung von Szenarien. Sofern der Nutzer ein derartiges System in seinem Haus hat und der Anwendung die nötigen Zugriffsrechte auf seine Accounts gewährt hat, könnte die Anwendung das Verhalten des Nutzers mitverfolgen und basierend auf einer erhobenen Statistik automatisch eigene Szenarien vorschlagen.
