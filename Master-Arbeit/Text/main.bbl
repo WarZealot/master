@@ -10,6 +10,11 @@
 \newblock Available online at \url{http://getbootstrap.com/}; visited on
   February 19th, 2017.
 
+\bibitem{concierge}
+{\em {Concierge}}.
+\newblock Available online at \url{http://www.eclipse.org/concierge/}; visited
+  on February 19th, 2017.
+
 \bibitem{dropbox}
 {\em {Dropbox}}.
 \newblock Available online at \url{https://www.dropbox.com/}; visited on
@@ -19,6 +24,12 @@
 {\em {Eclipse SmartHome Homepage}}.
 \newblock Available online at \url{https://www.eclipse.org/smarthome/}; visited
   on February 6th, 2017.
+
+\bibitem{eshsample}
+{\em {Eclipse SmartHome Packaging Sample}}.
+\newblock Available online at
+  \url{https://github.com/eclipse/smarthome-packaging-sample}; visited on
+  February 19th, 2017.
 
 \bibitem{gmail}
 {\em {Google Mail}}.
@@ -127,6 +138,10 @@
   Projects Portfolio}.
 \newblock
   {https://www.smart-action.eu/publications/detail/114/90c9734fda7c5c2c68e631bf29a9a9d2/}.
+
+\bibitem{felixgogo}
+{\sc Gedeon, Walid~Joseph}: {\em OSGi and Apache Felix 3.0 Beginners Guide}.
+\newblock Packt Publishing, 2010.
 
 \bibitem{FiCloud:M3Iot}
 {\sc Gyrard, A.}, {\sc S.~K. Datta}, {\sc C.~Bonnet} \btxandlong{}\ {\sc

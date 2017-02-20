@@ -83,11 +83,11 @@ Des weiteren soll dem User die Möglichkeit gegeben sein, die Zugriffsrechte auf
 
 
 
-\section{Deployment auf Raspberry Pi}
+\section{OSGi auf dem Raspberry Pi}
 \label{sec:deploy}
 Eclipse SmartHome besteht aus einer Reihe von OSGi Bundles und die im Rahmen der Arbeit erstellten zusätzlichen Funktionalitäten nehmen ebenfalls diese Form an. Es lässt sich annehmen, dass sofern ein OSGi Container auf dem Pi laufen wird, auch das gesamte Framework gestartet werden kann.\\
 
-Konkret betrachtet wird auf dem Raspberry Pi ein Betriebssystem benötigt, das Java unterstützt. Daraufhin muss ein OSGi Container wie beispielsweise Concierge oder Apache Felix GoGo gestartet werden. Danach muss er entsprechend konfiguriert werden, sodass die Jar-Dateien der relevanten ESH Bundles auf die benötigten allgemeinen System-Jars von Java Zugriff haben. Schließlich müssen alle Abhängigkeiten der im Container installierten Bundles erfüllt sein, damit sie gestartet werden können. Beispielsweise bedarf eine Web-UI eines entsprechenden HTTP Servers.
+Konkret betrachtet wird auf dem Raspberry Pi ein Betriebssystem benötigt, das Java unterstützt. Daraufhin muss ein OSGi Container wie beispielsweise Concierge\cite{concierge} oder Apache Felix GoGo\cite{felixgogo} gestartet werden. Danach muss er entsprechend konfiguriert werden, sodass die Jar-Dateien der relevanten ESH Bundles auf die benötigten allgemeinen System-Jars von Java Zugriff haben. Schließlich müssen alle Abhängigkeiten der im Container installierten Bundles erfüllt sein, damit sie gestartet werden können. Beispielsweise bedarf eine Web-UI eines entsprechenden HTTP Servers.
 
 
 \section{Fazit}
