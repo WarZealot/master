@@ -10,7 +10,8 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Die Struktur einer Verbindung mit Besipielimplementierung f\IeC {\"u}r Twitter\relax }}{24}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Die Benutzeroberl\IeC {\"a}rche\relax }}{31}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Die Benutzeroberl\IeC {\"a}rche\relax }}{30}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Authentifizierung bei Twitter als Sequenzdiagramm\relax }}{31}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {6.1}{\ignorespaces Vergleich des Demonstrators mit existierenden Task Automation Services\relax }}{34}
 \contentsline {figure}{\numberline {6.2}{\ignorespaces Vergleich des Mittelwerts zwischen IFTTT und FLASH f\IeC {\"u}r unterschiedliche Dateimengen\relax }}{35}

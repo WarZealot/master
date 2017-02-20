@@ -137,7 +137,7 @@ Das Erweitern der GUI um neue Bindings lässt sich damit auf eine einfache Art u
 \subsubsection{Funktionalität und visuelle Darstellung}
 Die Benutzeroberfläche bietet die Möglichkeit die implementierten Funktionalitäten zur Laufzeit zu konfigurieren. Sie ist in Abbildung \ref{fig:gui_all} dargestellt. 
 
-\begin{figure}[h]
+\begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{bilder/gui_all4}
 	\caption{Die Benutzeroberlärche}
@@ -153,6 +153,19 @@ Im letzten Teil der Benutzeroberfläche ist eine Liste mit den unterstützten We
 Beim Stylen der Oberfläche kam Bootstrap\cite{bootstrap} zum Einsatz.
 
 
+\subsection{Beispiel}
+Um die Zusammenarbeit der verschiedenen Komponenten zu visualisieren, wurde folgendes Diagramm erstellt:
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{bilder/sequenceOAuth}
+	\caption{Authentifizierung bei Twitter als Sequenzdiagramm}
+	\label{fig:sequenceOauth}
+\end{figure}
+
+In Abbildung \ref{fig:sequenceOauth} ist in einem Sequenzdiagramm schematisch dargestellt, wie die Authentifizierung bei Twitter abläuft. Der Nutzer äußert seinen Wunsch seinen Twitter Account dem Prototypen anzuvertrauen. Daraufhin vermittelt der TwitterServlet ihm eine URL, über die er dies wie in Sektion \ref{subsubsec:oauth} erläutert umsetzen kann. Nachdem die korrekte PIN dem System eingegeben wurde, wird dem System ein neues Thing vom Typ \glqq twitter\grqq{} hinzugefügt und ein entsprechender Listener im System registriert.
+
+
 \section{Deployment auf dem Raspberry Pi}
 \label{impl:deployment}
 Das Deployment fand auf einem Raspberry Pi 3 Model B statt. Auf dem Gerät lief das Betriebssystem \textit{Raspbian} mit installiertem Java 8.
@@ -165,6 +178,7 @@ Als Grundlage für die Distribution wurde das \textit{Eclipse SmartHome Packagin
 
 Schließlich wurde die Distribution auf dem Raspberry Pi gestartet und und einem umfangreichen Test unterzogen. Die Ergebnisse dieses Tests werden in Kapitel \ref{chap:eval} vorgestellt.
 
+\paragraph{Anmerkung:} Die Distribution kann über das \textit{start.sh} Script gestartet werden. Die Benutzeroberfläche ist unter \textit{http://localhost:8080/flash/index.html} erreichbar.
 
 \section{Fazit}
 Die Implementierung wurde entlang des in Kapitel \ref{chap:entwurf} definierten Entwurfs umgesetzt. Sie ist generisch aufgebaut und lässt sich leicht um neue Funktionalitäten erweitern.
