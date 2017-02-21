@@ -1,4 +1,4 @@
-\chapter{Entwurf}
+\chapter{Entwurf von FLASH}
 \label{chap:entwurf}
 Bevor mit der Implementierung angefangen werden kann, müssen erst Entscheidungen
 getroffen werden, wie die einzelnen Anforderungen umgesetzt werden sollen. Es folgt eine
@@ -10,15 +10,15 @@ Auf welche Weise die übrigen Anforderungen umgesetzt werden sollen, wird in den
 
 
 \section{Webservices}
-Man kann im Allgemeinen zwischen \textit{öffentlichen} und \textit{privaten} Webservices differenzieren. Der wesentliche Unterschied ist, dass öffentliche Dienste keine Nutzerverwaltung einschließen - sämtliche Schnittstellen und bereitgestellten Informationen sind frei verfügbar. Ein online Wetterdienst ist ein Beispiel für einen öffentlichen Webservice. 
+Es wird im Rahmen dieser Arbeit an dieser Stelle zwischen \textit{individuellen} und \textit{gemeinsamen} Webservices unterschieden. Der wesentliche Unterschied ist, dass bei gemeinsamen Diensten keine Authentifizierung benötigt wird - sämtliche Schnittstellen und bereitgestellten Informationen sind frei verfügbar. Ein Beispiel für einen gemeinsamen Webservice kann ein online Wetterdienst sein.. 
 
-Unter privaten Webservices handelt es sich in diesem Kontext um Dienste, deren Funktionalität von eingeloggten User abhängt. Ein Beispiel hierfür ist \textit{Dropbox}. Der Zugriff auf die in der Dropbox gelagerten Dateien ist erst möglich, nachdem sich der User im System authentisiert hat. 
+Unter individuellen Webservices handelt es sich in diesem Kontext um Dienste, deren Funktionalität vom eingeloggten User abhängt. Ein Beispiel hierfür ist \textit{Dropbox}. Der Zugriff auf die in der Dropbox gelagerten Dateien ist erst möglich, nachdem sich der User im System authentifiziert hat. 
 
 Es gibt eine Vielzahl von verschiedenen Sicherheitsprotokollen, die an dieser Stelle zum Einsatz kommen. Vor allem hat sich derzeit der OAuth Standard etabliert, welcher auch in den Webservices \textit{Twitter} und \textit{Dropbox} genutzt wird.\\
 
-\subsubsection{OAuth Standard}
+\subsubsection{OAuth 2 Standard}
 \label{subsubsec:oauth}
-OAuth\cite{oauth} ist ein offener Standard für Autorisierung, der es ermöglicht Nutzern Applikationen von Drittanbietern den Zugriff auf Webdienste in ihrem Namen zu gestatten, ohne dabei das eigene Passwort freizugeben. Dies geschieht in der Regel in mehreren Schritten.
+OAuth\cite{oauth} ist ein offener Standard für Autorisierung, der es ermöglicht Nutzern Applikationen von Drittanbietern den (zumeist eingeschränkten) Zugriff auf Webdienste in ihrem Namen zu gestatten, ohne dabei das eigene Passwort freizugeben. Dies geschieht in der Regel in mehreren Schritten.
 
 \begin{enumerate}
 \item Die Applikation registriert sich bei dem Webservice und erhält einen Consumer-Key und Consumer-Secret.
@@ -30,16 +30,17 @@ OAuth\cite{oauth} ist ein offener Standard für Autorisierung, der es ermöglich
 \end{enumerate}
 
 
-Im Rahmen dieser Arbeit wird es nötig sein, sowohl mit öffentlichen, als auch mit privaten Webservices Kontakt aufzunehmen. Es wird also notwendig sein, sich gegenüber den Diensten zu authentisieren um die erforderlichen Rechte zu erhalten, die es ermöglichen den Workflow des Nutzers zu automatisieren. Die Autorisierung wird über die Benutzeroberfläche stattfinden.
+Im Rahmen dieser Arbeit wird es nötig sein, sowohl mit gemeinsamen, als auch mit individuellen Webservices Kontakt aufzunehmen. Es wird also notwendig sein, sich gegenüber den Diensten zu authentisieren um die erforderlichen Rechte zu erhalten, die es ermöglichen den Workflow des Nutzers zu automatisieren. Die Autorisierung wird über die Benutzeroberfläche stattfinden.
 
 
 
 \section{Integration in Eclipse SmartHome}
 \label{sec:integrationESH}
 Im Rahmen der Arbeit sollen die bereits existierenden Funktionalitäten von ESH sofern möglich wiederverwendet werden. Hierzu sollen die einzelnen Webservices durch Bindings in das System integriert werden. 
-Dabei soll jede Instanz eines Webdienstes als ein Thing repräsentiert werden. Das bedeutet, dass beispielsweise im Falle eines Wetterdienstes für jeden Ort ein eigene Instanz des Thing-Typen erstellt wird, die diesen Ort darstellt. Alternativ könnte es sich bei den Instanzen um verschiedene Twitter-Accounts handeln.
+Dabei soll jede Instanz eines Webdienstes als ein Thing repräsentiert werden. Das bedeutet, dass beispielsweise im Falle eines Wetterdienstes für jeden Ort eine eigene Instanz des Thing-Typen erstellt wird, die diesen Ort darstellt. Alternativ könnte es sich bei den Instanzen um verschiedene Twitter-Accounts handeln.
 
-Die benötigten Zugriffsdaten (z.B. OAuth-Token) werden in den Konfigurationen der Things abgelegt. Ein solcher Aufbau garantiert, dass jedes Thing über sämtliche Informationen verfügt, die benötigt werden, um es zu steuern. Die konkreten Funktionalitäten werden über ein oder mehrere Channels dargestellt.
+Die benötigten Zugriffsdaten (z.B. OAuth-Token) werden in den Konfigurationen der Things abgelegt. Ein solcher Aufbau garantiert, dass jedes Thing über sämtliche Informationen verfügt, die benötigt werden, um es zu steuern. Die konkreten Funktionalitäten werden über ein oder mehrere Channels dargestellt. Im Rahmen dieser Arbeit wird im Demonstrator keine Nutzerverwaltung eingebaut.
+
 
 \subsection{Verbindung zum Webdienst}
 Nachdem ein Thing mit den benötigten Zugriffsdaten angelegt wurde, muss es vom System verwaltet werden können. Hierzu gehört vor allem die virtuelle Abbildung des realen Zustandes zu aktualisieren, sowie die tatsächliche Steuerung zu ermöglichen. 
@@ -71,12 +72,13 @@ Zusammen decken diese beiden Module einen großen Teil der möglichen Szenarien 
 
 
 \subsection{Persistenz}
-Wie in Sektion \ref{subsec:persistenz} erläutert, ist eine MapDB in ESH bereits integriert. Da im Rahmen dieser Arbeit nur geringe Mengen an Daten persistiert werden müssen, ist es nicht notwendig, auf eine mächtigere Datenbank umzusteigen. 
+Wie in Sektion \ref{subsec:persistenz} erläutert, ist eine MapDB in ESH bereits integriert. Da im Rahmen dieser Arbeit die Menge an persitierten Daten sich nicht maßgäblich verändern wird, ist es nicht notwendig, auf eine mächtigere Datenbank umzusteigen. 
+%Da im Rahmen dieser Arbeit nur geringe Mengen an Daten persistiert werden müssen, ist es nicht notwendig, auf eine mächtigere Datenbank umzusteigen. 
 
 Dadurch, dass die Webservices selbst als Things modelliert werden und alle notwendigen Konfigurationsdaten mit sich tragen, kann dieser Aspekt von ESH in seiner aktuellen Form wiederverwendet werden. Bei einem Neustart des Systems werden sämtliche relevante Things aus der Datenbank ausgelesen und basierend auf den in ihrer Konfiguration gespeicherten Zugriffsdaten (z.B. OAuth Token) entsprechende Verbindungen aufgebaut, die für die Aktualität der Zustände sorgen.
 
 \subsection{Benutzeroberfläche}
-Die Benutzeroberfläche soll den Nutzer in die Lage versetzen Regeln zur Laufzeit zu bearbeiten. Das bedeutet, es soll ihm möglich sein neue Regeln anzulegen, sowie existierende Regeln zu betrachten, zu editieren und zu löschen. Da Eclipse SmartHome die Möglichkeit bietet Regeln im JSON-Format zu deklarieren (siehe Sektion \ref{subsec:decltypes}), bietet sich an dieser Stelle an, es in der Benutzeroberfläche analog umzusetzen.\\
+Die Benutzeroberfläche soll den Nutzer in die Lage versetzen Regeln zur Laufzeit zu bearbeiten. Das bedeutet, es soll ihm möglich sein neue Regeln anzulegen, sowie existierende Regeln zu betrachten, zu editieren und zu löschen. Da Eclipse SmartHome die Möglichkeit bietet Regeln im JSON-Format zu deklarieren (siehe Sektion \ref{subsec:decltypes}), bietet es sich an dieser Stelle an, es in der Benutzeroberfläche analog umzusetzen.\\
 
 Des weiteren soll dem User die Möglichkeit gegeben sein, die Zugriffsrechte auf die unterstützten Webservices (z.B. auf seinen Twitter Account) der Anwendung zu übermitteln, bzw. auf diese Weise neue Instanzen des entsprechenden Thing-Typen zum System hinzuzufügen.
 

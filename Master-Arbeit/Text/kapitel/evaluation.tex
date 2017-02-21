@@ -3,7 +3,7 @@
 In diesem Kapitel wird die entstandene Implementierung gegen die Anforderungen verglichen und das Ergebnis evaluiert.
 
 \section{Erfüllte Ziele}
-Alle formalen Anforderungen, wie sie in Sektion \ref{sec:anforderungen} festgehalten sind, wurden erfüllt. Der Demonstrator läuft on-premise auf dem Raspberry Pi und verwaltet sämtliche Daten lokal. Es ist möglich komplexe Szenarien zu definieren, wobei intelligente Geräte mit Webdiensten frei zusammengefügt werden können. Dies ist möglich, da die integrierten Webservices ebenfalls als \textit{Things} im System abgebildet sind. Schließlich ist eine Benutzeroberfläche vorhanden, die es dem Nutzer erlaubt zur Laufzeit neue Szenarien zu erstellen, zu editieren und zu löschen.
+Alle formalen Anforderungen, wie sie in Sektion \ref{sec:anforderungen} festgehalten sind, wurden erfüllt. Der Demonstrator läuft on-premise auf dem Raspberry Pi und verwaltet sämtliche Daten lokal. Es ist möglich komplexe Szenarien (Multi Event- und Action-Rules, Kontextweitergabe zwischen den Modulen, etc.) zu definieren, wobei intelligente Geräte mit Webdiensten frei zusammengefügt werden können. Dies ist möglich, da die integrierten Webservices ebenfalls als \textit{Things} im System abgebildet sind. Schließlich ist eine Benutzeroberfläche vorhanden, die es dem Nutzer erlaubt zur Laufzeit neue Szenarien zu erstellen, zu editieren und zu löschen.
 
 \section{Vergleich mit Smart Home}
 Bei dem entwickelten Demonstrator handelt es sich um eine klassische Smart Home Lösung, die auf \textit{Eclipse SmartHome} basiert und um weitere Funktionalitäten angereichert wurde. Dadurch verfügt er  über alle üblichen Funktionalitäten, die in einem Smart Home enthalten sind - er ist in der Lage ausgewählte intelligente Geräte direkt anzusteuern und in Szenarien zu automatisieren. 
@@ -13,7 +13,7 @@ Bei dem entwickelten Demonstrator handelt es sich um eine klassische Smart Home 
 
 %In IFTTT ist es nur möglich simple Szenarien auf eine einfache Art und Weise zu definieren. Hierbei handelt es sich um sogenannte \glqq if this than that\grqq{} Szenarien, die über jeweils nur einen Trigger (\glqq this\grqq) und eine Action (\glqq that \grqq) verfügen. Der Demonstrator hingegen erlaubt es komlexe Event-Condition-Action-Regeln zu definieren.
 
-Einen Einblick, wie sich der entstandene Demonstrator in die aktuell existierenden Task Automation Services eingliedern lässt, verleiht Abbildung \ref{fig:eval0}. Wie zu sehen ist, gibt es Verbesserungen in vielen Aspekten gegenüber anderen Lösungen. Gegenüber den webbasierten TAS grenzt sich FLASH vor allem durch seine Fähigkeit ab intelligente Geräte direkt anzusteuern, sowie der deutlich mächtigeren Rule Engine ab. Es ist möglich komplexe ECA-Szenarien zu definieren, mit beliebig vielen Triggern, Bedingungen und Befehlen. Teile des Szenarios werden sequentiell abgearbeitet und können als Eingabe für spätere Elemente dienen.\\
+Einen Einblick, wie sich der entstandene Demonstrator in die aktuell existierenden Task Automation Services eingliedern lässt, bietet Abbildung \ref{fig:eval0}. Wie zu sehen ist, gibt es Verbesserungen in vielen Aspekten gegenüber anderen Lösungen. Gegenüber den webbasierten TAS grenzt sich FLASH vor allem durch seine Fähigkeit ab intelligente Geräte direkt anzusteuern, sowie der deutlich mächtigeren Rule Engine ab. Es ist möglich komplexe ECA-Szenarien zu definieren, mit beliebig vielen Triggern, Bedingungen und Befehlen. Teile des Szenarios werden sequentiell abgearbeitet und können als Eingabe für spätere Elemente dienen.\\
 
 \begin{figure}
 	\centering
@@ -23,7 +23,7 @@ Einen Einblick, wie sich der entstandene Demonstrator in die aktuell existierend
 \end{figure}
 
 
-Der entstandene Demonstrator wurde einem umfassenden Test unterzogen, im Laufe dessen Durchsatz und Reaktionszeiten gemessen und mit IFTTT verglichen wurden. 
+Der entstandene Demonstrator wurde einem umfassenden Test unterzogen, im Laufe dessen Datendurchsatz und Reaktionszeiten gemessen und mit IFTTT verglichen wurden. 
 
 \subsection{Kopieren von Dateien in der Dropbox}
 Um Durchsatz zu messen, wurde ein Szenario definiert, dass sämtliche Dateien, die in einen bestimmten Ordner in Dropbox hinzugefügt wurden, in einen anderen Ordner in der Dropbox zu kopieren. Zu Beachten ist, dass IFTTT sich auf die Abarbeitung von bis zu 15 Dateien pro Abfrage begrenzt und Dateien, die größer, als 30 MB sind, nicht beachtet. Zusätzlich wird vom Service gewarnt, dass die Ausführung aller Szenarien sich um bis zu 1 Stunde verzögern kann. Diese Tatsache führt zur Streuung, die in den nachfolgenden Grafiken festzustellen ist.
@@ -67,7 +67,7 @@ Es hat sich ergeben, dass die Reaktionszeit des Demonstrators stets unter einer 
 
 \subsection{Auswertung}
 \subsubsection{Vorteile}
-Aus den Messungen hat sich gezeigt, dass der Demonstrator IFTTT in vieler Hinsicht deutlich voraus ist. Dadurch, dass er sich im Hause des Nutzers befindet, ist er in der Lage mit Geräten direkt zu kommunizieren, was Grund für merklich bessere Reaktionszeiten in Szenarien, die intelligente Geräte im Haus betreffen, ist.\\
+Aus den Messungen hat sich gezeigt, dass der Demonstrator IFTTT in vieler Hinsicht deutlich voraus ist. Dadurch, dass er sich im Hause des Nutzers befindet, ist er in der Lage mit Geräten direkt zu kommunizieren, was der Grund für merklich bessere Reaktionszeiten in Szenarien, die intelligente Geräte im Haus betreffen, ist.\\
 
 Auch in Szenarien, die nur Web-basiert sind und viel Download/Upload-Volumen mit sich ziehen, hat sich der Raspberry Pi als überlegen erwiesen. Dies lässt sich dadurch erklären, dass es sich bei dem Demonstrator im Gegensatz zu IFTTT um ein dediziertes Gerät handelt, dass nur einen konkreten User bedient. Dies führt auch dazu, dass er keine arbiträren Eingrenzungen besitzt, wie z.B. die Begrenzung der Dateigröße.\\
 
@@ -76,7 +76,9 @@ Auch in Szenarien, die nur Web-basiert sind und viel Download/Upload-Volumen mit
 Schließlich ist der Raspberry Pi aus einer Datenschutzperspektive dem Cloud-Service zu bevorzugen, da sämtliche Zugriffsdaten nur lokal auf dem Gerät gesichert werden.
 
 \subsubsection{Nachteile}
-Negative Aspekte des Demonstrators sind Konsequenz der Tatsache, dass es sich dabei um eine on-premise Lösung handelt. Sämtliche Szenarien, die Webdienste automatisieren, funktionieren nur solange eine Internetverbindung  vorhanden ist. Sollte sie ausfallen, bleiben nur die charakteristischen Smart Home Funktionalitäten erhalten. In diesem Aspekt ist IFTTT dem Demonstrator voraus, da die Ausfallsicherheit in einem Rechenzentrum gegenüber der eines herkömmlichen Heimanschlusses weit überlegen ist.\\
+Negative Aspekte des Demonstrators sind Konsequenz der Tatsache, dass es sich dabei um eine on-premise Lösung handelt. Sämtliche Szenarien, die Webdienste automatisieren, funktionieren nur solange eine Internetverbindung  vorhanden ist. Sollte sie ausfallen, bleiben nur die charakteristischen Smart Home Funktionalitäten erhalten. In diesem Aspekt ist IFTTT dem Demonstrator voraus, da die Ausfallsicherheit in einem Rechenzentrum gegenüber der eines herkömmlichen Heimanschlusses weit überlegen ist.
+
+Umgekehrt ist natürlich zu bedenken, dass bei einem Ausfall des Heimanschlusses auch IFTTT nicht mehr in der Lage sein wird, die hausinternen Geräte über die vom Hersteller bereitgestellten Web-Schnittstellen zu steuern. \\
 
 Die Tatsache, dass sämtliche Zugriffsdaten auf Accounts des Users ausschließlich lokal auf dem Gerät vorhanden sind, zieht mit sich, dass im Falle eines Ausfalls (z.B. Hardware-Fehler) sämtliche Daten verloren gehen können. Dies könnte dazu führen, dass sämtliche Geräte, Dienste und Szenarien nach einer Reparatur komplett neu aufgesetzt werden müssten.
 
@@ -84,7 +86,7 @@ Die Tatsache, dass sämtliche Zugriffsdaten auf Accounts des Users ausschließli
 
 \section{Eclipse SmartHome und Quellcode}
 \subsection{Positive Aspekte}
-Im Laufe der Arbeit is klar geworden, dass das Eclipse SmartHome Framework sich gut als Grundgerüst für unterschiedlichste Lösungen handelt. Die sehr generische Struktur des Frameworks hat es ermöglicht, die im Rahmen der Arbeit implementierten Funktionalitäten nahtlos in das Gesamtkonstrukt zu integrieren. 
+Im Laufe der Arbeit ist klar geworden, dass das Eclipse SmartHome Framework sich gut als Grundgerüst für unterschiedlichste Lösungen handelt. Die sehr generische Struktur des Frameworks hat es ermöglicht, die im Rahmen der Arbeit implementierten Funktionalitäten nahtlos in das Gesamtkonstrukt zu integrieren. 
 
 Dies, sowie OSGi im Allgemeinen, ermöglicht es weitere Funktionalitäten (z.B. weitere Webdienste) der Anwendung hinzuzufügen, ohne bereits existierenden Code ändern zu müssen. Dank der Option, Szenarien im JSON-Format zu definieren, ist es sogar begrenzt möglich, neu hinzugefügte Webdienste in Regeln zu automatisieren, ohne die Benutzeroberfläche anzupassen.
 

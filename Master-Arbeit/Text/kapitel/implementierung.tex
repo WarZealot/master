@@ -12,7 +12,7 @@ Im Rahmen der Arbeit sind eine Reihe von Bundles entstanden, die die verschieden
 
 \section{Schnittstellen-Bundles}
 
-\subsection{tka.binding.core}
+\subsection{FLASH Authentifizierung}
 \label{impl:core}
 Das Bundle \textit{tka.binding.core} enthält die zentrale Schnittstelle für den Prozess der Authentifizierung. Sie ist generisch aufgebaut und entspricht den Anforderungen des OAuth Standards (siehe Sektion \ref{subsubsec:oauth}). In Abbildung \ref{fig:connectionservice} ist die Struktur visualisiert.
 
@@ -34,7 +34,7 @@ Der AbstractConnectionService bietet eine Reihe von unterstützenden Funktionali
 Jedes Binding enthält eigene Implementierungen der oben genannten Schnittstellen, die die Besonderheiten des konkreten Webdienstes berücksichtigen. Diese Implementierungen werden außerdem als Services in OSGi registriert, damit über die Benutzeroberfläche die Authentifizierung umgesetzt werden kann.
 
 
-\subsection{tka.automation.extension}
+\subsection{FLASH Erweiterungen}
 Das \textit{tka.automation.extension} Bundle registriert im System einige gemeinsamen Services, die von anderen Bundles genutzt werden. Unter anderem wird hier ein neuer Event-Typ registriert: Das \textit{FlashEvent}. Die implementierten Bindings publizieren alle Events dieses Typen, mit unterschiedlichen Topics und Payloads. Dies erlaubt es zu vermeiden, dass jedes Binding seine eigenen Event-Typen deklarieren muss. 
 
 
@@ -46,7 +46,7 @@ Jedes Binding integriert einen eigenen Webservice und fügt, sofern notwendig, s
 
 Alle Bindings haben gemeinsam, dass sie bei den respektiven Webdiensten zunächst registriert werden müssen. Dabei erhalten sie ein Token, mit dem sie sich gegenüber dem Dienst bei Aufrufen identifizieren. Wie komplex dieser Ablauf ist, hängt vom jeweiligen Service ab.
 
-\subsection{tka.binding.twitter}
+\subsection{Anbindung von Twitter}
 Das Twitter Binding fügt dem System Things des Typs \glqq twitter\grqq{} hinzu. Es wird derzeit der Channel \glqq status\grqq{} unterstützt. Dies bedeutet, dass es möglich ist über die Rule Engine den aktuellen Status des Nutzers über Regeln zu manipulieren. Die entsprechende Logik ist in dem \textit{TwitterHandler} und der \textit{TwitterAction} hinterlegt. \\
 
 Der \textit{TwitterHandler} ist ein ThingHandler, der konkrete (String-)Commands erhält und dafür verantwortlich ist den Twitter-Status des Nutzers entsprechend zu aktualisieren.  Hierzu liest er sich die Zugriffsdaten aus der Thing-Konfiguration aus und teilt Twitter mit, was geschehen soll.\\
@@ -66,7 +66,10 @@ Falls ein bestimmtes Szenario nicht abgedeckt ist, lässt sich der \textit{Twitt
 
 
 
-Bei der Interaktion mit Twitter kommt die Twitter4J-Bibliothek\cite{twitter4j} zum Einsatz. Dabei handelt es sich um eine leichtgewichtige Java-Bibliothek, ohne zusätzliche Abhängigkeiten, die die Twitter API 1.1 komplett unterstützt. Sie assistiert zusätzlich bei dem OAuth Prozess.\\
+Bei der Interaktion mit Twitter kommt die Twitter4J-Bibliothek\cite{twitter4j} zum Einsatz. Dabei handelt es sich um eine leichtgewichtige Java-Bibliothek, ohne zusätzliche Abhängigkeiten, die die Twitter API 1.1 komplett unterstützt. Sie assistiert zusätzlich bei dem OAuth Prozess. 
+
+Die Twitter4J-Bibliothek ist auch als OSGi Bundle verfügbar.
+
 
 
 
@@ -87,7 +90,7 @@ Bei der Interaktion mit Twitter kommt die Twitter4J-Bibliothek\cite{twitter4j} z
 
 In der Tabelle sind die Eingaben und Ausgaben von wichtigen Auslösern, Bedingungen und Aktionen aufgeführt. Zu beachten ist, dass die Eingaben sowohl über den Kontext übergeben, als auch direkt in der Konfiguration der konkreten Instanz fest definiert werden können. Dies erlaubt es sowohl statische als auch generische Regeln zu definieren. Falls Parameter fehlen sollten, wird die konkret betroffene Aktion nicht ausgeführt, der gesamte Ausführungsprozess wird nicht unterbrochen.
 
-\subsection{tka.binding.dropbox}
+\subsection{Integration von Dropbox}
 Das Bundle \textit{tka.binding.dropbox} ist analog zu \textit{tka.binding.twitter} aufgebaut. Es wird der neue Thing-Typ \glqq dropbox\grqq{} mit dem Channel \glqq folder\grqq{} im System registriert. Über diesen Channel gibt es die Möglichkeit neue Dateien in die Dropbox hochzuladen. \\
 
 Der \textit{DropboxChangesTracker} übernimmt die Rolle des \textit{TwitterUserStreamListeners}. Er überprüft alle 5 Sekunden den Inhalt der Dropbox und publiziert Events für sämtliche Änderungen.\\
@@ -96,12 +99,12 @@ Der \textit{DropboxChangesTracker} übernimmt die Rolle des \textit{TwitterUserS
 
 Bei der Interaktion mit dem Webservice kommt die vom Hersteller angebotene Dropbox SDK zum Einsatz. Dabei handelt es sich um eine Java-Bibliothek, die den Entwickler bei der OAuth-Authentifizierung und der gesamten Interaktion mit Dropbox (Hochladen und Löschen von Dateien, etc.) unterstützt. 
 
-Diese externen Bibliotheken (Dropbox SDK, Twitter4J) wurden mithilfe des bnd-Tools\cite{bnd} zu OSGi-Bundles umgewandelt. Dabei stellte sich heraus, dass die Dropbox SDK Abhängigkeiten auf eine Reihe von Android Bibliotheken besitzt. Nach weiterer Recherche ließen sich diese Abhängigkeiten mithilfe des bnd-Tools auf optional umstellen, wonach die SDK problemlos in der OSGi Umgebung eingesetzt werden konnte. 
+Die Dropbox SDK wurde mithilfe des bnd-Tools\cite{bnd} zu einem OSGi-Bundle umgewandelt. Dabei stellte sich heraus, dass sie Abhängigkeiten auf eine Reihe von Android Bibliotheken besitzt. Nach weiterer Recherche ließen sich diese Abhängigkeiten mithilfe des bnd-Tools auf optional umstellen, wonach die SDK problemlos in der OSGi Umgebung eingesetzt werden konnte. 
 
 
 
 
-\subsection{tka.binding.weather}
+\subsection{Das Wetter Binding}
 Das \textit{tka.binding.weather} Binding weist sowohl Gemeinsamkeiten, als auch Unterschiede zu den bisher vorgestellten Bundles auf. Es handelt sich bei dem Wetterdienst um einen Webservice, der einer regulären intelligenten Wetterstation stark ähnelt. Dadurch ließen sich mehr Funktionalitäten von ESH wiederverwenden, als bei den anderen Diensten.
 
 Gleichzeitig unterscheidet es sich von den bisher vorgestellten dadurch, dass es sich bei dem Webservice um einen öffentlichen Dienst handelt. Das bedeutet, dass ein komplexer Autorisierungsprozess (beispielsweise über OAuth) an dieser Stelle nicht benötigt wird. Dies führt dazu, dass keine eigene Implementierung der in Sektion \ref{impl:core} vorgestellten Schnittstellen notwendig ist. 
@@ -111,7 +114,7 @@ Das Binding registriert den neuen Thing-Typen \glqq weather\grqq{} mit den Chann
 Da die Zustandsaktualisierung in diesem Fall vergleichsweise simpel verläuft, wurde sie nicht in eine dedizierte Klasse ausgelagert. Stattdessen wurde der ThingHandler um die entsprechende Funktionalität erweitert. Da sich das Wetter von Region zu Region mit sehr unterschiedlicher Geschwindigkeit ändern kann, lässt sich die Aktualisierungsperiode über die Benutzeroberfläche beliebig konfigurieren.
 
 
-\subsection{tka.binding.gmail}
+\subsection{Email Funktionalitäten}
 Das Bundle \textit{tka.binding.gmail} erlaubt es dem Nutzer Emails zu versenden. Es ist analog zu den bisherigen Bindings aufgebaut. Der Thing-Typ \glqq gmail\grqq{} wird im System registriert und über einen entsprechenden ThingHandler gesteuert. 
 
 Das Binding registriert den Action Typen \textit{EmailAction}, über den der Nutzer angeben kann, an wen eine Email mit den gewählten Informationen gesendet werden soll. Die Email wird von einer anwendungsinternen Google Mail\cite{gmail} Adresse \textit{noreply.flash.ma@gmail.com} über einen öffentlichen SMTP Server versandt.
@@ -119,10 +122,8 @@ Das Binding registriert den Action Typen \textit{EmailAction}, über den der Nut
 
 
 \section{Benutzeroberfläche}
-Die Benutzeroberfläche ist komplett im Bundle \textit{tka.flashui} realisiert. Das Bundle ist von den Bindings los gekoppelt - es nutzt einige der von ihnen bereitgestellten Services um eine rudimentäre, aber dennoch voll funktionsfähige GUI bereitzustellen. Es ist jederzeit möglich diese Benutzeroberfläche auszutauschen oder weitere Schnittstellen parallel im System zu registrieren.
+Die Benutzeroberfläche ist komplett im Bundle \textit{tka.flashui} realisiert. Das Bundle ist von den Bindings los gekoppelt - es nutzt einige der von ihnen bereitgestellten Services um eine rudimentäre, aber dennoch voll funktionsfähige GUI bereitzustellen. Es ist jederzeit möglich diese Benutzeroberfläche auszutauschen oder weitere Schnittstellen parallel im System zu registrieren.\\
 
-
-\subsection{tka.flashui}
 Aus technischer Sicht wurde die GUI größtenteils über REST-Schnittstellen, Javascript und AJAX realisiert.
 
 \subsubsection{Backend}
@@ -134,7 +135,7 @@ Bei dem Frontend handelt es sich um eine Single-Page-Webanwendung. Es gibt eine 
 Das Erweitern der GUI um neue Bindings lässt sich damit auf eine einfache Art und Weise realisieren, ohne existierenden Code ändern zu müssen. Seitens des Backends muss für ein neues Binding eine neue REST-Schnittstelle in Form eines Servlets definiert werden. Das Frontend bedarf	einer lediglich einer weiteren JS-Datei.		\\
 
 
-\subsubsection{Funktionalität und visuelle Darstellung}
+\subsection{Funktionalität und visuelle Darstellung}
 Die Benutzeroberfläche bietet die Möglichkeit die implementierten Funktionalitäten zur Laufzeit zu konfigurieren. Sie ist in Abbildung \ref{fig:gui_all} dargestellt. 
 
 \begin{figure}
@@ -150,7 +151,7 @@ Im Abschnitt \textit{Things} sind die aktuell im System vorhandenen Things mit d
 
 Im letzten Teil der Benutzeroberfläche ist eine Liste mit den unterstützten Webservices bereitgestellt. Für jeden Webdienst gibt es hier die Möglichkeit die Zugriffsrechte an die Anwendung zu vermitteln.
 
-Beim Stylen der Oberfläche kam Bootstrap\cite{bootstrap} zum Einsatz.
+Beim der Gestaltung der Oberfläche kam Bootstrap\cite{bootstrap} zum Einsatz.
 
 
 \subsection{Beispiel}
@@ -163,14 +164,14 @@ Um die Zusammenarbeit der verschiedenen Komponenten zu visualisieren, wurde folg
 	\label{fig:sequenceOauth}
 \end{figure}
 
-In Abbildung \ref{fig:sequenceOauth} ist in einem Sequenzdiagramm schematisch dargestellt, wie die Authentifizierung bei Twitter abläuft. Der Nutzer äußert seinen Wunsch seinen Twitter Account dem Prototypen anzuvertrauen. Daraufhin vermittelt der TwitterServlet ihm eine URL, über die er dies wie in Sektion \ref{subsubsec:oauth} erläutert umsetzen kann. Nachdem die korrekte PIN dem System eingegeben wurde, wird dem System ein neues Thing vom Typ \glqq twitter\grqq{} hinzugefügt und ein entsprechender Listener im System registriert.
+In Abbildung \ref{fig:sequenceOauth} ist in einem Sequenzdiagramm schematisch dargestellt, wie die Authentifizierung bei Twitter abläuft. Der Nutzer entscheidet sich seinen Twitter Account dem Prototypen anzuvertrauen. Daraufhin vermittelt der TwitterServlet ihm eine URL, über die er dies wie in Sektion \ref{subsubsec:oauth} erläutert umsetzen kann. Nachdem die korrekte PIN dem System eingegeben wurde, wird dem System ein neues Thing vom Typ \glqq twitter\grqq{} hinzugefügt und ein entsprechender Listener im System registriert.
 
 
 \section{Deployment auf dem Raspberry Pi}
 \label{impl:deployment}
-Das Deployment fand auf einem Raspberry Pi 3 Model B statt. Auf dem Gerät lief das Betriebssystem \textit{Raspbian} mit installiertem Java 8.
+Das Deployment findet auf einem Raspberry Pi 3 Model B statt. Auf dem Gerät läuft das Betriebssystem \textit{Raspbian} mit installiertem Java 8.
 
-Als Grundlage für die Distribution wurde das \textit{Eclipse SmartHome Packaging Sample}\cite{eshsample} verwendet. Es erlaubt es mithilfe von Maven\cite{maven} eine leichtgewichtigen OSGi Container mitsamt einigen der zusätzlich benötigten Services zu bauen. Diese Distribution wurde entsprechend angepasst: 
+Als Grundlage für die Distribution wird das \textit{Eclipse SmartHome Packaging Sample}\cite{eshsample} verwendet. Es erlaubt es mithilfe von Maven\cite{maven} eine leichtgewichtigen OSGi Container mitsamt einigen der zusätzlich benötigten Services zu bauen. Diese Distribution wurde entsprechend angepasst: 
 \begin{enumerate}
 \item Weitere notwendige Service-Bundles wurden hinzugefügt. Vor allem bei dem Einbinden von den externen Bibliotheken (Dropbox SDK und Twitter4J) mussten an dieser Stelle zusätzliche Konfigurationen vorgenommen werden.
 \item Die eigenen Bundles wurden mithilfe von Maven zu OSGi-Jar-Dateien umgewandelt und zum Deployment hinzugefügt.

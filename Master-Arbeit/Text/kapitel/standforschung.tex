@@ -6,12 +6,12 @@ In diesem Kapitel wird der aktuelle Stand der Forschung des Internets der Dinge 
 \section{Internet of Things}
 Die enorm steigende Anzahl von „intelligenten Gegenständen“ mit eingebetteten Computern, die den Menschen im alltäglichen Leben unterstützen sollen, hat zu der Prägung des Begriffs „Internet der Dinge“ (IoT) geführt. Jedes dieser Dinge hat seine eigene Funktionalität und im Verbund stellen sie eine große Menge an Daten zur Verfügung. Im Rahmen von zahlreichen Forschungsprojekten \cite{ierc:portfolios} werden Möglichkeiten untersucht, IoT mit unterschiedlichen Technologien zu kombinieren. Unter anderem werden Technologien, wie Cloud Computing\cite{FiCloud:CloudIot}, Machine-2-Machine Learning\cite{FiCloud:M3Iot} und Semantic Web\cite{SemWebIoT} kritisch betrachtet. Außerdem werden Kernprinzipien, wie Architektur und Standardisierung intensiv recherchiert. Sie werden in dedizierten Forschungsprojekten \cite{icore:achitecture}\cite{iota:d25} immer wieder aufgegriffen.
 
-Im Laufe der Zeit haben sich verschiedene Aspekte des IoT herausgebildet, unter anderem das Smart Home.
+%Im Laufe der Zeit haben sich verschiedene Aspekte des IoT herausgebildet, unter anderem das Smart Home.
 
 \subsection{Smart Home}
-Ein mit IoT eng verwobenes Thema ist das Smart Home\cite{SmartHomeIoT}, welches die elektronische Steuerung von ausgewählten Geräten mit z.B. einer Rule Engine kombiniert um eine Automatisierung des Geräteverhaltens in einem Zusammenspiel zwischen Sensorik und Aktortik zu erreichen. Smart Home grenzt sich von IoT ab indem es auf Sensoren und Aktoren spezialisiert ist, die im Kontext eines Hauses relevant sind.\\
+Ein mit IoT eng verwobenes Thema ist das Smart Home\cite{SmartHomeIoT}, welches die elektronische Steuerung von ausgewählten Geräten mit z.B. einer Rule Engine kombiniert um eine Automatisierung des Geräteverhaltens in einem Zusammenspiel zwischen Sensorik und Aktorik zu erreichen. Smart Home grenzt sich vom übergreifenden IoT-Bereich ab indem es auf Sensoren und Aktoren spezialisiert ist, die im Kontext eines Hauses relevant sind.\\
 
-Bis dato wurden zahlreiche Smart Home Lösungen von verschiedenen Anbietern entwickelt. Man kann prinzipiell zwei Arten von Lösungen unterscheiden. \textit{Proprietäre} Produkte (z.B. \textit{RWE SmartHome}\cite{RWE}) spezialisieren sich auf eine sehr begrenzte Anzahl von Geräten und bemühen sich maximale Unterstützung für diese Geräte zu bieten. Dies sorgt für eine Fragmentierung des Marktes. \textit{Open Source} Lösungen hingegen verfolgen das Ziel möglichst offen für verschiedene Geräte und Protokolle zu bleiben.\\ 
+Bis dato wurden zahlreiche Smart Home Lösungen von verschiedenen Anbietern entwickelt. Man kann prinzipiell zwei Arten von Lösungen unterscheiden. \textit{Proprietäre} Produkte (z.B. \textit{RWE SmartHome} \cite{RWE}) spezialisieren sich auf eine sehr begrenzte Anzahl von Geräten und bemühen sich maximale Unterstützung für diese Geräte zu bieten. Dies sorgt für eine Fragmentierung des Marktes. \textit{Open Source} Lösungen hingegen verfolgen das Ziel möglichst offen für verschiedene Geräte und Protokolle zu bleiben.\\ 
 
 Da Open Source Lösungen aktuell noch aktiv in der Entwicklung sind und hauptsächlich als Software existieren, erfordert ihr Einsatz von Nutzern ein gewisses Maß an technischen Vorkenntnissen. In der Regel muss der Nutzer passende Hardware bereitstellen und die Software selbst installieren. Bei Problemen kann Support bestenfalls auf Foren von der Community gefunden werden. 
 
@@ -21,9 +21,9 @@ Diese Gründe führen dazu, dass Open Source Lösungen derzeit noch nicht massen
 
 \subsection{Task Automation Services}
 \label{subsec:tas}
-Die Automatisierung von Aufgaben ist eins der zentralen Bestreben unseres alltäglichen Lebens. Es macht das Leben einfacher und erlaubt uns kostbare Zeit zu sparen. Ob Notifikation auf dem Smartphone, wenn eine Email eingeht oder das Einschalten von Lampen, wenn ein Raum betreten wird, solche Automatisierung ist heutzutage überall zu finden. Lange Zeit musste jede derartige Automatisierung einzeln entworfen, konfiguriert und implementiert werden. Doch die steigende Anzahl von intelligenten Gegenständen und die Allgegenwärtigkeit des Internets belassen dies der Vergangenheit. Nun hat sich der Ansatz der Task Automation Services\cite{ieee:tas} gebildet.
+Die Vereinfachung von Aufgaben ist eines der zentralen Bestreben unseres alltäglichen Lebens. Eine konkrete Ausprägung davon ist die Automatisierung. Sie macht das Leben übersichtlicher und erlaubt uns kostbare Zeit zu sparen. Ob Notifikation auf dem Smartphone, wenn eine Email eingeht oder das Einschalten von Lampen, wenn ein Raum betreten wird, solche Automatisierung ist heutzutage überall zu finden. Lange Zeit musste jede derartige Automatisierung einzeln entworfen, konfiguriert und implementiert werden. Doch die steigende Anzahl von intelligenten Gegenständen und die Allgegenwärtigkeit des Internets überlassen dies der Vergangenheit. Nun hat sich der Ansatz der Task Automation Services\cite{ieee:tas} gebildet.
 
-Ein Task Automation Service (TAS) ist ein Dienst, der es Endnutzern ermöglicht das Verhalten von verschiedenen Services und Geräten in eigenen Szenarien jederzeit selbst zu automatisieren. Solche Szenarien basieren auf Event-Condition-Action (ECA) Regeln\cite{ECA}, welche es ermöglichen, auf Events unter festgelegten Bedingungen mit entsprechenden Aktionen zu reagieren. Meistens wird dies durch  einen intuitiven visuellen Regel Editor ermöglicht.
+Ein Task Automation Service (TAS) ist ein Dienst, der es Endnutzern ermöglicht das Verhalten von verschiedenen Services und Geräten in eigenen Szenarien jederzeit selbst zu automatisieren. Solche Szenarien basieren auf Event-Condition-Action (ECA) Regeln\cite{ECA}, welche es ermöglichen, auf Ereignisse unter festgelegten Bedingungen mit entsprechenden Aktionen zu reagieren. Meistens wird dies durch  einen intuitiven visuellen Regel Editor ermöglicht.
 
 %evtl näher eingehen, was typische Charakteristika von TAS sind: Channels, channel paradigms
 
@@ -37,11 +37,12 @@ Aktuell gibt es noch vergleichsweise wenige TAS. Ein Überblick über existieren
 \end{figure}
 
 Wie in der Abbildung zu sehen ist, gibt es unterschiedliche Ansätze. Einige TAS sind in der Cloud angesiedelt, was bedeutet, dass sie, sofern Internet verfügbar ist, jederzeit und von überall erreichbar sind. Die aktuell mächtigsten und bekanntesten TAS sind \textit{IFTTT} \cite{IFTTT} und \textit{Zapier}\cite{Zapier}. Sie unterstützen hunderte unterschiedlicher Web Services, bieten aber keine Möglichkeit mit Geräten direkt zu interagieren. Ihr Fokus ist es zu ermöglichen eine Vielzahl von Szenarien auf eine einfache Art und Weise zu erstellen. Auf komplexere Regeln und Szenarien sind ihre Rule Engines nicht ausgelegt. 
-Um diese TAS zu nutzen, muss man jedoch bereit sein, sämtliche Zugriffsrechte, die für die zu automatisierenden Dienste (z.B. \textit{Facebook}, \textit{Twitter}, etc.) benötigt werden, dem Cloud Service anzuvertrauen.
+Um diese TAS zu nutzen, muss man jedoch bereit sein, sämtliche Zugriffsrechte, die für die zu automatisierenden Dienste (z.B. \textit{Facebook}, \textit{Twitter}, etc.) benötigt werden, dem Cloud Service anzuvertrauen. Dies lässt sich teilweise durch Einsatz von Protokollen wie OAuth und der Übergabe von \textit{eingeschränkten} Rechten mäßigen - dennoch kann der durch einen Angreifer angerichtete Schaden enorm sein.
+%TODO beleg
 
 Andere Task Automation Services arbeiten lokal auf Smartphones. Solche TAS konzentrieren sich auf die Automatisierung von den auf dem Gerät laufenden Services. Die Unterstützung von der Automatisierung von Web Services ist nur in dem Umfang gegeben, in dem diese Web Services direkten Kontakt mit dem Smartphone haben.  
 
-Schließlich gibt es TAS, die auf einer dedizierten Basis im Haus arbeiten. Solche Task Automation Services konzentrieren sich auf die direkte Steuerung von Geräten mithilfe der entsprechenden Protokolle. Im Grunde sind sie äquivalent zu Smart Home. 
+Schließlich gibt es TAS, die auf einem dedizierten Gerät im Hause des Endnutzers arbeiten. Solche Task Automation Services konzentrieren sich auf die direkte Steuerung von Geräten mithilfe der entsprechenden Protokolle. Im Grunde sind sie äquivalent zu Smart Home. 
 
 Im Rahmen dieser Arbeit wird Smart Home jedoch getrennt von TAS behandelt, da der Fokus der Automatisierung völlig unterschiedlich ist. Mehr dazu in Sektion \ref{sec:idee}.
 
@@ -52,11 +53,11 @@ Ein Beispiel für Task Automation Services in der Cloud ist IFTTT, welches eine 
 
 Bis dato lassen sich komplexere Szenarien mit \textit{IFTTT} nicht abbilden.  Das bedeutet, dass es keine Möglichkeit gibt, beispielsweise, Und- und Oder-Bedingungen zu definieren, die es ermöglichen würden, mehrere Conditions in einem Recipe zu verknüpfen.
 
-Ein weiterer Aspekt von IFTTT ist, dass es für die Anbindung von Services Zugriffsrechte auf sämtliche Accounts des Users bedarf. Aus einer Datenschutz-Perspektive\cite{cloudsec} stellt das ein Risiko für den Endnutzer dar, da seine sämtlichen Account-Daten an einer Stelle gesammelt sind. Im Falle einer Sicherheitslücke bei IFTTT wären alle damit gekoppelten Services in Gefahr. 
+Ein weiterer Aspekt von IFTTT ist, dass es für die Anbindung von Services Zugriffsrechte auf sämtliche Accounts des Users bedarf. Aus einer Datenschutz-Perspektive\cite{cloudsec} stellt das ein Risiko für den Endnutzer dar, da diese Zugriffsrechte an einer Stelle gesammelt sind. Im Falle einer Sicherheitslücke bei IFTTT wären alle damit gekoppelten Services in Gefahr. 
 
 \section{Zentrale Idee}
 \label{sec:idee}
-Wie in Sektion \ref{subsec:tas} zu sehen ist, kann man drei prinzipiell unterschiedliche Arten von Task Automation Services unterscheiden: Cloud Service, Smartphone Applikation und Smart Home. Sie weisen zwar viele Gemeinsamkeiten auf, doch allein aus den Namen lässt sich ablesen, dass es sich dabei um grundlegend verschiedene Lösungen handelt. 
+Wie in Sektion \ref{subsec:tas} zu sehen ist, kann man drei prinzipiell unterschiedliche Arten von Task Automation Services unterscheiden: Cloud Services, Smartphone Applikationen und Smart Home Anwendungen. Sie weisen zwar viele Gemeinsamkeiten auf, doch allein aus den Namen lässt sich ablesen, dass es sich dabei um grundlegend verschiedene Lösungen handelt. 
 
 Die Cloud Services unterstützen nur begrenzt die \glqq direkte\grqq{}  Steuerung von Geräten. Außerdem sind die zum Einsatz kommenden Rule Engines sehr rudimentär. Smart Homes hingegen haben in der Regel mächtige Rule Engines und bieten die Möglichkeit komplexe Szenarien zu definieren. Zusätzlich sind sie in der Lage, Geräte direkt anzusteuern. Im Rahmen dieser Arbeit werden die Smartphone Applikationen nicht näher betrachtet.\\
 
@@ -76,7 +77,7 @@ Zum Schluss soll der entstandene Demonstrator evaluiert werden. Es soll geprüft
 \label{sec:anforderungen}
 In dieser Sektion werden aus den oben genannten Zielen konkrete Anforderungen an den resultierenden Demonstrator abgeleitet und im Detail festgehalten.
 
-Es wird erwartet, dass der Demonstrator folgende Eigenschaften erfüllt:
+Es wird postuliert, dass der Demonstrator folgende Eigenschaften erfüllt:
 \begin{enumerate}
 
 \item Der Demonstrator soll intern wie eine Smart Home Zentrale agieren und in der Lage sein, Geräte innerhalb des Hauses auch ohne Internetverbindung steuern zu können.
@@ -92,8 +93,8 @@ Es wird erwartet, dass der Demonstrator folgende Eigenschaften erfüllt:
 \label{subsec:anzubindende_services}
 Im Rahmen der Arbeit sollen folgende populäre Internetdienste in den Demonstrator exemplarisch integriert werden:
 \begin{enumerate}
-\item \textbf{Twitter}\cite{twitter} Der Demonstrator soll in der Lage sein für den Nutzer Tweets zu schreiben, sowie auf Tweets zu reagieren. Beispielsweise soll es möglich sein, Medien in Tweets automatisch in die Dropbox zu speichern.
 \item \textbf{Dropbox}\cite{dropbox} Es soll möglich sein, automatisch Dateien in die Dropbox zu speichern, sowie auf das Ändern von existierenden Dokumenten zu reagieren.
+\item \textbf{Twitter}\cite{twitter} Der Demonstrator soll in der Lage sein für den Nutzer Tweets zu schreiben, sowie auf Tweets zu reagieren. Beispielsweise soll es möglich sein, Medien in Tweets automatisch in die Dropbox zu speichern.
 \item \textbf{Wetterdienst}\cite{wetterapi} Es sollen Wetterdaten aus dem Internet bezogen und auf konkrete Wetterbedingungen reagiert werden können.
 \item \textbf{Email} Der Demonstrator soll in der Lage sein an beliebige Adressen Emails zu versenden.
 \end{enumerate}

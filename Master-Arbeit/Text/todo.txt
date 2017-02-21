@@ -1,0 +1,46 @@
+
+Einleitung
+- länger machen
+- Hype Cycle einfügen
+
+
+Stand der Forschung
+- Konkreter auf frühere Projekte eingehen
+- was genau ist M2M Learning
+- Fragmentierung des Martkes Beleg/Diagramm
+
+- Beispiel für Schaden, der bei Sicherheitsbruch entstehen kann
+
+- IFTTT Bezüge aktualisieren
+
+
+ESH
+- kompletter SmartHome Service Stack - Paper? oder umformulieren
+- Zusätzliche Grafik für Channels und Links
+
+
+Entwurf
+- Ein Bild einfügen - Komponentenmodell, Schnittstellen, etc.
+
+
+Implementierung
+- Sofern Möglich, an Stellen abstrakter
+- P. Hue Sektion hinzufügen
+
+- GUI in mehere Bilder aufteilen
+
+Evaluation:
+- Nochmal Testen, dass die Dateien erst heruntergeladen und danach hochgeladen werden
+
+
+Zusammenfassung
+- etwas länger
+
+
+
+Fragen an Sven:
+- welche Leerzeichen?
+- >130 Bundles: welche Referenz?
+- IFTTT - Messung keine Aussagekraft? Aber so ist der jetzt-Zustand von IFTTT. Man kann messen, was IST, nicht was SEIN KÖNNTE, WENN
+
+- "Sehr wichtiges Fazit" - "Ins Fazit aufnehmen" - Was meinst du?
