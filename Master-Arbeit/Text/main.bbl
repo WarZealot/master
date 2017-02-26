@@ -5,11 +5,6 @@
 \newblock Available online at \url{http://bnd.bndtools.org/}; visited on
   February 19th, 2017.
 
-\bibitem{bootstrap}
-{\em {Bootstrap}}.
-\newblock Available online at \url{http://getbootstrap.com/}; visited on
-  February 19th, 2017.
-
 \bibitem{concierge}
 {\em {Concierge}}.
 \newblock Available online at \url{http://www.eclipse.org/concierge/}; visited
@@ -31,6 +26,11 @@
   \url{https://github.com/eclipse/smarthome-packaging-sample}; visited on
   February 19th, 2017.
 
+\bibitem{ierc}
+{\em {European Research Cluster on the Internet of Things}}.
+\newblock Available online at \url{http://www.internet-of-things-research.eu/};
+  visited on February 19th, 2017.
+
 \bibitem{gmail}
 {\em {Google Mail}}.
 \newblock Available online at \url{https://mail.google.com/}; visited on
@@ -45,6 +45,11 @@
 {\em {openHAB}}.
 \newblock Available online at \url{http://www.openhab.org/}; visited on
   February 19th, 2017.
+
+\bibitem{oiot}
+{\em {OpenIoT}}.
+\newblock Available online at \url{http://www.openiot.eu/}; visited on February
+  26th, 2017.
 
 \bibitem{wetterapi}
 {\em {OpenWeatherMap}}.
@@ -88,6 +93,12 @@
 \newblock Available online at \url{http://ifttt.com}; visited on February 6th,
   2017.
 
+\bibitem{smartAction}
+{\em {Smart Action Project (IERC)}}.
+\newblock Website, 2017.
+\newblock Available online at \url{https://www.smart-action.eu/}; visited on
+  February 6th, 2017.
+
 \bibitem{osgi:whatisit}
 {\em {The OSGi Architecture}}.
 \newblock Website, 2017.
@@ -101,10 +112,23 @@
 \newblock Available online at \url{http://zapier.com/}; visited on February
   6th, 2017.
 
+\bibitem{IotEnablers}
+{\sc Al-Fuqaha, A.}, {\sc M.~Guizani}, {\sc M.~Mohammadi}, {\sc M.~Aledhari}
+  \btxandlong{}\ {\sc M.~Ayyash}: {\em Internet of Things: A Survey on Enabling
+  Technologies, Protocols, and Applications}.
+\newblock IEEE Communications Surveys Tutorials, 17(4):2347--2376,
+  Fourthquarter 2015.
+
 \bibitem{osgibook}
 {\sc Bakker, Paul} \btxandlong{}\ {\sc Bert Ertman}: {\em Building Modular
   Cloud Apps with OSGi}.
 \newblock "O'Reilly Media, Inc.", Sebastopol, 2013.
+
+\bibitem{iota:d15}
+{\sc Bauer, Martin}, {\sc Mathieu Boussard} \btxandlong{}\ {\sc Nicola~Bui
+  others}: {\em {Deliverable D1.5 – Final architectural reference model for
+  the IoT v3.0}}.
+\newblock \Btxtechreplong{}\ D1.5, The Internet of Things - Architecture, 2013.
 
 \bibitem{ECA}
 {\sc Beer, Wolfgang}, {\sc Volker Christian}, {\sc Alois Ferscha}
@@ -133,15 +157,17 @@
   Services: Automation for the Masses}.
 \newblock IEEE Internet Computing, 20(1):52--58, Jan 2016.
 
-\bibitem{ierc:portfolios}
-{\sc {European Research Cluster on the Internet of Things}}: {\em {IERC}
-  Projects Portfolio}.
-\newblock
-  {https://www.smart-action.eu/publications/detail/114/90c9734fda7c5c2c68e631bf29a9a9d2/}.
+\bibitem{hype}
+{\sc Gartner}: {\em {Hype Cycle Special Report for 2015}}.
+\newblock \Btxtechreplong{}, Gartner, 2015.
 
 \bibitem{felixgogo}
 {\sc Gedeon, Walid~Joseph}: {\em OSGi and Apache Felix 3.0 Beginners Guide}.
 \newblock Packt Publishing, 2010.
+
+\bibitem{sh:fragment}
+{\sc Greenough, John}: {\em {The US Smart Home Market Report}}.
+\newblock \Btxtechreplong{}, BI Intelligence, 2015.
 
 \bibitem{FiCloud:M3Iot}
 {\sc Gyrard, A.}, {\sc S.~K. Datta}, {\sc C.~Bonnet} \btxandlong{}\ {\sc
@@ -157,16 +183,27 @@
 \newblock \Btxinlong{}\ {\em Internet of Things (WF-IoT), 2015 IEEE 2nd World
   Forum on}, \btxpageslong{}\ 412--417, Dec 2015.
 
-\bibitem{iota:d25}
-{\sc Jacobs, Tobias}, {\sc Markus Joos}, {\sc Carsten Magerkurth}
-  \btxetalshort{.}: {\em {Adaptive, faulttolerant orchestration of distributed
-  IoT service interactions}}.
-\newblock \Btxtechreplong{}\ D2.5, The Internet of Things - Architecture, 2012.
+\bibitem{iot:glob_infr}
+{\sc {ITU-T Study Group 20}}: {\em {Frameworks and functional architecture
+  models}}.
+\newblock \Btxtechreplong{}\ Y.2060, Internet of Things Global Standards
+  Initiative, 2013.
 
-\bibitem{icore:achitecture}
-{\sc Menoret, Stephane} \btxetalshort{.}: {\em {iCore} - Final architecture
-  reference model}.
-\newblock \Btxtechreplong{}\ D2.5, iCore Project, 2014.
+\bibitem{ierc:portfolios}
+{\sc {Kleiner, Thibaut}}: {\em {IERC} Projects Portfolio}.
+\newblock \Btxtechreplong{}, European Research Cluster on the Internet of
+  Things, 2015.
+
+\bibitem{rfid_history}
+{\sc Landt, J.}: {\em The history of RFID}.
+\newblock IEEE Potentials, 24(4):8--11, Oct 2005.
+
+\bibitem{money}
+{\sc Manyika, James}, {\sc Michael Chui}, {\sc Jacques Bughin}, {\sc Richard
+  Dobbs}, {\sc Peter Bisson} \btxandlong{}\ {\sc Alex Marrs}: {\em {Disruptive
+  technologies: Advances that will transform life, business, and the global
+  economy}}.
+\newblock \Btxtechreplong{}, \btxmonmaylong{} 2013.
 
 \bibitem{maven}
 {\sc O'Brien, Tim}, {\sc Manfred Moser} \btxetalshort{.}: {\em Maven: The
@@ -203,6 +240,14 @@
 \bibitem{json}
 {\sc Sriparasa, Sai~Srinivas}: {\em JavaScript and JSON Essentials}.
 \newblock "Packt Publishing", 2013.
+
+\bibitem{iot_history}
+{\sc Suresh, P.}, {\sc J.~V. Daniel}, {\sc V.~Parthasarathy} \btxandlong{}\
+  {\sc R.~H. Aswathy}: {\em A state of the art review on the Internet of Things
+  (IoT) history, technology and fields of deployment}.
+\newblock \Btxinlong{}\ {\em 2014 International Conference on Science
+  Engineering and Management Research (ICSEMR)}, \btxpageslong{}\ 1--8, Nov
+  2014.
 
 \bibitem{gui_sp}
 {\sc Tesarik, J.}, {\sc L.~Dolezal} \btxandlong{}\ {\sc C.~Kollmann}: {\em User

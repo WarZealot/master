@@ -4,14 +4,56 @@ In diesem Kapitel wird der aktuelle Stand der Forschung des Internets der Dinge 
 
 
 \section{Internet of Things}
-Die enorm steigende Anzahl von „intelligenten Gegenständen“ mit eingebetteten Computern, die den Menschen im alltäglichen Leben unterstützen sollen, hat zu der Prägung des Begriffs „Internet der Dinge“ (IoT) geführt. Jedes dieser Dinge hat seine eigene Funktionalität und im Verbund stellen sie eine große Menge an Daten zur Verfügung. Im Rahmen von zahlreichen Forschungsprojekten \cite{ierc:portfolios} werden Möglichkeiten untersucht, IoT mit unterschiedlichen Technologien zu kombinieren. Unter anderem werden Technologien, wie Cloud Computing\cite{FiCloud:CloudIot}, Machine-2-Machine Learning\cite{FiCloud:M3Iot} und Semantic Web\cite{SemWebIoT} kritisch betrachtet. Außerdem werden Kernprinzipien, wie Architektur und Standardisierung intensiv recherchiert. Sie werden in dedizierten Forschungsprojekten \cite{icore:achitecture}\cite{iota:d25} immer wieder aufgegriffen.
+Die Kernideen des modernen Internets der Dinge wurden erstmals Anfang der 90er Jahren des letzten Jahrhunderts aufgeführt. Die Vision, sämtliche intelligenten Geräte in einem vereinten Netzwerk zu integrieren und zu steuern, ist also schon fast drei Jahrzehnte alt. 
+Vereinzelt wurden schon damals intelligente Geräte vielerorts in Demonstratoren und Prototypen an das Internet angeschlossen und von Menschen aus der Entfernung gesteuert. Doch erst im Jahre 1999 wurde der Begriff \glqq Internet of Things\grqq{} erstmals von Kevin Ashton, einem der Gründer des Auto-ID Centers am MIT geprägt \cite{iot_history}.\\
+
+Kevin Ashton betrachtete die radio-frequency identification (RFID) Technologie als Grundlage für den Erfolg von IoT. In der Tat fand RFID in den 90er Jahren erstmals massenhafte Verbreitung \cite{rfid_history}. Sie erlaubt es über Radio Wellen Informationen zu übertragen. Heutzutage kommt RFID in den verschiedensten Bereichen zum Einsatz.
+Mittlerweile haben sich auch andere Kommunikationstechnologien im IoT Umfeld fest etabliert. Dazu gehören unter anderem IEEE 802.11 (oft umgangssprachlich WLAN genannt), Bluetooth und QR Codes. \\
+
+Seitdem wurden zahlreiche Forschungsprojekte mit staatlicher Unterstützung ins Leben gerufen um das Potential des Internets der Dinge zu evaluieren. Besonders im aktuellen Jahrzehnt wird an Themen, wie Smart Cities und Standardisierung aktiv geforscht.\\
+
+Im Jahre 2007 wurde das European Research Cluster on the Internet of Things (IERC) \cite{ierc} von der europäischen Union ins Leben gerufen. Anfangs wurde damit das Ziel verfolgt die Forschung im Bereich RFID zu unterstützen, doch die unterstützten Forschungsprojekte \cite{ierc:portfolios} gingen schnell weit darüber hinaus. \\
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=\textwidth]{bilder/ierc}
+	\caption{Projektübergreifende Zusammenarbeit der vom IERC unterstützten Forschungsprojekte \cite{ierc:portfolios}. Selbst Teil des Smart Action Projekts \cite{smartAction}}
+	\label{fig:ierc}
+\end{figure}
+
+Aktuell werden verschiedenste Technologien von Partnern des IERC untersucht. Im Rahmen des Projekts \glqq Internet of Things - Architecture\grqq{} (IoT-A) wurde Anfang des Jahrzehnts ein Architektur-Referenz-Modell (ARM)\cite{iota:d15} entwickelt, das als Grundlage für konkrete IoT Systemarchitekturen dienen sollte. In der Tat kommt es heute in zahlreichen weiterführenden Projekten zum Einsatz. Die gemeinsame Architekturgrundlage sorgt dabei für Interoperabilität und Wiederverwendbarkeit.
+
+In dem Projekt OpenIoT \cite{oiot}, welches im Jahr 2010 ins Leben gerufen wurde, wird die Integration von IoT und Cloud Computing mithilfe von Semantiken untersucht. Unter anderem entstand auf diese Weise eine Open Source Software, die geeignet ist, um Sensoren in eine existierende IoT Lösung zu integrieren.
+
+Einen schematischen Überblick über diese und weitere Forschungsprojekte des European Research Cluster on the Internet of Things liefert Abbildung \ref{fig:ierc}.\\
+
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=\textwidth]{bilder/iot_market_share}
+	\caption{Erwarteter Marktanteil von IoT Anwendungen bis 2025 \cite{IotEnablers}}
+	\label{fig:market}
+\end{figure}
+
+
+
+Nicht nur im Rahmen des IERC wird an IoT geforscht. Die Internationale Fernmeldeunion (engl. International Telecommunication Union, ITU) hat 2013 eine dedizierte Study Group (SG20) ins Leben gerufen, die sich mit den Anwendungsmöglichkeiten von IoT und insbesondere Smart Cities und Communities beschäftigt. Als Teil davon hat die Internet of Things Global Standards Initiative (IoT-GSI) IoT als \textit{globale Infrastruktur einer Informationsgesellschaft} definiert \cite{iot:glob_infr}.  
+
+Auch in wissenschaftlichen Artikeln wird der Begriff IoT aktuell aus verschiedensten Perspektiven betrachtet. Es wird geprüft, inwiefern durch Kombination mit anderen Technologien ein Mehrwert erzielt werden kann. Unter anderem werden Technologien, wie Cloud Computing\cite{FiCloud:CloudIot}, Machine-2-Machine\cite{FiCloud:M3Iot} und Semantic Web\cite{SemWebIoT} kritisch analysiert. An dieser Stelle lässt sich auch diese Masterarbeit in den historischen Kontext einordnen. \\
+
+In der Tat sind die Anwendungsmöglichkeiten des Internets der Dinge sehr vielseitig. Es wird angenommen, dass bis zum Jahre 2025 die globalen ökonomischen Auswirkungen von 2,7 bis 6,2 Trillionen US-Dollar betragen werden \cite{money}. In welchen Bereichen die größten Effekte zu erwarten sind, zeigt Abbildung \ref{fig:market}.
+
+
+%Wie zu sehen ist, sind die Bereiche Gesundheitspflege und Produktionstechnik am meisten betroffen. 
+
+%Die enorm steigende Anzahl von „intelligenten Gegenständen“ mit eingebetteten Computern, die den Menschen im alltäglichen Leben unterstützen sollen, hat zu der Prägung des Begriffs „Internet der Dinge“ (IoT) geführt. Jedes dieser Dinge hat seine eigene Funktionalität und im Verbund stellen sie eine große Menge an Daten zur Verfügung. Im Rahmen von zahlreichen Forschungsprojekten \cite{ierc:portfolios} werden Möglichkeiten untersucht, IoT mit unterschiedlichen Technologien zu kombinieren. Unter anderem werden Technologien, wie Cloud Computing\cite{FiCloud:CloudIot}, Machine-2-Machine\cite{FiCloud:M3Iot} und Semantic Web\cite{SemWebIoT} kritisch betrachtet. 
 
 %Im Laufe der Zeit haben sich verschiedene Aspekte des IoT herausgebildet, unter anderem das Smart Home.
 
 \subsection{Smart Home}
 Ein mit IoT eng verwobenes Thema ist das Smart Home\cite{SmartHomeIoT}, welches die elektronische Steuerung von ausgewählten Geräten mit z.B. einer Rule Engine kombiniert um eine Automatisierung des Geräteverhaltens in einem Zusammenspiel zwischen Sensorik und Aktorik zu erreichen. Smart Home grenzt sich vom übergreifenden IoT-Bereich ab indem es auf Sensoren und Aktoren spezialisiert ist, die im Kontext eines Hauses relevant sind.\\
 
-Bis dato wurden zahlreiche Smart Home Lösungen von verschiedenen Anbietern entwickelt. Man kann prinzipiell zwei Arten von Lösungen unterscheiden. \textit{Proprietäre} Produkte (z.B. \textit{RWE SmartHome} \cite{RWE}) spezialisieren sich auf eine sehr begrenzte Anzahl von Geräten und bemühen sich maximale Unterstützung für diese Geräte zu bieten. Dies sorgt für eine Fragmentierung des Marktes. \textit{Open Source} Lösungen hingegen verfolgen das Ziel möglichst offen für verschiedene Geräte und Protokolle zu bleiben.\\ 
+Bis dato wurden zahlreiche Smart Home Lösungen von verschiedenen Anbietern entwickelt. Man kann prinzipiell zwei Arten von Lösungen unterscheiden. \textit{Proprietäre} Produkte (z.B. \textit{RWE SmartHome} \cite{RWE}) spezialisieren sich auf eine sehr begrenzte Anzahl von Geräten und bemühen sich maximale Unterstützung für diese Geräte zu bieten. Dies sorgt für eine Fragmentierung des Marktes \cite{sh:fragment}. \textit{Open Source} Lösungen hingegen verfolgen das Ziel möglichst offen für verschiedene Geräte und Protokolle zu bleiben.\\ 
 
 Da Open Source Lösungen aktuell noch aktiv in der Entwicklung sind und hauptsächlich als Software existieren, erfordert ihr Einsatz von Nutzern ein gewisses Maß an technischen Vorkenntnissen. In der Regel muss der Nutzer passende Hardware bereitstellen und die Software selbst installieren. Bei Problemen kann Support bestenfalls auf Foren von der Community gefunden werden. 
 
@@ -49,9 +91,9 @@ Im Rahmen dieser Arbeit wird Smart Home jedoch getrennt von TAS behandelt, da de
 
 
 \subsubsection{IFTTT}
-Ein Beispiel für Task Automation Services in der Cloud ist IFTTT, welches eine große Anzahl verschiedener Services (\textit{Facebook}, \textit{Dropbox}, \textit{Philips Hue}\cite{hue},   etc.) integriert und eine rudimentäre Rule Engine anbietet, die es erlaubt auf eine einfache Art und Weise serviceübergreifende „if this than that“ Anweisungen zu hinterlegen, die der klassischen „EDV“ ähneln. Es wird eine feste Trigger Komponente gewählt, die etwas auslöst, daraufhin wird die Aktion festgelegt, die ausgeführt werden soll. Solche Condition/Command Paare werden in IFTTT \textit{Recipes} genannt. 
+Ein Beispiel für Task Automation Services in der Cloud ist IFTTT, welches eine große Anzahl verschiedener Services (\textit{Facebook}, \textit{Dropbox}, \textit{Philips Hue}\cite{hue},   etc.) integriert und eine rudimentäre Rule Engine anbietet, die es erlaubt auf eine einfache Art und Weise serviceübergreifende „if this than that“ Anweisungen zu hinterlegen, die der klassischen „EDV“ ähneln. Es wird eine feste Trigger Komponente gewählt, die etwas auslöst, daraufhin wird die Aktion festgelegt, die ausgeführt werden soll. Solche Condition/Command Paare werden in IFTTT \textit{Applets} genannt. 
 
-Bis dato lassen sich komplexere Szenarien mit \textit{IFTTT} nicht abbilden.  Das bedeutet, dass es keine Möglichkeit gibt, beispielsweise, Und- und Oder-Bedingungen zu definieren, die es ermöglichen würden, mehrere Conditions in einem Recipe zu verknüpfen.
+Bis dato lassen sich komplexere Szenarien mit \textit{IFTTT} nur begrenzt abbilden. Das bedeutet, dass es keine Möglichkeit gibt, beispielsweise, Und- und Oder-Bedingungen zu definieren, die es ermöglichen würden, mehrere Conditions in einem Applet zu verknüpfen. Stattdessen muss komplexes Verhalten in einzelnen Bausteinen auf verschiedene Applets verteilt werden.
 
 Ein weiterer Aspekt von IFTTT ist, dass es für die Anbindung von Services Zugriffsrechte auf sämtliche Accounts des Users bedarf. Aus einer Datenschutz-Perspektive\cite{cloudsec} stellt das ein Risiko für den Endnutzer dar, da diese Zugriffsrechte an einer Stelle gesammelt sind. Im Falle einer Sicherheitslücke bei IFTTT wären alle damit gekoppelten Services in Gefahr. 
 

@@ -6,9 +6,13 @@ Im Rahmen dieser Arbeit wurde die Kompatibilität von Smart Home mit webbasierte
 
 Zu erwarten war, dass durch die Erweiterung einer Smart Home Anwendung um die Funktionalitäten von TAS die inhärenten Sicherheitsrisiken eines webbasierten Task Automation Services vermeiden lassen. Außerdem ließ sich erhoffen, dass ein dediziertes Gerät Verbesserungen in Punkten Reaktionszeit und Durchsatz aufweisen würde.\\
 
-Diese Annahmen wurden in der Praxis getestet. Hierzu wurde das Open Source Framework Eclipse SmartHome als Grundlage verwendet und auf dessen Basis ein vollständiger Prototyp entworfen und implementiert. Im Prototypen wurden die Webservices Twitter, Dropbox, ein Wetter- und ein Emaildienst integriert. Der Code wurde möglichst generisch gehalten, sodass Erweiterungen ohne großen Aufwand eingebaut werden können.\\
+Diese Annahmen wurden in der Praxis getestet. Hierzu wurde das Open Source Framework Eclipse SmartHome als Grundlage verwendet und auf dessen Basis ein vollständiger Prototyp entworfen und implementiert. Im Prototypen wurden die Webservices Twitter, Dropbox, ein Wetter- und ein Emaildienst integriert. Der Code wurde möglichst generisch gehalten, sodass Erweiterungen ohne großen Aufwand eingebaut werden können. Eine angemessene grafische Benutzeroberfläche wurde basierend auf modernen Design Prinzipien entworfen und implementiert. \\
 
-Im Laufe der Evaluationsphase haben sich die zugrundeliegenden Annahmen vollständig bestätigt. Es hat sich gezeigt, dass der Prototyp einer herkömmlichen Smart Home Lösung überlegen ist, da er vergleichbare Reaktionszeiten aufweist und gleichzeitig um zusätzliche Funktionalitäten verfügt. Gleichzeitig ist er auch den webbasierten Task Automation Services  in Punkten Reaktionszeit, Durchsatz und Sicherheit voraus.
+Im Laufe der Evaluationsphase haben sich die zugrundeliegenden Annahmen vollständig bestätigt. Es hat sich gezeigt, dass der Prototyp einer herkömmlichen Smart Home Lösung überlegen ist, da er vergleichbare Reaktionszeiten aufweist und gleichzeitig um zusätzliche Funktionalitäten verfügt. Gleichzeitig ist er auch den webbasierten Task Automation Services  in Punkten Reaktionszeit, Datendurchsatz und Sicherheit voraus. \\
+
+Im Punkt Datendurchsatz muss beachtet werden, dass der Vorsprung von FLASH hier auf die  Verzögerung beim Ausführen der Szenarien zurückzuführen ist. IFTTT begrenzt stark sowohl die Anzahl der bearbeiteten Dateien pro Applet als auch ihre Größe. Der Demonstrator hingegen hat solche Einschränkungen nicht.
+
+Besonders in Szenarien, in denen Webservices mit intelligenten Geräten im Haus interagieren, beweist er seine Mächtigkeit, da er die Geräte direkt ansteuern kann, ohne Umwege über vom Hersteller bereitgestellt Webschnittstellen ausnutzen zu müssen. 
 
 
 
@@ -22,4 +26,12 @@ Diese Tatsache lässt sich zum Teil durch die sehr starke Fragmentierung des Mar
 
 In diesem Zusammenhang kann Ziel zukünftiger Arbeiten werden, weiter in die Richtung der Integration von SmartHome mit Task Automation Services zu forschen. Beispielsweise wäre ein einfacher, aber gleichzeitig mächtiger visueller Regeleditor für den Erfolg eines solchen Unternehmens von großer Wichtigkeit. \\
 
-Ein anderer möglicher Ausbaupunkt für einen solchen Workflow Automation Service wäre die automatische Generierung von Szenarien. Sofern der Nutzer ein derartiges System in seinem Haus hat und der Anwendung die nötigen Zugriffsrechte auf seine Accounts gewährt hat, könnte die Anwendung das Verhalten des Nutzers mitverfolgen und basierend auf einer erhobenen Statistik automatisch eigene Szenarien vorschlagen.
+Des Weiteren ist die automatische Konfliktentdeckung und -Resolution in Szenarien ein wichtiges Thema in Regelmaschinen. Dies würde es dem Nutzer erleichtern nicht deterministisches Verhalten des Systems zu vermeiden. Auch die Entdeckung von Zyklen in Szenarien ist auf Dauer notwendig, denn insbesondere für Nutzer mit begrenztem Datenvolumen im Internetvertrag kann unkontrolliertes Verschieben von Daten schnell zum Problem werden.\\
+
+FLASH hat derzeit keine Datensicherung integriert. Sollte ein Hardwarefehler auftreten oder durch einen Softwarefehler die Daten in der Datenbank beschädigt werden, so wäre ein Wiederherstellen der Informationen unmöglich. Dies Problem könnte auf mehrere Weisen behoben werden. Einerseits wäre es möglich einen zusätzlichen passenden Webservice (z.B. Owncloud) in FLASH zu integrieren und es zu ermöglichen, die wichtigen Daten dort als Backups zu speichern. 
+
+Andererseits wäre ein zentrales Backend für sämtliche FLASH Instanzen von Interesse. Ein solches Backend wäre außer der Datensicherung auch in der Lage Updates für FLASH bereitzustellen. Dabei könnte es sich beispielsweise um die Aktualisierung der existierenden und die Integration von zusätzlichen Webservices handeln.
+
+In beiden Fällen sollte beachtet werden, dass die Zugriffsdaten des Nutzers für die Webservices nicht ohne seine Zustimmung an so ein Backend übermittelt werden. Dies würde bei einer kompletten Neuinstallation zwar dazu führen, dass der Nutzer für die betroffenen Accounts neu seine Zustimmung geben muss, doch dafür würden die Sicherheitsrisiken vermieden werden.\\
+
+Ein anderer möglicher Ausbaupunkt für FLASH wäre die automatische Generierung von Szenarien. Sofern der Nutzer ein derartiges System in seinem Haus hat und der Anwendung die nötigen Zugriffsrechte auf seine Accounts gewährt hat, könnte die Anwendung das Verhalten des Nutzers mitverfolgen und basierend auf einer erhobenen Statistik automatisch eigene Szenarien vorschlagen.

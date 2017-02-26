@@ -13,37 +13,42 @@ The style file: gerplain.bst
 A level-1 auxiliary file: kapitel/erklaerung.aux
 Database file #1: literatur/diplom.bib
 Warning--string name "website" is undefined
---line 231 of file literatur/diplom.bib
+--line 267 of file literatur/diplom.bib
 Warning--string name "website" is undefined
---line 239 of file literatur/diplom.bib
+--line 275 of file literatur/diplom.bib
 Warning--string name "website" is undefined
---line 247 of file literatur/diplom.bib
+--line 283 of file literatur/diplom.bib
 Warning--string name "website" is undefined
---line 255 of file literatur/diplom.bib
+--line 291 of file literatur/diplom.bib
 Warning--string name "website" is undefined
---line 263 of file literatur/diplom.bib
+--line 299 of file literatur/diplom.bib
 Warning--string name "website" is undefined
---line 272 of file literatur/diplom.bib
+--line 316 of file literatur/diplom.bib
 Warning--string name "website" is undefined
---line 280 of file literatur/diplom.bib
+--line 324 of file literatur/diplom.bib
 Warning--string name "website" is undefined
---line 288 of file literatur/diplom.bib
+--line 332 of file literatur/diplom.bib
 Warning--string name "website" is undefined
---line 297 of file literatur/diplom.bib
+--line 341 of file literatur/diplom.bib
 Warning--string name "website" is undefined
---line 305 of file literatur/diplom.bib
+--line 349 of file literatur/diplom.bib
 Warning--string name "website" is undefined
---line 313 of file literatur/diplom.bib
+--line 357 of file literatur/diplom.bib
 Warning--string name "website" is undefined
---line 321 of file literatur/diplom.bib
+--line 365 of file literatur/diplom.bib
 Warning--string name "website" is undefined
---line 329 of file literatur/diplom.bib
+--line 373 of file literatur/diplom.bib
 Warning--string name "website" is undefined
---line 337 of file literatur/diplom.bib
+--line 381 of file literatur/diplom.bib
 Warning--string name "website" is undefined
---line 345 of file literatur/diplom.bib
+--line 389 of file literatur/diplom.bib
 Warning--string name "website" is undefined
---line 355 of file literatur/diplom.bib
+--line 399 of file literatur/diplom.bib
+Warning--string name "website" is undefined
+--line 411 of file literatur/diplom.bib
+Warning--to sort, need author or key in ierc
+Warning--to sort, need author or key in smartAction
+Warning--to sort, need author or key in oiot
 Warning--to sort, need author or key in RWE
 Warning--to sort, need author or key in IFTTT
 Warning--to sort, need author or key in Zapier
@@ -61,8 +66,8 @@ Warning--to sort, need author or key in concierge
 Warning--to sort, need author or key in twitter4j
 Warning--to sort, need author or key in bnd
 Warning--to sort, need author or key in gmail
-Warning--to sort, need author or key in bootstrap
 Warning--to sort, need author or key in eshsample
 Warning--can't use both author and editor fields in ECA
+Warning--empty institution in money
 Warning--empty year in maven
-(There were 37 warnings)
+(There were 41 warnings)

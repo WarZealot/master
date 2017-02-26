@@ -2,21 +2,24 @@
 \select@language {english}
 \select@language {german}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Der Hype Zyklus \cite {hype}\relax }}{1}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces \IeC {\"U}berblick \IeC {\"u}ber existierende Task Automation Services \cite {ieee:tas}\relax }}{5}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Projekt\IeC {\"u}bergreifende Zusammenarbeit der vom IERC unterst\IeC {\"u}tzten Forschungsprojekte \cite {ierc:portfolios}. Selbst Teil des Smart Action Projekts \cite {smartAction}\relax }}{6}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Erwarteter Marktanteil von IoT Anwendungen bis 2025 \cite {IotEnablers}\relax }}{7}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces \IeC {\"U}berblick \IeC {\"u}ber existierende Task Automation Services \cite {ieee:tas}\relax }}{10}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces OSGi Komponentenmodell: Kommunikation zwischen Bundles \cite {osgi:whatisit}\relax }}{9}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Architektur von \textit {Things} und \textit {Items} in ESH \cite {ESH:home}\relax }}{11}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces OSGi Komponentenmodell: Kommunikation zwischen Bundles \cite {osgi:whatisit}\relax }}{15}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Architektur von \textit {Things} und \textit {Items} in ESH \cite {ESH:home}\relax }}{17}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Komponentenmodell: OSGi, ESH und FLASH\relax }}{17}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Komponentenmodell: OSGi, ESH und FLASH\relax }}{23}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Die Struktur einer Verbindung mit Besipielimplementierung f\IeC {\"u}r Twitter\relax }}{26}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Die Darstellung der Regeln in der Benutzeroberfl\IeC {\"a}che\relax }}{33}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Die Darstellung der Things und Verbindungen in der Benutzeroberfl\IeC {\"a}che\relax }}{34}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Authentifizierung bei Twitter als Sequenzdiagramm\relax }}{36}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Die Struktur einer Verbindung mit Besipielimplementierung f\IeC {\"u}r Twitter\relax }}{32}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Die Darstellung der Regeln in der Benutzeroberfl\IeC {\"a}che\relax }}{39}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Die Darstellung der Things und Verbindungen in der Benutzeroberfl\IeC {\"a}che\relax }}{40}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Authentifizierung bei Twitter als Sequenzdiagramm\relax }}{46}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Vergleich des Demonstrators mit existierenden Task Automation Services\relax }}{38}
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Vergleich des Mittelwerts zwischen IFTTT und FLASH f\IeC {\"u}r unterschiedliche Dateimengen\relax }}{39}
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Vergleich der l\IeC {\"a}ngsten Dauer (equivalent zu Gesamtdauer, da ca. 1-2 Sekunden vernachl\IeC {\"a}ssigt werden k\IeC {\"o}nnen) zwischen IFTTT und FLASH f\IeC {\"u}r unterschiedliche Dateimengen\relax }}{40}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Vergleich des Demonstrators mit existierenden Task Automation Services\relax }}{48}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Vergleich des Mittelwerts zwischen IFTTT und FLASH f\IeC {\"u}r unterschiedliche Dateimengen\relax }}{49}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Vergleich der l\IeC {\"a}ngsten Dauer (equivalent zu Gesamtdauer, da ca. 1-2 Sekunden vernachl\IeC {\"a}ssigt werden k\IeC {\"o}nnen) zwischen IFTTT und FLASH f\IeC {\"u}r unterschiedliche Dateimengen\relax }}{50}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

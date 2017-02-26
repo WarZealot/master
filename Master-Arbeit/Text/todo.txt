@@ -1,27 +1,4 @@
 
-Einleitung
-- länger machen
-- Hype Cycle einfügen
-
-Stand der Forschung
-- Konkreter auf frühere Projekte eingehen
-- was genau ist M2M Learning
-- Fragmentierung des Martkes Beleg/Diagramm
-
-- Beispiel für Schaden, der bei Sicherheitsbruch entstehen kann
-
-- IFTTT Bezüge aktualisieren
-
-Zusammenfassung
-- etwas länger
-
-
-
-
-
-Implementierung
-- Rule Syntax
-- Beispiel 2 - Event angekommen -> Action ausgeführt
 
 Evaluation:
 - evtl. noch Zapier einfügen

@@ -163,6 +163,7 @@ Neue Regeln können im JSON-Format konfiguriert und über \textit{Import Rules} 
 
 
 \subsubsection{Darstellung von Things und Verbindungen}
+\label{thing_table}
 Die Things und Verbindungen in der Benutzeroberfläche sind in Abbildung \ref{fig:gui_2} dargestellt.\\
 
 \begin{figure}
@@ -183,12 +184,104 @@ Da die Konfigurations- und Zugriffsdaten ausschließlich im entsprechenden Thing
 
 
 \subsection{Regel Syntax und ihre Mächtigkeit}
-Wie bereits erklärt werden die Regeln in JSON deklariert und über die Benutzeroberfläche dem System hinzugefügt. 
+Wie in vorherigen Sektionen erläutert, können neue Regeln in JSON deklariert und über die Benutzeroberfläche dem System hinzugefügt werden. Im Folgenden werden anhand einer Beispielregel die vier logischen Abschnitte der JSON-Deklaration erläutert. Die ausgewählte Regel sorgt dafür, dass sämtliche in Tweets hochgeladene Bilder automatisch in einen spezifizierten Dropbox-Ordner kopiert werden.
+
+\subsubsection{Meta-Informationen}
+Der erste Teil einer Regel besteht aus den Meta-Informationen, durch die sie eindeutig identifiziert werden kann. In Listing \ref{lmeta} sind die verschiedenen Elemente beispielhaft aufgeführt.
+
+\begin{lstlisting}[language=json,firstnumber=1, caption=Meta-Informationen einer Regel im JSON Format, captionpos=b, label=lmeta]
+{
+    "uid": "Twitter2Dropbox",
+    "name": "Twitter2DropboxRule",
+    "description": "This rule saves any media in tweet to the dropbox.",
+     "tags": [
+        "flash"
+    ],
+    "visibility": "VISIBLE",
+    "configuration": {},
+    "configDescriptions": [],
+    ...
+}
+\end{lstlisting}
+
+Wie zu sehen ist, hat jede Regel eine eindeutige \textit{uid}. Eine neu hinzugefügte Regel mit derselben uid überschreiben die bereits existierende. Die Attribute Name, Beschreibung und Tags helfen bei der Filterung und Präsentation der jeweiligen Regel. Die Sichtbarkeit regelt, ob Regeln für den Nutzer einsehbar sind. Schließlich gibt es die Möglichkeit zusätzliche Konfigurationsparameter mit Beschriftungen in die Regel aufzunehmen. Es muss ein entsprechender Handler im System existieren, damit sie auf irgendeine Weise ausgewertet werden.
+
+\subsubsection{Auslöser}
+Zusätzlich besitzt jede Regel eine Liste von Triggern. In Listing \ref{l2} ist diese Liste für die Beispielregel dargestellt.
+\begin{lstlisting}[language=json,firstnumber=1, caption=Die Liste der Trigger im JSON Format, captionpos=b, label=l2]
+{
+    ...
+    "triggers": [
+	     {
+	         "id": "KtkTwitter2DropboxTriggerId",
+	         "type": "GenericEventTrigger",
+	         "configuration": {
+	             "eventSource": "flash/twitter",
+	             "eventTopic": "flash/twitter/media",
+	             "eventTypes": "ALL"
+	         }	         
+	     }
+    ],
+    ...
+}            
+\end{lstlisting}
+Wie zu sehen ist, hat die Regel in diesem Fall nur einen einzigen GenericEventTrigger. In der Konfiguration kann angegeben werden, welche konkreten Events ihn auslösen sollen. In diesem Fall sind nur die Events interessant, die ausgelöst werden, wenn ein aktualisierter Status auf Twitter ein Medium enthält.
+
+Es ist möglich, beliebig viele Trigger auf diese Weise zu der Regel hinzuzufügen. Die Ausführung wird dann angestoßen, sofern mindestens einer der Trigger erfüllt ist - es handelt sich dabei also um eine logische \textit{oder}-Verknüpfung. Logische \textit{und}-Verknüpfungen werden von ESH begrenzt durch CompositeTrigger unterstützt, werden aber im Rahmen dieser Arbeit nicht näher behandelt.
+
+\subsubsection{Bedingungen}
+Nach den Triggern werden zunächst die Bedingungen evaluiert. Wie diese im JSON-Format aussehen, zeigt Listing \ref{l3}.
+\begin{lstlisting}[language=json,firstnumber=1, caption=Die Liste der Conditions einer Regel im JSON Format, captionpos=b, label=l3]
+{
+    ...
+    "conditions": [
+        {
+            "id": "KtkTwitter2DropboxConditionID",
+            "type": "EventCondition",
+            "configuration": {
+                "topic": "flash/twitter/.*"
+            },
+            "inputs": {
+                "event": "KtkTwitter2DropboxTriggerId.event"
+            }           
+        }
+    ],
+    ...
+}                   
+\end{lstlisting}
+Die Beispielregel besitzt nur eine EventCondition. Sie analysiert das Event, das den Trigger ausgelöst hat und vom Trigger in den Ausführungskontext gespeichert wurde. Falls der Topic des Events dem spezifizierten regulären Ausdruck entspricht, so gilt die Bedinung als erfüllt. Ansonsten wird die Ausführung der Regel angehalten, da nicht alle Bedingungen erfüllt sind.
+
+Es ist möglich, eine beliebige Anzahl von Conditions in der Regel aufzulisten. Zu beachten ist, dass sie alle erfüllt sein müssen, damit die Regel ausgeführt wird - es handelt sich um eine logische \textit{und}-Verknüpfung. Es ist derzeit nicht möglich die Conditions über ein logisches \textit{oder} zu verbinden.
+
+
+\subsubsection{Aktionen}
+Schließlich müssen noch die Aktionen einer Regel festgelegt werden. Dies ist in Listing \ref{l4} beispielhaft dargestellt.
+\begin{lstlisting}[language=json,firstnumber=1, caption=Die Liste der Aktionen einer Regel im JSON Format, captionpos=b, label=l4]
+{
+...
+"actions": [
+  {
+	"id": "DropboxActionWohooID",
+    "type": "DropboxAction",
+    "configuration": {
+       "directory": "/testfolder/",
+       "itemName": "dropbox_dropboxThingTypeId_dropboxconnection_folder"
+    },
+    "inputs": {
+       "event": "KtkTwitter2DropboxTriggerId.event"
+    }
+  }
+ ]
+}            
+\end{lstlisting}
+Die Regel enthält eine Aktion des Typs DropboxAction. In der Konfiguration wird angegeben, in welchem Ordner in der Dropbox die Dateien gespeichert werden sollen. Der Name des Items stellt sich aus dem Namen des Things und des Channels zusammen. Er kann vom Nutzer aus der Thing-Tabelle (siehe Sektion \ref{thing_table}) ermittelt werden. Schließlich muss angegeben werden, welches Event als Kontext für diese Aktion gelten soll. Dies kann besonders bei Regeln mit mehreren Triggern wichtig sein.
+
+Sämtliche Aktionen, die in einer Regel definiert werden, werden sequentiell abgearbeitet. Dabei ist es möglich für früher in der Sequenz auftretende Aktionen Informationen in den Kontext zu speichern, sodass sie von später ausgeführten Aktionen ausgelesen und berücksichtigt werden. Bei Fehlschlagen der Ausführung einer konkreten Aktion werden die übrigen dennoch weiter ausgeführt.
 
 
 
 
-\subsection{Beispiel}
+\subsection{Beispiel für die Zusammenarbeit verschiedener Komponente}
 
 \begin{figure}[h]
 	\centering

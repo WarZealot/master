@@ -4,97 +4,102 @@
 \contentsline {chapter}{\numberline {1}Einleitung}{1}
 \contentsline {section}{\numberline {1.1}Motivation und Hintergrund}{1}
 \contentsline {section}{\numberline {1.2}Ziele der Arbeit}{2}
-\contentsline {section}{\numberline {1.3}Aufbau der Arbeit}{2}
-\contentsline {chapter}{\numberline {2}Stand der Forschung}{3}
-\contentsline {section}{\numberline {2.1}Internet of Things}{3}
-\contentsline {subsection}{\numberline {2.1.1}Smart Home}{3}
-\contentsline {subsection}{\numberline {2.1.2}Task Automation Services}{4}
-\contentsline {subsubsection}{IFTTT}{6}
-\contentsline {section}{\numberline {2.2}Zentrale Idee}{6}
-\contentsline {subsection}{\numberline {2.2.1}Ziele}{6}
-\contentsline {subsection}{\numberline {2.2.2}Konkrete Anforderungen}{7}
-\contentsline {subsubsection}{Anzubindende Services}{8}
-\contentsline {chapter}{\numberline {3}Eclipse SmartHome}{9}
-\contentsline {section}{\numberline {3.1}\IeC {\"U}berblick}{9}
-\contentsline {subsubsection}{Architektur}{9}
-\contentsline {subsubsection}{Features}{10}
-\contentsline {section}{\numberline {3.2}Modell}{10}
-\contentsline {subsubsection}{Things}{10}
-\contentsline {subsubsection}{Channels}{11}
-\contentsline {subsubsection}{Items}{11}
-\contentsline {subsubsection}{Links}{11}
-\contentsline {subsection}{\numberline {3.2.1}Persistenz}{12}
-\contentsline {section}{\numberline {3.3}Automatisierung}{12}
-\contentsline {subsection}{\numberline {3.3.1}Rule Engine}{12}
-\contentsline {subsubsection}{Trigger}{12}
-\contentsline {subsubsection}{Kontext}{13}
-\contentsline {subsubsection}{Conditions}{13}
-\contentsline {subsubsection}{Actions}{13}
-\contentsline {subsubsection}{Commands}{14}
-\contentsline {subsection}{\numberline {3.3.2}Deklarative Typen}{14}
-\contentsline {subsection}{\numberline {3.3.3}Events}{14}
-\contentsline {section}{\numberline {3.4}Bindings}{15}
-\contentsline {subsubsection}{Thing Handler}{15}
-\contentsline {chapter}{\numberline {4}Entwurf von FLASH}{17}
-\contentsline {section}{\numberline {4.1}\IeC {\"U}berblick}{18}
-\contentsline {section}{\numberline {4.2}Webservices}{18}
-\contentsline {subsubsection}{OAuth 2 Standard}{19}
-\contentsline {section}{\numberline {4.3}Integration in Eclipse SmartHome}{19}
-\contentsline {subsection}{\numberline {4.3.1}Verbindung zum Webdienst}{20}
-\contentsline {subsubsection}{Polling und Webhooks}{20}
-\contentsline {subsubsection}{Verbindung}{20}
-\contentsline {subsubsection}{Eigene Events und Module von Regeln}{21}
-\contentsline {subsection}{\numberline {4.3.2}Persistenz}{21}
-\contentsline {subsection}{\numberline {4.3.3}Benutzeroberfl\IeC {\"a}che}{22}
-\contentsline {subsubsection}{Funktionale Anforderungen}{22}
-\contentsline {subsubsection}{Umsetzungskonzept}{22}
-\contentsline {section}{\numberline {4.4}OSGi auf dem Raspberry Pi}{23}
-\contentsline {section}{\numberline {4.5}Fazit}{23}
-\contentsline {chapter}{\numberline {5}Implementierung}{25}
-\contentsline {section}{\numberline {5.1}\IeC {\"U}berblick}{25}
-\contentsline {section}{\numberline {5.2}Schnittstellen-Bundles}{25}
-\contentsline {subsection}{\numberline {5.2.1}FLASH Authentifizierung}{25}
-\contentsline {subsubsection}{ConnectionService}{25}
-\contentsline {subsubsection}{AbstractConnectionService}{26}
-\contentsline {subsection}{\numberline {5.2.2}FLASH Erweiterungen}{27}
-\contentsline {section}{\numberline {5.3}Bindings}{27}
-\contentsline {subsection}{\numberline {5.3.1}Anbindung von Twitter}{27}
-\contentsline {subsubsection}{\IeC {\"U}berblick \IeC {\"u}ber die relevanten Trigger, Conditions und Actions}{28}
-\contentsline {subsection}{\numberline {5.3.2}Integration von Dropbox}{29}
-\contentsline {subsection}{\numberline {5.3.3}Das Wetter Binding}{30}
-\contentsline {subsection}{\numberline {5.3.4}Email Funktionalit\IeC {\"a}ten}{30}
-\contentsline {subsection}{\numberline {5.3.5}Integraiton von Philips Hue}{30}
-\contentsline {section}{\numberline {5.4}Benutzeroberfl\IeC {\"a}che}{31}
-\contentsline {subsubsection}{Backend}{31}
-\contentsline {subsubsection}{Frontend}{31}
-\contentsline {subsection}{\numberline {5.4.1}Funktionalit\IeC {\"a}t und visuelle Darstellung}{31}
-\contentsline {subsubsection}{Regeln in der Benutzeroberfl\IeC {\"a}che}{32}
-\contentsline {subsubsection}{Darstellung von Things und Verbindungen}{32}
-\contentsline {subsection}{\numberline {5.4.2}Beispiel}{35}
-\contentsline {section}{\numberline {5.5}Deployment auf dem Raspberry Pi}{35}
-\contentsline {paragraph}{Anmerkung:}{35}
-\contentsline {section}{\numberline {5.6}Fazit}{35}
-\contentsline {chapter}{\numberline {6}Evaluation}{37}
-\contentsline {section}{\numberline {6.1}Erf\IeC {\"u}llte Ziele}{37}
-\contentsline {section}{\numberline {6.2}Vergleich mit Smart Home}{37}
-\contentsline {section}{\numberline {6.3}Vergleich mit webbasierten Task Automation Services}{37}
-\contentsline {subsection}{\numberline {6.3.1}Kopieren von Dateien in der Dropbox}{38}
-\contentsline {subsubsection}{Zahlreiche kleine Dateien}{39}
-\contentsline {subsubsection}{Gro\IeC {\ss }e Dateien}{40}
-\contentsline {subsection}{\numberline {6.3.2}Steuern von Lampen bei Tweets}{40}
-\contentsline {subsection}{\numberline {6.3.3}Auswertung}{41}
-\contentsline {subsubsection}{Vorteile}{41}
-\contentsline {subsubsection}{Nachteile}{41}
-\contentsline {section}{\numberline {6.4}Eclipse SmartHome und Quellcode}{42}
-\contentsline {subsection}{\numberline {6.4.1}Positive Aspekte}{42}
-\contentsline {subsection}{\numberline {6.4.2}Negative Aspekte}{42}
-\contentsline {subsubsection}{Eclipse SmartHome}{42}
-\contentsline {subsubsection}{Quellcode}{42}
-\contentsline {section}{\numberline {6.5}Fazit}{42}
-\contentsline {chapter}{\numberline {7}Zusammenfassung}{43}
-\contentsline {section}{\numberline {7.1}Zusammenfassung}{43}
-\contentsline {section}{\numberline {7.2}Ausblick}{44}
-\contentsline {chapter}{\numberline {A}Weitere Informationen}{45}
-\contentsline {chapter}{Abbildungsverzeichnis}{47}
-\contentsline {chapter}{Literaturverzeichnis}{51}
-\contentsline {chapter}{Erkl\IeC {\"a}rung}{51}
+\contentsline {section}{\numberline {1.3}Aufbau der Arbeit}{3}
+\contentsline {chapter}{\numberline {2}Stand der Forschung}{5}
+\contentsline {section}{\numberline {2.1}Internet of Things}{5}
+\contentsline {subsection}{\numberline {2.1.1}Smart Home}{8}
+\contentsline {subsection}{\numberline {2.1.2}Task Automation Services}{9}
+\contentsline {subsubsection}{IFTTT}{10}
+\contentsline {section}{\numberline {2.2}Zentrale Idee}{11}
+\contentsline {subsection}{\numberline {2.2.1}Ziele}{11}
+\contentsline {subsection}{\numberline {2.2.2}Konkrete Anforderungen}{12}
+\contentsline {subsubsection}{Anzubindende Services}{12}
+\contentsline {chapter}{\numberline {3}Eclipse SmartHome}{15}
+\contentsline {section}{\numberline {3.1}\IeC {\"U}berblick}{15}
+\contentsline {subsubsection}{Architektur}{15}
+\contentsline {subsubsection}{Features}{16}
+\contentsline {section}{\numberline {3.2}Modell}{16}
+\contentsline {subsubsection}{Things}{16}
+\contentsline {subsubsection}{Channels}{17}
+\contentsline {subsubsection}{Items}{17}
+\contentsline {subsubsection}{Links}{17}
+\contentsline {subsection}{\numberline {3.2.1}Persistenz}{18}
+\contentsline {section}{\numberline {3.3}Automatisierung}{18}
+\contentsline {subsection}{\numberline {3.3.1}Rule Engine}{18}
+\contentsline {subsubsection}{Trigger}{18}
+\contentsline {subsubsection}{Kontext}{19}
+\contentsline {subsubsection}{Conditions}{19}
+\contentsline {subsubsection}{Actions}{19}
+\contentsline {subsubsection}{Commands}{20}
+\contentsline {subsection}{\numberline {3.3.2}Deklarative Typen}{20}
+\contentsline {subsection}{\numberline {3.3.3}Events}{20}
+\contentsline {section}{\numberline {3.4}Bindings}{21}
+\contentsline {subsubsection}{Thing Handler}{21}
+\contentsline {chapter}{\numberline {4}Entwurf von FLASH}{23}
+\contentsline {section}{\numberline {4.1}\IeC {\"U}berblick}{24}
+\contentsline {section}{\numberline {4.2}Webservices}{24}
+\contentsline {subsubsection}{OAuth 2 Standard}{25}
+\contentsline {section}{\numberline {4.3}Integration in Eclipse SmartHome}{25}
+\contentsline {subsection}{\numberline {4.3.1}Verbindung zum Webdienst}{26}
+\contentsline {subsubsection}{Polling und Webhooks}{26}
+\contentsline {subsubsection}{Verbindung}{26}
+\contentsline {subsubsection}{Eigene Events und Module von Regeln}{27}
+\contentsline {subsection}{\numberline {4.3.2}Persistenz}{27}
+\contentsline {subsection}{\numberline {4.3.3}Benutzeroberfl\IeC {\"a}che}{28}
+\contentsline {subsubsection}{Funktionale Anforderungen}{28}
+\contentsline {subsubsection}{Umsetzungskonzept}{28}
+\contentsline {section}{\numberline {4.4}OSGi auf dem Raspberry Pi}{29}
+\contentsline {section}{\numberline {4.5}Fazit}{29}
+\contentsline {chapter}{\numberline {5}Implementierung}{31}
+\contentsline {section}{\numberline {5.1}\IeC {\"U}berblick}{31}
+\contentsline {section}{\numberline {5.2}Schnittstellen-Bundles}{31}
+\contentsline {subsection}{\numberline {5.2.1}FLASH Authentifizierung}{31}
+\contentsline {subsubsection}{ConnectionService}{31}
+\contentsline {subsubsection}{AbstractConnectionService}{32}
+\contentsline {subsection}{\numberline {5.2.2}FLASH Erweiterungen}{33}
+\contentsline {section}{\numberline {5.3}Bindings}{33}
+\contentsline {subsection}{\numberline {5.3.1}Anbindung von Twitter}{33}
+\contentsline {subsubsection}{\IeC {\"U}berblick \IeC {\"u}ber die relevanten Trigger, Conditions und Actions}{34}
+\contentsline {subsection}{\numberline {5.3.2}Integration von Dropbox}{35}
+\contentsline {subsection}{\numberline {5.3.3}Das Wetter Binding}{36}
+\contentsline {subsection}{\numberline {5.3.4}Email Funktionalit\IeC {\"a}ten}{36}
+\contentsline {subsection}{\numberline {5.3.5}Integraiton von Philips Hue}{36}
+\contentsline {section}{\numberline {5.4}Benutzeroberfl\IeC {\"a}che}{37}
+\contentsline {subsubsection}{Backend}{37}
+\contentsline {subsubsection}{Frontend}{37}
+\contentsline {subsection}{\numberline {5.4.1}Funktionalit\IeC {\"a}t und visuelle Darstellung}{37}
+\contentsline {subsubsection}{Regeln in der Benutzeroberfl\IeC {\"a}che}{38}
+\contentsline {subsubsection}{Darstellung von Things und Verbindungen}{38}
+\contentsline {subsection}{\numberline {5.4.2}Regel Syntax und ihre M\IeC {\"a}chtigkeit}{41}
+\contentsline {subsubsection}{Meta-Informationen}{41}
+\contentsline {subsubsection}{Ausl\IeC {\"o}ser}{41}
+\contentsline {subsubsection}{Bedingungen}{42}
+\contentsline {subsubsection}{Aktionen}{43}
+\contentsline {subsection}{\numberline {5.4.3}Beispiel f\IeC {\"u}r die Zusammenarbeit verschiedener Komponente}{44}
+\contentsline {section}{\numberline {5.5}Deployment auf dem Raspberry Pi}{44}
+\contentsline {paragraph}{Anmerkung:}{45}
+\contentsline {section}{\numberline {5.6}Fazit}{45}
+\contentsline {chapter}{\numberline {6}Evaluation}{47}
+\contentsline {section}{\numberline {6.1}Erf\IeC {\"u}llte Ziele}{47}
+\contentsline {section}{\numberline {6.2}Vergleich mit Smart Home}{47}
+\contentsline {section}{\numberline {6.3}Vergleich mit webbasierten Task Automation Services}{47}
+\contentsline {subsection}{\numberline {6.3.1}Kopieren von Dateien in der Dropbox}{48}
+\contentsline {subsubsection}{Zahlreiche kleine Dateien}{49}
+\contentsline {subsubsection}{Gro\IeC {\ss }e Dateien}{50}
+\contentsline {subsection}{\numberline {6.3.2}Steuern von Lampen bei Tweets}{50}
+\contentsline {subsection}{\numberline {6.3.3}Auswertung}{51}
+\contentsline {subsubsection}{Vorteile}{51}
+\contentsline {subsubsection}{Nachteile}{51}
+\contentsline {section}{\numberline {6.4}Eclipse SmartHome und Quellcode}{52}
+\contentsline {subsection}{\numberline {6.4.1}Positive Aspekte}{52}
+\contentsline {subsection}{\numberline {6.4.2}Negative Aspekte}{52}
+\contentsline {subsubsection}{Eclipse SmartHome}{52}
+\contentsline {subsubsection}{Quellcode}{52}
+\contentsline {section}{\numberline {6.5}Fazit}{52}
+\contentsline {chapter}{\numberline {7}Zusammenfassung}{53}
+\contentsline {section}{\numberline {7.1}Zusammenfassung}{53}
+\contentsline {section}{\numberline {7.2}Ausblick}{54}
+\contentsline {chapter}{\numberline {A}Weitere Informationen}{57}
+\contentsline {chapter}{Abbildungsverzeichnis}{59}
+\contentsline {chapter}{Literaturverzeichnis}{64}
+\contentsline {chapter}{Erkl\IeC {\"a}rung}{64}
