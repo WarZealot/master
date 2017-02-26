@@ -4,8 +4,21 @@ Bevor mit der Implementierung angefangen werden kann, müssen erst Entscheidunge
 getroffen werden, wie die einzelnen Anforderungen umgesetzt werden sollen. Es folgt eine
 schrittweise Analyse der einzelnen Anforderungen.
 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics{bilder/entwurf_comp}
+	\caption{Komponentenmodell: OSGi, ESH und FLASH}
+	\label{fig:comp}
+\end{figure}
+
+
 \section{Überblick}
-Im Rahmen der Arbeit müssen die Anforderungen umgesetzt werden, die in Sektion \ref{sec:anforderungen} zusammengefasst wurden. Durch die Nutzung von Eclipse SmartHome ist die Anforderung, dass das System in der Lage ist Geräte innerhalb des Hauses ohne Internetverbindung zu steuern, bereits gegeben. Es ist jedoch darauf zu achten, dass durch die Integration der neuen Funktionalitäten die existierenden nicht beeinträchtigt werden.
+Im Rahmen der Arbeit müssen die Anforderungen umgesetzt werden, die in Sektion \ref{sec:anforderungen} zusammengefasst wurden. Durch die Nutzung von Eclipse SmartHome ist die Anforderung, dass das System in der Lage ist Geräte innerhalb des Hauses ohne Internetverbindung zu steuern, bereits gegeben. Es ist jedoch darauf zu achten, dass durch die Integration der neuen Funktionalitäten die existierenden nicht beeinträchtigt werden.\\
+
+Einen Überblick über die verschiedenen Komponenten bietet Abbildung \ref{fig:comp}. Wie zu sehen ist, laufen sämtliche Elemente in der OSGi Umgebung. FLASH orientiert sich dabei an ESH und nutzt dieselben Ressourcen und Schnittstellen. Die zentrale Verbindungsstelle zwischen der Anwendung und den externen Funktionalitäten sind die Bindings. Sie wiederum kommunizieren mit den anderen von OSGi verwalteten Services. Der Event Bus und die Regelmaschine gehören zu den für diese Arbeit wichtigsten Diensten. ESH bietet die Interaktion mit den üblichen intelligenten Geräten in einem Smart Home (Dimmer, Jalousien, etc.), während FLASH für die Integration von den Webservices verantwortlich ist.\\
+
+
 Auf welche Weise die übrigen Anforderungen umgesetzt werden sollen, wird in den nachfolgenden Sektionen diskutiert.
 
 
@@ -78,10 +91,22 @@ Wie in Sektion \ref{subsec:persistenz} erläutert, ist eine MapDB in ESH bereits
 Dadurch, dass die Webservices selbst als Things modelliert werden und alle notwendigen Konfigurationsdaten mit sich tragen, kann dieser Aspekt von ESH in seiner aktuellen Form wiederverwendet werden. Bei einem Neustart des Systems werden sämtliche relevante Things aus der Datenbank ausgelesen und basierend auf den in ihrer Konfiguration gespeicherten Zugriffsdaten (z.B. OAuth Token) entsprechende Verbindungen aufgebaut, die für die Aktualität der Zustände sorgen.
 
 \subsection{Benutzeroberfläche}
+\label{entwurf:gui}
+\subsubsection{Funktionale Anforderungen}
 Die Benutzeroberfläche soll den Nutzer in die Lage versetzen Regeln zur Laufzeit zu bearbeiten. Das bedeutet, es soll ihm möglich sein neue Regeln anzulegen, sowie existierende Regeln zu betrachten, zu editieren und zu löschen. Da Eclipse SmartHome die Möglichkeit bietet Regeln im JSON-Format zu deklarieren (siehe Sektion \ref{subsec:decltypes}), bietet es sich an dieser Stelle an, es in der Benutzeroberfläche analog umzusetzen.\\
 
 Des weiteren soll dem User die Möglichkeit gegeben sein, die Zugriffsrechte auf die unterstützten Webservices (z.B. auf seinen Twitter Account) der Anwendung zu übermitteln, bzw. auf diese Weise neue Instanzen des entsprechenden Thing-Typen zum System hinzuzufügen.
 
+\subsubsection{Umsetzungskonzept}
+Die zu entwickelnde grafische Benutzeroberfläche soll modernen Design-Prinzipien entsprechen. Im Rahmen dieser Arbeit wurde entschieden diese in Form einer Einzelseiten-Webanwendung zu realisieren. \\
+
+Das Format einer \textit{Web}-Anwendung bietet sich an, da es dem Nutzer möglich sein soll seine angebundenen Geräte von überall steuern zu können. Eine Anwendung, die nativ auf dem Raspberry Pi arbeitet und nur verwendet werden kann, sofern man physischen Zugriff auf das Gerät hat, würde am Ziel vorbei führen. Im Umfeld von Smart Home sind Webanwendungen seit langem zum Standard geworden.\\
+
+Es soll sich dabei um eine \textit{Einzelseiten}-Webanwendung (engl. Single Page Application (SPA))handeln, da sie sich gut für dieses konkrete Szenario eignet. Bei einer SPA handelt es sich um ein Design Paradigma, bei dem die gesamte Anwendung auf einer einzigen HTML-Seite entwickelt wird \cite{gui_sp}. Inhalte werden dynamisch vom Server angefragt, wenn sie benötigt werden und auf der Seite angemessen präsentiert. In der Regel kommt dabei vor allem asynchroner Javascript zum Einsatz.
+
+Einzelseiten-Webanwendungen eignen sich gut für die im Rahmen dieser Arbeit behandelte Problemstellung, da sie es ermöglichen die Belastung auf den Server zu reduzieren. Dies ist wichtig, da die Rechenleistung eines Raspberry Pi vergleichsweise begrenzt ist und eine Server seitige Bearbeitung ung Bereitstellung von HTML-Inhalten zu Verzögerungen führen könnte.\\
+
+Seitens des Servers sollen die Informationen über REST Schnittstellen \cite{rest} bereitgestellt werden. Es wurde entschieden für die  Kommunikation Representational State Transfer zu wählen, da es aktuell als Referenz-Paradigma für die Bereitstellung von intelligenten Geräten im Web gilt \cite{gui_rest}.
 
 
 

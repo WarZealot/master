@@ -176,11 +176,22 @@
   \url{https://books.sonatype.com/mvnref-book/reference/public-book.html};
   visited on February 19th, 2017.
 
+\bibitem{gui_rest}
+{\sc Paganelli, F.}, {\sc S.~Turchi} \btxandlong{}\ {\sc D.~Giuli}: {\em A Web
+  of Things Framework for RESTful Applications and Its Experimentation in a
+  Smart City}.
+\newblock IEEE Systems Journal, 10(4):1412--1423, Dec 2016.
+
 \bibitem{SmartHomeIoT}
 {\sc Ran, Chen}, {\sc Baoan Li} \btxandlong{}\ {\sc Jianjun Yu}: {\em CEIS 2011
   Research and Application on the Smart Home Based on Component Technologies
   and Internet of Things}.
 \newblock Procedia Engineering, 15:2087 -- 2092, 2011.
+
+\bibitem{rest}
+{\sc Richardson, Leonard} \btxandlong{}\ {\sc Sam Ruby}: {\em {RESTful Web
+  Services}}.
+\newblock "O'Reilly Media, Inc.", 2008.
 
 \bibitem{gson}
 {\sc Singh, Inderjeet}, {\sc Joel Leitch} \btxandlong{}\ {\sc Jesse Wilson}:
@@ -192,5 +203,12 @@
 \bibitem{json}
 {\sc Sriparasa, Sai~Srinivas}: {\em JavaScript and JSON Essentials}.
 \newblock "Packt Publishing", 2013.
+
+\bibitem{gui_sp}
+{\sc Tesarik, J.}, {\sc L.~Dolezal} \btxandlong{}\ {\sc C.~Kollmann}: {\em User
+  interface design practices in simple single page web applications}.
+\newblock \Btxinlong{}\ {\em 2008 First International Conference on the
+  Applications of Digital Information and Web Technologies (ICADIWT)},
+  \btxpageslong{}\ 223--228, Aug 2008.
 
 \end{thebibliography}

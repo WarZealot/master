@@ -102,8 +102,6 @@ Bei der Interaktion mit dem Webservice kommt die vom Hersteller angebotene Dropb
 Die Dropbox SDK wurde mithilfe des bnd-Tools\cite{bnd} zu einem OSGi-Bundle umgewandelt. Dabei stellte sich heraus, dass sie Abhängigkeiten auf eine Reihe von Android Bibliotheken besitzt. Nach weiterer Recherche ließen sich diese Abhängigkeiten mithilfe des bnd-Tools auf optional umstellen, wonach die SDK problemlos in der OSGi Umgebung eingesetzt werden konnte. 
 
 
-
-
 \subsection{Das Wetter Binding}
 Das \textit{tka.binding.weather} Binding weist sowohl Gemeinsamkeiten, als auch Unterschiede zu den bisher vorgestellten Bundles auf. Es handelt sich bei dem Wetterdienst um einen Webservice, der einer regulären intelligenten Wetterstation stark ähnelt. Dadurch ließen sich mehr Funktionalitäten von ESH wiederverwenden, als bei den anderen Diensten.
 
@@ -120,14 +118,21 @@ Das Bundle \textit{tka.binding.gmail} erlaubt es dem Nutzer Emails zu versenden.
 Das Binding registriert den Action Typen \textit{EmailAction}, über den der Nutzer angeben kann, an wen eine Email mit den gewählten Informationen gesendet werden soll. Die Email wird von einer anwendungsinternen Google Mail\cite{gmail} Adresse \textit{noreply.flash.ma@gmail.com} über einen öffentlichen SMTP Server versandt.
 
 
+\subsection{Integraiton von Philips Hue}
+Die Integration von Philips Hue Geräten ist insofern für diese Arbeit relevant, als dass Hue Lampen im Rahmen der Evaluation (Kapitel \ref{chap:eval}) eingesetzt werden. Ein entsprechendes Binding ist seitens von Eclipse SmartHome bereits exemplarisch implementiert. Es ermöglicht die Philips Hue Bridge und eine Reihe von unterstützten Lampen zu steuern. Zusätzlich wird automatisches Entdecken und Einbinden dieser Geräte über Universal Plug and Play (UPnP) unterstützt.
+
 
 \section{Benutzeroberfläche}
 Die Benutzeroberfläche ist komplett im Bundle \textit{tka.flashui} realisiert. Das Bundle ist von den Bindings los gekoppelt - es nutzt einige der von ihnen bereitgestellten Services um eine rudimentäre, aber dennoch voll funktionsfähige GUI bereitzustellen. Es ist jederzeit möglich diese Benutzeroberfläche auszutauschen oder weitere Schnittstellen parallel im System zu registrieren.\\
 
-Aus technischer Sicht wurde die GUI größtenteils über REST-Schnittstellen, Javascript und AJAX realisiert.
+Wie in Sektion \ref{entwurf:gui} angekündigt, wurde die Oberfläche in Form einer Single Page Applikation umgesetzt. 
 
 \subsubsection{Backend}
-Seitens des Backends wird vom OSGi Container ein HTTP-Service bezogen, sowie die von den Bundles bereitgestellten konkreten ConnectionServices. Daraufhin wird in Form von Servlets eine Reihe von Schnittstellen definiert, über die verschiedene Informationen aus dem Frontend per AJAX abgefragt werden können. Auf diese Weise werden Informationen über die aktuell im System verwalteten Rules und Things bereitgestellt. Für jedes Binding gibt es ein eigenes Servlet, das die Interaktion damit (hauptsächlich für die Authentifizierung) ermöglicht. 
+Seitens des Backends wird vom OSGi Container ein HTTP-Service bezogen, sowie die von den Bundles bereitgestellten konkreten ConnectionServices. Daraufhin wird in Form von Servlets eine Reihe von REST-Schnittstellen definiert, über die verschiedene Informationen aus dem Frontend per AJAX abgefragt werden. 
+Auf diese Weise werden Informationen über die aktuell im System verwalteten Rules und Things bereitgestellt. Für jedes Binding gibt es ein eigenes Servlet, das die Interaktion damit (hauptsächlich für die Authentifizierung) ermöglicht. 
+
+%Es wurde entschieden, die Kommunikation mithilfe von Representational State Transfer zu realisieren, da es aktuell als Referenz-Paradigma für die Bereitstellung von intelligenten Geräten im Web gilt \cite{gui_rest}.
+
 
 \subsubsection{Frontend}
 Bei dem Frontend handelt es sich um eine Single-Page-Webanwendung. Es gibt eine HTML-Datei, die ein leeres Grundgerüst für die Seite bietet und eine Reihe von Javascript Dateien, die beim Öffnen der Seite geladen werden. Die verschiedenen logischen Aspekte der  Anwendung werden in separaten JS-Dateien realisiert. Für jedes Binding gibt es ebenfalls eine einzelne JS-Datei, in der die Logik der Zusammenarbeit mit dem konkreten Binding realisiert ist. \\
@@ -136,35 +141,65 @@ Das Erweitern der GUI um neue Bindings lässt sich damit auf eine einfache Art u
 
 
 \subsection{Funktionalität und visuelle Darstellung}
-Die Benutzeroberfläche bietet die Möglichkeit die implementierten Funktionalitäten zur Laufzeit zu konfigurieren. Sie ist in Abbildung \ref{fig:gui_all} dargestellt. 
+Die Benutzeroberfläche bietet die Möglichkeit die implementierten Funktionalitäten zur Laufzeit zu konfigurieren. Sie erfüllt alle Anforderungen, die in Sektion \ref{entwurf:gui} festgehalten wurden. Die Oberfläche lässt sich in drei Abschnitte unterteilen, die im Folgenden nacheinander vorgestellt werden.
+
+\subsubsection{Regeln in der Benutzeroberfläche}
+In Abbildung \ref{fig:gui_1} sind die mit Regeln zusammenhängenden Funktionalitäten der grafischen Benutzeroberfläche dargestellt.\\
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{bilder/gui_all4}
-	\caption{Die Benutzeroberlärche}
-	\label{fig:gui_all}
+	\includegraphics[angle=90, width=\textwidth]{bilder/gui_all4_1}
+	\caption{Die Darstellung der Regeln in der Benutzeroberfläche}
+	\label{fig:gui_1}
 \end{figure}
 
-Es ist leicht zu sehen, dass die Oberfläche grob in drei Abschnitte unterteilt werden kann. Im Abschnitt \textit{Rules} gibt eine Tabelle mit den aktuell existierenden Regeln zu sehen, sowie der Möglichkeit, diese Regeln zu manipulieren. Neue Regeln können im JSON-Format konfiguriert und über \textit{Import Rules} an das Backend übermittelt werden. Sie werden daraufhin mithilfe von GSON\cite{gson} zu Rules umgewandelt und dem System hinzugefügt. Auf diese Weise importierte Regeln überschreiben existierende Regeln mit der gleichen Id.
+Im Abschnitt \textit{Rules} werden die aktuell existierenden Regeln in Form einer Tabelle präsentiert. Der Nutzer hat hier die Möglichkeit sich die existierenden Regeln anzuschauen, sie zu (de-)aktivieren und zu löschen. 
 
-Im Abschnitt \textit{Things} sind die aktuell im System vorhandenen Things mit den von ihnen unterstützten Channels zu sehen. 
+Neue Regeln können im JSON-Format konfiguriert und über \textit{Import Rules} an das Backend übermittelt werden. Sie werden daraufhin mithilfe von GSON\cite{gson} zu Rules umgewandelt und dem System hinzugefügt. Auf diese Weise importierte Regeln überschreiben existierende Regeln, die dieselbe Id besitzen.
 
-Im letzten Teil der Benutzeroberfläche ist eine Liste mit den unterstützten Webservices bereitgestellt. Für jeden Webdienst gibt es hier die Möglichkeit die Zugriffsrechte an die Anwendung zu vermitteln.
 
-Beim der Gestaltung der Oberfläche kam Bootstrap\cite{bootstrap} zum Einsatz.
+
+
+
+
+\subsubsection{Darstellung von Things und Verbindungen}
+Die Things und Verbindungen in der Benutzeroberfläche sind in Abbildung \ref{fig:gui_2} dargestellt.\\
+
+\begin{figure}
+	\centering
+	\includegraphics[angle=90, height=\textheight]{bilder/gui_all4_4}
+	\caption{Die Darstellung der Things und Verbindungen in der Benutzeroberfläche}
+	\label{fig:gui_2}
+\end{figure}
+
+Im Abschnitt \textit{Things} sind die aktuell im System vorhandenen Things mit den von ihnen unterstützten Channels zu sehen. Der Nutzer hat hier außerdem die Möglichkeit sämtliche Things zu löschen.\\
+
+Unter \textit{Connections} ist eine Liste mit den unterstützten Webservices zu sehen. Für jeden Webdienst gibt es hier die Möglichkeit die Zugriffsrechte an die Anwendung zu vermitteln (siehe \textit{Connect}-Knopf neben Twitter). Daraufhin wird der Nutzer zu einer entsprechenden URL (wie in Sektion \ref{subsubsec:oauth} erläutert) weitergeleitet. 
+Falls der Authentifizierungsvorgang bereits abgeschlossen ist, so wird der Listeneintrag grün hinterlegt und ein entsprechendes Thing in der Thing-Liste angezeigt. 
+
+Da der online Wetterdienst keine Authentifizierung seitens des Nutzers benötigt, kommen OAuth-Weiterleitungen an dieser Stelle nicht zum Einsatz. Stattdessen wird dem Nutzer die Möglichkeit gegeben eine beliebige Anzahl von entsprechenden Things zu konfigurieren und dem System hinzuzufügen.\\
+
+Da die Konfigurations- und Zugriffsdaten ausschließlich im entsprechenden Thing gespeichert werden, ist das Löschen des Things semantisch äquivalent zum Zurückziehen der Berechtigung den betroffenen Dienst im Namen des Nutzers zu verwalten. Auf diese Weise kann der Nutzer seine Accounts von FLASH entkoppeln.
+
+
+\subsection{Regel Syntax und ihre Mächtigkeit}
+Wie bereits erklärt werden die Regeln in JSON deklariert und über die Benutzeroberfläche dem System hinzugefügt. 
+
+
 
 
 \subsection{Beispiel}
-Um die Zusammenarbeit der verschiedenen Komponenten zu visualisieren, wurde folgendes Diagramm erstellt:
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{bilder/sequenceOAuth}
+	\includegraphics[angle=90, height=\textheight]{bilder/sequenceOAuth}
 	\caption{Authentifizierung bei Twitter als Sequenzdiagramm}
 	\label{fig:sequenceOauth}
 \end{figure}
 
-In Abbildung \ref{fig:sequenceOauth} ist in einem Sequenzdiagramm schematisch dargestellt, wie die Authentifizierung bei Twitter abläuft. Der Nutzer entscheidet sich seinen Twitter Account dem Prototypen anzuvertrauen. Daraufhin vermittelt der TwitterServlet ihm eine URL, über die er dies wie in Sektion \ref{subsubsec:oauth} erläutert umsetzen kann. Nachdem die korrekte PIN dem System eingegeben wurde, wird dem System ein neues Thing vom Typ \glqq twitter\grqq{} hinzugefügt und ein entsprechender Listener im System registriert.
+In Abbildung \ref{fig:sequenceOauth} ist in einem Sequenzdiagramm schematisch dargestellt, wie die Authentifizierung bei Twitter abläuft. Dies soll helfen, die Zusammenarbeit der verschiedenen Komponeneten zu visualisieren.
+
+Der Nutzer entscheidet sich seinen Twitter Account dem Prototypen anzuvertrauen. Daraufhin vermittelt der TwitterServlet ihm eine URL, über die er dies wie in Sektion \ref{subsubsec:oauth} erläutert umsetzen kann. Nachdem die korrekte PIN dem System eingegeben wurde, wird dem System ein neues Thing vom Typ \glqq twitter\grqq{} hinzugefügt und ein entsprechender Listener im System registriert.
 
 
 \section{Deployment auf dem Raspberry Pi}
