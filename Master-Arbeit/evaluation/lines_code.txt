@@ -1,0 +1,11 @@
+	Lines of code without empty lines		
+Bundle	Java	Javascript	Html
+extension	142		
+core	160		
+dropbox	1092		
+twitter	1114		
+weather	349		
+email	826		
+flashui	794	336	75
+			
+	4477		

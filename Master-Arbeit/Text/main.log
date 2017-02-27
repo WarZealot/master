@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.6.9)  27 FEB 2017 09:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.6.9)  27 FEB 2017 15:16
 entering extended mode
 **./main.tex
 (main.tex
@@ -1232,39 +1232,42 @@ e stellt ei-ne Be-nut-ze-ro-ber-flä-che be-reit, über die neue Webservice-
 File: bilder/ConnectionService.png Graphic file (type png)
 
 <use bilder/ConnectionService.png>
-Package pdftex.def Info: bilder/ConnectionService.png used on input line 21.
+Package pdftex.def Info: bilder/ConnectionService.png used on input line 23.
 (pdftex.def)             Requested size: 426.79135pt x 409.29619pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [31]
-Underfull \hbox (badness 10000) in paragraph at lines 30--31
+Underfull \hbox (badness 10000) in paragraph at lines 32--33
 
  []
 
-[32 <./bilder/ConnectionService.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 50--51
 
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[33]
+ [32 <./bilder/ConnectionService.png (PNG copy)>]
 Underfull \hbox (badness 10000) in paragraph at lines 52--53
 
  []
 
-
+[33]
 Underfull \hbox (badness 10000) in paragraph at lines 54--55
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 65--66
+Underfull \hbox (badness 10000) in paragraph at lines 56--57
 
  []
 
 
-Overfull \hbox (1.68083pt too wide) in paragraph at lines 79--88
+Underfull \hbox (badness 10000) in paragraph at lines 67--68
+
+ []
+
+
+Overfull \hbox (1.68083pt too wide) in paragraph at lines 81--90
  [][] 
  []
 
@@ -1272,11 +1275,6 @@ Overfull \hbox (1.68083pt too wide) in paragraph at lines 79--88
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [34]
-Underfull \hbox (badness 10000) in paragraph at lines 95--96
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 97--98
 
  []
@@ -1287,28 +1285,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 99--100
  []
 
 
-Underfull \vbox (badness 6252) has occurred while \output is active []
-
- [35]
-Underfull \hbox (badness 10000) in paragraph at lines 127--128
+Underfull \hbox (badness 10000) in paragraph at lines 101--102
 
  []
 
-
-Underfull \vbox (badness 3449) has occurred while \output is active []
-
- [36]
-Underfull \hbox (badness 10000) in paragraph at lines 139--140
+[35]
+Underfull \hbox (badness 10000) in paragraph at lines 129--130
 
  []
 
-
+[36]
 Underfull \hbox (badness 10000) in paragraph at lines 141--142
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 143--144
+
+ []
+
 [37]
-Underfull \hbox (badness 10000) in paragraph at lines 148--149
+Underfull \hbox (badness 10000) in paragraph at lines 150--151
 
  []
 
@@ -1316,10 +1313,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 148--149
 File: bilder/gui_all4_1.png Graphic file (type png)
 
 <use bilder/gui_all4_1.png>
-Package pdftex.def Info: bilder/gui_all4_1.png used on input line 152.
+Package pdftex.def Info: bilder/gui_all4_1.png used on input line 154.
 (pdftex.def)             Requested size: 885.30533pt x 690.32738pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 168--169
+Underfull \hbox (badness 10000) in paragraph at lines 170--171
 
  []
 
@@ -1327,24 +1324,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 168--169
 File: bilder/gui_all4_4.png Graphic file (type png)
 
 <use bilder/gui_all4_4.png>
-Package pdftex.def Info: bilder/gui_all4_4.png used on input line 172.
+Package pdftex.def Info: bilder/gui_all4_4.png used on input line 174.
 (pdftex.def)             Requested size: 889.8222pt x 472.76509pt.
 
 
-LaTeX Warning: Float too large for page by 24.99869pt on input line 175.
+LaTeX Warning: Float too large for page by 24.99869pt on input line 177.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 177--178
+Underfull \hbox (badness 10000) in paragraph at lines 179--180
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 182--183
+Underfull \hbox (badness 10000) in paragraph at lines 184--185
 
  []
 
 [38] [39 <./bilder/gui_all4_1.png>] [40 <./bilder/gui_all4_4.png>]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 193.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 195.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
@@ -1354,11 +1351,11 @@ File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 File: bilder/sequenceOAuth.png Graphic file (type png)
 
 <use bilder/sequenceOAuth.png>
-Package pdftex.def Info: bilder/sequenceOAuth.png used on input line 289.
+Package pdftex.def Info: bilder/sequenceOAuth.png used on input line 291.
 (pdftex.def)             Requested size: 874.76599pt x 520.94498pt.
 
 
-LaTeX Warning: Float too large for page by 25.0016pt on input line 292.
+LaTeX Warning: Float too large for page by 25.0016pt on input line 294.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -1560,7 +1557,7 @@ four\jknappen\ec\dpi600\ecss1200.pk> <C:\Users\ktkachuk\AppData\Local\MiKTeX\2.
 9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsx1200.pk> <C:\Users\ktkachuk\AppData\Lo
 cal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecss1440.pk> <C:\Users\ktkach
 uk\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1095.pk>
-Output written on main.pdf (76 pages, 1379246 bytes).
+Output written on main.pdf (76 pages, 1379404 bytes).
 PDF statistics:
  1084 PDF objects out of 1200 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
