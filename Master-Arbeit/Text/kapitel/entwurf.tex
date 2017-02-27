@@ -23,7 +23,7 @@ Auf welche Weise die übrigen Anforderungen umgesetzt werden sollen, wird in den
 
 
 \section{Webservices}
-Es wird im Rahmen dieser Arbeit an dieser Stelle zwischen \textit{individuellen} und \textit{gemeinsamen} Webservices unterschieden. Der wesentliche Unterschied ist, dass bei gemeinsamen Diensten keine Authentifizierung benötigt wird - sämtliche Schnittstellen und bereitgestellten Informationen sind frei verfügbar. Ein Beispiel für einen gemeinsamen Webservice kann ein online Wetterdienst sein.. 
+Es wird im Rahmen dieser Arbeit an dieser Stelle zwischen \textit{individuellen} und \textit{gemeinsamen} Webservices unterschieden. Der wesentliche Unterschied ist, dass bei gemeinsamen Diensten keine Authentifizierung benötigt wird - sämtliche Schnittstellen und bereitgestellten Informationen sind frei verfügbar. Ein Beispiel für einen gemeinsamen Webservice kann ein online Wetterdienst sein. 
 
 Unter individuellen Webservices handelt es sich in diesem Kontext um Dienste, deren Funktionalität vom eingeloggten User abhängt. Ein Beispiel hierfür ist \textit{Dropbox}. Der Zugriff auf die in der Dropbox gelagerten Dateien ist erst möglich, nachdem sich der User im System authentifiziert hat. 
 
@@ -31,7 +31,7 @@ Es gibt eine Vielzahl von verschiedenen Sicherheitsprotokollen, die an dieser St
 
 \subsubsection{OAuth 2 Standard}
 \label{subsubsec:oauth}
-OAuth\cite{oauth} ist ein offener Standard für Autorisierung, der es ermöglicht Nutzern Applikationen von Drittanbietern den (zumeist eingeschränkten) Zugriff auf Webdienste in ihrem Namen zu gestatten, ohne dabei das eigene Passwort freizugeben. Dies geschieht in der Regel in mehreren Schritten.
+OAuth \cite{oauth} ist ein offener Standard für Authentifizierung, der es ermöglicht Nutzern Applikationen von Drittanbietern den (zumeist eingeschränkten) Zugriff auf Webdienste in ihrem Namen zu gestatten, ohne dabei das eigene Passwort freizugeben. Dies geschieht in der Regel in mehreren Schritten.
 
 \begin{enumerate}
 \item Die Applikation registriert sich bei dem Webservice und erhält einen Consumer-Key und Consumer-Secret.
@@ -39,11 +39,11 @@ OAuth\cite{oauth} ist ein offener Standard für Autorisierung, der es ermöglich
 \item Die Applikation teilt dem Nutzer eine URL mit, über die er dies erlauben kann. Diese URL wird vom Webservice basierend auf dem Consumer-Key bereitgestellt. 
 \item Der Nutzer autorisiert sich unter der URL beim Webservice klassischerweise mit seinem Namen und Passwort. Daraufhin erhält er die Möglichkeit, der Applikation die geforderten Zugriffsrechte einzugestehen.
 \item Nachdem der Nutzer die Erlaubnis erteilt hat, erhält er eine PIN, die er manuell in der Applikation eingeben muss. 
-\item Nachdem er dies getan hat erhält die Applikation ein generiertes OAuth-Token, mit dem sie Zugriff auf den Account des Users hat. Der Autorisierungsprozess ist damit abgeschlossen.
+\item Nachdem er dies getan hat erhält die Applikation ein generiertes OAuth-Token, mit dem sie Zugriff auf den Account des Users hat. Der Authentifizierungsprozess ist damit abgeschlossen.
 \end{enumerate}
 
 
-Im Rahmen dieser Arbeit wird es nötig sein, sowohl mit gemeinsamen, als auch mit individuellen Webservices Kontakt aufzunehmen. Es wird also notwendig sein, sich gegenüber den Diensten zu authentisieren um die erforderlichen Rechte zu erhalten, die es ermöglichen den Workflow des Nutzers zu automatisieren. Die Autorisierung wird über die Benutzeroberfläche stattfinden.
+Im Rahmen dieser Arbeit wird es nötig sein, sowohl mit gemeinsamen, als auch mit individuellen Webservices Kontakt aufzunehmen. Es wird also notwendig sein, sich gegenüber den Diensten zu authentifizieren um die erforderlichen Rechte zu erhalten, die es ermöglichen den Workflow des Nutzers zu automatisieren. Die Authentifizierung wird über die Benutzeroberfläche stattfinden.
 
 
 
@@ -52,7 +52,7 @@ Im Rahmen dieser Arbeit wird es nötig sein, sowohl mit gemeinsamen, als auch mi
 Im Rahmen der Arbeit sollen die bereits existierenden Funktionalitäten von ESH sofern möglich wiederverwendet werden. Hierzu sollen die einzelnen Webservices durch Bindings in das System integriert werden. 
 Dabei soll jede Instanz eines Webdienstes als ein Thing repräsentiert werden. Das bedeutet, dass beispielsweise im Falle eines Wetterdienstes für jeden Ort eine eigene Instanz des Thing-Typen erstellt wird, die diesen Ort darstellt. Alternativ könnte es sich bei den Instanzen um verschiedene Twitter-Accounts handeln.
 
-Die benötigten Zugriffsdaten (z.B. OAuth-Token) werden in den Konfigurationen der Things abgelegt. Ein solcher Aufbau garantiert, dass jedes Thing über sämtliche Informationen verfügt, die benötigt werden, um es zu steuern. Die konkreten Funktionalitäten werden über ein oder mehrere Channels dargestellt. Im Rahmen dieser Arbeit wird im Demonstrator keine Nutzerverwaltung eingebaut.
+Die benötigten Zugriffsdaten (z. B. OAuth-Token) werden in den Konfigurationen der Things abgelegt. Ein solcher Aufbau garantiert, dass jedes Thing über sämtliche Informationen verfügt, die benötigt werden, um es zu steuern. Die konkreten Funktionalitäten werden über ein oder mehrere Channels dargestellt. Im Rahmen dieser Arbeit wird im Demonstrator keine Nutzerverwaltung eingebaut.
 
 
 \subsection{Verbindung zum Webdienst}
@@ -85,17 +85,17 @@ Zusammen decken diese beiden Module einen großen Teil der möglichen Szenarien 
 
 
 \subsection{Persistenz}
-Wie in Sektion \ref{subsec:persistenz} erläutert, ist eine MapDB in ESH bereits integriert. Da im Rahmen dieser Arbeit die Menge an persitierten Daten sich nicht maßgäblich verändern wird, ist es nicht notwendig, auf eine mächtigere Datenbank umzusteigen. 
+Wie in Sektion \ref{subsec:persistenz} erläutert, ist eine MapDB in ESH bereits integriert. Da im Rahmen dieser Arbeit die Menge an persistierten Daten sich nicht maßgeblich verändern wird, ist es nicht notwendig, auf eine mächtigere Datenbank umzusteigen. 
 %Da im Rahmen dieser Arbeit nur geringe Mengen an Daten persistiert werden müssen, ist es nicht notwendig, auf eine mächtigere Datenbank umzusteigen. 
 
-Dadurch, dass die Webservices selbst als Things modelliert werden und alle notwendigen Konfigurationsdaten mit sich tragen, kann dieser Aspekt von ESH in seiner aktuellen Form wiederverwendet werden. Bei einem Neustart des Systems werden sämtliche relevante Things aus der Datenbank ausgelesen und basierend auf den in ihrer Konfiguration gespeicherten Zugriffsdaten (z.B. OAuth Token) entsprechende Verbindungen aufgebaut, die für die Aktualität der Zustände sorgen.
+Dadurch, dass die Webservices selbst als Things modelliert werden und alle notwendigen Konfigurationsdaten mit sich tragen, kann dieser Aspekt von ESH in seiner aktuellen Form wiederverwendet werden. Bei einem Neustart des Systems werden sämtliche relevante Things aus der Datenbank ausgelesen und basierend auf den in ihrer Konfiguration gespeicherten Zugriffsdaten (z. B. OAuth Token) entsprechende Verbindungen aufgebaut, die für die Aktualität der Zustände sorgen.
 
 \subsection{Benutzeroberfläche}
 \label{entwurf:gui}
 \subsubsection{Funktionale Anforderungen}
 Die Benutzeroberfläche soll den Nutzer in die Lage versetzen Regeln zur Laufzeit zu bearbeiten. Das bedeutet, es soll ihm möglich sein neue Regeln anzulegen, sowie existierende Regeln zu betrachten, zu editieren und zu löschen. Da Eclipse SmartHome die Möglichkeit bietet Regeln im JSON-Format zu deklarieren (siehe Sektion \ref{subsec:decltypes}), bietet es sich an dieser Stelle an, es in der Benutzeroberfläche analog umzusetzen.\\
 
-Des weiteren soll dem User die Möglichkeit gegeben sein, die Zugriffsrechte auf die unterstützten Webservices (z.B. auf seinen Twitter Account) der Anwendung zu übermitteln, bzw. auf diese Weise neue Instanzen des entsprechenden Thing-Typen zum System hinzuzufügen.
+Des Weiteren soll dem User die Möglichkeit gegeben sein, die Zugriffsrechte auf die unterstützten Webservices (z. B. auf seinen Twitter Account) der Anwendung zu übermitteln, bzw. auf diese Weise neue Instanzen des entsprechenden Thing-Typen zum System hinzuzufügen.
 
 \subsubsection{Umsetzungskonzept}
 Die zu entwickelnde grafische Benutzeroberfläche soll modernen Design-Prinzipien entsprechen. Im Rahmen dieser Arbeit wurde entschieden diese in Form einer Einzelseiten-Webanwendung zu realisieren. \\
@@ -104,7 +104,7 @@ Das Format einer \textit{Web}-Anwendung bietet sich an, da es dem Nutzer möglic
 
 Es soll sich dabei um eine \textit{Einzelseiten}-Webanwendung (engl. Single Page Application (SPA))handeln, da sie sich gut für dieses konkrete Szenario eignet. Bei einer SPA handelt es sich um ein Design Paradigma, bei dem die gesamte Anwendung auf einer einzigen HTML-Seite entwickelt wird \cite{gui_sp}. Inhalte werden dynamisch vom Server angefragt, wenn sie benötigt werden und auf der Seite angemessen präsentiert. In der Regel kommt dabei vor allem asynchroner Javascript zum Einsatz.
 
-Einzelseiten-Webanwendungen eignen sich gut für die im Rahmen dieser Arbeit behandelte Problemstellung, da sie es ermöglichen die Belastung auf den Server zu reduzieren. Dies ist wichtig, da die Rechenleistung eines Raspberry Pi vergleichsweise begrenzt ist und eine Server seitige Bearbeitung ung Bereitstellung von HTML-Inhalten zu Verzögerungen führen könnte.\\
+Einzelseiten-Webanwendungen eignen sich gut für die im Rahmen dieser Arbeit behandelte Problemstellung, da sie es ermöglichen die Belastung auf den Server zu reduzieren. Dies ist wichtig, da die Rechenleistung eines Raspberry Pi vergleichsweise begrenzt ist und eine Server seitige Bearbeitung und Bereitstellung von HTML-Inhalten zu Verzögerungen führen könnte.\\
 
 Seitens des Servers sollen die Informationen über REST Schnittstellen \cite{rest} bereitgestellt werden. Es wurde entschieden für die  Kommunikation Representational State Transfer zu wählen, da es aktuell als Referenz-Paradigma für die Bereitstellung von intelligenten Geräten im Web gilt \cite{gui_rest}.
 

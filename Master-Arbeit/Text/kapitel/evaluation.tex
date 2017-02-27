@@ -13,7 +13,7 @@ Bei dem entwickelten Demonstrator handelt es sich um eine klassische Smart Home 
 
 %In IFTTT ist es nur möglich simple Szenarien auf eine einfache Art und Weise zu definieren. Hierbei handelt es sich um sogenannte \glqq if this than that\grqq{} Szenarien, die über jeweils nur einen Trigger (\glqq this\grqq) und eine Action (\glqq that \grqq) verfügen. Der Demonstrator hingegen erlaubt es komlexe Event-Condition-Action-Regeln zu definieren.
 
-Einen Einblick, wie sich der entstandene Demonstrator in die aktuell existierenden Task Automation Services eingliedern lässt, bietet Abbildung \ref{fig:eval0}. Wie zu sehen ist, gibt es Verbesserungen in vielen Aspekten gegenüber anderen Lösungen. Gegenüber den webbasierten TAS grenzt sich FLASH vor allem durch seine Fähigkeit ab intelligente Geräte direkt anzusteuern, sowie der deutlich mächtigeren Rule Engine ab. Es ist möglich komplexe ECA-Szenarien zu definieren, mit beliebig vielen Triggern, Bedingungen und Befehlen. Teile des Szenarios werden sequentiell abgearbeitet und können als Eingabe für spätere Elemente dienen.\\
+Einen Einblick, wie sich der entstandene Demonstrator in die aktuell existierenden Task Automation Services eingliedern lässt, bietet Abbildung \ref{fig:eval0}. Wie zu sehen ist, gibt es Verbesserungen in vielen Aspekten gegenüber anderen Lösungen. Gegenüber den webbasierten TAS grenzt sich FLASH vor allem durch seine Fähigkeit ab intelligente Geräte direkt anzusteuern, sowie der deutlich mächtigeren Rule Engine ab. Es ist möglich komplexe Szenarien zu definieren, mit beliebig vielen Triggern, Bedingungen und Aktionen. Teile des Szenarios werden sequentiell abgearbeitet und können als Eingabe für spätere Elemente dienen.\\
 
 \begin{figure}
 	\centering
@@ -32,10 +32,10 @@ Im Falle von Zapier ist bekannt, dass nur bis zu 5 Zaps pro Abfrage alle 15 Minu
 
 Der Demonstrator lief auf einem Raspberry Pi 3 Model B, der an einen Router mit VDSL (50 MBit) Verbindung angeschlossen war.
 
-Es wurde geprüft, wie gut die beiden Anwendungen mit einer großer Anzahl kleiner Dateien, sowie mit geringer Anzahl von großen Dateien umgehen können. 
+Es wurde geprüft, wie gut die beiden Anwendungen mit einer großen Anzahl kleiner Dateien, sowie mit geringer Anzahl von großen Dateien umgehen können. 
 
 \subsubsection{Zahlreiche kleine Dateien}
-Es wurden Mengen von 258 KB großen Dateien gleichzeitig in einen Dropbox Ordner hochgeladen. Es wurden jeweils Vielfache von 15 verwendet, da dies die maximale Anzahl von Dateien ist, die IFTTT in einer Abfrage bearbeitet.
+Es wurden Mengen von 258 KB großen Dateien gleichzeitig in einen Dropbox Ordner hochgeladen. Es wurden jeweils vielfache von 15 verwendet, da dies die maximale Anzahl von Dateien ist, die IFTTT in einer Abfrage bearbeitet.
 
 Es entstanden die Grafiken \ref{fig:eval1} und \ref{fig:eval2}.
 \begin{figure}
@@ -48,7 +48,7 @@ Es entstanden die Grafiken \ref{fig:eval1} und \ref{fig:eval2}.
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{bilder/vs_laengste2}
-	\caption{Vergleich der längsten Dauer (equivalent zu Gesamtdauer, da ca. 1-2 Sekunden vernachlässigt werden können) zwischen IFTTT und FLASH für unterschiedliche Dateimengen}
+	\caption{Vergleich der längsten Dauer (äquivalent zu Gesamtdauer, da ca. 1-2 Sekunden vernachlässigt werden können) zwischen IFTTT und FLASH für unterschiedliche Dateimengen}
 	\label{fig:eval2}
 \end{figure}
 
@@ -75,9 +75,9 @@ Zapier wurde in diesem Szenario nicht betrachtet, da es die Steuerung von intell
 \subsubsection{Vorteile}
 Aus den Messungen hat sich gezeigt, dass der Demonstrator IFTTT und Zapier in vieler Hinsicht deutlich voraus ist. Dadurch, dass er sich im Hause des Nutzers befindet, ist er in der Lage mit Geräten direkt zu kommunizieren, was der Grund für merklich bessere Reaktionszeiten in Szenarien, die intelligente Geräte im Haus betreffen, ist.\\
 
-Auch in Szenarien, die nur Web-basiert sind und viel Download/Upload-Volumen mit sich ziehen, hat sich der Raspberry Pi als überlegen erwiesen. Dies lässt sich dadurch erklären, dass es sich bei dem Demonstrator im Gegensatz zu IFTTT und Zapier um ein dediziertes Gerät handelt, dass nur einen konkreten Nutzer bedient. Dies führt auch dazu, dass er keine arbiträren Eingrenzungen besitzt, wie z.B. die Begrenzung der Dateigröße.
+Auch in Szenarien, die nur Web-basiert sind und viel Download/Upload-Volumen mit sich ziehen, hat sich der Raspberry Pi als überlegen erwiesen. Dies lässt sich dadurch erklären, dass es sich bei dem Demonstrator im Gegensatz zu IFTTT und Zapier um ein dediziertes Gerät handelt, dass nur einen konkreten Nutzer bedient. Dies führt auch dazu, dass er keine arbiträren Eingrenzungen besitzt, wie z. B. die Begrenzung der Dateigröße.
 
-Interessant ist, dass sofern Zapier keine Verzögerungen bei der Ausführung von Zaps hätte, es einen höheren Datendurchsatz aufweisen würde. Negativ an Zapier aufgefallen ist, dass es, falls es eine große Anzahl von Dateien (z.B. 150) in einem Zap bearbeiten soll, zunächst den Nutzer um eine Bestätigung bittet. Diese Bestätigung muss jedes Mal manuell erteilt werden, was die Einsatzmöglichkeiten von Zapier eingrenzt. \\
+Interessant ist, dass sofern Zapier keine Verzögerungen bei der Ausführung von Zaps hätte, es einen höheren Datendurchsatz aufweisen würde. Negativ an Zapier aufgefallen ist, dass es, falls es eine große Anzahl von Dateien (z. B. 150) in einem Zap bearbeiten soll, zunächst den Nutzer um eine Bestätigung bittet. Diese Bestätigung muss jedes Mal manuell erteilt werden, was die Einsatzmöglichkeiten von Zapier eingrenzt. \\
 
 %\paragraph{Anmerkung:} Es ist zu beachten, dass diese Messung mit einem 50 MBit/s Internetanschluss erstellt wurde. Langsamere/schnellere Verbindungen könnten die Messungen entsprechend beeinflussen.\\
 
@@ -88,7 +88,7 @@ Negative Aspekte des Demonstrators sind Konsequenz der Tatsache, dass es sich da
 
 Umgekehrt ist natürlich zu bedenken, dass bei einem Ausfall des Heimanschlusses auch IFTTT nicht mehr in der Lage sein wird, die hausinternen Geräte über die vom Hersteller bereitgestellten Web-Schnittstellen zu steuern. \\
 
-Die Tatsache, dass sämtliche Zugriffsdaten auf Accounts des Users ausschließlich lokal auf dem Gerät vorhanden sind, zieht mit sich, dass im Falle eines Ausfalls (z.B. Hardware-Fehler) sämtliche Daten verloren gehen können. Dies könnte dazu führen, dass sämtliche Geräte, Dienste und Szenarien nach einer Reparatur komplett neu aufgesetzt werden müssten.
+Die Tatsache, dass sämtliche Zugriffsdaten auf Accounts des Users ausschließlich lokal auf dem Gerät vorhanden sind, zieht mit sich, dass im Falle eines Ausfalls (z. B. Hardware-Fehler) sämtliche Daten verloren gehen können. Dies könnte dazu führen, dass sämtliche Geräte, Dienste und Szenarien nach einer Reparatur komplett neu aufgesetzt werden müssten.
 
 
 
@@ -96,7 +96,7 @@ Die Tatsache, dass sämtliche Zugriffsdaten auf Accounts des Users ausschließli
 \subsection{Positive Aspekte}
 Im Laufe der Arbeit ist klar geworden, dass das Eclipse SmartHome Framework sich gut als Grundgerüst für unterschiedlichste Lösungen handelt. Die sehr generische Struktur des Frameworks hat es ermöglicht, die im Rahmen der Arbeit implementierten Funktionalitäten nahtlos in das Gesamtkonstrukt zu integrieren. 
 
-Dies, sowie OSGi im Allgemeinen, ermöglicht es weitere Funktionalitäten (z.B. weitere Webdienste) der Anwendung hinzuzufügen, ohne bereits existierenden Code ändern zu müssen. Dank der Option, Szenarien im JSON-Format zu definieren, ist es sogar begrenzt möglich, neu hinzugefügte Webdienste in Regeln zu automatisieren, ohne die Benutzeroberfläche anzupassen.
+Dies, sowie OSGi im Allgemeinen, ermöglicht es weitere Funktionalitäten (z. B. weitere Webdienste) der Anwendung hinzuzufügen, ohne bereits existierenden Code ändern zu müssen. Dank der Option, Szenarien im JSON-Format zu definieren, ist es sogar begrenzt möglich, neu hinzugefügte Webdienste in Regeln zu automatisieren, ohne die Benutzeroberfläche anzupassen.
 
 \subsection{Negative Aspekte}
 \subsubsection{Eclipse SmartHome}

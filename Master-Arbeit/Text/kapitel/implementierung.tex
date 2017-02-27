@@ -29,7 +29,7 @@ Das Bundle \textit{tka.binding.core} enthält die zentrale Schnittstelle für de
 Die ConnectionService Schnittstelle bietet drei wesentliche Methoden, die bei der Authentifizierung relevant sind. Per \textit{requestAuthorization} teilt der Nutzer mit, dass er wünscht, die Anwendung mit einem seiner Webservice-Accounts (beispielsweise Twitter) zu verknüpfen. Daraufhin bekommt er in der Regel eine URL geliefert, über die er dies umsetzen kann. Die PIN, die er auf diese Weise erhält, teilt er über den \textit{authorizationGrantedCallback} der Anwendung mit. Schließlich lässt sich über \textit{isAuthorized} stets abfragen, ob die Anwendung bereits über die benötigten Zugriffsrechte verfügt. Im Rahmen dieser Arbeit wurde entschieden, sich auf die tatsächliche Unterstützung nur eines Accounts einer Art zu beschränken, obwohl die generische Struktur geeignet ist, um beliebige Mengen von Accounts zu verwalten.
 
 \subsubsection{AbstractConnectionService}
-Der AbstractConnectionService bietet eine Reihe von unterstützenden Funktionalitäten, die in der Regel von den Bindings benötigt werden. Hierzu gehört unter anderem die Beziehung des \textit{ThingRegistry}- und \textit{EventPublisher}-Services aus dem System, sowie die eigene Registrierung als \textit{EventSubscriber}. Die ThingRegistry wird benötigt um entsprechende Things im System zu registrieren, nachdem die Autorisierung erfolgreich abgeschlossen ist. Über den EventPublisher publizieren die konkreten Listener (z.B. TwitterUserStreamListener) die Zustandsänderungsevents (mehr dazu in Sektion \ref{sec:bindings_impl}). Als EventSubscriber registriert sich ein ConnectionService um auf Änderungen von Things im System entsprechend reagieren zu können. Beispielsweise, falls ein Thing gelöscht wird, muss auch der zugehörige Listener entfernt werden.\\
+Der AbstractConnectionService bietet eine Reihe von unterstützenden Funktionalitäten, die in der Regel von den Bindings benötigt werden. Hierzu gehört unter anderem die Beziehung des \textit{ThingRegistry}- und \textit{EventPublisher}-Services aus dem System, sowie die eigene Registrierung als \textit{EventSubscriber}. Die ThingRegistry wird benötigt um entsprechende Things im System zu registrieren, nachdem die Autorisierung erfolgreich abgeschlossen ist. Über den EventPublisher publizieren die konkreten Listener (z. B. TwitterUserStreamListener) die Zustandsänderungsevents (mehr dazu in Sektion \ref{sec:bindings_impl}). Als EventSubscriber registriert sich ein ConnectionService um auf Änderungen von Things im System entsprechend reagieren zu können. Beispielsweise, falls ein Thing gelöscht wird, muss auch der zugehörige Listener entfernt werden.\\
 
 
 
@@ -46,7 +46,7 @@ Die Bindings sind wie in Sektion \ref{esh:bindings} erläutert aufgebaut. Es wir
 
 Jedes Binding integriert einen eigenen Webservice und fügt, sofern notwendig, spezielle Trigger und Actions dem System hinzu. Diese Module erlauben es die Interaktion mit diesen Services über die ESH Rule Engine sinnvoll zu automatisieren.
 
-Alle Bindings haben gemeinsam, dass sie bei den respektiven Webdiensten zunächst registriert werden müssen. Dabei erhalten sie ein Token, mit dem sie sich gegenüber dem Dienst bei Aufrufen identifizieren. Wie komplex dieser Ablauf ist, hängt vom jeweiligen Service ab.
+Alle Bindings haben gemeinsam, dass sie bei den zugehörigen Webdiensten zunächst registriert werden müssen. Dabei erhalten sie ein Token, mit dem sie sich gegenüber dem Dienst bei Aufrufen identifizieren. Wie komplex dieser Ablauf ist, hängt vom jeweiligen Service ab.
 
 \subsection{Anbindung von Twitter}
 Das Twitter Binding fügt dem System Things des Typs \glqq twitter\grqq{} hinzu. Es wird derzeit der Channel \glqq status\grqq{} unterstützt. Dies bedeutet, dass es möglich ist über die Rule Engine den aktuellen Status des Nutzers über Regeln zu manipulieren. Die entsprechende Logik ist in dem \textit{TwitterHandler} und der \textit{TwitterAction} hinterlegt. \\
@@ -59,9 +59,9 @@ Umgekehrt ist das Binding in der Lage auf viele Zustandsänderungen des Accounts
 
 \begin{enumerate}
 \item sich ein Status, dem der Nutzer auf Twitter folgt, ändert. In diesem Fall wird der neue Status im Payload des Events gespeichert.
-\item ein Status sich ändert und Medien (z.B. Bilder) enthält. In diesem Fall wird für jedes Medium ein eigenes Event publiziert, dass die Medien-URL enthält.
+\item ein Status sich ändert und Medien (z. B. Bilder) enthält. In diesem Fall wird für jedes Medium ein eigenes Event publiziert, dass die Medien-URL enthält.
 \item der Nutzer eine Nachricht erhält. Der Text der Nachricht wird im Payload hinterlegt.
-\item viele weiter Ereignisse eintreffen.
+\item viele weitere Ereignisse eintreffen.
 \end{enumerate}
  
 Falls ein bestimmtes Szenario nicht abgedeckt ist, lässt sich der \textit{TwitterUserStreamListener} entsprechend erweitern.\\
@@ -115,10 +115,10 @@ Das Binding registriert den neuen Thing-Typen \glqq weather\grqq{} mit den Chann
 Da die Zustandsaktualisierung in diesem Fall vergleichsweise simpel verläuft, wurde sie nicht in eine dedizierte Klasse ausgelagert. Stattdessen wurde der ThingHandler um die entsprechende Funktionalität erweitert. Da sich das Wetter von Region zu Region mit sehr unterschiedlicher Geschwindigkeit ändern kann, lässt sich die Aktualisierungsperiode über die Benutzeroberfläche beliebig konfigurieren.
 
 
-\subsection{Email Funktionalitäten}
-Das Bundle \textit{tka.binding.gmail} erlaubt es dem Nutzer Emails zu versenden. Es ist analog zu den bisherigen Bindings aufgebaut. Der Thing-Typ \glqq gmail\grqq{} wird im System registriert und über einen entsprechenden ThingHandler gesteuert. 
+\subsection{E-Mail Funktionalitäten}
+Das Bundle \textit{tka.binding.gmail} erlaubt es dem Nutzer E-Mails zu versenden. Es ist analog zu den bisherigen Bindings aufgebaut. Der Thing-Typ \glqq gmail\grqq{} wird im System registriert und über einen entsprechenden ThingHandler gesteuert. 
 
-Das Binding registriert den Action Typen \textit{EmailAction}, über den der Nutzer angeben kann, an wen eine Email mit den gewählten Informationen gesendet werden soll. Die Email wird von einer anwendungsinternen Google Mail\cite{gmail} Adresse \textit{noreply.flash.ma@gmail.com} über einen öffentlichen SMTP Server versandt.
+Das Binding registriert den Mdoul-Typ \textit{EmailAction}, über den der Nutzer angeben kann, an wen eine E-Mail mit den gewählten Informationen gesendet werden soll. Die E-Mail wird von einer anwendungsinternen Google Mail\cite{gmail} Adresse \textit{noreply.flash.ma@gmail.com} über einen öffentlichen SMTP Server versandt.
 
 
 \subsection{Integraiton von Philips Hue}
@@ -308,7 +308,7 @@ Als Grundlage für die Distribution wird das \textit{Eclipse SmartHome Packaging
 \item Die eigenen Bundles wurden mithilfe von Maven zu OSGi-Jar-Dateien umgewandelt und zum Deployment hinzugefügt.
 \end{enumerate}
 
-Schließlich wurde die Distribution auf dem Raspberry Pi gestartet und und einem umfangreichen Test unterzogen. Die Ergebnisse dieses Tests werden in Kapitel \ref{chap:eval} vorgestellt.
+Schließlich wurde die Distribution auf dem Raspberry Pi gestartet und einem umfangreichen Test unterzogen. Die Ergebnisse dieses Tests werden in Kapitel \ref{chap:eval} vorgestellt.
 
 \paragraph{Anmerkung:} Die Distribution kann über das \textit{start.sh} Script gestartet werden. Die Benutzeroberfläche ist unter \textit{http://localhost:8080/flash/index.html} erreichbar.
 

@@ -4,7 +4,7 @@
 In diesem Kapitel wird \textit{Eclipse SmartHome} (ESH) \cite{ESH:home} vorgestellt. Es werden zunächst die grundlegenden Konzepte des Frameworks erläutert. Anschließend wird auf für die Arbeit relevante konkrete Aspekte näher eingegangen.
 
 \section{Überblick}
-Eclipse SmartHome positioniert sich als ein Framework, dass als Grundlage für die Entwicklung von konkreten SmartHome Anwendungen dienen soll. Tatsächlich kommt es in vielen bekannten Produkten zum Einsatz, wie z.B. openHAB\cite{openHAB} oder Qivicon\cite{qivicon}.
+Eclipse SmartHome positioniert sich als ein Framework, dass als Grundlage für die Entwicklung von konkreten SmartHome Anwendungen dienen soll. Tatsächlich kommt es in vielen bekannten Produkten zum Einsatz, wie z. B. openHAB\cite{openHAB} oder Qivicon\cite{qivicon}.
 
 
 \subsubsection{Architektur}
@@ -19,11 +19,11 @@ Eclipse SmartHome hat eine serviceorientierte Architektur, basierend auf dem Jav
 
 Im Rahmen des OSGi Frameworks wird das gesamte Programm in verschiedene Softwarekomponenten (Bundles) aufgeteilt. Jede Komponente bietet und bezieht Services. Die angebotenen Services werden von den entsprechenden Bundles zur Laufzeit im System registriert, wonach andere Bundles, die diese Services beziehen, darüber informiert und ihrerseits gestartet werden können. Ein Bundle wird erst gestartet, wenn alle von ihm benötigten Services im System registriert wurden.\\
 
-Ein derartiger modularer Aufbau erlaubt es verschiedene Bundles nahezu unabhängig von einander zu entwickeln und später einzelne Bundles gegen aktuellere Versionen problemlos auszutauschen. Eclipse SmartHome besteht derzeit aus über 130 solcher untereinander kommunizierender Softwarekomponenten.
+Ein derartiger modularer Aufbau erlaubt es verschiedene Bundles nahezu unabhängig voneinander zu entwickeln und später einzelne Bundles gegen aktuellere Versionen problemlos auszutauschen. Eclipse SmartHome besteht derzeit aus über 130 solcher untereinander kommunizierender Softwarekomponenten.
 
 
 \subsubsection{Features}
-Trotz der Positionierung als Grundlage für konkrete Smart Home Lösungen anderer Anbieter, verfügt das Framework über viele Funktionalitäten, die in einem Smart Home zum Einsatz kommen. Es existiert ein allgemeines Modellgerüst für die virtuelle Abbildung von realen Geräten. Für einige ausgewählte Geräte ist die Steuerung implementiert. Automatisches Auffinden und Einbinden von Geräten wird begrenzt unterstützt. Eine Rule Engine ist bereits integriert. Schließlich gibt es eine rudimentäre Benutzeroberfläche, die es erlaubt zur Laufzeit Geräte zum System hinzuzufügen und sie zu steuern. ESH hat eine ganze Reihe weiterer Features, wie z.B. Sprachunterstützung, die jedoch im Rahmen dieser Arbeit nicht von Interesse sind. 
+Trotz der Positionierung als Grundlage für konkrete Smart Home Lösungen anderer Anbieter, verfügt das Framework über viele Funktionalitäten, die in einem Smart Home zum Einsatz kommen. Es existiert ein allgemeines Modellgerüst für die virtuelle Abbildung von realen Geräten. Für einige ausgewählte Geräte ist die Steuerung implementiert. Automatisches Auffinden und Einbinden von Geräten wird begrenzt unterstützt. Eine Rule Engine ist bereits integriert. Schließlich gibt es eine rudimentäre Benutzeroberfläche, die es erlaubt zur Laufzeit Geräte zum System hinzuzufügen und sie zu steuern. ESH hat eine ganze Reihe weiterer Features, wie z. B. Sprachunterstützung, die jedoch im Rahmen dieser Arbeit nicht von Interesse sind. 
 
 Zentrales Prinzip des gesamten Frameworks ist es möglichst generische Schnittstellen zu definieren und exemplarische Implementierungen anzubieten, die die beabsichtigte Funktionsweise veranschaulichen. \\
 
@@ -42,7 +42,7 @@ Die virtuelle Abbildung der realen Geräte im System veranschaulicht Abbildung \
 \subsubsection{Things}
 Things repräsentieren Entitäten, die zum System hinzugefügt werden können. In der Regel handelt es sich hierbei um verschiedene intelligente Geräte, wie beispielsweise eine \textit{Hue} Lampe oder eine Wetterstation. Derartige Geräte bieten eine oder mehrere Funktionalitäten über Channels an.
 
-Things, die als Brücke zu anderen intelligenten Geräten dienen, werden als Bridges bezeichnet (z.B. \textit{Hue} Bridge);
+Things, die als Brücke zu anderen intelligenten Geräten dienen, werden als Bridges bezeichnet (z. B. \textit{Hue} Bridge);
 
 \subsubsection{Channels}
 Ein Channel stellt eine bestimmte Funktionalität eines Things dar. Things können eine beliebige Anzahl von Channels anbieten. Beispielsweise kann eine Hue Lampe einen einzigen \glqq Licht\grqq -Channel anbieten, während eine Wetterstation die Channels \glqq Temperatur\grqq , \glqq Druck\grqq{} und \glqq Feuchtigkeit\grqq{} unterstützt.
@@ -72,7 +72,7 @@ Durch Trigger wird die Ausführung einer Regel angestoßen. Die Logik dahinter i
 
 Der Handler erhält nach der Instanziierung einen Callback zur Rule Engine vom System. Über diesen Callback teilt er der Regelmaschine mit, wann immer die Ausführung einer Regel angestoßen werden soll. Wann dies geschieht, muss vom Handler selbst entschieden werden, die Rule Engine hat hierauf keinerlei Einfluss. Beispielsweise, falls der Trigger klassischerweise bei einem Event feuern sollte, müsste der Handler sich als \textit{EventSubscriber} im System registrieren und auf das Event entsprechend reagieren. Alternativ kann an dieser Stelle auch beliebige andere Logik zum Einsatz kommen.\\
 
-Trigger-Handler werden für Instanzen von Triggern über \textit{ModuleTypeProvider} bereitgestellt. Solche Provider sind dafür verantwortlich für bestimmte Modul-IDs zugehörige Handler zur Verfügung zu stellen. Jedes Mal, wenn eine Instanz eines Moduls im System erzeugt wird, wird unter den registrierten Providern nach einem passenden gesucht, der für die ID des Moduls einen Handler generieren kann. Falls kein entsprechender Handler instanziiert werden kann, bleibt das Modul tot im System liegen und sämtliche damit gekoppelte Funktionalitäten fallen aus. Beispielsweise würde eine Rule, die einen Trigger enthält, für den kein korrespondierender Handler erzeugt werden kann, im System als \glqq nicht initialisiert\grqq{} untätig bleiben.
+Trigger-Handler werden für Instanzen von Triggern über \textit{ModuleTypeProvider} bereitgestellt. Solche Provider sind dafür verantwortlich für bestimmte Modul-Ids zugehörige Handler zur Verfügung zu stellen. Jedes Mal, wenn eine Instanz eines Moduls im System erzeugt wird, wird unter den registrierten Providern nach einem passenden gesucht, der für die Id des Moduls einen Handler generieren kann. Falls kein entsprechender Handler instanziiert werden kann, bleibt das Modul tot im System liegen und sämtliche damit gekoppelte Funktionalitäten fallen aus. Beispielsweise würde eine Rule, die einen Trigger enthält, für den kein korrespondierender Handler erzeugt werden kann, im System als \glqq nicht initialisiert\grqq{} untätig bleiben.
 
 \subsubsection{Kontext}
 \label{subsubsec:kontext}
@@ -93,16 +93,16 @@ Es gibt eine ganze Reihe unterschiedlicher Commands in ESH. Unter anderen gibt e
 
 \subsection{Deklarative Typen}
 \label{subsec:decltypes}
-Eclipse SmartHome unterstützt die Möglichkeit viele Entitäten deklarativ im JSON-Format\cite{json} in externen Dateien zu definieren. Es kann sich dabei sowohl um die Typen von Triggern, Conditions und Actions handeln, als auch beispielsweise um konkrete Regeln, die beim Systemstart ausgelesen und importiert werden. Sämtliche JSON-Dateien, die auf diese Weise Entitäten deklarieren, müssen innerhalb eines Bundles im Ordner \textit{ESH-INF} gelagert werden, wobei weitere Unterordner (z.B. \textit{automation}, \textit{moduletypes}) eine feinere Unterteilung ermöglichen. \\
+Eclipse SmartHome unterstützt die Möglichkeit viele Entitäten deklarativ im JSON-Format\cite{json} in externen Dateien zu definieren. Es kann sich dabei sowohl um die Typen von Triggern, Conditions und Actions handeln, als auch beispielsweise um konkrete Regeln, die beim Systemstart ausgelesen und importiert werden. Sämtliche JSON-Dateien, die auf diese Weise Entitäten deklarieren, müssen innerhalb eines Bundles im Ordner \textit{ESH-INF} gelagert werden, wobei weitere Unterordner (z. B. \textit{automation}, \textit{moduletypes}) eine feinere Unterteilung ermöglichen. \\
 
-Dabei werden die Namen und Typen der Modell-Attribute festgelegt. Jede Entität muss eine eindeutige ID besitzen, denn für diese ID werden sogenannte \textit{ModuleTypeProvider} im System registriert, die dafür verantwortlich sind für eine konkrete Instanz einer Entität einen entsprechenden Handler bereit zu stellen.\\
+Dabei werden die Namen und Typen der Modell-Attribute festgelegt. Jede Entität muss eine eindeutige Id besitzen, denn für diese Id werden sogenannte \textit{ModuleTypeProvider} im System registriert, die dafür verantwortlich sind für eine konkrete Instanz einer Entität einen entsprechenden Handler bereit zu stellen.\\
 
 Alternativ ist es auch möglich Typen von Modulen klassisch per Java-Code zu definieren.
 
 \subsection{Events}
-ESH arbeitet über den klassischen OSGi Event Bus. Er ermöglicht die Kommunikation zwischen den Komponenten der verschiedenen Bundles und ist gleichzeitig das Werkzeug, über das sie von einander entkoppelt werden. Die Bundles müssen sich dadurch nicht mehr gegenseitig kennen - es reicht, wenn sie mit dem Event Bus kommunizieren können. Bei dem Event Bus handelt es sich um einen klassischen OSGi Service.
+ESH arbeitet über den klassischen OSGi Event Bus. Er ermöglicht die Kommunikation zwischen den Komponenten der verschiedenen Bundles und ist gleichzeitig das Werkzeug, über das sie voneinander entkoppelt werden. Die Bundles müssen sich dadurch nicht mehr gegenseitig kennen - es reicht, wenn sie mit dem Event Bus kommunizieren können. Bei dem Event Bus handelt es sich um einen klassischen OSGi Service.
 
-Es ist auch möglich eigene Event Typen zu definieren. Hierfür muss zunächst der Typ des Events (POJO mit Attributen) festgelegt werden. Daraufhin muss für dieses Event ein EventProvider im System registriert werden, der dafür verantwortlich ist, ein generisches OSGi Event in ein entsprechendes Event vom spezifizierten Typ umzuwandeln. Die Zuordnung findet klassischerweise über eindeutige IDs statt. Ein OSGi Event besteht aus \textit{type}, \textit{source}, \textit{topic} und \textit{payload}.
+Es ist auch möglich eigene Event Typen zu definieren. Hierfür muss zunächst der Typ des Events (POJO mit Attributen) festgelegt werden. Daraufhin muss für dieses Event ein EventProvider im System registriert werden, der dafür verantwortlich ist, ein generisches OSGi Event in ein entsprechendes Event vom spezifizierten Typ umzuwandeln. Die Zuordnung findet klassischerweise über eindeutige Ids statt. Ein OSGi Event besteht aus \textit{type}, \textit{source}, \textit{topic} und \textit{payload}.
 
 
 \section{Bindings}
@@ -113,7 +113,7 @@ In der Regel handelt es sich dabei um verschiedene intelligente Geräte, doch es
 Ein Binding besteht aus einer Reihe von Komponenten. Die grundlegenden Elemente sind im Folgenden aufgeführt:
 
 \begin{enumerate}
-\item Eine Datei \textit{binding.xml} im Unterordner \textit{ESH-INF/binding}, welche die ID des Bindings eindeutig festlegt.
+\item Eine Datei \textit{binding.xml} im Unterordner \textit{ESH-INF/binding}, welche die Id des Bindings eindeutig festlegt.
 \item Eine Datei \textit{thing-types.xml} im Unterordner \textit{ESH-INF/thing}, in der die durch dieses Binding unterstützten Things und Channels spezifiziert werden.
 \item Eine \textit{HandlerFactory}, die für die in der \textit{thing-types.xml}-Datei spezifizierten Things zugehörige Handler instanziiert.
 \item Eine Reihe von Thing-Handlern, über die die Things tatsächlich gesteuert werden können.
@@ -121,7 +121,7 @@ Ein Binding besteht aus einer Reihe von Komponenten. Die grundlegenden Elemente 
 
 
 \subsubsection{Thing Handler}
-Thing Handler sind dafür verantwortlich, die Logik für die Steuerung von Geräten zu implementieren. Sie sind zuständig für die automatische Aktualisierung von Zuständen im System (z.B. regelmäßige Aktualisierung der Temperatur, die von einem Thermostat geliefert werden). Außerdem erhalten sie Commands vom System (z.B. als Teil einer Action einer Rule).
+Thing Handler sind dafür verantwortlich, die Logik für die Steuerung von Geräten zu implementieren. Sie sind zuständig für die automatische Aktualisierung von Zuständen im System (z. B. regelmäßige Aktualisierung der Temperatur, die von einem Thermostat geliefert werden). Außerdem erhalten sie Commands vom System (z. B. als Teil einer Action einer Rule).
 
 
 
