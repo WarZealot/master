@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.6.9)  27 FEB 2017 16:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.6.9)  27 FEB 2017 16:45
 entering extended mode
 **./main.tex
 (main.tex
@@ -768,7 +768,10 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 LaTeX Warning: Unused global option(s):
     [color].
 
-(main.aux (kapitel/titelseite.aux))
+(main.aux (kapitel/titelseite.aux) (kapitel/vorwort.aux)
+(kapitel/einleitung.aux) (kapitel/standforschung.aux) (kapitel/esh.aux)
+(kapitel/entwurf.aux) (kapitel/implementierung.aux) (kapitel/evaluation.aux)
+(kapitel/zusammenfassung.aux) (kapitel/anhang.aux) (kapitel/erklaerung.aux))
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
@@ -952,15 +955,6 @@ Overfull \hbox (24.89503pt too wide) in paragraph at lines 8--9
  []
 
 
-LaTeX Warning: Citation `hype' on page 1 undefined on input line 9.
-
-
-LaTeX Warning: Citation `hype' on page 1 undefined on input line 9.
-
-
-LaTeX Warning: Reference `fig:hype' on page 1 undefined on input line 13.
-
-
 Underfull \vbox (badness 6658) has occurred while \output is active []
 
  [1
@@ -981,9 +975,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 19--22
 
  []
 
-
-LaTeX Warning: Reference `sec:ziele' on page 2 undefined on input line 29.
-
 [2]) [3]
 \openout2 = `kapitel/standforschung.aux'.
 
@@ -994,15 +985,9 @@ LaTeX Warning: Reference `sec:ziele' on page 2 undefined on input line 29.
 ]
 Kapitel 2.
 
-LaTeX Warning: Citation `iot_history' on page 5 undefined on input line 8.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 7--9
 
  []
-
-
-LaTeX Warning: Citation `rfid_history' on page 5 undefined on input line 10.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 10--12
@@ -1015,13 +1000,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 13--14
  []
 
 
-LaTeX Warning: Citation `ierc' on page 5 undefined on input line 15.
-
-
-LaTeX Warning: Citation `ierc:portfolios' on page 5 undefined on input line 15.
-
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 15--16
 
  []
@@ -1032,34 +1010,9 @@ File: bilder/ierc.png Graphic file (type png)
 Package pdftex.def Info: bilder/ierc.png used on input line 19.
 (pdftex.def)             Requested size: 426.79135pt x 426.80246pt.
 
-
-LaTeX Warning: Citation `ierc:portfolios' on page 6 undefined on input line 20.
-
-
-
-LaTeX Warning: Citation `smartAction' on page 6 undefined on input line 20.
-
-
-LaTeX Warning: Citation `ierc:portfolios' on page 6 undefined on input line 20.
-
-
-
-LaTeX Warning: Citation `smartAction' on page 6 undefined on input line 20.
-
-
-LaTeX Warning: Citation `iota:d15' on page 6 undefined on input line 24.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [6 <./bilder/ierc.png>]
-
-LaTeX Warning: Citation `oiot' on page 7 undefined on input line 26.
-
-
-LaTeX Warning: Reference `fig:ierc' on page 7 undefined on input line 28.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 28--29
 
  []
@@ -1070,40 +1023,10 @@ File: bilder/iot_market_share.png Graphic file (type png)
 <use bilder/iot_market_share.png>
 Package pdftex.def Info: bilder/iot_market_share.png used on input line 33.
 (pdftex.def)             Requested size: 426.79135pt x 431.48221pt.
-
-
-LaTeX Warning: Citation `IotEnablers' on page 7 undefined on input line 34.
-
-
-LaTeX Warning: Citation `IotEnablers' on page 7 undefined on input line 34.
-
-
-LaTeX Warning: Citation `iot:glob_infr' on page 7 undefined on input line 40.
-
-[7 <./bilder/iot_market_share.png>]
-
-LaTeX Warning: Citation `FiCloud:CloudIot' on page 8 undefined on input line 42
-.
-
-
-LaTeX Warning: Citation `FiCloud:M3Iot' on page 8 undefined on input line 42.
-
-
-LaTeX Warning: Citation `SemWebIoT' on page 8 undefined on input line 42.
-
-
+ [7 <./bilder/iot_market_share.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 42--43
 
  []
-
-
-LaTeX Warning: Citation `money' on page 8 undefined on input line 44.
-
-
-LaTeX Warning: Reference `fig:market' on page 8 undefined on input line 44.
-
-
-LaTeX Warning: Citation `SmartHomeIoT' on page 8 undefined on input line 54.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 54--55
@@ -1111,30 +1034,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 54--55
  []
 
 
-LaTeX Warning: Citation `RWE' on page 8 undefined on input line 56.
-
-
-LaTeX Warning: Citation `sh:fragment' on page 8 undefined on input line 56.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 56--57
 
  []
 
 
-LaTeX Warning: Citation `ieee:tas' on page 8 undefined on input line 66.
-
-
 Underfull \vbox (badness 5519) has occurred while \output is active []
 
  [8]
-
-LaTeX Warning: Citation `ECA' on page 9 undefined on input line 68.
-
-
-LaTeX Warning: Reference `fig:tasoverview' on page 9 undefined on input line 72
-.
-
 <bilder/TASOverview.png, id=70, 863.47594pt x 643.6547pt>
 File: bilder/TASOverview.png Graphic file (type png)
 
@@ -1143,60 +1050,17 @@ Package pdftex.def Info: bilder/TASOverview.png used on input line 76.
 (pdftex.def)             Requested size: 426.79135pt x 318.13371pt.
 
 
-LaTeX Warning: Citation `ieee:tas' on page 9 undefined on input line 77.
-
-
-LaTeX Warning: Citation `ieee:tas' on page 9 undefined on input line 77.
-
-
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-LaTeX Warning: Citation `IFTTT' on page 9 undefined on input line 81.
-
-
-LaTeX Warning: Citation `Zapier' on page 9 undefined on input line 81.
-
-
-LaTeX Warning: Reference `sec:idee' on page 9 undefined on input line 88.
-
 [9]
-
-LaTeX Warning: Citation `hue' on page 10 undefined on input line 93.
-
-
-LaTeX Warning: Citation `cloudsec' on page 10 undefined on input line 97.
-
-
 Underfull \vbox (badness 1377) has occurred while \output is active []
 
  [10 <./bilder/TASOverview.png>]
-
-LaTeX Warning: Reference `subsec:tas' on page 11 undefined on input line 108.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 110--111
 
  []
 
-
-Underfull \vbox (badness 4144) has occurred while \output is active []
-
- [11]
-
-LaTeX Warning: Citation `rasp' on page 12 undefined on input line 118.
-
-[12]
-
-LaTeX Warning: Citation `dropbox' on page 13 undefined on input line 144.
-
-
-LaTeX Warning: Citation `twitter' on page 13 undefined on input line 145.
-
-
-LaTeX Warning: Citation `wetterapi' on page 13 undefined on input line 146.
-
-) [13]
+[11] [12]) [13]
 \openout2 = `kapitel/esh.aux'.
 
  (kapitel/esh.tex [14
@@ -1205,33 +1069,11 @@ LaTeX Warning: Citation `wetterapi' on page 13 undefined on input line 146.
 
 ]
 Kapitel 3.
-
-LaTeX Warning: Citation `ESH:home' on page 15 undefined on input line 4.
-
-
-LaTeX Warning: Citation `openHAB' on page 15 undefined on input line 7.
-
-
-LaTeX Warning: Citation `qivicon' on page 15 undefined on input line 7.
-
-
-LaTeX Warning: Citation `osgibook' on page 15 undefined on input line 11.
-
-
-LaTeX Warning: Reference `fig:osgi' on page 15 undefined on input line 11.
-
 <bilder/osgi.png, id=90, 353.32pt x 126.4725pt>
 File: bilder/osgi.png Graphic file (type png)
  <use bilder/osgi.png>
 Package pdftex.def Info: bilder/osgi.png used on input line 15.
 (pdftex.def)             Requested size: 353.31914pt x 126.47218pt.
-
-
-LaTeX Warning: Citation `osgi:whatisit' on page 15 undefined on input line 16.
-
-
-LaTeX Warning: Citation `osgi:whatisit' on page 15 undefined on input line 16.
-
 
 Underfull \hbox (badness 10000) in paragraph at lines 20--21
 
@@ -1242,10 +1084,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 28--29
 
  []
 
-
-LaTeX Warning: Reference `fig:esh_model' on page 16 undefined on input line 33.
-
-
 <bilder/esh_model.png, id=96, 295.60437pt x 179.16937pt>
 File: bilder/esh_model.png Graphic file (type png)
 
@@ -1254,19 +1092,9 @@ Package pdftex.def Info: bilder/esh_model.png used on input line 37.
 (pdftex.def)             Requested size: 426.79135pt x 258.6899pt.
 
 
-LaTeX Warning: Citation `ESH:home' on page 16 undefined on input line 38.
-
-
-LaTeX Warning: Citation `ESH:home' on page 16 undefined on input line 38.
-
-
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [16] [17 <./bilder/esh_model.png>]
-
-LaTeX Warning: Citation `mapDB' on page 18 undefined on input line 59.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 71--72
 
  []
@@ -1277,11 +1105,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 73--74
  []
 
 [18] [19]
-
-LaTeX Warning: Citation `json' on page 20 undefined on input line 96.
-
-
-Overfull \hbox (12.05086pt too wide) in paragraph at lines 96--97
+Overfull \hbox (17.03127pt too wide) in paragraph at lines 96--97
 \T1/cmr/m/n/10.95 Eclipse Smar-tHo-me un-ter-stützt die Mög-lich-keit vie-le En
 -ti-tä-ten de-kla-ra-tiv im JSON-Format[[]]
  []
@@ -1317,11 +1141,6 @@ File: bilder/entwurf_comp.png Graphic file (type png)
 Package pdftex.def Info: bilder/entwurf_comp.png used on input line 10.
 (pdftex.def)             Requested size: 408.77618pt x 353.06819pt.
 
-
-LaTeX Warning: Reference `sec:anforderungen' on page 23 undefined on input line
- 17.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 17--18
 
  []
@@ -1330,10 +1149,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 17--18
 Underfull \vbox (badness 1609) has occurred while \output is active []
 
  [23 <./bilder/entwurf_comp.png>]
-
-LaTeX Warning: Reference `fig:comp' on page 24 undefined on input line 19.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 19--20
 
  []
@@ -1342,9 +1157,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 19--20
 Underfull \hbox (badness 10000) in paragraph at lines 30--31
 
  []
-
-
-LaTeX Warning: Citation `oauth' on page 24 undefined on input line 34.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1361,27 +1173,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 67--68
  []
 
 
-LaTeX Warning: Reference `table:io' on page 26 undefined on input line 69.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 74--75
 
  []
 
 [26]
-
-LaTeX Warning: Reference `subsubsec:kontext' on page 27 undefined on input line
- 78.
-
-
-LaTeX Warning: Reference `subsec:persistenz' on page 27 undefined on input line
- 88.
-
-
-LaTeX Warning: Reference `subsec:decltypes' on page 27 undefined on input line 
-96.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 96--97
 
  []
@@ -1400,29 +1196,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 103--104
  []
 
 
-LaTeX Warning: Citation `gui_sp' on page 28 undefined on input line 105.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 107--108
 
  []
-
-
-LaTeX Warning: Citation `rest' on page 28 undefined on input line 109.
-
-
-LaTeX Warning: Citation `gui_rest' on page 28 undefined on input line 109.
 
 [28]
 Underfull \hbox (badness 10000) in paragraph at lines 115--116
 
  []
-
-
-LaTeX Warning: Citation `concierge' on page 29 undefined on input line 117.
-
-
-LaTeX Warning: Citation `felixgogo' on page 29 undefined on input line 117.
 
 ) [29]
 \openout2 = `kapitel/implementierung.aux'.
@@ -1447,14 +1228,6 @@ Overfull \hbox (3.27876pt too wide) in paragraph at lines 9--10
 e stellt ei-ne Be-nut-ze-ro-ber-flä-che be-reit, über die neue Webservice-
  []
 
-
-LaTeX Warning: Reference `subsubsec:oauth' on page 31 undefined on input line 1
-9.
-
-
-LaTeX Warning: Reference `fig:connectionservice' on page 31 undefined on input 
-line 19.
-
 <bilder/ConnectionService.png, id=149, 661.47125pt x 634.37pt>
 File: bilder/ConnectionService.png Graphic file (type png)
 
@@ -1466,11 +1239,6 @@ Package pdftex.def Info: bilder/ConnectionService.png used on input line 23.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [31]
-
-LaTeX Warning: Reference `sec:bindings_impl' on page 32 undefined on input line
- 32.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 32--33
 
  []
@@ -1479,10 +1247,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 32--33
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [32 <./bilder/ConnectionService.png (PNG copy)>]
-
-LaTeX Warning: Reference `esh:bindings' on page 33 undefined on input line 45.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 52--53
 
  []
@@ -1493,9 +1257,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 54--55
  []
 
 
-LaTeX Warning: Reference `table:io' on page 34 undefined on input line 56.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 56--57
 
  []
@@ -1504,9 +1265,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 56--57
 Underfull \hbox (badness 10000) in paragraph at lines 67--68
 
  []
-
-
-LaTeX Warning: Citation `twitter4j' on page 34 undefined on input line 71.
 
 
 Overfull \hbox (1.68083pt too wide) in paragraph at lines 81--90
@@ -1531,24 +1289,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 101--102
 
  []
 
-
-LaTeX Warning: Citation `bnd' on page 35 undefined on input line 105.
-
 [35]
-
-LaTeX Warning: Reference `impl:core' on page 36 undefined on input line 111.
-
-
-LaTeX Warning: Citation `gmail' on page 36 undefined on input line 121.
-
-
-Overfull \hbox (7.97684pt too wide) in paragraph at lines 121--122
+Overfull \hbox (7.5133pt too wide) in paragraph at lines 121--122
 \T1/cmr/m/n/10.95 Mail wird von ei-ner an-wen-dungs-in-ter-nen Goo-gle Mail[[]]
  Adres-se \T1/cmr/m/it/10.95 no-re-p-ly.flash.ma@gmail.com
  []
-
-
-LaTeX Warning: Reference `chap:eval' on page 36 undefined on input line 125.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 129--130
@@ -1556,10 +1301,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 129--130
  []
 
 [36]
-
-LaTeX Warning: Reference `entwurf:gui' on page 37 undefined on input line 131.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 141--142
 
  []
@@ -1569,14 +1310,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 143--144
 
  []
 
-
-LaTeX Warning: Reference `entwurf:gui' on page 37 undefined on input line 147.
-
 [37]
-
-LaTeX Warning: Reference `fig:gui_1' on page 38 undefined on input line 150.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 150--151
 
  []
@@ -1587,13 +1321,6 @@ File: bilder/gui_all4_1.png Graphic file (type png)
 <use bilder/gui_all4_1.png>
 Package pdftex.def Info: bilder/gui_all4_1.png used on input line 154.
 (pdftex.def)             Requested size: 885.30533pt x 690.32738pt.
-
-
-LaTeX Warning: Citation `gson' on page 38 undefined on input line 161.
-
-
-LaTeX Warning: Reference `fig:gui_2' on page 38 undefined on input line 170.
-
 
 Underfull \hbox (badness 10000) in paragraph at lines 170--171
 
@@ -1615,38 +1342,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 179--180
  []
 
 
-LaTeX Warning: Reference `subsubsec:oauth' on page 38 undefined on input line 1
-81.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 184--185
 
  []
 
 [38] [39 <./bilder/gui_all4_1.png>] [40 <./bilder/gui_all4_4.png>]
-
-LaTeX Warning: Reference `lmeta' on page 41 undefined on input line 193.
-
 LaTeX Font Info:    Try loading font information for T1+cmtt on input line 195.
+
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-
-LaTeX Warning: Reference `l2' on page 41 undefined on input line 213.
-
-[41]
-
-LaTeX Warning: Reference `l3' on page 42 undefined on input line 236.
-
-[42]
-
-LaTeX Warning: Reference `l4' on page 43 undefined on input line 261.
-
-[43]
-
-LaTeX Warning: Reference `thing_table' on page 44 undefined on input line 280.
-
+) [41] [42] [43]
 <bilder/sequenceOAuth.png, id=196, 874.76813pt x 520.94624pt>
 File: bilder/sequenceOAuth.png Graphic file (type png)
 
@@ -1660,40 +1366,11 @@ LaTeX Warning: Float too large for page by 25.0016pt on input line 294.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-LaTeX Warning: Reference `fig:sequenceOauth' on page 44 undefined on input line
- 296.
-
-
-LaTeX Warning: Reference `subsubsec:oauth' on page 44 undefined on input line 2
-98.
-
-
-LaTeX Warning: Citation `eshsample' on page 44 undefined on input line 305.
-
-
-LaTeX Warning: Citation `maven' on page 44 undefined on input line 305.
-
-[44]
-
-LaTeX Warning: Reference `chap:eval' on page 45 undefined on input line 311.
-
-
-LaTeX Warning: Reference `chap:entwurf' on page 45 undefined on input line 316.
-
-
-) [45] [46 <./bilder/sequenceOAuth.png>]
+[44]) [45] [46 <./bilder/sequenceOAuth.png>]
 \openout2 = `kapitel/evaluation.aux'.
 
  (kapitel/evaluation.tex
 Kapitel 6.
-
-LaTeX Warning: Reference `sec:anforderungen' on page 47 undefined on input line
- 6.
-
-
-LaTeX Warning: Reference `fig:eval0' on page 47 undefined on input line 16.
-
 
 Underfull \hbox (badness 10000) in paragraph at lines 16--17
 
@@ -1713,12 +1390,6 @@ Package pdftex.def Info: bilder/TASOverview_eval.png used on input line 20.
 Underfull \vbox (badness 2932) has occurred while \output is active []
 
  [48 <./bilder/TASOverview_eval.png>]
-
-LaTeX Warning: Reference `fig:eval1' on page 49 undefined on input line 40.
-
-
-LaTeX Warning: Reference `fig:eval2' on page 49 undefined on input line 40.
-
 <bilder/vs_mittelwert2.png, id=216, 362.3136pt x 217.7736pt>
 File: bilder/vs_mittelwert2.png Graphic file (type png)
 
@@ -1732,14 +1403,7 @@ File: bilder/vs_laengste2.png Graphic file (type png)
 <use bilder/vs_laengste2.png>
 Package pdftex.def Info: bilder/vs_laengste2.png used on input line 50.
 (pdftex.def)             Requested size: 426.79135pt x 256.52866pt.
-
-
-LaTeX Warning: Reference `fig:eval1' on page 49 undefined on input line 55.
-
-
-LaTeX Warning: Reference `fig:eval2' on page 49 undefined on input line 57.
-
-[49 <./bilder/vs_mittelwert2.png>] [50 <./bilder/vs_laengste2.png>]
+ [49 <./bilder/vs_mittelwert2.png>] [50 <./bilder/vs_laengste2.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 76--77
 
  []
@@ -1818,30 +1482,7 @@ Anhang A.
 ) [59] [60
 
 
-] (main.lof
-
-LaTeX Warning: Citation `hype' on page 61 undefined on input line 5.
-
-
-LaTeX Warning: Citation `ierc:portfolios' on page 61 undefined on input line 7.
-
-
-
-LaTeX Warning: Citation `smartAction' on page 61 undefined on input line 7.
-
-
-LaTeX Warning: Citation `IotEnablers' on page 61 undefined on input line 8.
-
-
-LaTeX Warning: Citation `ieee:tas' on page 61 undefined on input line 9.
-
-
-LaTeX Warning: Citation `osgi:whatisit' on page 61 undefined on input line 11.
-
-
-LaTeX Warning: Citation `ESH:home' on page 61 undefined on input line 12.
-
-)
+] (main.lof)
 \tf@lof=\write4
 \openout4 = `main.lof'.
 
@@ -1891,46 +1532,40 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--39
  (main.aux (kapitel/titelseite.aux) (kapitel/vorwort.aux)
 (kapitel/einleitung.aux) (kapitel/standforschung.aux) (kapitel/esh.aux)
 (kapitel/entwurf.aux) (kapitel/implementierung.aux) (kapitel/evaluation.aux)
-(kapitel/zusammenfassung.aux) (kapitel/anhang.aux) (kapitel/erklaerung.aux))
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+(kapitel/zusammenfassung.aux) (kapitel/anhang.aux) (kapitel/erklaerung.aux)) ) 
 Here is how much of TeX's memory you used:
- 9170 strings out of 493335
- 128096 string characters out of 3139252
- 239129 words of memory out of 3000000
- 12431 multiletter control sequences out of 15000+200000
+ 9201 strings out of 493335
+ 128758 string characters out of 3139252
+ 259779 words of memory out of 3000000
+ 12442 multiletter control sequences out of 15000+200000
  24596 words of font info for 54 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  40i,8n,42p,939b,1891s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\ktkachuk\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi6
-00\eccc1095.pk> <C:\Users\ktkachuk\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jkn
-appen\ec\dpi600\ectt1095.pk> <C:\Users\ktkachuk\AppData\Local\MiKTeX\2.9\fonts\
-pk\ljfour\jknappen\ec\dpi600\ecrm0800.pk> <C:\Users\ktkachuk\AppData\Local\MiKT
-eX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1000.pk> <C:\Users\ktkachuk\AppDa
-ta\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\k
-tkachuk\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1095.pk
-> <C:\Users\ktkachuk\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi60
-0\ecrm1000.pk> <C:\Users\ktkachuk\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jkna
-ppen\ec\dpi600\ecbx1000.pk> <C:\Users\ktkachuk\AppData\Local\MiKTeX\2.9\fonts\p
-k\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\ktkachuk\AppData\Local\MiKTe
-X\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2074.pk> <C:\Users\ktkachuk\AppDat
-a\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsl1095.pk> <C:\Users\kt
-kachuk\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2488.pk>
- <C:\Users\ktkachuk\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600
-\ecbx1095.pk> <C:\Users\ktkachuk\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknap
-pen\ec\dpi600\ecss1095.pk> <C:\Users\ktkachuk\AppData\Local\MiKTeX\2.9\fonts\pk
-\ljfour\jknappen\ec\dpi600\ecss1200.pk> <C:\Users\ktkachuk\AppData\Local\MiKTeX
-\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsx1200.pk> <C:\Users\ktkachuk\AppData
-\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecss1440.pk> <C:\Users\ktk
-achuk\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1095.pk>
-Output written on main.pdf (76 pages, 1380772 bytes).
+ 
+<C:\Users\ktkachuk\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
+eccc1095.pk> <C:\Users\ktkachuk\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknapp
+en\ec\dpi600\ectt1095.pk> <C:\Users\ktkachuk\AppData\Local\MiKTeX\2.9\fonts\pk\
+ljfour\jknappen\ec\dpi600\ecrm0800.pk> <C:\Users\ktkachuk\AppData\Local\MiKTeX\
+2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1000.pk> <C:\Users\ktkachuk\AppData\
+Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\ktka
+chuk\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1095.pk> <
+C:\Users\ktkachuk\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\e
+crm1000.pk> <C:\Users\ktkachuk\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappe
+n\ec\dpi600\ecbx1000.pk> <C:\Users\ktkachuk\AppData\Local\MiKTeX\2.9\fonts\pk\l
+jfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\ktkachuk\AppData\Local\MiKTeX\2
+.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2074.pk> <C:\Users\ktkachuk\AppData\L
+ocal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsl1095.pk> <C:\Users\ktkac
+huk\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2488.pk> <C
+:\Users\ktkachuk\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ec
+bx1095.pk> <C:\Users\ktkachuk\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen
+\ec\dpi600\ecss1095.pk> <C:\Users\ktkachuk\AppData\Local\MiKTeX\2.9\fonts\pk\lj
+four\jknappen\ec\dpi600\ecss1200.pk> <C:\Users\ktkachuk\AppData\Local\MiKTeX\2.
+9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsx1200.pk> <C:\Users\ktkachuk\AppData\Lo
+cal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecss1440.pk> <C:\Users\ktkach
+uk\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1095.pk>
+Output written on main.pdf (76 pages, 1378738 bytes).
 PDF statistics:
- 1083 PDF objects out of 1200 (max. 8388607)
+ 1085 PDF objects out of 1200 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  76 words of extra memory for PDF output out of 10000 (max. 10000000)
 
