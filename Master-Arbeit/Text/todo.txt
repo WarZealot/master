@@ -1,0 +1,3 @@
+undo proxy settings in bindings
+
+add itemstateevent to table
