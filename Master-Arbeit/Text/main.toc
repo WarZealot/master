@@ -10,10 +10,11 @@
 \contentsline {subsection}{\numberline {2.1.1}Smart Home}{8}
 \contentsline {subsection}{\numberline {2.1.2}Task Automation Services}{9}
 \contentsline {subsubsection}{IFTTT}{10}
+\contentsline {subsubsection}{Zapier}{11}
 \contentsline {section}{\numberline {2.2}Zentrale Idee}{11}
-\contentsline {subsection}{\numberline {2.2.1}Ziele}{11}
+\contentsline {subsection}{\numberline {2.2.1}Ziele}{12}
 \contentsline {subsection}{\numberline {2.2.2}Konkrete Anforderungen}{12}
-\contentsline {subsubsection}{Anzubindende Services}{12}
+\contentsline {subsubsection}{Anzubindende Services}{13}
 \contentsline {chapter}{\numberline {3}Eclipse SmartHome}{15}
 \contentsline {section}{\numberline {3.1}\IeC {\"U}berblick}{15}
 \contentsline {subsubsection}{Architektur}{15}
@@ -86,7 +87,7 @@
 \contentsline {subsection}{\numberline {6.3.1}Kopieren von Dateien in der Dropbox}{48}
 \contentsline {subsubsection}{Zahlreiche kleine Dateien}{49}
 \contentsline {subsubsection}{Gro\IeC {\ss }e Dateien}{50}
-\contentsline {subsection}{\numberline {6.3.2}Steuern von Lampen bei Tweets}{50}
+\contentsline {subsection}{\numberline {6.3.2}Steuern von Lampen bei Tweets}{51}
 \contentsline {subsection}{\numberline {6.3.3}Auswertung}{51}
 \contentsline {subsubsection}{Vorteile}{51}
 \contentsline {subsubsection}{Nachteile}{51}
@@ -94,12 +95,12 @@
 \contentsline {subsection}{\numberline {6.4.1}Positive Aspekte}{52}
 \contentsline {subsection}{\numberline {6.4.2}Negative Aspekte}{52}
 \contentsline {subsubsection}{Eclipse SmartHome}{52}
-\contentsline {subsubsection}{Quellcode}{52}
-\contentsline {section}{\numberline {6.5}Fazit}{52}
-\contentsline {chapter}{\numberline {7}Zusammenfassung}{53}
-\contentsline {section}{\numberline {7.1}Zusammenfassung}{53}
-\contentsline {section}{\numberline {7.2}Ausblick}{54}
-\contentsline {chapter}{\numberline {A}Weitere Informationen}{57}
-\contentsline {chapter}{Abbildungsverzeichnis}{59}
-\contentsline {chapter}{Literaturverzeichnis}{64}
-\contentsline {chapter}{Erkl\IeC {\"a}rung}{64}
+\contentsline {subsubsection}{Quellcode}{53}
+\contentsline {section}{\numberline {6.5}Fazit}{53}
+\contentsline {chapter}{\numberline {7}Zusammenfassung}{55}
+\contentsline {section}{\numberline {7.1}Zusammenfassung}{55}
+\contentsline {section}{\numberline {7.2}Ausblick}{56}
+\contentsline {chapter}{\numberline {A}Weitere Informationen}{59}
+\contentsline {chapter}{Abbildungsverzeichnis}{61}
+\contentsline {chapter}{Literaturverzeichnis}{66}
+\contentsline {chapter}{Erkl\IeC {\"a}rung}{66}

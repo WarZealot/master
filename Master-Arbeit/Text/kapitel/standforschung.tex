@@ -80,7 +80,6 @@ Aktuell gibt es noch vergleichsweise wenige TAS. Ein Überblick über existieren
 
 Wie in der Abbildung zu sehen ist, gibt es unterschiedliche Ansätze. Einige TAS sind in der Cloud angesiedelt, was bedeutet, dass sie, sofern Internet verfügbar ist, jederzeit und von überall erreichbar sind. Die aktuell mächtigsten und bekanntesten TAS sind \textit{IFTTT} \cite{IFTTT} und \textit{Zapier}\cite{Zapier}. Sie unterstützen hunderte unterschiedlicher Web Services, bieten aber keine Möglichkeit mit Geräten direkt zu interagieren. Ihr Fokus ist es zu ermöglichen eine Vielzahl von Szenarien auf eine einfache Art und Weise zu erstellen. Auf komplexere Regeln und Szenarien sind ihre Rule Engines nicht ausgelegt. 
 Um diese TAS zu nutzen, muss man jedoch bereit sein, sämtliche Zugriffsrechte, die für die zu automatisierenden Dienste (z.B. \textit{Facebook}, \textit{Twitter}, etc.) benötigt werden, dem Cloud Service anzuvertrauen. Dies lässt sich teilweise durch Einsatz von Protokollen wie OAuth und der Übergabe von \textit{eingeschränkten} Rechten mäßigen - dennoch kann der durch einen Angreifer angerichtete Schaden enorm sein.
-%TODO beleg
 
 Andere Task Automation Services arbeiten lokal auf Smartphones. Solche TAS konzentrieren sich auf die Automatisierung von den auf dem Gerät laufenden Services. Die Unterstützung von der Automatisierung von Web Services ist nur in dem Umfang gegeben, in dem diese Web Services direkten Kontakt mit dem Smartphone haben.  
 
@@ -96,6 +95,13 @@ Ein Beispiel für Task Automation Services in der Cloud ist IFTTT, welches eine 
 Bis dato lassen sich komplexere Szenarien mit \textit{IFTTT} nur begrenzt abbilden. Das bedeutet, dass es keine Möglichkeit gibt, beispielsweise, Und- und Oder-Bedingungen zu definieren, die es ermöglichen würden, mehrere Conditions in einem Applet zu verknüpfen. Stattdessen muss komplexes Verhalten in einzelnen Bausteinen auf verschiedene Applets verteilt werden.
 
 Ein weiterer Aspekt von IFTTT ist, dass es für die Anbindung von Services Zugriffsrechte auf sämtliche Accounts des Users bedarf. Aus einer Datenschutz-Perspektive\cite{cloudsec} stellt das ein Risiko für den Endnutzer dar, da diese Zugriffsrechte an einer Stelle gesammelt sind. Im Falle einer Sicherheitslücke bei IFTTT wären alle damit gekoppelten Services in Gefahr. 
+
+\subsubsection{Zapier}
+Zapier ist nach IFTTT der zweitgrößte webbasierte Task Automation Service. Es bietet im Wesentlichen die gleichen Funktionalitäten an, mit einigen Unterschieden. 
+
+Zu den Vorteilen von Zapier gehört, dass es in seinem Applet-Äquivalent, den sogenannten \textit{Zaps}, eine mächtigere Regelmaschine anbietet. Es ist möglich mehrere Aktionen an einen Trigger in einem Zap zu binden. Zusätzlich lassen sich Filter (Conditions) definieren. Die Zaps haben keine offiziellen Einschränkungen in Punkten Datenanzahl und Volumen.
+
+Negativ aufgefallen ist, dass Zapier gleichzeitig deutlich weniger Webservices unterstützt. Insbesondere unterstützt es Hardware-steuernden Dienste, wie z.B. Philips Hue \textit{nicht}. Schließlich ist der Service kostenpflichtig. Kostenlos werden Zaps nur in einem 15 Minuten Intervall evaluiert und nie mehr als fünf pro Abfrage. Abhängig vom Typ des Premium-Accounts lässt sich das Intervall auf bis zu 5 Minuten reduzieren und die Anzahl der evaluierten Zaps erhöhen.
 
 \section{Zentrale Idee}
 \label{sec:idee}
@@ -113,7 +119,7 @@ Es soll ein Demonstrator entwickelt werden, der die Funktionalitäten von Smart 
 
 Die entstandenen Funktionalitäten sollen anhand von einer Reihe von konkreten Services demonstriert werden. Unter anderem sollen ein Wetterdienst, ein Filesharing Service und ein Social Media Service angebunden werden. Die Zusammenarbeit dieser Services untereinander und mit Smart Home Geräten soll anhand von Beispiel-Regeln demonstriert werden. Außerdem soll es möglich sein neue Regeln zum System über eine Benutzeroberfläche hinzufügen zu können.
 
-Zum Schluss soll der entstandene Demonstrator evaluiert werden. Es soll geprüft werden, inwiefern Task Automation Services als on-premise Lösung sinnvoll sind unter Betrachtung von Aspekten wie Reaktionszeiten und Netzwerklast. Hierzu soll ein Vergleich der erstellten Anwendung mit \textit{IFTTT} stattfinden.
+Zum Schluss soll der entstandene Demonstrator evaluiert werden. Es soll geprüft werden, inwiefern Task Automation Services als on-premise Lösung sinnvoll sind unter Betrachtung von Aspekten wie Reaktionszeiten und Netzwerklast. Hierzu soll ein Vergleich der erstellten Anwendung mit den aktuell größten webbasierten TAS (IFTTT und Zapier) stattfinden.
 
 \subsection{Konkrete Anforderungen}
 \label{sec:anforderungen}

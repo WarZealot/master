@@ -23,10 +23,12 @@ Einen Einblick, wie sich der entstandene Demonstrator in die aktuell existierend
 \end{figure}
 
 
-Der entstandene Demonstrator wurde einem umfassenden Test unterzogen, im Laufe dessen Datendurchsatz und Reaktionszeiten gemessen und mit IFTTT verglichen wurden. 
+Der entstandene Demonstrator wurde einem umfassenden Test unterzogen, im Laufe dessen Datendurchsatz und Reaktionszeiten gemessen und mit IFTTT und Zapier verglichen wurden. 
 
 \subsection{Kopieren von Dateien in der Dropbox}
 Um Durchsatz zu messen, wurde ein Szenario definiert, dass sämtliche Dateien, die in einen bestimmten Ordner in Dropbox hinzugefügt wurden, in einen anderen Ordner in der Dropbox zu kopieren. Zu Beachten ist, dass IFTTT sich auf die Abarbeitung von bis zu 15 Dateien pro Abfrage begrenzt und Dateien, die größer, als 30 MB sind, nicht beachtet. Zusätzlich wird vom Service gewarnt, dass die Ausführung aller Szenarien sich um bis zu 1 Stunde verzögern kann. Diese Tatsache führt zur Streuung, die in den nachfolgenden Grafiken festzustellen ist.
+
+Im Falle von Zapier ist bekannt, dass nur bis zu 5 Zaps pro Abfrage alle 15 Minuten evaluiert werden. Allerdings gibt es keine Einschränkungen in der Anzahl der bearbeiteten Dateien und ihrer Größe. Aufgrund dieses Wissens wurde bei der Evaluation angenommen, dass die durchschnittliche Verzögerung der Ausführung eines Zaps bei 7,5 Minuten liegt.
 
 Der Demonstrator lief auf einem Raspberry Pi 3 Model B, der an einen Router mit VDSL (50 MBit) Verbindung angeschlossen war.
 
@@ -54,22 +56,28 @@ Für die Erstellung von Grafik \ref{fig:eval1} wurde für jede hochgeladene Date
 
 In der Grafik \ref{fig:eval2} wurde analog gehandelt, mit dem Unterschied, dass hier dargestellt ist, was die längste Dauer zwischen hochladen einer Datei und der Bereitstellung der Kopie ist. Da alle Dateien nahezu gleichzeitig hochgeladen werden, kann man diesen Wert auch als Gesamtdauer, bis alle Dateien verschoben wurden, betrachten.
 
+Bei der Messung von IFTTT wurden die berechneten Werte wie gemessen in die Grafik übertragen, da die Verzögerung vor der Ausführung des Applets unbekannt ist und nicht beeinflusst werden kann. Bei Zapier wurde hingegen eine durchschnittliche Verzögerung von 7,5 Minuten angenommen. Da es sich um kleine Dateien handelt und die Zeit, die benötigt wird um eine einzige Datei hochzuladen, vergleichbar klein ist (ca. 1 Sekunde basierend auf den gemessenen Werten) und in Betrachtung der Gesamtzeiten vernachlässigt werden kann, wurde beim Erstellen der Grafik zunächst die kleinste Zeit vom Mittelwert subtrahiert und daraufhin die erwarteten 7,5 Minuten hinzu addiert.
+
 \subsubsection{Große Dateien}
 IFTTT ist in der Lage mit Dateien umzugehen, die bis zu 30 MB groß sind. Eine Wiederholung der oben genannten Messung mit 25 MB großen Dateien hat ergeben, dass sich die Ergebnisse  analog verhalten. 
 
-Der Demonstrator ist in der Lage mit größeren Dateien umzugehen. Im Test gab es auch bei Verschiebung von 300 MB großen Dateien keinerlei Probleme.
+Sowohl der Demonstrator als auch Zapier sind in der Lage mit größeren Dateien umzugehen. Im Test gab es auch bei Verschiebung von 100 MB großen Dateien keinerlei Probleme.
 
 \subsection{Steuern von Lampen bei Tweets}
 Es wurde sowohl auf IFTTT als auch auf dem Demonstrator ein Szenario erstellt, dass bei jedem Tweet eine Philips Hue Lampe ausschaltet. Anschließend wurde gemessen, wie lange es dauert, bis die Lampe tatsächlich ausgeschaltet wird, nachdem der Tweet veröffentlicht wurde. Dabei steuert ITTTT die Lampe über die von Hue bereitgestellte Webschnittstelle an, während der Demonstrator das Gerät über WLAN bedient.
 
 Es hat sich ergeben, dass die Reaktionszeit des Demonstrators stets unter einer Sekunde lag, während die Schaltung durch IFTTT eine sehr variable Dauer aufwies. Die schnellste Reaktionszeit lag bei ungefähr 10 Sekunden.
 
+Zapier wurde in diesem Szenario nicht betrachtet, da es die Steuerung von intelligenten Geräten über vom Hersteller bereitgestellte Webdienste nicht unterstützt.
+
 
 \subsection{Auswertung}
 \subsubsection{Vorteile}
-Aus den Messungen hat sich gezeigt, dass der Demonstrator IFTTT in vieler Hinsicht deutlich voraus ist. Dadurch, dass er sich im Hause des Nutzers befindet, ist er in der Lage mit Geräten direkt zu kommunizieren, was der Grund für merklich bessere Reaktionszeiten in Szenarien, die intelligente Geräte im Haus betreffen, ist.\\
+Aus den Messungen hat sich gezeigt, dass der Demonstrator IFTTT und Zapier in vieler Hinsicht deutlich voraus ist. Dadurch, dass er sich im Hause des Nutzers befindet, ist er in der Lage mit Geräten direkt zu kommunizieren, was der Grund für merklich bessere Reaktionszeiten in Szenarien, die intelligente Geräte im Haus betreffen, ist.\\
 
-Auch in Szenarien, die nur Web-basiert sind und viel Download/Upload-Volumen mit sich ziehen, hat sich der Raspberry Pi als überlegen erwiesen. Dies lässt sich dadurch erklären, dass es sich bei dem Demonstrator im Gegensatz zu IFTTT um ein dediziertes Gerät handelt, dass nur einen konkreten User bedient. Dies führt auch dazu, dass er keine arbiträren Eingrenzungen besitzt, wie z.B. die Begrenzung der Dateigröße.\\
+Auch in Szenarien, die nur Web-basiert sind und viel Download/Upload-Volumen mit sich ziehen, hat sich der Raspberry Pi als überlegen erwiesen. Dies lässt sich dadurch erklären, dass es sich bei dem Demonstrator im Gegensatz zu IFTTT und Zapier um ein dediziertes Gerät handelt, dass nur einen konkreten Nutzer bedient. Dies führt auch dazu, dass er keine arbiträren Eingrenzungen besitzt, wie z.B. die Begrenzung der Dateigröße.
+
+Interessant ist, dass sofern Zapier keine Verzögerungen bei der Ausführung von Zaps hätte, es einen höheren Datendurchsatz aufweisen würde. Negativ an Zapier aufgefallen ist, dass es, falls es eine große Anzahl von Dateien (z.B. 150) in einem Zap bearbeiten soll, zunächst den Nutzer um eine Bestätigung bittet. Diese Bestätigung muss jedes Mal manuell erteilt werden, was die Einsatzmöglichkeiten von Zapier eingrenzt. \\
 
 %\paragraph{Anmerkung:} Es ist zu beachten, dass diese Messung mit einem 50 MBit/s Internetanschluss erstellt wurde. Langsamere/schnellere Verbindungen könnten die Messungen entsprechend beeinflussen.\\
 
