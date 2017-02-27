@@ -5,19 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package tka.automation.extension.handler;
+package tka.binding.dropbox.automation;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.smarthome.automation.Action;
-import org.eclipse.smarthome.automation.Condition;
 import org.eclipse.smarthome.automation.Module;
-import org.eclipse.smarthome.automation.Trigger;
 import org.eclipse.smarthome.automation.handler.BaseModuleHandlerFactory;
 import org.eclipse.smarthome.automation.handler.ModuleHandler;
 import org.eclipse.smarthome.automation.handler.ModuleHandlerFactory;
@@ -29,40 +25,58 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import tka.automation.extension.type.AlwaysTrueConditionType;
-import tka.automation.extension.type.DropboxActionType;
-import tka.automation.extension.type.EmailActionType;
-import tka.automation.extension.type.TkaTriggerType;
-import tka.automation.extension.type.TwitterActionType;
-
-/**
- * This class is a simple implementation of the {@link ModuleHandlerFactory}, which is registered as a service.
+/***
+ * This class is an implementation of the {@link ModuleHandlerFactory}, which is registered as a service. It is used to
+ * provide DropboxActionHandlers.
  *
+ * @author Konstantin Tkachuk
+ *
+ *         27.02.2017
  */
-public class FlashHandlerFactory extends BaseModuleHandlerFactory {
+public class DropboxModuleHandlerFactory extends BaseModuleHandlerFactory {
 
-    public static final String MODULE_HANDLER_FACTORY_NAME = "[TkaHandlerFactory]";
+    /**
+     * The name of the factory.
+     */
+    public static final String MODULE_HANDLER_FACTORY_NAME = "[DropboxModuleHandlerFactory]";
+
+    /**
+     * The supported module types.
+     */
     private static final Collection<String> TYPES;
-
     static {
         List<String> temp = new ArrayList<String>();
-        temp.add(TwitterActionType.UID);
         temp.add(DropboxActionType.UID);
-        temp.add(EmailActionType.UID);
-        temp.add(AlwaysTrueConditionType.UID);
-        temp.add(TkaTriggerType.UID);
         TYPES = Collections.unmodifiableCollection(temp);
     }
 
+    /**
+     * The service registration.
+     */
     @SuppressWarnings("rawtypes")
     private ServiceRegistration factoryRegistration;
-    private Map<String, TkaTriggerHandler> triggerHandlers;
-    private Logger logger = LoggerFactory.getLogger(FlashHandlerFactory.class);
+
+    /**
+     * The logger.
+     */
+    private Logger logger = LoggerFactory.getLogger(DropboxModuleHandlerFactory.class);
+
+    /**
+     * The event publisher.
+     */
     private EventPublisher eventPublisher;
+
+    /**
+     * The item registry.
+     */
     private ItemRegistry itemRegistry;
 
-    public FlashHandlerFactory(BundleContext bc) {
-        triggerHandlers = new HashMap<String, TkaTriggerHandler>();
+    /**
+     * The constructor.
+     *
+     * @param bc the bundle context.
+     */
+    public DropboxModuleHandlerFactory(BundleContext bc) {
         activate(bc);
 
         ServiceReference<EventPublisher> reference3 = bc.getServiceReference(EventPublisher.class);
@@ -72,43 +86,44 @@ public class FlashHandlerFactory extends BaseModuleHandlerFactory {
         itemRegistry = bc.getService(reference4);
     }
 
+    /**
+     * @see org.eclipse.smarthome.automation.handler.ModuleHandlerFactory#getTypes()
+     */
     @Override
     public Collection<String> getTypes() {
         return TYPES;
     }
 
+    /**
+     * Registers this class as a service.
+     *
+     * @param bc
+     */
     public void register(BundleContext bc) {
         factoryRegistration = bc.registerService(ModuleHandlerFactory.class.getName(), this, null);
     }
 
+    /**
+     * Unregisters this service.
+     */
     public void unregister() {
         factoryRegistration.unregister();
         factoryRegistration = null;
     }
 
-    public TkaTriggerHandler getTriggerHandler(String uid) {
-        return triggerHandlers.get(uid);
-    }
-
+    /**
+     * @see org.eclipse.smarthome.automation.handler.BaseModuleHandlerFactory#internalCreate(org.eclipse.smarthome.automation.Module,
+     *      java.lang.String)
+     */
     @Override
     protected ModuleHandler internalCreate(Module module, String ruleUID) {
         System.out.println("FlashHandlerFactory.internalCreate() " + module + " " + ruleUID);
         ModuleHandler moduleHandler = null;
-        if (TwitterActionType.UID.equals(module.getTypeUID())) {
-            moduleHandler = new TwitterActionHandler((Action) module, eventPublisher, itemRegistry);
-        } else if (DropboxActionType.UID.equals(module.getTypeUID())) {
+        if (DropboxActionType.UID.equals(module.getTypeUID())) {
             moduleHandler = new DropboxActionHandler((Action) module, eventPublisher, itemRegistry);
-        } else if (EmailActionType.UID.equals(module.getTypeUID())) {
-            moduleHandler = new EmailActionHandler((Action) module, eventPublisher, itemRegistry);
-        } else if (AlwaysTrueConditionType.UID.equals(module.getTypeUID())) {
-            moduleHandler = new AlwaysTrueConditionHandler((Condition) module);
-        } else if (TkaTriggerType.UID.equals(module.getTypeUID())) {
-            moduleHandler = new TkaTriggerHandler((Trigger) module);
-            triggerHandlers.put(ruleUID, (TkaTriggerHandler) moduleHandler);
         } else {
             logger.error(MODULE_HANDLER_FACTORY_NAME + "Not supported moduleHandler: {}", module.getTypeUID());
         }
-        System.out.println("TriggerHandlers: " + triggerHandlers);
         return moduleHandler;
     }
 }

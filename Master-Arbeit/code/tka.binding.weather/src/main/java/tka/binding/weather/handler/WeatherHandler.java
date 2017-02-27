@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 1997, 2015 by ProSyst Software GmbH and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package tka.binding.weather.handler;
 
 import java.io.IOException;
@@ -36,24 +43,56 @@ import com.google.gson.JsonParser;
 import tka.binding.weather.WeatherBindingConstants;
 
 /**
- * @author ktkachuk
+ * The thing handler for {@link WeatherBindingConstants#THING_TYPE_WEATHER} things.
  *
+ * @author Konstantin Tkachuk
+ *
+ *         27.02.2017
  */
 public class WeatherHandler extends ConfigStatusThingHandler {
 
+    /**
+     * The logger.
+     */
     private final Logger logger = LoggerFactory.getLogger(WeatherHandler.class);
 
+    /**
+     * The location.
+     */
     private String location;
+
+    /**
+     * The refresh period.
+     */
     private BigDecimal refresh;
+
+    /**
+     * The json parser.
+     */
     private static final JsonParser PARSER = new JsonParser();
 
+    /**
+     * The current weather information in json.
+     */
     private String weatherJSON = null;
+
+    /**
+     * The refresh job.
+     */
     ScheduledFuture<?> refreshJob;
 
+    /**
+     * The constructor.
+     *
+     * @param thing
+     */
     public WeatherHandler(Thing thing) {
         super(thing);
     }
 
+    /**
+     * @see org.eclipse.smarthome.core.thing.binding.BaseThingHandler#initialize()
+     */
     @Override
     public void initialize() {
         logger.debug("Initializing Weather handler.");
@@ -76,6 +115,9 @@ public class WeatherHandler extends ConfigStatusThingHandler {
         startAutomaticRefresh();
     }
 
+    /**
+     * Starts the polling of weather information.
+     */
     private void startAutomaticRefresh() {
         Runnable runnable = new Runnable() {
             @Override
@@ -99,11 +141,18 @@ public class WeatherHandler extends ConfigStatusThingHandler {
         refreshJob = scheduler.scheduleAtFixedRate(runnable, 0, refresh.intValue(), TimeUnit.SECONDS);
     }
 
+    /**
+     * @see org.eclipse.smarthome.core.thing.binding.BaseThingHandler#dispose()
+     */
     @Override
     public void dispose() {
         refreshJob.cancel(true);
     }
 
+    /**
+     * @see org.eclipse.smarthome.core.thing.binding.ThingHandler#handleCommand(org.eclipse.smarthome.core.thing.ChannelUID,
+     *      org.eclipse.smarthome.core.types.Command)
+     */
     @Override
     public void handleCommand(ChannelUID channelUID, Command command) {
         logger.info("handle command: {}", command);
@@ -116,6 +165,9 @@ public class WeatherHandler extends ConfigStatusThingHandler {
         logger.info("Command {} is not supported for channel: {}", command, channelUID.getId());
     }
 
+    /**
+     * @see org.eclipse.smarthome.config.core.status.ConfigStatusProvider#getConfigStatus()
+     */
     @Override
     public Collection<ConfigStatusMessage> getConfigStatus() {
         Collection<ConfigStatusMessage> configStatus = new ArrayList<>();
@@ -128,6 +180,9 @@ public class WeatherHandler extends ConfigStatusThingHandler {
         return configStatus;
     }
 
+    /**
+     * @return
+     */
     private synchronized boolean updateWeatherData() {
         try {
             weatherJSON = getWeatherData();
@@ -143,6 +198,12 @@ public class WeatherHandler extends ConfigStatusThingHandler {
         return false;
     }
 
+    /**
+     * Actually gets the information from the web service.
+     *
+     * @return the weather information in json
+     * @throws IOException
+     */
     private String getWeatherData() throws IOException {
         String urlString = WeatherBindingConstants.WETTER_API_URL + WeatherBindingConstants.URL_PARAM_LOCATION
                 + location + "%27";
@@ -158,6 +219,11 @@ public class WeatherHandler extends ConfigStatusThingHandler {
         }
     }
 
+    /**
+     * Gets the humidity state from the weather data.
+     *
+     * @return
+     */
     private State getHumidity() {
         if (weatherJSON != null) {
             JsonObject rootObj = PARSER.parse(weatherJSON).getAsJsonObject();
@@ -169,6 +235,11 @@ public class WeatherHandler extends ConfigStatusThingHandler {
         return UnDefType.UNDEF;
     }
 
+    /**
+     * Gets the rain state from the weather data.
+     *
+     * @return
+     */
     private State getRain() {
         if (weatherJSON != null) {
             JsonObject rootObj = PARSER.parse(weatherJSON).getAsJsonObject();
@@ -178,6 +249,11 @@ public class WeatherHandler extends ConfigStatusThingHandler {
         return UnDefType.UNDEF;
     }
 
+    /**
+     * Gets the temperature state from the weather data.
+     *
+     * @return
+     */
     private State getTemperature() {
         if (weatherJSON != null) {
             JsonObject rootObj = PARSER.parse(weatherJSON).getAsJsonObject();

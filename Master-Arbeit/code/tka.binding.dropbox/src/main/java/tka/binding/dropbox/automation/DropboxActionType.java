@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package tka.automation.extension.type;
+package tka.binding.dropbox.automation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,20 +17,42 @@ import org.eclipse.smarthome.config.core.ConfigDescriptionParameter.Type;
 import org.eclipse.smarthome.config.core.ConfigDescriptionParameterBuilder;
 
 /**
- * @author Konstantin
+ * The dropbox action type.
  *
+ * @author Konstantin Tkachuk
+ *
+ *         27.02.2017
  */
 public class DropboxActionType extends ActionType {
 
+    /**
+     * The unique identifier of this type.
+     */
     public static final String UID = "DropboxAction";
+
+    /**
+     * The name of the configuration parameter.
+     */
     public static final String CONFIG_ITEM_NAME = "itemName";
+
+    /**
+     * The name of the configuration parameter.
+     */
     public static final String CONFIG_DIRECTORY = "directory";
 
+    /**
+     * The constructor.
+     */
     public DropboxActionType() {
         super(UID, getConfigParameters(), "Dropbox Action Template", "Template for creation of a Dropbox Action.", null,
                 Visibility.VISIBLE, null, null);
     }
 
+    /**
+     * Builds the configuration parameters.
+     * 
+     * @return the config parameters
+     */
     private static List<ConfigDescriptionParameter> getConfigParameters() {
         final ConfigDescriptionParameter device = ConfigDescriptionParameterBuilder.create(CONFIG_ITEM_NAME, Type.TEXT)
                 .withRequired(true).withReadOnly(true).withMultiple(false).withLabel("Device")

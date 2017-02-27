@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package tka.automation.extension.handler;
+package tka.binding.twitter.automation;
 
 import java.util.Map;
 
@@ -25,57 +25,74 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonParser;
-
-import tka.automation.extension.type.DropboxActionType;
-import tka.automation.extension.type.DropboxUploadEntity;
 
 /**
- * This class serves to handle the Action types provided by this application. It is used to help the RuleEngine
- * to execute the {@link Action}s.
+ * This class serves to handle the twitter action type provided by this binding. It is used to help the RuleEngine
+ * to execute the {@link Action}.
  *
- * @author Ana Dimova - Initial Contribution
+ * @author Konstantin Tkachuk
  *
+ *         27.02.2017
  */
-public class DropboxActionHandler extends BaseModuleHandler<Action> implements ActionHandler {
+public class TwitterActionHandler extends BaseModuleHandler<Action> implements ActionHandler {
 
+    /**
+     * The Gson object.
+     */
     private static final Gson GSON = new Gson();
 
-    private final Logger logger = LoggerFactory.getLogger(DropboxActionHandler.class);
+    /**
+     * The logger.
+     */
+    private final Logger logger = LoggerFactory.getLogger(TwitterActionHandler.class);
 
+    /**
+     * The event publisher.
+     */
     private EventPublisher eventPublisher;
+
+    /**
+     * The item registry.
+     */
     private ItemRegistry itemRegistry;
 
-    public DropboxActionHandler(Action module, EventPublisher eventPublisher, ItemRegistry itemRegistry) {
+    /**
+     * The constructor.
+     *
+     * @param module
+     * @param eventPublisher
+     * @param itemRegistry
+     */
+    public TwitterActionHandler(Action module, EventPublisher eventPublisher, ItemRegistry itemRegistry) {
         super(module);
         this.eventPublisher = eventPublisher;
         this.itemRegistry = itemRegistry;
     }
 
+    /**
+     * @see org.eclipse.smarthome.automation.handler.ActionHandler#execute(java.util.Map)
+     */
     @Override
     public Map<String, Object> execute(Map<String, ?> context) {
-        String itemName = (String) module.getConfiguration().get(DropboxActionType.CONFIG_ITEM_NAME);
-        String directory = (String) module.getConfiguration().get(DropboxActionType.CONFIG_DIRECTORY);
+        String itemName = (String) module.getConfiguration().get(TwitterActionType.CONFIG_ITEM_NAME);
+        String message = (String) module.getConfiguration().get(TwitterActionType.CONFIG_MESSAGE);
+        if (message == null) {
+            message = "";
+        }
 
         Event event = (Event) context.get("event");
-        if (event == null) {
-            logger.error("Command was not posted because event information is missing from inputs");
-            return null;
+        if (event != null) {
+            if (message.contains(TwitterActionType.PLACEHOLDER)) {
+                message = message.replaceAll(TwitterActionType.PLACEHOLDER, event.getPayload());
+            } else if (!event.getPayload().isEmpty()) {
+                message += event.getPayload();
+            }
         }
-        String payload = event.getPayload();
 
-        if (itemName != null && directory != null && eventPublisher != null && itemRegistry != null) {
+        if (itemName != null && !message.isEmpty() && eventPublisher != null && itemRegistry != null) {
             try {
-                String json;
-                if (payload.contains("pathLower") && payload.contains("serverModified")) {
-                    json = GSON
-                            .toJson(new DropboxUploadEntity(directory, GSON.toJson(new JsonParser().parse(payload))));
-                } else {
-                    json = buildJson(directory, payload);
-                }
-
                 Item item = itemRegistry.getItem(itemName);
-                Command commandObj = TypeParser.parseCommand(item.getAcceptedCommandTypes(), json);
+                Command commandObj = TypeParser.parseCommand(item.getAcceptedCommandTypes(), message);
                 ItemCommandEvent itemCommandEvent = ItemEventFactory.createCommandEvent(itemName, commandObj);
                 logger.debug("Executing ItemPostCommandAction on Item {} with Command {}",
                         itemCommandEvent.getItemName(), itemCommandEvent.getItemCommand());
@@ -86,15 +103,9 @@ public class DropboxActionHandler extends BaseModuleHandler<Action> implements A
         } else {
             logger.error(
                     "Command was not posted because either the configuration was not correct or a Service was missing: ItemName: {}, Command: {}, eventPublisher: {}, ItemRegistry: {}",
-                    itemName, directory, eventPublisher, itemRegistry);
+                    itemName, message, eventPublisher, itemRegistry);
         }
         return null;
-    }
-
-    private String buildJson(String directory, String payload) {
-        DropboxUploadEntity entity = new DropboxUploadEntity(directory, payload);
-
-        return GSON.toJson(entity);
     }
 
 }

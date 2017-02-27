@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 1997, 2015 by ProSyst Software GmbH and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package tka.binding.twitter.internal;
 
 import java.util.Collections;
@@ -12,19 +19,31 @@ import tka.binding.twitter.TwitterBindingConstants;
 import tka.binding.twitter.handler.TwitterHandler;
 
 /**
- * @author ktkachuk
+ * The factory responsible for creating the thing handlers.
  *
+ * @author Konstantin Tkachuk
+ *
+ *         27.02.2017
  */
 public class TwitterHandlerFactory extends BaseThingHandlerFactory {
 
+    /**
+     * The supported thing types.
+     */
     private final static Set<ThingTypeUID> SUPPORTED_THING_TYPES_UIDS = Collections
             .singleton(TwitterBindingConstants.THING_TYPE_TWITTER);
 
+    /**
+     * @see org.eclipse.smarthome.core.thing.binding.ThingHandlerFactory#supportsThingType(org.eclipse.smarthome.core.thing.ThingTypeUID)
+     */
     @Override
     public boolean supportsThingType(ThingTypeUID thingTypeUID) {
         return SUPPORTED_THING_TYPES_UIDS.contains(thingTypeUID);
     }
 
+    /**
+     * @see org.eclipse.smarthome.core.thing.binding.BaseThingHandlerFactory#createHandler(org.eclipse.smarthome.core.thing.Thing)
+     */
     @Override
     protected ThingHandler createHandler(Thing thing) {
 

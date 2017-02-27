@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 1997, 2015 by ProSyst Software GmbH and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package tka.binding.twitter.handler;
 
 import java.util.ArrayList;
@@ -19,17 +26,31 @@ import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
 /**
- * @author ktkachuk
+ * The thing handler for {@link DropboxBindingConstants#THING_TYPE_DROPBOX} things.
  *
+ * @author Konstantin Tkachuk
+ *
+ *         27.02.2017
  */
 public class TwitterHandler extends ConfigStatusThingHandler {
 
+    /**
+     * The logger.
+     */
     private final Logger logger = LoggerFactory.getLogger(TwitterHandler.class);
 
+    /**
+     * The constructor.
+     *
+     * @param thing
+     */
     public TwitterHandler(Thing thing) {
         super(thing);
     }
 
+    /**
+     * @see org.eclipse.smarthome.core.thing.binding.BaseThingHandler#initialize()
+     */
     @Override
     public void initialize() {
         logger.debug("Initializing Twitter handler.");
@@ -37,10 +58,10 @@ public class TwitterHandler extends ConfigStatusThingHandler {
 
     }
 
-    @Override
-    public void dispose() {
-    }
-
+    /**
+     * @see org.eclipse.smarthome.core.thing.binding.ThingHandler#handleCommand(org.eclipse.smarthome.core.thing.ChannelUID,
+     *      org.eclipse.smarthome.core.types.Command)
+     */
     @Override
     public void handleCommand(ChannelUID channelUID, Command command) {
         logger.info("handle command: {}", command);
@@ -52,6 +73,9 @@ public class TwitterHandler extends ConfigStatusThingHandler {
         logger.info("Command {} is not supported for channel: {}", command, channelUID.getId());
     }
 
+    /**
+     * @see org.eclipse.smarthome.config.core.status.ConfigStatusProvider#getConfigStatus()
+     */
     @Override
     public Collection<ConfigStatusMessage> getConfigStatus() {
         logger.info("getting config status");
@@ -60,6 +84,8 @@ public class TwitterHandler extends ConfigStatusThingHandler {
     }
 
     /**
+     * Sets the status of the user on twitter to a specified new status.
+     *
      * @param newStatus
      */
     private void updateTwitterStatus(String newStatus) {

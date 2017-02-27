@@ -1,29 +1,20 @@
 /**
- *
+ * Copyright (c) 1997, 2015 by ProSyst Software GmbH and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package tka.binding.twitter;
 
 import tka.binding.core.ConnectionService;
 
 /**
- * @author Konstantin
+ * The concrete extension of the generic ConnectionService.
  *
+ * @author Konstantin Tkachuk
+ *
+ *         27.02.2017
  */
 public interface TwitterConnectionService extends ConnectionService {
-    /**
-     * @return the URL which is used by the user to grant access to his application
-     */
-    public Object requestAuthorization();
-
-    /**
-     * @param information
-     * @return <code>true</code>, if the service can confirm that authorization was granted successfully.
-     */
-    public boolean authorizationGrantedCallback(Object information);
-
-    /**
-     * @return <code>true</code>, if the connection service has authorization to act on behalf of the user
-     */
-    public boolean isAuthorized();
-
 }

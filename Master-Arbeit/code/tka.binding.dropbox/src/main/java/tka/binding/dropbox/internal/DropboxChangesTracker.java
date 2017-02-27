@@ -1,5 +1,9 @@
 /**
- *
+ * Copyright (c) 1997, 2015 by ProSyst Software GmbH and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package tka.binding.dropbox.internal;
 
@@ -20,18 +24,50 @@ import com.google.gson.Gson;
 import tka.binding.dropbox.DropboxBindingConstants;
 
 /**
- * @author Konstantin
+ * This class is responsible for tracking the changes in the dropbox.
  *
+ * @author Konstantin Tkachuk
+ *
+ *         27.02.2017
  */
 public class DropboxChangesTracker implements Runnable {
 
+    /**
+     * The GSON object.
+     */
     private static final Gson GSON = new Gson();
+
+    /**
+     * The logger.
+     */
     private final Logger logger = LoggerFactory.getLogger(DropboxChangesTracker.class);
+
+    /**
+     * The dropbox client.
+     */
     private final DbxClientV2 client;
+
+    /**
+     * Used to publishe events in the OSGi event bus.
+     */
     private final EventPublisher eventPublisher;
+
+    /**
+     * Reflects the current state of the dropbox. During checks the new state is compared against this one.
+     */
     private TreeMap<String, Metadata> children;
+
+    /**
+     * The cursor.
+     */
     private String cursor;
 
+    /**
+     * The constructor.
+     *
+     * @param client
+     * @param eventPublisher
+     */
     public DropboxChangesTracker(DbxClientV2 client, EventPublisher eventPublisher) {
         this.client = client;
         this.eventPublisher = eventPublisher;
@@ -52,6 +88,11 @@ public class DropboxChangesTracker implements Runnable {
         }
     }
 
+    /**
+     * Uses a cursor to track changes.
+     *
+     * @see java.lang.Runnable#run()
+     */
     @Override
     public void run() {
         try {
@@ -82,11 +123,17 @@ public class DropboxChangesTracker implements Runnable {
         }
     }
 
+    /**
+     * Publishes a flash event with the specified topic and payload
+     *
+     * @param topic
+     * @param payload
+     */
     private void publishEvent(final String topic, final String payload) {
         Event event = new Event() {
             @Override
             public String getType() {
-                return "TwitterEvent";
+                return "FlashEvent";
             }
 
             @Override

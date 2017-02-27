@@ -14,10 +14,15 @@ Import-Package: com.dropbox.core,
  com.google.gson,
  org.apache.commons.io,
  org.apache.commons.lang,
+ org.eclipse.smarthome.automation,
+ org.eclipse.smarthome.automation.handler,
+ org.eclipse.smarthome.automation.type,
  org.eclipse.smarthome.config.core,
  org.eclipse.smarthome.config.core.status,
  org.eclipse.smarthome.core.common.registry,
  org.eclipse.smarthome.core.events,
+ org.eclipse.smarthome.core.items,
+ org.eclipse.smarthome.core.items.events,
  org.eclipse.smarthome.core.library.types,
  org.eclipse.smarthome.core.thing,
  org.eclipse.smarthome.core.thing.binding,
@@ -26,8 +31,10 @@ Import-Package: com.dropbox.core,
  org.eclipse.smarthome.core.types,
  org.osgi.framework,
  org.osgi.service.component,
- org.slf4j
+ org.slf4j,
+ tka.binding.core
 Service-Component: OSGI-INF/*.xml
 Export-Package: tka.binding.dropbox,
  tka.binding.dropbox.handler
+Bundle-Activator: tka.binding.dropbox.Activator
 

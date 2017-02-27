@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package tka.automation.extension.type;
+package tka.binding.twitter.automation;
 
 import java.util.Collection;
 import java.util.Dictionary;
@@ -16,35 +16,49 @@ import java.util.Map;
 
 import org.eclipse.smarthome.automation.type.ModuleType;
 import org.eclipse.smarthome.automation.type.ModuleTypeProvider;
-import org.eclipse.smarthome.core.common.registry.ProviderChangeListener;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 
 /**
- * @author Konstantin
+ * The module type provider for this binding.
  *
+ * @author Konstantin Tkachuk
+ *
+ *         27.02.2017
  */
-public class FlashModuleTypeProvider implements ModuleTypeProvider {
+public class TwitterModuleTypeProvider implements ModuleTypeProvider {
 
+    /**
+     * The provided module types.
+     */
     private Map<String, ModuleType> providedModuleTypes;
+
+    /**
+     * The service registration.
+     */
     @SuppressWarnings("rawtypes")
     private ServiceRegistration providerReg;
 
-    public FlashModuleTypeProvider() {
+    /**
+     * The constructor.
+     */
+    public TwitterModuleTypeProvider() {
         providedModuleTypes = new HashMap<String, ModuleType>();
         providedModuleTypes.put(TwitterActionType.UID, TwitterActionType.initialize());
-        providedModuleTypes.put(AlwaysTrueConditionType.UID, AlwaysTrueConditionType.initialize());
-        providedModuleTypes.put(TkaTriggerType.UID, TkaTriggerType.initialize());
-        providedModuleTypes.put(DropboxActionType.UID, new DropboxActionType());
-        providedModuleTypes.put(EmailActionType.UID, new EmailActionType());
     }
 
+    /**
+     * @see org.eclipse.smarthome.automation.type.ModuleTypeProvider#getModuleType(java.lang.String, java.util.Locale)
+     */
     @SuppressWarnings("unchecked")
     @Override
     public <T extends ModuleType> T getModuleType(String UID, Locale locale) {
         return (T) providedModuleTypes.get(UID);
     }
 
+    /**
+     * @see org.eclipse.smarthome.automation.type.ModuleTypeProvider#getModuleTypes(java.util.Locale)
+     */
     @SuppressWarnings("unchecked")
     @Override
     public <T extends ModuleType> Collection<T> getModuleTypes(Locale locale) {
@@ -52,7 +66,7 @@ public class FlashModuleTypeProvider implements ModuleTypeProvider {
     }
 
     /**
-     * To provide the {@link ModuleType}s should register the WelcomeHomeModuleTypeProvider as
+     * To provide the {@link ModuleType}s should register the TwitterModuleTypeProvider as
      * {@link ModuleTypeProvider} service.
      *
      * @param bc
@@ -65,7 +79,7 @@ public class FlashModuleTypeProvider implements ModuleTypeProvider {
     }
 
     /**
-     * This method unregisters the WelcomeHomeModuleTypeProvider as {@link ModuleTypeProvider}
+     * This method unregisters the TwitterModuleTypeProvider as {@link ModuleTypeProvider}
      * service.
      */
     public void unregister() {
@@ -74,17 +88,11 @@ public class FlashModuleTypeProvider implements ModuleTypeProvider {
         providedModuleTypes = null;
     }
 
-    public void addProviderChangeListener(ProviderChangeListener<ModuleType> listener) {
-        // TODO Auto-generated method stub
-
-    }
-
+    /**
+     * @return all provided module types.
+     */
     public Collection<ModuleType> getAll() {
         return providedModuleTypes.values();
     }
 
-    public void removeProviderChangeListener(ProviderChangeListener<ModuleType> listener) {
-        // TODO Auto-generated method stub
-
-    }
 }

@@ -5,14 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package tka.automation.extension;
+package tka.binding.gmail;
 
-import org.eclipse.smarthome.core.events.EventFactory;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceRegistration;
 
-import tka.automation.extension.handler.FlashEventFactory;
+import tka.binding.gmail.automation.GmailModuleHandlerFactory;
+import tka.binding.gmail.automation.GmailModuleTypeProvider;
 
 /**
  * This class is responsible for registering the services.
@@ -24,25 +23,27 @@ import tka.automation.extension.handler.FlashEventFactory;
 public class Activator implements BundleActivator {
 
     /**
-     * The flash event factory.
+     * The twitter module type provider.
      */
-    private FlashEventFactory flashEventFactory;
+    private GmailModuleTypeProvider mtProvider;
 
     /**
-     * The service registration.
+     * The twitter module handler factory.
      */
-    private ServiceRegistration<?> eventFactoryService;
+    private GmailModuleHandlerFactory handlerFactory;
 
     /**
      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
      */
     @Override
     public void start(BundleContext context) throws Exception {
+        mtProvider = new GmailModuleTypeProvider();
+        mtProvider.register(context);
 
-        flashEventFactory = new FlashEventFactory();
-        eventFactoryService = context.registerService(EventFactory.class.getName(), flashEventFactory, null);
+        handlerFactory = new GmailModuleHandlerFactory(context);
+        handlerFactory.register(context);
 
-        System.out.println("Registered FLASH Types");
+        System.out.println("Registered Gmail Types");
     }
 
     /**
@@ -50,10 +51,11 @@ public class Activator implements BundleActivator {
      */
     @Override
     public void stop(BundleContext context) throws Exception {
+        mtProvider.unregister();
+        mtProvider = null;
 
-        if (eventFactoryService != null) {
-            eventFactoryService.unregister();
-        }
+        handlerFactory.unregister();
+        handlerFactory = null;
     }
 
 }

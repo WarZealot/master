@@ -1,12 +1,17 @@
+/**
+ * Copyright (c) 1997, 2015 by ProSyst Software GmbH and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package tka.binding.dropbox.handler;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.concurrent.ScheduledFuture;
 
 import org.apache.commons.io.FilenameUtils;
 import org.eclipse.smarthome.config.core.status.ConfigStatusMessage;
@@ -22,39 +27,53 @@ import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.DownloadErrorException;
-import com.dropbox.core.v2.files.FileMetadata;
 import com.dropbox.core.v2.files.UploadErrorException;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import tka.binding.dropbox.DropboxBindingConstants;
-import tka.binding.dropbox.DropboxUploadEntity;
+import tka.binding.dropbox.automation.DropboxUploadEntity;
 
 /**
- * @author ktkachuk
+ * The thing handler for {@link DropboxBindingConstants#THING_TYPE_DROPBOX} things.
  *
+ * @author Konstantin Tkachuk
+ *
+ *         27.02.2017
  */
 public class DropboxHandler extends ConfigStatusThingHandler {
 
+    /**
+     * The json parser.
+     */
     private static final JsonParser JSON_PARSER = new JsonParser();
 
+    /**
+     * The logger.
+     */
     private final Logger logger = LoggerFactory.getLogger(DropboxHandler.class);
 
-    private String timeData = null;
-
-    ScheduledFuture<?> refreshJob;
-
-    private BigDecimal refresh;
-
+    /**
+     * The dropbox client.
+     */
     private DbxClientV2 client;
 
+    /**
+     * The GSON object.
+     */
     private static final Gson GSON = new Gson();
 
+    /**
+     * @param thing
+     */
     public DropboxHandler(Thing thing) {
         super(thing);
     }
 
+    /**
+     * @see org.eclipse.smarthome.core.thing.binding.BaseThingHandler#initialize()
+     */
     @Override
     public void initialize() {
         logger.debug("Initializing Dropbox handler.");
@@ -63,19 +82,12 @@ public class DropboxHandler extends ConfigStatusThingHandler {
         DbxRequestConfig dbxRequestConfig = new DbxRequestConfig("FlashApp");
         client = new DbxClientV2(dbxRequestConfig,
                 (String) getThing().getConfiguration().get(DropboxBindingConstants.KEY_OAUTH_TOKEN));
-
-        if (refresh == null) {
-            refresh = new BigDecimal(30);
-        }
     }
 
-    @Override
-    public void dispose() {
-        if (refreshJob != null) {
-            refreshJob.cancel(true);
-        }
-    }
-
+    /**
+     * @see org.eclipse.smarthome.core.thing.binding.ThingHandler#handleCommand(org.eclipse.smarthome.core.thing.ChannelUID,
+     *      org.eclipse.smarthome.core.types.Command)
+     */
     @Override
     public void handleCommand(ChannelUID channelUID, Command command) {
         logger.info("handle command: {}", command);
@@ -106,12 +118,23 @@ public class DropboxHandler extends ConfigStatusThingHandler {
         logger.info("Command {} is not supported for channel: {}", command, channelUID.getId());
     }
 
+    /**
+     * Gets an input stream from a JSON that contains a dropbox path.
+     *
+     * @param dropboxJson
+     * @return
+     * @throws DownloadErrorException
+     * @throws DbxException
+     */
     private InputStream getFileInputStream(String dropboxJson) throws DownloadErrorException, DbxException {
         JsonObject root = JSON_PARSER.parse(dropboxJson).getAsJsonObject();
         String path = root.get("pathLower").getAsString();
         return client.files().download(path).getInputStream();
     }
 
+    /**
+     * @see org.eclipse.smarthome.config.core.status.ConfigStatusProvider#getConfigStatus()
+     */
     @Override
     public Collection<ConfigStatusMessage> getConfigStatus() {
         logger.info("getting config status");
@@ -120,6 +143,8 @@ public class DropboxHandler extends ConfigStatusThingHandler {
     }
 
     /**
+     * Helper method, prints the status.
+     *
      * @param newStatus
      */
     private void printCurrentAccount() {
@@ -133,8 +158,17 @@ public class DropboxHandler extends ConfigStatusThingHandler {
         }
     }
 
+    /**
+     * Uploads a file to the specified location.
+     *
+     * @param in
+     * @param path
+     * @throws UploadErrorException
+     * @throws DbxException
+     * @throws IOException
+     */
     private void uploadFile(InputStream in, String path) throws UploadErrorException, DbxException, IOException {
-        FileMetadata metadata = client.files().uploadBuilder(path).uploadAndFinish(in);
+        client.files().uploadBuilder(path).uploadAndFinish(in);
         logger.info("Uploaded file to dropbox:  " + path);
     }
 }

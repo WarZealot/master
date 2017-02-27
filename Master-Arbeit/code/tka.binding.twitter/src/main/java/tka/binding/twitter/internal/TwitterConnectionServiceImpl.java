@@ -1,23 +1,18 @@
 /**
- *
+ * Copyright (c) 1997, 2015 by ProSyst Software GmbH and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package tka.binding.twitter.internal;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.eclipse.smarthome.config.core.Configuration;
 import org.eclipse.smarthome.core.events.Event;
-import org.eclipse.smarthome.core.events.EventFactory;
-import org.eclipse.smarthome.core.events.EventFilter;
-import org.eclipse.smarthome.core.events.EventPublisher;
 import org.eclipse.smarthome.core.events.EventSubscriber;
 import org.eclipse.smarthome.core.thing.Thing;
-import org.eclipse.smarthome.core.thing.ThingRegistry;
 import org.eclipse.smarthome.core.thing.ThingUID;
 import org.eclipse.smarthome.core.thing.events.ThingRemovedEvent;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.ComponentContext;
 
 import tka.binding.core.AbstractConnectionService;
@@ -32,33 +27,44 @@ import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
 
 /**
- * @author Konstantin
+ * This class setups the connection to the twitter account of the user.
  *
+ * @author Konstantin Tkachuk
+ *
+ *         27.02.2017
  */
 public class TwitterConnectionServiceImpl extends AbstractConnectionService
         implements TwitterConnectionService, EventSubscriber {
 
+    /**
+     * The uid of the twitter thing.
+     */
     private static final ThingUID TWITTER_CONNECTION = new ThingUID("twitter", "twitterThingTypeId",
             "twitterconnection");
-    private static final Set<String> SUBSCRIBED_EVENT_TYPES = new HashSet<>();
-    static {
-        SUBSCRIBED_EVENT_TYPES.add(ThingRemovedEvent.TYPE);
-    }
     /**
-     *
+     * The oauth access token.
      */
     private AccessToken accessToken = null;
+
+    /**
+     * The request token.
+     */
     private RequestToken requestToken;
+
+    /**
+     * The twitter client.
+     */
     private Twitter twitter;
-    private ThingRegistry thingRegistry;
-    private EventPublisher eventPublisher;
-    private ComponentContext context;
+
+    /**
+     * The twitter stream.
+     */
     private TwitterStream twitterStream;
+
+    /**
+     * The twitter configuration.
+     */
     private twitter4j.conf.Configuration configuration;
-    private TwitterEventFactory twitterEventFactory;
-    private BundleContext bundleContext;
-    private ServiceRegistration<?> eventFactoryService;
-    private ServiceRegistration<?> thisSubscriberService;
 
     /**
      * @see tka.binding.twitter.TwitterConnectionService#requestAuthorization()
@@ -80,11 +86,17 @@ public class TwitterConnectionServiceImpl extends AbstractConnectionService
         return null;
     }
 
+    /**
+     * @see tka.binding.core.ConnectionService#isAuthorized()
+     */
     @Override
     public boolean isAuthorized() {
         return accessToken != null;
     }
 
+    /**
+     * @see tka.binding.core.ConnectionService#authorizationGrantedCallback(java.lang.Object)
+     */
     @Override
     public boolean authorizationGrantedCallback(Object info) {
         if (requestToken == null || twitter == null) {
@@ -104,18 +116,21 @@ public class TwitterConnectionServiceImpl extends AbstractConnectionService
         return false;
     }
 
+    /**
+     * Starts listening to changes in the account of the user.
+     */
     private void createTwitterStream() {
         twitterStream = new TwitterStreamFactory(configuration).getInstance();
         twitterStream.addListener(new TwitterUserStreamLIstener(eventPublisher));
         twitterStream.user();
     }
 
+    /**
+     * @see tka.binding.core.AbstractConnectionService#activate(org.osgi.service.component.ComponentContext)
+     */
     @Override
     public void activate(ComponentContext context) {
-        this.context = context;
-        this.bundleContext = context.getBundleContext();
-
-        regsiterServices();
+        super.activate(context);
 
         Thing twitterConnection = thingRegistry.get(TWITTER_CONNECTION);
         if (twitterConnection != null) {
@@ -131,12 +146,15 @@ public class TwitterConnectionServiceImpl extends AbstractConnectionService
         configuration = buildTwitterConfiguration();
     }
 
+    /**
+     * @return the default twitter configurtion used when requesting an oauth token.
+     */
     private twitter4j.conf.Configuration buildTwitterConfiguration() {
         ConfigurationBuilder twitterConfigurationBuilder = new ConfigurationBuilder();
         twitterConfigurationBuilder.setDebugEnabled(true)
                 .setOAuthConsumerKey(TwitterBindingConstants.OAUTH_CONSUMER_KEY)
                 .setOAuthConsumerSecret(TwitterBindingConstants.OAUTH_CONSUMER_SECRET);
-        // twitterConfigurationBuilder.setHttpProxyHost("proxy.materna.de").setHttpProxyPort(8080);
+        twitterConfigurationBuilder.setHttpProxyHost("proxy.materna.de").setHttpProxyPort(8080);
 
         if (accessToken != null) {
             twitterConfigurationBuilder.setOAuthAccessToken(accessToken.getToken())
@@ -145,28 +163,17 @@ public class TwitterConnectionServiceImpl extends AbstractConnectionService
         return twitterConfigurationBuilder.build();
     }
 
-    private void regsiterServices() {
-        HashSet<String> set = new HashSet<String>();
-        set.add(TwitterEvent.TYPE);
-        twitterEventFactory = new TwitterEventFactory(set);
-        eventFactoryService = bundleContext.registerService(EventFactory.class.getName(), twitterEventFactory, null);
-
-        thisSubscriberService = bundleContext.registerService(EventSubscriber.class.getName(), this, null);
-    }
-
+    /**
+     * @see tka.binding.core.AbstractConnectionService#deactivate(org.osgi.service.component.ComponentContext)
+     */
     @Override
     public void deactivate(ComponentContext context) {
-        if (eventFactoryService != null) {
-            eventFactoryService.unregister();
-        }
-        if (thisSubscriberService != null) {
-            thisSubscriberService.unregister();
-        }
-
-        this.bundleContext = null;
-        this.context = null;
+        super.deactivate(context);
     }
 
+    /**
+     * Creates a new twitter thing.
+     */
     private void createTwitterThing() {
         Configuration configuration = new Configuration();
         configuration.put(TwitterBindingConstants.KEY_OAUTH_TOKEN, accessToken.getToken());
@@ -175,39 +182,11 @@ public class TwitterConnectionServiceImpl extends AbstractConnectionService
         Thing thing = thingRegistry.createThingOfType(TwitterBindingConstants.THING_TYPE_TWITTER, TWITTER_CONNECTION,
                 null, "twitterLabel", configuration);
         thingRegistry.add(thing);
-
     }
 
-    @Override
-    public void setThingRegistry(ThingRegistry thingRegistry) {
-        this.thingRegistry = thingRegistry;
-    }
-
-    @Override
-    public void unsetThingRegistry(ThingRegistry thingRegistry) {
-        this.thingRegistry = null;
-    }
-
-    @Override
-    public void setEventPublisher(EventPublisher eventPublisher) {
-        this.eventPublisher = eventPublisher;
-    }
-
-    @Override
-    public void unsetEventPublisher(EventPublisher eventPublisher) {
-        this.eventPublisher = null;
-    }
-
-    @Override
-    public Set<String> getSubscribedEventTypes() {
-        return SUBSCRIBED_EVENT_TYPES;
-    }
-
-    @Override
-    public EventFilter getEventFilter() {
-        return null;
-    }
-
+    /**
+     * @see org.eclipse.smarthome.core.events.EventSubscriber#receive(org.eclipse.smarthome.core.events.Event)
+     */
     @Override
     public void receive(Event event) {
         ThingRemovedEvent e = (ThingRemovedEvent) event;

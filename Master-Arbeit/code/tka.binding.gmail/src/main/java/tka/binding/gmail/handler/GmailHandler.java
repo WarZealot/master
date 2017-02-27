@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 1997, 2015 by ProSyst Software GmbH and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package tka.binding.gmail.handler;
 
 import java.util.ArrayList;
@@ -23,21 +30,35 @@ import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 
-import tka.automation.extension.type.EmailParameters;
 import tka.binding.gmail.GmailBindingConstants;
+import tka.binding.gmail.automation.EmailParameters;
 
 /**
- * @author ktkachuk
+ * The thing handler for {@link GmailBindingConstants#THING_TYPE_GMAIL} things.
  *
+ * @author Konstantin Tkachuk
+ *
+ *         27.02.2017
  */
 public class GmailHandler extends ConfigStatusThingHandler {
 
+    /**
+     * The logger.
+     */
     private final Logger logger = LoggerFactory.getLogger(GmailHandler.class);
 
+    /**
+     * The constructor.
+     *
+     * @param thing
+     */
     public GmailHandler(Thing thing) {
         super(thing);
     }
 
+    /**
+     * @see org.eclipse.smarthome.core.thing.binding.BaseThingHandler#initialize()
+     */
     @Override
     public void initialize() {
         logger.debug("Initializing Gmail handler.");
@@ -45,10 +66,10 @@ public class GmailHandler extends ConfigStatusThingHandler {
 
     }
 
-    @Override
-    public void dispose() {
-    }
-
+    /**
+     * @see org.eclipse.smarthome.core.thing.binding.ThingHandler#handleCommand(org.eclipse.smarthome.core.thing.ChannelUID,
+     *      org.eclipse.smarthome.core.types.Command)
+     */
     @Override
     public void handleCommand(ChannelUID channelUID, Command command) {
         logger.info("handle command: {}", command);
@@ -65,6 +86,9 @@ public class GmailHandler extends ConfigStatusThingHandler {
         logger.info("Command {} is not supported for channel: {}", command, channelUID.getId());
     }
 
+    /**
+     * @see org.eclipse.smarthome.config.core.status.ConfigStatusProvider#getConfigStatus()
+     */
     @Override
     public Collection<ConfigStatusMessage> getConfigStatus() {
         logger.info("getting config status");
@@ -72,6 +96,13 @@ public class GmailHandler extends ConfigStatusThingHandler {
         return configStatus;
     }
 
+    /**
+     * Sends an email with the specified parameters.
+     * 
+     * @param parameters
+     * @throws AddressException
+     * @throws MessagingException
+     */
     private void sendEmail(EmailParameters parameters) throws AddressException, MessagingException {
         // Step1
         // System.out.println("\n 1st ===> setup Mail Server Properties..");

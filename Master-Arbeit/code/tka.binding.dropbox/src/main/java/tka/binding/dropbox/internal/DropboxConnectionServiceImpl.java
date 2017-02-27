@@ -1,10 +1,12 @@
 /**
- *
+ * Copyright (c) 1997, 2015 by ProSyst Software GmbH and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package tka.binding.dropbox.internal;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -12,15 +14,12 @@ import java.util.concurrent.TimeUnit;
 
 import org.eclipse.smarthome.config.core.Configuration;
 import org.eclipse.smarthome.core.events.Event;
-import org.eclipse.smarthome.core.events.EventFilter;
 import org.eclipse.smarthome.core.events.EventPublisher;
 import org.eclipse.smarthome.core.events.EventSubscriber;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.thing.ThingRegistry;
 import org.eclipse.smarthome.core.thing.ThingUID;
 import org.eclipse.smarthome.core.thing.events.ThingRemovedEvent;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.ComponentContext;
 
 import com.dropbox.core.DbxAppInfo;
@@ -29,34 +28,53 @@ import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.DbxWebAuth;
 import com.dropbox.core.v2.DbxClientV2;
 
+import tka.binding.core.AbstractConnectionService;
 import tka.binding.dropbox.DropboxBindingConstants;
 import tka.binding.dropbox.DropboxConnectionService;
 
 /**
- * @author Konstantin
+ * This class offers authorization in the dropbox.
  *
+ * @author Konstantin Tkachuk
+ *
+ *         27.02.2017
  */
-public class DropboxConnectionServiceImpl implements DropboxConnectionService, EventSubscriber {
+public class DropboxConnectionServiceImpl extends AbstractConnectionService
+        implements DropboxConnectionService, EventSubscriber {
 
+    /**
+     * The unique uid of the single instance of the dropbox thing.
+     */
     private static final ThingUID DROPBOX_CONNECTION = new ThingUID("dropbox", "dropboxThingTypeId",
             "dropboxconnection");
-    private static final Set<String> SUBSCRIBED_EVENT_TYPES = new HashSet<>();
-    static {
-        SUBSCRIBED_EVENT_TYPES.add(ThingRemovedEvent.TYPE);
-    }
     /**
-     *
+     * The thing registry.
      */
     private ThingRegistry thingRegistry;
+
+    /**
+     * The event publisher.
+     */
     private EventPublisher eventPublisher;
-    private ComponentContext context;
-    private BundleContext bundleContext;
-    private ServiceRegistration<?> thisSubscriberService;
+
+    /**
+     * The oauth access token.
+     */
     private String accessToken;
+
+    /**
+     * The drobox client.
+     */
     private DbxClientV2 client;
+
+    /**
+     * Used during authorization process.
+     */
     private DbxWebAuth webAuth;
 
-    ScheduledFuture<?> changeListenerJob;
+    /**
+     * The scheduled check of the state of the dropbox.
+     */
     private ScheduledFuture<?> scheduledFuture;
 
     /**
@@ -77,11 +95,17 @@ public class DropboxConnectionServiceImpl implements DropboxConnectionService, E
         return url;
     }
 
+    /**
+     * @see tka.binding.core.ConnectionService#isAuthorized()
+     */
     @Override
     public boolean isAuthorized() {
         return accessToken != null;
     }
 
+    /**
+     * @see tka.binding.core.ConnectionService#authorizationGrantedCallback(java.lang.Object)
+     */
     @Override
     public boolean authorizationGrantedCallback(Object info) {
         if (webAuth == null) {
@@ -105,13 +129,14 @@ public class DropboxConnectionServiceImpl implements DropboxConnectionService, E
         return false;
     }
 
+    /**
+     * @see tka.binding.core.AbstractConnectionService#activate(org.osgi.service.component.ComponentContext)
+     */
+    @Override
     public void activate(ComponentContext context) {
-        this.context = context;
-        this.bundleContext = context.getBundleContext();
+        super.activate(context);
 
         System.out.println("DropboxConnectionServiceImpl.activate()");
-
-        regsiterServices();
 
         Thing dropboxConnection = thingRegistry.get(DROPBOX_CONNECTION);
         if (dropboxConnection != null) {
@@ -123,25 +148,26 @@ public class DropboxConnectionServiceImpl implements DropboxConnectionService, E
         }
     }
 
+    /**
+     * Builds a dropbox client.
+     */
     private void buildDropboxClient() {
         DbxRequestConfig dbxRequestConfig = new DbxRequestConfig("FlashApp");
         client = new DbxClientV2(dbxRequestConfig, accessToken);
         registerChangeListener();
     }
 
-    private void regsiterServices() {
-        thisSubscriberService = bundleContext.registerService(EventSubscriber.class.getName(), this, null);
-    }
-
+    /**
+     * @see tka.binding.core.AbstractConnectionService#deactivate(org.osgi.service.component.ComponentContext)
+     */
+    @Override
     public void deactivate(ComponentContext context) {
-        if (thisSubscriberService != null) {
-            thisSubscriberService.unregister();
-        }
-
-        this.bundleContext = null;
-        this.context = null;
+        super.deactivate(context);
     }
 
+    /**
+     * Creates a Thing of the type {@link DropboxBindingConstants#THING_TYPE_DROPBOX}
+     */
     private void createDropboxThing() {
         Configuration configuration = new Configuration();
         configuration.put(DropboxBindingConstants.KEY_OAUTH_TOKEN, accessToken);
@@ -151,42 +177,27 @@ public class DropboxConnectionServiceImpl implements DropboxConnectionService, E
         thingRegistry.add(thing);
     }
 
+    /**
+     * Registers the change listener.
+     */
     private void registerChangeListener() {
         DropboxChangesTracker tracker = new DropboxChangesTracker(client, eventPublisher);
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
         scheduledFuture = executor.scheduleWithFixedDelay(tracker, 0, 5, TimeUnit.SECONDS);
     }
 
+    /**
+     * Unregisters the change listener.
+     */
     private void unregisterChangeListener() {
         scheduledFuture.cancel(true);
     }
 
-    public void setThingRegistry(ThingRegistry thingRegistry) {
-        this.thingRegistry = thingRegistry;
-    }
-
-    public void unsetThingRegistry(ThingRegistry thingRegistry) {
-        this.thingRegistry = null;
-    }
-
-    public void setEventPublisher(EventPublisher eventPublisher) {
-        this.eventPublisher = eventPublisher;
-    }
-
-    public void unsetEventPublisher(EventPublisher eventPublisher) {
-        this.eventPublisher = null;
-    }
-
-    @Override
-    public Set<String> getSubscribedEventTypes() {
-        return SUBSCRIBED_EVENT_TYPES;
-    }
-
-    @Override
-    public EventFilter getEventFilter() {
-        return null;
-    }
-
+    /**
+     * Resets everything when the dropbox thing is removed from the system.
+     *
+     * @see org.eclipse.smarthome.core.events.EventSubscriber#receive(org.eclipse.smarthome.core.events.Event)
+     */
     @Override
     public void receive(Event event) {
         ThingRemovedEvent e = (ThingRemovedEvent) event;

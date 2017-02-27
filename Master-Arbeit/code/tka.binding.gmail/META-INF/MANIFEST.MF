@@ -12,10 +12,15 @@ Import-Package: com.google.common.collect,
  javax.mail.internet,
  org.apache.commons.io,
  org.apache.commons.lang,
+ org.eclipse.smarthome.automation,
+ org.eclipse.smarthome.automation.handler,
+ org.eclipse.smarthome.automation.type,
  org.eclipse.smarthome.config.core,
  org.eclipse.smarthome.config.core.status,
  org.eclipse.smarthome.core.common.registry,
  org.eclipse.smarthome.core.events,
+ org.eclipse.smarthome.core.items,
+ org.eclipse.smarthome.core.items.events,
  org.eclipse.smarthome.core.library.types,
  org.eclipse.smarthome.core.thing,
  org.eclipse.smarthome.core.thing.binding,
@@ -25,9 +30,10 @@ Import-Package: com.google.common.collect,
  org.osgi.framework,
  org.osgi.service.component,
  org.slf4j,
- tka.automation.extension.type
+ tka.binding.core
 Service-Component: OSGI-INF/*.xml
 Export-Package: tka.binding.gmail,
  tka.binding.gmail.handler,
  tka.binding.gmail.internal
+Bundle-Activator: tka.binding.gmail.Activator
 
