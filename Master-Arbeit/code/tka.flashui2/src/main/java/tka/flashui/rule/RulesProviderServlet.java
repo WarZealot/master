@@ -99,7 +99,7 @@ public class RulesProviderServlet extends HttpServlet {
             ruleObj.addProperty("enabled", enabled);
 
             // add status info
-            String status = ruleRegistry.getStatus(uid).getStatus().toString();
+            String status = ruleRegistry.getStatus(uid).toString();
             ruleObj.addProperty("status", status);
         }
 

@@ -3,20 +3,23 @@ Bundle-SymbolicName: tka.binding.twitter;singleton:=true
 Export-Package: tka.binding.twitter,tka.binding.twitter.handler,tka.bi
  nding.twitter.internal
 Bundle-Name: Tkachuk Twitter Binding
-Bundle-Version: 0.9.0.201702041409
+Bundle-Version: 0.9.0.201702271916
 Bundle-ClassPath: .
 Bundle-ManifestVersion: 2
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-Activator: tka.binding.twitter.Activator
 Bundle-Vendor: Materna/Tkachuk
 Import-Package: com.google.common.collect,com.google.gson,org.apache.c
- ommons.io,org.apache.commons.lang,org.eclipse.smarthome.config.core,o
- rg.eclipse.smarthome.config.core.status,org.eclipse.smarthome.core.co
- mmon.registry,org.eclipse.smarthome.core.events,org.eclipse.smarthome
- .core.library.types,org.eclipse.smarthome.core.thing,org.eclipse.smar
- thome.core.thing.binding,org.eclipse.smarthome.core.thing.dto,org.ecl
- ipse.smarthome.core.thing.events,org.eclipse.smarthome.core.types,org
- .osgi.framework,org.osgi.service.component,org.slf4j,tka.binding.twit
- ter,tka.binding.twitter.handler,twitter4j,twitter4j.api,twitter4j.aut
- h,twitter4j.conf
+ ommons.io,org.apache.commons.lang,org.eclipse.smarthome.automation,or
+ g.eclipse.smarthome.automation.handler,org.eclipse.smarthome.automati
+ on.type,org.eclipse.smarthome.config.core,org.eclipse.smarthome.confi
+ g.core.status,org.eclipse.smarthome.core.common.registry,org.eclipse.
+ smarthome.core.events,org.eclipse.smarthome.core.items,org.eclipse.sm
+ arthome.core.items.events,org.eclipse.smarthome.core.library.types,or
+ g.eclipse.smarthome.core.thing,org.eclipse.smarthome.core.thing.bindi
+ ng,org.eclipse.smarthome.core.thing.dto,org.eclipse.smarthome.core.th
+ ing.events,org.eclipse.smarthome.core.types,org.osgi.framework,org.os
+ gi.service.component,org.slf4j,tka.binding.core,twitter4j,twitter4j.a
+ pi,twitter4j.auth,twitter4j.conf
 Service-Component: OSGI-INF/*.xml
 

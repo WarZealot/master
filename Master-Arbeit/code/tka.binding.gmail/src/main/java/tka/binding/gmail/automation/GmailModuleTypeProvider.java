@@ -16,6 +16,7 @@ import java.util.Map;
 
 import org.eclipse.smarthome.automation.type.ModuleType;
 import org.eclipse.smarthome.automation.type.ModuleTypeProvider;
+import org.eclipse.smarthome.core.common.registry.ProviderChangeListener;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 
@@ -93,5 +94,21 @@ public class GmailModuleTypeProvider implements ModuleTypeProvider {
      */
     public Collection<ModuleType> getAll() {
         return providedModuleTypes.values();
+    }
+
+    /**
+     * @see org.eclipse.smarthome.core.common.registry.Provider#addProviderChangeListener(org.eclipse.smarthome.core.common.registry.ProviderChangeListener)
+     */
+    public void addProviderChangeListener(ProviderChangeListener<ModuleType> listener) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /**
+     * @see org.eclipse.smarthome.core.common.registry.Provider#removeProviderChangeListener(org.eclipse.smarthome.core.common.registry.ProviderChangeListener)
+     */
+    public void removeProviderChangeListener(ProviderChangeListener<ModuleType> listener) {
+        // TODO Auto-generated method stub
+
     }
 }

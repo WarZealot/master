@@ -1,15 +1,3 @@
-D:\Programme\Java\github-master\Master-Arbeit\code\tka.automation.extension\src\main\java\tka\automation\extension\type\FlashModuleTypeProvider.java
-D:\Programme\Java\github-master\Master-Arbeit\code\tka.automation.extension\src\main\java\tka\automation\extension\handler\TwitterActionHandler.java
-D:\Programme\Java\github-master\Master-Arbeit\code\tka.automation.extension\src\main\java\tka\automation\extension\handler\EmailActionHandler.java
-D:\Programme\Java\github-master\Master-Arbeit\code\tka.automation.extension\src\main\java\tka\automation\extension\handler\FlashHandlerFactory.java
-D:\Programme\Java\github-master\Master-Arbeit\code\tka.automation.extension\src\main\java\tka\automation\extension\type\DropboxUploadEntity.java
-D:\Programme\Java\github-master\Master-Arbeit\code\tka.automation.extension\src\main\java\tka\automation\extension\type\DropboxActionType.java
-D:\Programme\Java\github-master\Master-Arbeit\code\tka.automation.extension\src\main\java\tka\automation\extension\type\EmailParameters.java
-D:\Programme\Java\github-master\Master-Arbeit\code\tka.automation.extension\src\main\java\tka\automation\extension\type\AlwaysTrueConditionType.java
-D:\Programme\Java\github-master\Master-Arbeit\code\tka.automation.extension\src\main\java\tka\automation\extension\handler\AlwaysTrueConditionHandler.java
-D:\Programme\Java\github-master\Master-Arbeit\code\tka.automation.extension\src\main\java\tka\automation\extension\handler\DropboxActionHandler.java
-D:\Programme\Java\github-master\Master-Arbeit\code\tka.automation.extension\src\main\java\tka\automation\extension\type\EmailActionType.java
-D:\Programme\Java\github-master\Master-Arbeit\code\tka.automation.extension\src\main\java\tka\automation\extension\handler\TkaTriggerHandler.java
-D:\Programme\Java\github-master\Master-Arbeit\code\tka.automation.extension\src\main\java\tka\automation\extension\type\TkaTriggerType.java
+D:\Programme\Java\github-master\Master-Arbeit\code\tka.automation.extension\src\main\java\tka\automation\extension\handler\FlashEventFactory.java
 D:\Programme\Java\github-master\Master-Arbeit\code\tka.automation.extension\src\main\java\tka\automation\extension\Activator.java
-D:\Programme\Java\github-master\Master-Arbeit\code\tka.automation.extension\src\main\java\tka\automation\extension\type\TwitterActionType.java
+D:\Programme\Java\github-master\Master-Arbeit\code\tka.automation.extension\src\main\java\tka\automation\extension\type\FlashEvent.java

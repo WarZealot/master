@@ -16,6 +16,7 @@ import java.util.Map;
 
 import org.eclipse.smarthome.automation.type.ModuleType;
 import org.eclipse.smarthome.automation.type.ModuleTypeProvider;
+import org.eclipse.smarthome.core.common.registry.ProviderChangeListener;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 
@@ -94,4 +95,15 @@ public class DropboxModuleTypeProvider implements ModuleTypeProvider {
     public Collection<ModuleType> getAll() {
         return providedModuleTypes.values();
     }
+
+    public void addProviderChangeListener(ProviderChangeListener<ModuleType> listener) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void removeProviderChangeListener(ProviderChangeListener<ModuleType> listener) {
+        // TODO Auto-generated method stub
+
+    }
+
 }

@@ -9,10 +9,7 @@ package tka.binding.weather.handler;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
-import java.net.Proxy;
-import java.net.Proxy.Type;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -173,8 +170,8 @@ public class WeatherHandler extends ConfigStatusThingHandler {
         Collection<ConfigStatusMessage> configStatus = new ArrayList<>();
 
         if (weatherJSON != null && weatherJSON.contains("Invalid API")) {
-            configStatus.add(ConfigStatusMessage.Builder.error("location").withMessageKey("weather.configparam.invalid")
-                    .withArguments(location).build());
+            configStatus.add(ConfigStatusMessage.Builder.error("location")
+                    .withMessageKeySuffix("weather.configparam.invalid").withArguments(location).build());
         }
 
         return configStatus;
@@ -210,8 +207,8 @@ public class WeatherHandler extends ConfigStatusThingHandler {
         try {
             URL url = new URL(urlString);
             logger.info("Wetter API Request: " + urlString);
-            URLConnection connection = url
-                    .openConnection(new Proxy(Type.HTTP, new InetSocketAddress("proxy.materna.de", 8080)));
+            // new Proxy(Type.HTTP, new InetSocketAddress("proxy.materna.de", 8080));
+            URLConnection connection = url.openConnection();
             return IOUtils.toString(connection.getInputStream());
         } catch (MalformedURLException e) {
             logger.debug("Constructed url '{}' is not valid: {}", urlString, e.getMessage());

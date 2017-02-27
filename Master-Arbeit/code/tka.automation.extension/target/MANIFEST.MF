@@ -2,15 +2,11 @@ Manifest-Version: 1.0
 Bundle-SymbolicName: tka.automation.extension
 Export-Package: tka.automation.extension,tka.automation.extension.type
 Bundle-Name: Flash Rule Templates
-Bundle-Version: 0.9.0.201702041600
+Bundle-Version: 0.9.0.201702271741
 Bundle-ManifestVersion: 2
 Bundle-Activator: tka.automation.extension.Activator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-Vendor: Tkachuk
-Import-Package: com.google.gson,org.eclipse.smarthome.automation,org.e
- clipse.smarthome.automation.handler,org.eclipse.smarthome.automation.
- type,org.eclipse.smarthome.config.core,org.eclipse.smarthome.core.com
- mon.registry,org.eclipse.smarthome.core.events,org.eclipse.smarthome.
- core.items,org.eclipse.smarthome.core.items.events,org.eclipse.smarth
- ome.core.types,org.osgi.framework,org.slf4j
+Import-Package: org.eclipse.smarthome.core.events,org.osgi.framework,o
+ rg.slf4j
 

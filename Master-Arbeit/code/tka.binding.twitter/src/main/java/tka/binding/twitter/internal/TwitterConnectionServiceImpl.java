@@ -154,7 +154,7 @@ public class TwitterConnectionServiceImpl extends AbstractConnectionService
         twitterConfigurationBuilder.setDebugEnabled(true)
                 .setOAuthConsumerKey(TwitterBindingConstants.OAUTH_CONSUMER_KEY)
                 .setOAuthConsumerSecret(TwitterBindingConstants.OAUTH_CONSUMER_SECRET);
-        twitterConfigurationBuilder.setHttpProxyHost("proxy.materna.de").setHttpProxyPort(8080);
+        // twitterConfigurationBuilder.setHttpProxyHost("proxy.materna.de").setHttpProxyPort(8080);
 
         if (accessToken != null) {
             twitterConfigurationBuilder.setOAuthAccessToken(accessToken.getToken())

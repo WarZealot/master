@@ -10,6 +10,7 @@ package tka.flashui.rule;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -22,6 +23,8 @@ import org.eclipse.smarthome.automation.Rule;
 import org.eclipse.smarthome.automation.RuleRegistry;
 import org.eclipse.smarthome.automation.parser.Parser;
 
+import com.google.gson.Gson;
+
 /**
  * This servlet provides the functionality to import new rules.
  *
@@ -30,6 +33,8 @@ import org.eclipse.smarthome.automation.parser.Parser;
  *         27.02.2017
  */
 public class RulesImporterServlet extends HttpServlet {
+
+    private static final Gson GSON = new Gson();
 
     /**
      * The serial version uid.
@@ -42,7 +47,7 @@ public class RulesImporterServlet extends HttpServlet {
     private RuleRegistry ruleRegistry;
 
     /**
-     * The parser.
+     * The rule parser. Sadly does not work due to an internal Bug.
      */
     private Parser<Rule> parser;
 
@@ -71,6 +76,60 @@ public class RulesImporterServlet extends HttpServlet {
             return;
         }
         String json = names.nextElement();
+
+        handleJson2(resp, json);
+
+        // handleJson(resp, json);
+    }
+
+    /**
+     * Manually handle deserialization because ESH parser does not work.
+     * 
+     * @param resp
+     * @param json
+     * @throws IOException
+     */
+    private void handleJson2(HttpServletResponse resp, String json) throws IOException {
+        try {
+            Set<Rule> rules = new HashSet<>();
+            if (json.trim().startsWith("[")) {
+                Rule[] array = GSON.fromJson(json, Rule[].class);
+                for (int i = 0; i < array.length; i++) {
+                    rules.add(array[i]);
+                }
+            } else {
+                Rule rule = GSON.fromJson(json, Rule.class);
+                rules.add(rule);
+            }
+
+            for (Rule rule : rules) {
+                if (!rule.getTags().contains("flash")) {
+                    rule.getTags().add("flash");
+                }
+
+                System.out.println("Tags: " + rule.getTags());
+                if (ruleRegistry.get(rule.getUID()) != null) {
+                    ruleRegistry.update(rule);
+                } else {
+                    ruleRegistry.add(rule);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.getWriter().print("ERROR");
+            return;
+        }
+        resp.getWriter().print("SUCCESS");
+    }
+
+    /**
+     * Handle deserialization using the ESH rule parser
+     * 
+     * @param resp
+     * @param json
+     * @throws IOException
+     */
+    private void handleJson(HttpServletResponse resp, String json) throws IOException {
         InputStreamReader reader = new InputStreamReader(IOUtils.toInputStream(json));
         try {
             Set<Rule> rules = parser.parse(reader);

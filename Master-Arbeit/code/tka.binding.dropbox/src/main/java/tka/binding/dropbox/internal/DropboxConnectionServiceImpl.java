@@ -14,10 +14,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.eclipse.smarthome.config.core.Configuration;
 import org.eclipse.smarthome.core.events.Event;
-import org.eclipse.smarthome.core.events.EventPublisher;
 import org.eclipse.smarthome.core.events.EventSubscriber;
 import org.eclipse.smarthome.core.thing.Thing;
-import org.eclipse.smarthome.core.thing.ThingRegistry;
 import org.eclipse.smarthome.core.thing.ThingUID;
 import org.eclipse.smarthome.core.thing.events.ThingRemovedEvent;
 import org.osgi.service.component.ComponentContext;
@@ -47,15 +45,6 @@ public class DropboxConnectionServiceImpl extends AbstractConnectionService
      */
     private static final ThingUID DROPBOX_CONNECTION = new ThingUID("dropbox", "dropboxThingTypeId",
             "dropboxconnection");
-    /**
-     * The thing registry.
-     */
-    private ThingRegistry thingRegistry;
-
-    /**
-     * The event publisher.
-     */
-    private EventPublisher eventPublisher;
 
     /**
      * The oauth access token.
@@ -209,4 +198,5 @@ public class DropboxConnectionServiceImpl extends AbstractConnectionService
         }
 
     }
+
 }
